@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="hous_blue">#5e9eff</color>
+    <color name="hous_blue_bg_2">#cce1ff</color>
+    <color name="hous_blue_bg">#eff5ff</color>
+    <color name="hous_yellow_bg">#fff8e6</color>
+    <color name="hous_yellow">#ffd66d</color>
+    <color name="hous_yellow_bg_2">#ffefc4</color>
+    <color name="hous_green">#8ff28d</color>
+    <color name="hous_purple">#d99cff</color>
+    <color name="hous_red">#ff6666</color>
+    <color name="hous_purple_bg">#f9f1ff</color>
+    <color name="hous_red_bg_2">#ffdede</color>
+    <color name="hous_purple_bg_2">#f1daff</color>
+    <color name="hous_red_bg">#fff2f2</color>
+    <color name="white">#ffffff</color>
+    <color name="g_1">#fafafa</color>
+    <color name="g_2">#f2f2f2</color>
+    <color name="g_4">#c8c8c8</color>
+    <color name="g_5">#afafaf</color>
+    <color name="g_6">#969696</color>
+    <color name="g_7">#3d3d3d</color>
+    <color name="black">#161616</color>
+    <color name="g_3">#e1e1e1</color>
+    <color name="hous_black_layer">#000000</color>
 </resources>
