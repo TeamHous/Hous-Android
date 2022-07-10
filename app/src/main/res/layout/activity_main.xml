@@ -12,6 +12,26 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_main_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="44dp"
+                android:text="@string/home_title"
+                android:textColor="@color/hous_black"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bot_nav_main"
             android:layout_width="match_parent"

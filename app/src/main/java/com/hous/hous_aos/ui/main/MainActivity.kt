@@ -20,21 +20,51 @@ class MainActivity : AppCompatActivity() {
             setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.ic_bot_nav_home -> {
-                        background = ContextCompat.getDrawable(this@MainActivity, R.drawable.shape_bot_navi_home)
-                        itemIconTintList = ContextCompat.getColorStateList(this@MainActivity, R.color.sel_bot_navi_home_color)
-                        itemTextColor = ContextCompat.getColorStateList(this@MainActivity, R.color.sel_bot_navi_home_color)
+                        background = ContextCompat.getDrawable(
+                            this@MainActivity,
+                            R.drawable.shape_bot_navi_home
+                        )
+                        itemIconTintList = ContextCompat.getColorStateList(
+                            this@MainActivity,
+                            R.color.sel_bot_navi_home_color
+                        )
+                        itemTextColor = ContextCompat.getColorStateList(
+                            this@MainActivity,
+                            R.color.sel_bot_navi_home_color
+                        )
+                        binding.tvMainTitle.text = getString(R.string.home_title)
                         true
                     }
                     R.id.ic_bot_nav_rules -> {
-                        background = ContextCompat.getDrawable(this@MainActivity, R.drawable.shape_bot_navi_rule)
-                        itemIconTintList = ContextCompat.getColorStateList(this@MainActivity, R.color.sel_bot_navi_rule_color)
-                        itemTextColor = ContextCompat.getColorStateList(this@MainActivity, R.color.sel_bot_navi_rule_color)
+                        background = ContextCompat.getDrawable(
+                            this@MainActivity,
+                            R.drawable.shape_bot_navi_rule
+                        )
+                        itemIconTintList = ContextCompat.getColorStateList(
+                            this@MainActivity,
+                            R.color.sel_bot_navi_rule_color
+                        )
+                        itemTextColor = ContextCompat.getColorStateList(
+                            this@MainActivity,
+                            R.color.sel_bot_navi_rule_color
+                        )
+                        binding.tvMainTitle.text = getString(R.string.rules_title)
                         true
                     }
                     else -> {
-                        background = ContextCompat.getDrawable(this@MainActivity, R.drawable.shape_bot_navi_profile)
-                        itemIconTintList = ContextCompat.getColorStateList(this@MainActivity, R.color.sel_bot_navi_profile_color)
-                        itemTextColor = ContextCompat.getColorStateList(this@MainActivity, R.color.sel_bot_navi_profile_color)
+                        background = ContextCompat.getDrawable(
+                            this@MainActivity,
+                            R.drawable.shape_bot_navi_profile
+                        )
+                        itemIconTintList = ContextCompat.getColorStateList(
+                            this@MainActivity,
+                            R.color.sel_bot_navi_profile_color
+                        )
+                        itemTextColor = ContextCompat.getColorStateList(
+                            this@MainActivity,
+                            R.color.sel_bot_navi_profile_color
+                        )
+                        binding.tvMainTitle.text = getString(R.string.profile_title)
                         true
                     }
                 }
