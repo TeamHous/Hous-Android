@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
                         supportFragmentManager.commit {
                             replace<HomeFragment>(R.id.fcv_main)
                             setReorderingAllowed(true)
-                            addToBackStack(null)
                         }
                         true
                     }
@@ -67,7 +66,6 @@ class MainActivity : AppCompatActivity() {
                         supportFragmentManager.commit {
                             replace<RulesFragment>(R.id.fcv_main)
                             setReorderingAllowed(true)
-                            addToBackStack(null)
                         }
                         true
                     }
@@ -88,7 +86,6 @@ class MainActivity : AppCompatActivity() {
                         supportFragmentManager.commit {
                             replace<ProfileFragment>(R.id.fcv_main)
                             setReorderingAllowed(true)
-                            addToBackStack(null)
                         }
                         true
                     }
