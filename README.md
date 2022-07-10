@@ -10,6 +10,7 @@
 - Hilt
 - Retrofit2
 - Glide
+- Flow
 <br/><br/>
 
 ## 폴더링 구조
