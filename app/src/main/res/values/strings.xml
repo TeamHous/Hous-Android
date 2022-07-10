@@ -4,4 +4,8 @@
     <string name="bot_navi_home">Home</string>
     <string name="bot_navi_rules">Rules</string>
     <string name="bot_navi_profile">Profile</string>
+
+    <string name="home_title">Hous-</string>
+    <string name="rules_title">Hous- 규칙</string>
+    <string name="profile_title">Hous- ME</string>
 </resources>
