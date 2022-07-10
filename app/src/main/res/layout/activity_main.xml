@@ -26,10 +26,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="44dp"
+                android:text="@string/home_title"
                 android:textColor="@color/hous_black"
                 android:textSize="28sp"
-                android:textStyle="bold"
-                tools:text="Hous-" />
+                android:textStyle="bold" />
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
