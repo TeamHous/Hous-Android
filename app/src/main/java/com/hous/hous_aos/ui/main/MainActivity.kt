@@ -4,8 +4,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.ActivityMainBinding
+import com.hous.hous_aos.ui.home.HomeFragment
+import com.hous.hous_aos.ui.profile.ProfileFragment
+import com.hous.hous_aos.ui.rules.RulesFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -16,6 +21,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initBotNav() {
+        binding.botNavMain.selectedItemId = R.id.ic_bot_nav_home
+        supportFragmentManager.commit {
+            replace<HomeFragment>(R.id.fcv_main)
+        }
+
         binding.botNavMain.apply {
             setOnItemSelectedListener {
                 when (it.itemId) {
@@ -33,6 +43,10 @@ class MainActivity : AppCompatActivity() {
                             R.color.sel_bot_navi_home_color
                         )
                         binding.tvMainTitle.text = getString(R.string.home_title)
+                        supportFragmentManager.commit {
+                            replace<HomeFragment>(R.id.fcv_main)
+                            setReorderingAllowed(true)
+                        }
                         true
                     }
                     R.id.ic_bot_nav_rules -> {
@@ -49,6 +63,10 @@ class MainActivity : AppCompatActivity() {
                             R.color.sel_bot_navi_rule_color
                         )
                         binding.tvMainTitle.text = getString(R.string.rules_title)
+                        supportFragmentManager.commit {
+                            replace<RulesFragment>(R.id.fcv_main)
+                            setReorderingAllowed(true)
+                        }
                         true
                     }
                     else -> {
@@ -65,6 +83,10 @@ class MainActivity : AppCompatActivity() {
                             R.color.sel_bot_navi_profile_color
                         )
                         binding.tvMainTitle.text = getString(R.string.profile_title)
+                        supportFragmentManager.commit {
+                            replace<ProfileFragment>(R.id.fcv_main)
+                            setReorderingAllowed(true)
+                        }
                         true
                     }
                 }
