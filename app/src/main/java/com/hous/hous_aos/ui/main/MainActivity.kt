@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                             this@MainActivity,
                             R.color.sel_bot_navi_home_color
                         )
-                        binding.tvMain.text = getString(R.string.home_title)
+                        currentFragment = HomeFragment()
                         true
                     }
                     R.id.ic_bot_nav_rules -> {
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                             this@MainActivity,
                             R.color.sel_bot_navi_rule_color
                         )
-                        binding.tvMain.text = getString(R.string.rules_title)
+                        supportFragmentManager.beginTransaction().replace(R.id.fcv_main, currentFragment).commit()
                         true
                     }
                     else -> {
