@@ -27,8 +27,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/shape_yellow_fill_16_rectangle"
-            tools:src="@drawable/shape_yellow_fill_16_rectangle" />
+            app:srcCompat="@drawable/shape_yellow_home_fill_16_rectangle"
+            tools:src="@drawable/shape_yellow_home_fill_16_rectangle" />
 
         <ImageView
             android:id="@+id/iv_home_coming_up_image"
