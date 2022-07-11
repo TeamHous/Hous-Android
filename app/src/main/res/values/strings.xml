@@ -13,6 +13,9 @@
     <string name="home_rules">Rules</string>
     <string name="home_to_do">To-Do</string>
     <string name="home_homie_profile">Homie Profile-</string>
+
+    <string name="home_rules_empty">아직 규칙이 없어요 ;(</string>
+
     <string name="new_rules_title">새로운 규칙 추가</string>
     <string name="new_rules_rule_name">규칙이름</string>
     <string name="new_rules_category">카테고리</string>

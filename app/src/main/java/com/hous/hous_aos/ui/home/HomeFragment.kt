@@ -12,6 +12,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var comingUpAdapter: ComingUpAdapter
+    private lateinit var rulesAdapter: RulesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,6 +21,13 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         initAdapter()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            position = rules.size
+        }
     }
 
     override fun onDestroyView() {
@@ -31,18 +39,37 @@ class HomeFragment : Fragment() {
         comingUpAdapter = ComingUpAdapter()
         binding.rvComingUp.adapter = comingUpAdapter
         comingUpAdapter.comingUpList.addAll(
-            listOf(
-                ComingUpData(R.drawable.ic_party, "D-1"),
-                ComingUpData(R.drawable.ic_party, "D-4"),
-                ComingUpData(R.drawable.ic_beer, "D-6"),
-                ComingUpData(R.drawable.ic_coffee, "D-10"),
-                ComingUpData(R.drawable.ic_pancake, "D-15"),
-                ComingUpData(R.drawable.ic_party, "D-18"),
-                ComingUpData(R.drawable.ic_coffee, "D-20"),
-                ComingUpData(R.drawable.ic_beer, "D-25"),
-                ComingUpData(R.drawable.ic_pancake, "D-80"),
-            )
+            comingUp
         )
         comingUpAdapter.notifyDataSetChanged()
+
+        rulesAdapter = RulesAdapter()
+        binding.rvRules.adapter = rulesAdapter
+        rulesAdapter.rulesList.addAll(
+            rules
+        )
+        comingUpAdapter.notifyDataSetChanged()
+    }
+
+    companion object {
+        val comingUp = listOf<ComingUpData>(
+            ComingUpData(R.drawable.ic_party, "D-1"),
+            ComingUpData(R.drawable.ic_party, "D-4"),
+            ComingUpData(R.drawable.ic_beer, "D-6"),
+            ComingUpData(R.drawable.ic_coffee, "D-10"),
+            ComingUpData(R.drawable.ic_pancake, "D-15"),
+            ComingUpData(R.drawable.ic_party, "D-18"),
+            ComingUpData(R.drawable.ic_coffee, "D-20"),
+            ComingUpData(R.drawable.ic_beer, "D-25"),
+            ComingUpData(R.drawable.ic_pancake, "D-80"),
+        )
+
+        val rules = listOf<RulesData>(
+            RulesData("00시~ 불 끄기!"),
+            RulesData("23시~ 이어폰 필수!"),
+            RulesData("세탁기는 화,수,토"),
+            RulesData("일 - 청소하는 날!"),
+            RulesData("2,4주 토- 장보기"),
+        )
     }
 }
