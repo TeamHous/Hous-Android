@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -37,40 +38,44 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
-import timber.log.Timber
 
 @Composable
 fun NewRulesScreen() {
     val isAlarm = remember { mutableStateOf(false) }
     val text = remember { mutableStateOf("") }
     val categoryText = remember { mutableStateOf("") }
+    val checkBoxState: MutableState<State> = remember { mutableStateOf(State.SELECT) }
     Column(
         modifier = Modifier
             .background(colorResource(id = R.color.hous_blue_bg))
             .padding(horizontal = 20.dp)
     ) {
         Spacer(modifier = Modifier.size(50.dp))
-        NewRulesToolbar(isAlarm)
 
+        NewRulesToolbar(isAlarm)
         Spacer(modifier = Modifier.size(27.dp))
+
         Text(
             text = "규칙이름",
             fontStyle = FontStyle(R.style.B2),
             color = colorResource(id = R.color.hous_blue)
         )
-
         Spacer(modifier = Modifier.size(8.dp))
-        NewRulesTextField(text, 10.dp)
 
+        NewRulesTextField(text, 10.dp)
         Spacer(modifier = Modifier.size(16.dp))
+
         Text(
             text = "카테고리",
             fontStyle = FontStyle(R.style.B2),
             color = colorResource(id = R.color.hous_blue)
         )
-
         Spacer(modifier = Modifier.size(8.dp))
+
         NewRulesBox(10.dp, R.color.white, categoryText)
+        Spacer(modifier = Modifier.size(16.dp))
+
+        NewRulesCheckBox(checkBoxState)
     }
 }
 
@@ -160,13 +165,13 @@ private fun NewRulesBox(
                 .wrapContentSize()
                 .align(Alignment.CenterEnd),
         ) {
-            HousDropDownMenu(categoryText)
+            NewRulesDropDownMenu(categoryText)
         }
     }
 }
 
 @Composable
-private fun HousDropDownMenu(categoryText: MutableState<String>) {
+private fun NewRulesDropDownMenu(categoryText: MutableState<String>) {
 
     var isExpanded by remember { mutableStateOf(false) }
     Image(
@@ -194,6 +199,36 @@ private fun HousDropDownMenu(categoryText: MutableState<String>) {
             Text("카테고리")
         }
     }
+}
+
+@Composable
+fun NewRulesCheckBox(
+    checkBoxState: MutableState<State>
+) {
+    when (checkBoxState.value) {
+        State.UNSELECT -> NewRulesBox(colorResource(id = R.color.hous_blue_bg_2))
+        State.SELECT -> NewRulesBox(colorResource(id = R.color.hous_blue))
+        State.BLOCK -> NewRulesBox(colorResource(id = R.color.g_4))
+    }
+}
+
+@Composable
+fun NewRulesBox(boxColor: Color) {
+    Box(
+        modifier = Modifier
+            .clip(shape = RoundedCornerShape(5.dp))
+            .background(color = boxColor)
+            .size(24.dp),
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_check),
+            contentDescription = ""
+        )
+    }
+}
+
+enum class State {
+    UNSELECT, SELECT, BLOCK
 }
 
 @Preview
