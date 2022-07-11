@@ -16,4 +16,13 @@
                     "카데고리 상단에 표시 됩니다</string>
     <string name="new_rules_manager_setting">고정 담당자 설정</string>
     <string name="new_rules_key_rules">Key Rules으로 추가</string>
+    <string-array name="new_rules_day_list">
+        <item>월</item>
+        <item>화</item>
+        <item>수</item>
+        <item>목</item>
+        <item>금</item>
+        <item>토</item>
+        <item>일</item>
+    </string-array>
 </resources>
