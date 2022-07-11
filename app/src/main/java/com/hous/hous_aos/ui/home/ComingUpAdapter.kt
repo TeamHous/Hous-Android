@@ -30,7 +30,7 @@ class ComingUpAdapter : RecyclerView.Adapter<ComingUpAdapter.ComingUpViewHolder>
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: ComingUpData) {
             binding.ivComingUpImage.setImageResource(data.image)
-            binding.tvComingUpDay.text = data.day
+            binding.comingUpData = data
             binding.position = adapterPosition
         }
     }
