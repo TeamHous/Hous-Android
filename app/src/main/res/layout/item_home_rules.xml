@@ -13,7 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:marginTop="9dp">
+        android:layout_marginBottom="8dp"
+        android:layout_marginHorizontal="20dp">
 
         <ImageView
             android:id="@+id/iv_rules"
@@ -28,11 +29,11 @@
             android:id="@+id/tv_rules"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="8dp"
+            android:text="@{rulesData.rules}"
             android:textAppearance="@style/B3"
             app:layout_constraintStart_toEndOf="@id/iv_rules"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@{rulesData.rules}"
             tools:text="머리카락 치우기" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
