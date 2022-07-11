@@ -19,7 +19,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="6dp">
+        android:layout_marginEnd="8dp">
 
         <ImageView
             android:id="@+id/iv_coming_up_shape"
@@ -34,6 +34,8 @@
             android:id="@+id/iv_coming_up_image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="7dp"
+            android:layout_marginVertical="7dp"
             app:layout_constraintBottom_toBottomOf="@id/iv_coming_up_shape"
             app:layout_constraintEnd_toEndOf="@id/iv_coming_up_shape"
             app:layout_constraintStart_toStartOf="@id/iv_coming_up_shape"
@@ -44,6 +46,8 @@
             android:id="@+id/tv_coming_up_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="18dp"
+            android:layout_marginVertical="23dp"
             android:fontFamily="@font/montserrat_semibold"
             android:letterSpacing="0.03"
             android:textColor="@color/white"
