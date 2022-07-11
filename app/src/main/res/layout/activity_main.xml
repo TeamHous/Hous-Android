@@ -45,7 +45,7 @@
             android:id="@+id/bot_nav_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_bot_navi_home"
+            android:background="@drawable/shape_yellow_fill_20_ract"
             app:itemIconTint="@color/sel_bot_navi_home_color"
             app:itemTextColor="@color/sel_bot_navi_home_color"
             app:labelVisibilityMode="labeled"
