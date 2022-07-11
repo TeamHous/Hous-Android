@@ -52,5 +52,13 @@ class HomeFragment : Fragment() {
             )
         )
         comingUpAdapter.notifyDataSetChanged()
+
+        rulesAdapter = RulesAdapter()
+        binding.rvRules.adapter = rulesAdapter
+        rulesAdapter.rulesList.addAll(
+            rules
+        )
+        comingUpAdapter.notifyDataSetChanged()
+    }
     }
 }
