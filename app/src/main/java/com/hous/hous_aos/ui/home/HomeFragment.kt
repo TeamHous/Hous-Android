@@ -26,7 +26,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            position = rules.size
+            rulesPosition = rules.size
+            toDoPosition = toDo.size
         }
     }
 
