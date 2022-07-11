@@ -43,6 +43,7 @@ import timber.log.Timber
 fun NewRulesScreen() {
     val isAlarm = remember { mutableStateOf(false) }
     val text = remember { mutableStateOf("") }
+    val categoryText = remember { mutableStateOf("") }
     Column(
         modifier = Modifier
             .background(colorResource(id = R.color.hous_blue_bg))
@@ -69,13 +70,7 @@ fun NewRulesScreen() {
         )
 
         Spacer(modifier = Modifier.size(8.dp))
-        NewRulesBox(10.dp, R.color.white) {
-            Text(
-                text = "청소",
-                fontStyle = FontStyle(R.style.B2),
-                color = colorResource(id = R.color.g_6)
-            )
-        }
+        NewRulesBox(10.dp, R.color.white, categoryText)
     }
 }
 
@@ -139,7 +134,7 @@ fun NewRulesTextField(
 private fun NewRulesBox(
     radius: Dp,
     customColor: Int,
-    content: @Composable () -> Unit
+    categoryText: MutableState<String>
 ) {
     Box(
         modifier = Modifier
@@ -154,20 +149,24 @@ private fun NewRulesBox(
                 .wrapContentSize()
                 .align(Alignment.CenterStart),
         ) {
-            content()
+            Text(
+                text = categoryText.value,
+                fontStyle = FontStyle(R.style.B2),
+                color = colorResource(id = R.color.g_6)
+            )
         }
         Box(
             modifier = Modifier
                 .wrapContentSize()
                 .align(Alignment.CenterEnd),
         ) {
-            HousDropDownMenu()
+            HousDropDownMenu(categoryText)
         }
     }
 }
 
 @Composable
-private fun HousDropDownMenu() {
+private fun HousDropDownMenu(categoryText: MutableState<String>) {
 
     var isExpanded by remember { mutableStateOf(false) }
     Image(
@@ -184,15 +183,15 @@ private fun HousDropDownMenu() {
         onDismissRequest = { isExpanded = false }
     ) {
         DropdownMenuItem(
-            onClick = { Timber.d("test1") }
+            onClick = { categoryText.value = "청소" }
         ) {
-            Text("test1")
+            Text("청소")
         }
 
         DropdownMenuItem(
-            onClick = { Timber.d("test2") }
+            onClick = { categoryText.value = "카테고리" }
         ) {
-            Text("test2")
+            Text("카테고리")
         }
     }
 }
