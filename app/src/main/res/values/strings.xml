@@ -8,4 +8,9 @@
     <string name="home_title">Hous-</string>
     <string name="rules_title">Hous- 규칙</string>
     <string name="profile_title">Hous- ME</string>
+
+    <string name="home_coming_up">Coming up-</string>
+    <string name="home_rules">Rules</string>
+    <string name="home_to_do">To-Do</string>
+    <string name="home_homie_profile">Homie Profile-</string>
 </resources>

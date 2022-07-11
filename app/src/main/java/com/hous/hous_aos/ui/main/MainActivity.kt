@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.ic_bot_nav_home -> {
                         background = ContextCompat.getDrawable(
                             this@MainActivity,
-                            R.drawable.shape_yellow_fill_20_ract
+                            R.drawable.shape_yellow_fill_20_rect
                         )
                         itemIconTintList = ContextCompat.getColorStateList(
                             this@MainActivity,
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.ic_bot_nav_rules -> {
                         background = ContextCompat.getDrawable(
                             this@MainActivity,
-                            R.drawable.shape_blue_fill_20_ract
+                            R.drawable.shape_blue_fill_20_rect
                         )
                         itemIconTintList = ContextCompat.getColorStateList(
                             this@MainActivity,
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
                     else -> {
                         background = ContextCompat.getDrawable(
                             this@MainActivity,
-                            R.drawable.shape_red_fill_20_ract
+                            R.drawable.shape_red_fill_20_rect
                         )
                         itemIconTintList = ContextCompat.getColorStateList(
                             this@MainActivity,
