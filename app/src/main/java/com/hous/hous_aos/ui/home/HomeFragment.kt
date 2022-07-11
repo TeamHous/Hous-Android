@@ -29,6 +29,18 @@ class HomeFragment : Fragment() {
 
     private fun initAdapter() {
         comingUpAdapter = ComingUpAdapter()
+        binding.rvComingUp.adapter = comingUpAdapter
+        comingUpAdapter.comingUpList.addAll(
+            listOf(
+                ComingUpData(R.drawable.img_coming_up_plus, "D-1"),
+                ComingUpData(R.drawable.img_coming_up_party, "D-4"),
+                ComingUpData(R.drawable.img_coming_up_party, "D-6"),
+                ComingUpData(R.drawable.img_coming_up_party, "D-10"),
+                ComingUpData(R.drawable.img_coming_up_party, "D-15"),
+                ComingUpData(R.drawable.img_coming_up_party, "D-18"),
+                ComingUpData(R.drawable.img_coming_up_party, "D-20"),
+                ComingUpData(R.drawable.img_coming_up_party, "D-25"),
+                ComingUpData(R.drawable.img_coming_up_party, "D-80"),
             )
         )
         comingUpAdapter.notifyDataSetChanged()
