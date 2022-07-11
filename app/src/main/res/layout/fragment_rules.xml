@@ -52,11 +52,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/rv_rules"
             app:layout_constraintTop_toTopOf="parent" />
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> #18-create-rules-top-recyclerview
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
