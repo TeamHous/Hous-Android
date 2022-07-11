@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_puple_fill_10_ract"
-            android:paddingVertical="11dp"
+            android:paddingVertical="9dp"
             android:paddingStart="6dp"
             android:paddingEnd="7dp"
             android:src="@drawable/ic_rules_smile"
@@ -53,6 +53,7 @@
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toEndOf="@+id/rv_rules"
             app:layout_constraintTop_toTopOf="parent" />
+        
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
