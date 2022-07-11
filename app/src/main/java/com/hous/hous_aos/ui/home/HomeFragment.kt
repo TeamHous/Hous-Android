@@ -66,11 +66,12 @@ class HomeFragment : Fragment() {
         )
 
         val rules = listOf<RulesData>(
-            RulesData("00시~ 불 끄기!"),
-            RulesData("23시~ 이어폰 필수!"),
-            RulesData("세탁기는 화,수,토"),
-            RulesData("일 - 청소하는 날!"),
-            RulesData("2,4주 토- 장보기"),
+            RulesData("00시~ 불 끄기!밤새모니터에튀긴침이마르기도전에"),
+            RulesData("23시~ 이어폰 필수!밤새모니터에튀긴침이마르기도전에"),
+            RulesData("세탁기는 화,수,토밤새모니터에튀긴침이마르기도전에"),
+            RulesData("일 - 청소하는 날!밤새모니터에튀긴침이마르기도전에"),
+            RulesData("2,4주 토- 장보기밤새모니터에튀긴침이마르기도전에"),
+        )
         )
     }
 }
