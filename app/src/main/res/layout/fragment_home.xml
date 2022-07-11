@@ -50,5 +50,52 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_coming_up"
             tools:listitem="@layout/item_home_coming_up" />
+
+        <TextView
+            android:id="@+id/tv_rules"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/home_rules"
+            android:textColor="@color/g_7"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="@+id/rv_rules"
+            app:layout_constraintTop_toBottomOf="@id/rv_coming_up" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_rules"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="4dp"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:background="@drawable/shape_blue_bg_fill_16_rect"
+            android:paddingTop="20dp"
+            android:paddingBottom="12dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toStartOf="@id/rv_to_do"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_rules"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_home_rules" />
+
+        <TextView
+            android:id="@+id/tv_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="SpoqaHanSansNeo-Medium"
+            android:text="@string/home_rules_empty"
+            android:textColor="@color/g_6"
+            android:textSize="13sp"
+            android:textStyle="normal"
+            android:visibility="@{position > 0 ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/rv_rules"
+            app:layout_constraintEnd_toEndOf="@id/rv_rules"
+            app:layout_constraintStart_toStartOf="@id/rv_rules"
+            app:layout_constraintTop_toTopOf="@id/rv_rules" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
