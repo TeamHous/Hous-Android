@@ -32,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
@@ -145,9 +146,10 @@ fun NewRulesToolbar(
 fun NewRulesTextField(
     text: MutableState<String>
 ) {
+    val maxChar = 16
     BasicTextField(
         value = text.value,
-        onValueChange = { text.value = it },
+        onValueChange = { if (it.length < maxChar) text.value = it },
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
@@ -155,9 +157,12 @@ fun NewRulesTextField(
             .height(37.dp)
             .padding(vertical = 8.dp, horizontal = 15.dp),
         textStyle = TextStyle(
-            color = colorResource(id = R.color.g_6),
+            color = colorResource(id = R.color.black),
             fontStyle = FontStyle(R.style.B2)
-        )
+        ),
+        maxLines = 1,
+        singleLine = true,
+        cursorBrush = SolidColor(colorResource(id = R.color.hous_blue))
     )
 }
 
