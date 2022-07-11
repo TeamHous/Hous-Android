@@ -7,7 +7,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    
     <!-- hous color -->
     <color name="hous_blue">#5e9eff</color>
     <color name="hous_blue_bg_2">#cce1ff</color>
@@ -15,6 +14,7 @@
     <color name="hous_yellow_bg">#fff8e6</color>
     <color name="hous_yellow">#ffd66d</color>
     <color name="hous_yellow_bg_2">#ffefc4</color>
+    <color name="hous_yellow_home">#ffda7b</color>
     <color name="hous_green">#8ff28d</color>
     <color name="hous_purple">#d99cff</color>
     <color name="hous_red">#ff6666</color>
@@ -34,4 +34,9 @@
     <color name="hous_bot_navi_home">#fff6e0</color>
     <color name="hous_bot_navi_rule">#c6ddff</color>
     <color name="hous_bot_navi_profile">#FFBEBE</color>
+
+    <!--    hous-rules-->
+    <color name="hous_black_layer">#b3000000</color>
+    <color name="hous_event_bg">#ffda7b</color>
+    <color name="hous_green_bg">#f0fff0</color>
 </resources>
