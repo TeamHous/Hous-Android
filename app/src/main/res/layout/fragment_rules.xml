@@ -19,13 +19,12 @@
             android:id="@+id/iv_smile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="4dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/shape_puple_fill_10_ract"
             android:paddingVertical="9dp"
             android:paddingStart="6dp"
             android:paddingEnd="7dp"
             android:src="@drawable/ic_rules_smile"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +35,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_smile"
             app:layout_constraintTop_toTopOf="parent"
             tools:itemCount="2"
@@ -47,11 +45,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:paddingVertical="4dp"
+            android:layout_marginBottom="21dp"
             android:src="@drawable/ic_rules_todo_plus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/rv_rules"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/iv_smile" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
