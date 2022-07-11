@@ -22,9 +22,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:text="@string/home_coming_up"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:textAppearance="@style/G7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,11 +33,13 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:orientation="horizontal"
-            android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_coming_up"
             app:layout_constraintTop_toBottomOf="@id/tv_coming_up"
             tools:listitem="@layout/item_home_coming_up"
+            android:paddingEnd="0dp"
+            android:clipToPadding="false"
+            android:overScrollMode="always"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
