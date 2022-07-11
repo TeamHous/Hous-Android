@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
@@ -17,11 +18,10 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -31,12 +31,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -46,7 +46,7 @@ import com.hous.hous_aos.R
 @Composable
 fun NewRulesScreen() {
     val isAlarm = remember { mutableStateOf(false) }
-    val text = remember { mutableStateOf("") }
+    val value: MutableState<String> = remember { mutableStateOf("") }
     val categoryText = remember { mutableStateOf("") }
     val checkBoxState: MutableState<State> = remember { mutableStateOf(State.UNSELECT) }
     val isMenu = remember { mutableStateOf(true) }
@@ -67,7 +67,7 @@ fun NewRulesScreen() {
         )
         Spacer(modifier = Modifier.size(8.dp))
 
-        NewRulesTextField(text, 10.dp)
+        NewRulesTextField(value)
         Spacer(modifier = Modifier.size(16.dp))
 
         Text(
@@ -101,6 +101,10 @@ fun NewRulesScreen() {
         Spacer(modifier = Modifier.size(12.dp))
 
         NewRulesManagerItem()
+        Spacer(modifier = Modifier.size(180.dp))
+
+        NewRulesButton()
+        Spacer(modifier = Modifier.size(24.dp))
     }
 }
 
@@ -139,24 +143,21 @@ fun NewRulesToolbar(
 
 @Composable
 fun NewRulesTextField(
-    text: MutableState<String>,
-    radius: Dp
+    text: MutableState<String>
 ) {
-    TextField(
+    BasicTextField(
+        value = text.value,
+        onValueChange = { text.value = it },
         modifier = Modifier
             .fillMaxWidth()
-            .scale(scaleY = 0.5F, scaleX = 1F),
-        value = text.value,
-        onValueChange = {
-            text.value = it
-        },
-        shape = RoundedCornerShape(radius),
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = colorResource(id = R.color.white),
-            unfocusedIndicatorColor = colorResource(id = R.color.white),
-            focusedIndicatorColor = colorResource(id = R.color.white),
-            cursorColor = colorResource(id = R.color.white),
-        ),
+            .clip(RoundedCornerShape(10.dp))
+            .background(colorResource(id = R.color.white))
+            .height(37.dp)
+            .padding(vertical = 8.dp, horizontal = 15.dp),
+        textStyle = TextStyle(
+            color = colorResource(id = R.color.g_6),
+            fontStyle = FontStyle(R.style.B2)
+        )
     )
 }
 
@@ -317,6 +318,30 @@ fun NewRulesDayList() {
     val dayList = stringArrayResource(id = R.array.new_rules_day_list)
     LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
         items(dayList) { NewRulesDay(it) }
+    }
+}
+
+@Composable
+private fun NewRulesButton() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .size(48.dp)
+            .clip(shape = RoundedCornerShape(15.dp))
+            .background(colorResource(id = R.color.hous_blue))
+            .padding(horizontal = 12.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .wrapContentSize()
+                .align(Alignment.Center),
+        ) {
+            Text(
+                text = "추가하기",
+                fontStyle = FontStyle(R.style.B1),
+                color = colorResource(id = R.color.white)
+            )
+        }
     }
 }
 
