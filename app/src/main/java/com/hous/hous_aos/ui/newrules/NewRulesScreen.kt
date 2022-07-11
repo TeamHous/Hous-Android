@@ -44,7 +44,7 @@ fun NewRulesScreen() {
     val isAlarm = remember { mutableStateOf(false) }
     val text = remember { mutableStateOf("") }
     val categoryText = remember { mutableStateOf("") }
-    val checkBoxState: MutableState<State> = remember { mutableStateOf(State.SELECT) }
+    val checkBoxState: MutableState<State> = remember { mutableStateOf(State.UNSELECT) }
     Column(
         modifier = Modifier
             .background(colorResource(id = R.color.hous_blue_bg))
@@ -56,7 +56,7 @@ fun NewRulesScreen() {
         Spacer(modifier = Modifier.size(27.dp))
 
         Text(
-            text = "규칙이름",
+            text = stringResource(id = R.string.new_rules_rule_name),
             fontStyle = FontStyle(R.style.B2),
             color = colorResource(id = R.color.hous_blue)
         )
@@ -66,7 +66,7 @@ fun NewRulesScreen() {
         Spacer(modifier = Modifier.size(16.dp))
 
         Text(
-            text = "카테고리",
+            text = stringResource(id = R.string.new_rules_category),
             fontStyle = FontStyle(R.style.B2),
             color = colorResource(id = R.color.hous_blue)
         )
@@ -76,6 +76,24 @@ fun NewRulesScreen() {
         Spacer(modifier = Modifier.size(16.dp))
 
         NewRulesCheckBox(checkBoxState)
+        Spacer(modifier = Modifier.size(4.dp))
+
+        Row {
+            Spacer(Modifier.size(30.dp))
+            Text(
+                text = stringResource(id = R.string.new_rules_description),
+                fontStyle = FontStyle(R.style.Description),
+                color = colorResource(id = R.color.g_4)
+            )
+        }
+        Spacer(modifier = Modifier.size(20.dp))
+
+        Text(
+            text = stringResource(id = R.string.new_rules_manager_setting),
+            fontStyle = FontStyle(R.style.B2),
+            color = colorResource(id = R.color.hous_blue)
+        )
+        Spacer(modifier = Modifier.size(12.dp))
     }
 }
 
@@ -206,23 +224,43 @@ fun NewRulesCheckBox(
     checkBoxState: MutableState<State>
 ) {
     when (checkBoxState.value) {
-        State.UNSELECT -> NewRulesBox(colorResource(id = R.color.hous_blue_bg_2))
-        State.SELECT -> NewRulesBox(colorResource(id = R.color.hous_blue))
-        State.BLOCK -> NewRulesBox(colorResource(id = R.color.g_4))
+        State.UNSELECT -> NewRulesBoxRow(
+            boxColor = colorResource(id = R.color.hous_blue_bg_2),
+            textColor = colorResource(id = R.color.g_4)
+        )
+        State.SELECT -> NewRulesBoxRow(
+            boxColor = colorResource(id = R.color.hous_blue),
+            textColor = colorResource(id = R.color.hous_blue)
+        )
+        State.BLOCK -> NewRulesBoxRow(
+            boxColor = colorResource(id = R.color.g_4),
+            textColor = colorResource(id = R.color.g_4)
+        )
     }
 }
 
 @Composable
-fun NewRulesBox(boxColor: Color) {
-    Box(
-        modifier = Modifier
-            .clip(shape = RoundedCornerShape(5.dp))
-            .background(color = boxColor)
-            .size(24.dp),
+fun NewRulesBoxRow(boxColor: Color, textColor: Color) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_check),
-            contentDescription = ""
+        Box(
+            modifier = Modifier
+                .clip(shape = RoundedCornerShape(5.dp))
+                .background(color = boxColor)
+                .size(24.dp),
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_check),
+                contentDescription = ""
+            )
+        }
+        Spacer(modifier = Modifier.size(6.dp))
+        Text(
+            text = stringResource(id = R.string.new_rules_key_rules),
+            color = textColor,
+            fontStyle = FontStyle(R.style.B1)
         )
     }
 }
