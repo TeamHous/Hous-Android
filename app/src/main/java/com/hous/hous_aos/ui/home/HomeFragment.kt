@@ -13,6 +13,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var comingUpAdapter: ComingUpAdapter
     private lateinit var rulesAdapter: RulesAdapter
+    private lateinit var toDoAdapter: ToDoAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +50,14 @@ class HomeFragment : Fragment() {
         rulesAdapter.rulesList.addAll(
             rules
         )
-        comingUpAdapter.notifyDataSetChanged()
+        rulesAdapter.notifyDataSetChanged()
+
+        toDoAdapter = ToDoAdapter()
+        binding.rvToDo.adapter = toDoAdapter
+        toDoAdapter.toDoList.addAll(
+            toDo
+        )
+        toDoAdapter.notifyDataSetChanged()
     }
 
     companion object {
