@@ -1,44 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingStart="20dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_rules_background"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="4dp"
-        android:backgroundTint="@color/purple_200"
-        android:src="@drawable/ic_rules_rule_bg"
-        app:layout_constraintBottom_toBottomOf="@id/iv_bear"
-        app:layout_constraintDimensionRatio="1"
-        app:layout_constraintEnd_toEndOf="@id/iv_bear"
-        app:layout_constraintStart_toStartOf="@id/iv_bear"
-        app:layout_constraintTop_toTopOf="@id/iv_bear" />
+    <data>
 
-    <ImageView
-        android:id="@+id/iv_bear"
+        <variable
+            name="data"
+            type="com.hous.hous_aos.data.entity.rules.CategoryOfRuleResponse" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_rules_beer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingStart="20dp">
 
-    <TextView
-        android:id="@+id/tv_rule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:textAppearance="@style/B3"
-        android:textColor="@color/g_6"
-        app:layout_constraintEnd_toEndOf="@id/iv_rules_background"
-        app:layout_constraintStart_toStartOf="@id/iv_rules_background"
-        app:layout_constraintTop_toBottomOf="@id/iv_rules_background"
-        tools:text="청소" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_rules_background"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:backgroundTint="@color/purple_200"
+            android:src="@{context.getDrawable(data.icon)}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_bear"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="@id/iv_bear"
+            app:layout_constraintStart_toStartOf="@id/iv_bear"
+            app:layout_constraintTop_toTopOf="@id/iv_bear"
+            tools:src="@drawable/ic_rules_rule_bg" />
+
+        <ImageView
+            android:id="@+id/iv_bear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@{context.getDrawable(data.icon)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_rules_beer" />
+
+        <TextView
+            android:id="@+id/tv_rule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="@{data.name}"
+            android:textAppearance="@style/B3"
+            android:textColor="@color/g_6"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@id/iv_rules_background"
+            app:layout_constraintStart_toStartOf="@id/iv_rules_background"
+            app:layout_constraintTop_toBottomOf="@id/iv_rules_background"
+            tools:text="청소" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
