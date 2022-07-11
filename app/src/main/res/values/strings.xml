@@ -8,4 +8,6 @@
     <string name="home_title">Hous-</string>
     <string name="rules_title">Hous- 규칙</string>
     <string name="profile_title">Hous- ME</string>
+
+    <string name="new_rules_title">새로운 규칙 추가</string>
 </resources>
