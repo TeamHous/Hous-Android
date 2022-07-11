@@ -1,5 +1,6 @@
 package com.hous.hous_aos.ui.newrules
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -284,20 +285,36 @@ fun NewRulesBoxRow(boxColor: Color, textColor: Color) {
 
 @Composable
 fun NewRulesDay(
-    day: String
+    day: String,
+    selected: MutableState<State>
 ) {
+    val color = when (selected.value) {
+        State.UNSELECT -> colorResource(id = R.color.white)
+        State.SELECT -> colorResource(id = R.color.hous_blue_bg_2)
+        State.BLOCK -> colorResource(id = R.color.g_2)
+    }
+    val textColor = when (selected.value) {
+        State.BLOCK -> colorResource(id = R.color.g_4)
+        else -> colorResource(id = R.color.hous_blue)
+    }
     Box(
         modifier = Modifier
             .size(40.dp)
             .clip(shape = CircleShape)
-            .background(colorResource(id = R.color.g_2))
+            .background(color)
+            .clickable {
+                if (selected.value != State.BLOCK) {
+                    if (selected.value == State.SELECT) selected.value = State.UNSELECT
+                    else selected.value = State.SELECT
+                }
+            }
     ) {
         Text(
             modifier = Modifier
                 .wrapContentSize()
                 .align(Alignment.Center),
             text = day,
-            color = colorResource(id = R.color.g_4),
+            color = textColor,
             fontStyle = FontStyle(R.style.B3)
         )
     }
@@ -318,11 +335,12 @@ fun NewRulesManagerItem() {
     }
 }
 
+@SuppressLint("UnrememberedMutableState")
 @Composable
 fun NewRulesDayList() {
     val dayList = stringArrayResource(id = R.array.new_rules_day_list)
     LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-        items(dayList) { NewRulesDay(it) }
+        items(dayList) { NewRulesDay(it, mutableStateOf(State.UNSELECT)) }
     }
 }
 
