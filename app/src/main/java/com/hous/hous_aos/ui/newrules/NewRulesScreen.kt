@@ -77,7 +77,7 @@ fun NewRulesScreen() {
         )
         Spacer(modifier = Modifier.size(8.dp))
 
-        NewRulesBox(10.dp, R.color.white, categoryText, isMenu)
+        NewRulesBox(10.dp, categoryText, isMenu)
         Spacer(modifier = Modifier.size(16.dp))
 
         NewRulesCheckBox(checkBoxState)
@@ -99,6 +99,8 @@ fun NewRulesScreen() {
             color = colorResource(id = R.color.hous_blue)
         )
         Spacer(modifier = Modifier.size(12.dp))
+
+        NewRulesManagerItem()
     }
 }
 
@@ -161,8 +163,7 @@ fun NewRulesTextField(
 @Composable
 private fun NewRulesBox(
     radius: Dp,
-    customColor: Int,
-    categoryText: MutableState<String>,
+    prefixText: MutableState<String>,
     isMenu: MutableState<Boolean>
 ) {
     Box(
@@ -170,7 +171,7 @@ private fun NewRulesBox(
             .fillMaxWidth()
             .size(36.dp)
             .clip(shape = RoundedCornerShape(radius))
-            .background(colorResource(id = customColor))
+            .background(colorResource(id = R.color.white))
             .padding(horizontal = 12.dp)
     ) {
         Box(
@@ -179,7 +180,7 @@ private fun NewRulesBox(
                 .align(Alignment.CenterStart),
         ) {
             Text(
-                text = categoryText.value,
+                text = prefixText.value,
                 fontStyle = FontStyle(R.style.B2),
                 color = colorResource(id = R.color.g_6)
             )
@@ -189,7 +190,7 @@ private fun NewRulesBox(
                 .wrapContentSize()
                 .align(Alignment.CenterEnd),
         ) {
-            NewRulesDropDownMenu(categoryText, isMenu)
+            NewRulesDropDownMenu(prefixText, isMenu)
         }
     }
 }
@@ -297,6 +298,21 @@ fun NewRulesDay(
 }
 
 @Composable
+fun NewRulesManagerItem() {
+    val managerText = remember { mutableStateOf("담당자 없음") }
+    val isMenu = remember { mutableStateOf(true) }
+    Column {
+        NewRulesBox(
+            radius = 10.dp,
+            prefixText = managerText,
+            isMenu = isMenu
+        )
+        Spacer(modifier = Modifier.size(10.dp))
+        NewRulesDayList()
+    }
+}
+
+@Composable
 fun NewRulesDayList() {
     val dayList = stringArrayResource(id = R.array.new_rules_day_list)
     LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -312,10 +328,4 @@ enum class State {
 @Composable
 fun NewRulesPreview() {
     NewRulesScreen()
-}
-
-@Preview
-@Composable
-fun NewRulesDayPreview() {
-    NewRulesDayList()
 }
