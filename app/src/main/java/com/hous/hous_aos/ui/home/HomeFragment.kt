@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
         binding.rvComingUp.adapter = comingUpAdapter
         comingUpAdapter.comingUpList.addAll(
             listOf(
-                ComingUpData(R.drawable.ic_plus, "D-1"),
+                ComingUpData(R.drawable.ic_party, "D-1"),
                 ComingUpData(R.drawable.ic_party, "D-4"),
                 ComingUpData(R.drawable.ic_beer, "D-6"),
                 ComingUpData(R.drawable.ic_coffee, "D-10"),
