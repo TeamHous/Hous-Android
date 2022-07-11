@@ -34,4 +34,9 @@
     <color name="hous_bot_navi_home">#fff6e0</color>
     <color name="hous_bot_navi_rule">#c6ddff</color>
     <color name="hous_bot_navi_profile">#FFBEBE</color>
+
+    <!--    hous-rules-->
+    <color name="hous_black_layer">#b3000000</color>
+    <color name="hous_event_bg">#ffda7b</color>
+    <color name="hous_green_bg">#f0fff0</color>
 </resources>
