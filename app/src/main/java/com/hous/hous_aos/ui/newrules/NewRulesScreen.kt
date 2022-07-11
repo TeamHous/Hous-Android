@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -102,10 +103,10 @@ fun NewRulesScreen() {
         )
         Spacer(modifier = Modifier.size(12.dp))
 
-        NewRulesManagerItem()
+        NewRulesManagerList()
         Spacer(modifier = Modifier.size(180.dp))
 
-        NewRulesButton()
+        NewRulesAddRuleButton()
         Spacer(modifier = Modifier.size(24.dp))
     }
 }
@@ -321,15 +322,43 @@ fun NewRulesDay(
 }
 
 @Composable
-fun NewRulesManagerItem() {
+fun NewRulesManagerList() {
+    val isAddButton = remember { mutableStateOf(false) }
+    LazyColumn {
+        item { NewRulesManagerItem(isAddButton) }
+//        items() { }
+        item {
+            Spacer(modifier = Modifier.size(16.dp))
+            NewRulesAddMangerButton(isAddButton)
+        }
+    }
+}
+
+@Composable
+fun NewRulesManagerItem(
+    isButton: MutableState<Boolean>
+) {
     val managerText = remember { mutableStateOf("담당자 없음") }
     val isMenu = remember { mutableStateOf(true) }
     Column {
-        NewRulesBox(
-            radius = 10.dp,
-            prefixText = managerText,
-            isMenu = isMenu
-        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            if (managerText.value != "담당자 없음") {
+                isButton.value = true
+                Image(
+                    painter = painterResource(id = R.drawable.ic_delete),
+                    contentDescription = "",
+                    modifier = Modifier.clickable {
+                        /* item 제거 기능 */
+                    }
+                )
+                Spacer(modifier = Modifier.size(12.dp))
+            }
+            NewRulesBox(
+                radius = 10.dp,
+                prefixText = managerText,
+                isMenu = isMenu
+            )
+        }
         Spacer(modifier = Modifier.size(10.dp))
         NewRulesDayList()
     }
@@ -345,14 +374,46 @@ fun NewRulesDayList() {
 }
 
 @Composable
-private fun NewRulesButton() {
+private fun NewRulesAddMangerButton(
+    isButton: MutableState<Boolean>
+) {
+    if (isButton.value) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .size(32.dp)
+                .clip(shape = RoundedCornerShape(10.dp))
+                .background(colorResource(id = R.color.white))
+                .padding(vertical = 4.dp)
+                .clickable {
+                    /* item add feature */
+                    isButton.value = false
+                }
+        ) {
+            Box(
+                modifier = Modifier
+                    .wrapContentSize()
+                    .align(Alignment.Center),
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_plus_blue),
+                    contentDescription = ""
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun NewRulesAddRuleButton() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .size(48.dp)
             .clip(shape = RoundedCornerShape(15.dp))
             .background(colorResource(id = R.color.hous_blue))
-            .padding(horizontal = 12.dp)
+            .padding(vertical = 12.dp)
+            .clickable { /* 서버 통신 */ }
     ) {
         Box(
             modifier = Modifier
