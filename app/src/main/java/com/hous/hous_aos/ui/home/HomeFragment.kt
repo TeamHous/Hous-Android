@@ -13,6 +13,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var comingUpAdapter: ComingUpAdapter
     private lateinit var rulesAdapter: RulesAdapter
+    private lateinit var toDoAdapter: ToDoAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +27,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            position = rules.size
+            rulesPosition = rules.size
+            toDoPosition = toDo.size
         }
     }
 
@@ -48,7 +50,14 @@ class HomeFragment : Fragment() {
         rulesAdapter.rulesList.addAll(
             rules
         )
-        comingUpAdapter.notifyDataSetChanged()
+        rulesAdapter.notifyDataSetChanged()
+
+        toDoAdapter = ToDoAdapter()
+        binding.rvToDo.adapter = toDoAdapter
+        toDoAdapter.toDoList.addAll(
+            toDo
+        )
+        toDoAdapter.notifyDataSetChanged()
     }
 
     companion object {
@@ -65,11 +74,19 @@ class HomeFragment : Fragment() {
         )
 
         val rules = listOf<RulesData>(
-            RulesData("00시~ 불 끄기!"),
-            RulesData("23시~ 이어폰 필수!"),
-            RulesData("세탁기는 화,수,토"),
-            RulesData("일 - 청소하는 날!"),
-            RulesData("2,4주 토- 장보기"),
+            RulesData("00시~ 불 끄기!밤새모니터에튀긴침이마르기도전에"),
+            RulesData("23시~ 이어폰 필수!밤새모니터에튀긴침이마르기도전에"),
+            RulesData("세탁기는 화,수,토밤새모니터에튀긴침이마르기도전에"),
+            RulesData("일 - 청소하는 날!밤새모니터에튀긴침이마르기도전에"),
+            RulesData("2,4주 토- 장보기밤새모니터에튀긴침이마르기도전에"),
+        )
+
+        val toDo = listOf<ToDoData>(
+            ToDoData("퇴근하고 마트ㄹㄹㄹ밤새모니터에튀긴침이마르기도전에"),
+            ToDoData("저녁 설거지ㅇㅇㅇㅇㅇㅇㅇㅇㅇ밤새모니터에튀긴침이마르기도전에"),
+            ToDoData("아침 설거지ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ밤새모니터에튀긴침이마르기도전에"),
+            ToDoData("물 사기밤새모니터에튀긴침이마르기도전에"),
+            ToDoData("야식 먹지 말자밤새모니터에튀긴침이마르기도전에"),
         )
     }
 }

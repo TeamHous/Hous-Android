@@ -13,8 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginHorizontal="20dp">
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="8dp">
 
         <ImageView
             android:id="@+id/iv_rules"
@@ -30,6 +30,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:maxEms="7"
+            android:maxLines="1"
             android:text="@{rulesData.rules}"
             android:textAppearance="@style/B3"
             app:layout_constraintStart_toEndOf="@id/iv_rules"
