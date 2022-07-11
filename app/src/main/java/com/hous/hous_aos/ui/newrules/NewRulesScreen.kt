@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
@@ -265,6 +266,27 @@ fun NewRulesBoxRow(boxColor: Color, textColor: Color) {
     }
 }
 
+@Composable
+fun NewRulesDay(
+    day: String
+) {
+    Box(
+        modifier = Modifier
+            .size(40.dp)
+            .clip(shape = CircleShape)
+            .background(colorResource(id = R.color.g_2))
+    ) {
+        Text(
+            modifier = Modifier
+                .wrapContentSize()
+                .align(Alignment.Center),
+            text = day,
+            color = colorResource(id = R.color.g_4),
+            fontStyle = FontStyle(R.style.B3)
+        )
+    }
+}
+
 enum class State {
     UNSELECT, SELECT, BLOCK
 }
@@ -273,4 +295,10 @@ enum class State {
 @Composable
 fun NewRulesPreview() {
     NewRulesScreen()
+}
+
+@Preview
+@Composable
+fun NewRulesDayPreview() {
+    NewRulesDay("월")
 }
