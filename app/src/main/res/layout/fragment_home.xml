@@ -12,7 +12,11 @@
             type="com.hous.hous_aos.ui.home.HomeFragment" />
 
         <variable
-            name="position"
+            name="rulesPosition"
+            type="Integer" />
+
+        <variable
+            name="toDoPosition"
             type="Integer" />
     </data>
 
