@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="toDoData"
+            type="com.hous.hous_aos.ui.home.ToDoData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="14dp"
+        android:layout_marginBottom="8dp">
+
+        <CheckBox
+            android:id="@+id/cb_to_do"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/sel_home_to_do_check_box"
+            android:button="@android:color/transparent"
+            android:checked="false"
+            app:layout_constraintBottom_toBottomOf="@id/tv_to_do"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_to_do" />
+
+        <TextView
+            android:id="@+id/tv_to_do"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:ellipsize="end"
+            android:maxEms="7"
+            android:maxLines="1"
+            android:text="@{toDoData.rules}"
+            android:textAppearance="@style/B3"
+            app:layout_constraintStart_toEndOf="@id/cb_to_do"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="청소기 돌리기" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
