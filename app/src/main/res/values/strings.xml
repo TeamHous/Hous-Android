@@ -10,4 +10,10 @@
     <string name="profile_title">Hous- ME</string>
 
     <string name="new_rules_title">새로운 규칙 추가</string>
+    <string name="new_rules_rule_name">규칙이름</string>
+    <string name="new_rules_category">카테고리</string>
+    <string name="new_rules_description">담당자와 날짜 구분을 하지 않고 항상 하는 규칙이라면\n" +
+                    "카데고리 상단에 표시 됩니다</string>
+    <string name="new_rules_manager_setting">고정 담당자 설정</string>
+    <string name="new_rules_key_rules">Key Rules으로 추가</string>
 </resources>
