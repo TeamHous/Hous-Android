@@ -16,21 +16,21 @@
         android:marginTop="9dp">
 
         <ImageView
-            android:id="@+id/iv_home_rules"
+            android:id="@+id/iv_rules"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/shape_blue_fill_circle"
-            app:layout_constraintBottom_toBottomOf="@id/tv_home_rules"
+            app:layout_constraintBottom_toBottomOf="@id/tv_rules"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_home_rules" />
+            app:layout_constraintTop_toTopOf="@id/tv_rules" />
 
         <TextView
-            android:id="@+id/tv_home_rules"
+            android:id="@+id/tv_rules"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textAppearance="@style/B3"
-            app:layout_constraintStart_toEndOf="@id/iv_home_rules"
+            app:layout_constraintStart_toEndOf="@id/iv_rules"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@{rulesData.rules}"
             tools:text="머리카락 치우기" />
