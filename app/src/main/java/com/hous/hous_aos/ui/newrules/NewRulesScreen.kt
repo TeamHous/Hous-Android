@@ -49,6 +49,7 @@ fun NewRulesScreen() {
     val text = remember { mutableStateOf("") }
     val categoryText = remember { mutableStateOf("") }
     val checkBoxState: MutableState<State> = remember { mutableStateOf(State.UNSELECT) }
+    val isMenu = remember { mutableStateOf(true) }
     Column(
         modifier = Modifier
             .background(colorResource(id = R.color.hous_blue_bg))
@@ -76,7 +77,7 @@ fun NewRulesScreen() {
         )
         Spacer(modifier = Modifier.size(8.dp))
 
-        NewRulesBox(10.dp, R.color.white, categoryText)
+        NewRulesBox(10.dp, R.color.white, categoryText, isMenu)
         Spacer(modifier = Modifier.size(16.dp))
 
         NewRulesCheckBox(checkBoxState)
@@ -161,7 +162,8 @@ fun NewRulesTextField(
 private fun NewRulesBox(
     radius: Dp,
     customColor: Int,
-    categoryText: MutableState<String>
+    categoryText: MutableState<String>,
+    isMenu: MutableState<Boolean>
 ) {
     Box(
         modifier = Modifier
@@ -187,38 +189,42 @@ private fun NewRulesBox(
                 .wrapContentSize()
                 .align(Alignment.CenterEnd),
         ) {
-            NewRulesDropDownMenu(categoryText)
+            NewRulesDropDownMenu(categoryText, isMenu)
         }
     }
 }
 
 @Composable
-private fun NewRulesDropDownMenu(categoryText: MutableState<String>) {
+private fun NewRulesDropDownMenu(
+    categoryText: MutableState<String>,
+    isMenu: MutableState<Boolean>
+) {
+    if (isMenu.value) {
+        var isExpanded by remember { mutableStateOf(false) }
+        Image(
+            modifier = Modifier
+                .fillMaxHeight()
+                .clickable { isExpanded = true },
+            painter = painterResource(id = R.drawable.ic_open),
+            contentDescription = ""
+        )
 
-    var isExpanded by remember { mutableStateOf(false) }
-    Image(
-        modifier = Modifier
-            .fillMaxHeight()
-            .clickable { isExpanded = true },
-        painter = painterResource(id = R.drawable.ic_open),
-        contentDescription = ""
-    )
-
-    DropdownMenu(
-        modifier = Modifier.fillMaxWidth(),
-        expanded = isExpanded,
-        onDismissRequest = { isExpanded = false }
-    ) {
-        DropdownMenuItem(
-            onClick = { categoryText.value = "청소" }
+        DropdownMenu(
+            modifier = Modifier.fillMaxWidth(),
+            expanded = isExpanded,
+            onDismissRequest = { isExpanded = false }
         ) {
-            Text("청소")
-        }
+            DropdownMenuItem(
+                onClick = { categoryText.value = "청소" }
+            ) {
+                Text("청소")
+            }
 
-        DropdownMenuItem(
-            onClick = { categoryText.value = "카테고리" }
-        ) {
-            Text("카테고리")
+            DropdownMenuItem(
+                onClick = { categoryText.value = "카테고리" }
+            ) {
+                Text("카테고리")
+            }
         }
     }
 }
