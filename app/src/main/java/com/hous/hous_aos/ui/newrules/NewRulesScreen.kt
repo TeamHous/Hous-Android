@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.DropdownMenu
@@ -33,6 +35,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -287,6 +290,14 @@ fun NewRulesDay(
     }
 }
 
+@Composable
+fun NewRulesDayList() {
+    val dayList = stringArrayResource(id = R.array.new_rules_day_list)
+    LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+        items(dayList) { NewRulesDay(it) }
+    }
+}
+
 enum class State {
     UNSELECT, SELECT, BLOCK
 }
@@ -300,5 +311,5 @@ fun NewRulesPreview() {
 @Preview
 @Composable
 fun NewRulesDayPreview() {
-    NewRulesDay("월")
+    NewRulesDayList()
 }
