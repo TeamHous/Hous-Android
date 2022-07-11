@@ -45,7 +45,7 @@
             android:id="@+id/tv_home_coming_up_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="D-10"
+            android:textColor="@color/white"
             android:textColor="@color/hous_white"
             android:textSize="20sp"
             android:textStyle="bold"
