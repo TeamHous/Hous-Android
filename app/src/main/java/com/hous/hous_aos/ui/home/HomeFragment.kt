@@ -39,17 +39,7 @@ class HomeFragment : Fragment() {
         comingUpAdapter = ComingUpAdapter()
         binding.rvComingUp.adapter = comingUpAdapter
         comingUpAdapter.comingUpList.addAll(
-            listOf(
-                ComingUpData(R.drawable.ic_party, "D-1"),
-                ComingUpData(R.drawable.ic_party, "D-4"),
-                ComingUpData(R.drawable.ic_beer, "D-6"),
-                ComingUpData(R.drawable.ic_coffee, "D-10"),
-                ComingUpData(R.drawable.ic_pancake, "D-15"),
-                ComingUpData(R.drawable.ic_party, "D-18"),
-                ComingUpData(R.drawable.ic_coffee, "D-20"),
-                ComingUpData(R.drawable.ic_beer, "D-25"),
-                ComingUpData(R.drawable.ic_pancake, "D-80"),
-            )
+            comingUp
         )
         comingUpAdapter.notifyDataSetChanged()
 
@@ -60,5 +50,26 @@ class HomeFragment : Fragment() {
         )
         comingUpAdapter.notifyDataSetChanged()
     }
+
+    companion object {
+        val comingUp = listOf<ComingUpData>(
+            ComingUpData(R.drawable.ic_party, "D-1"),
+            ComingUpData(R.drawable.ic_party, "D-4"),
+            ComingUpData(R.drawable.ic_beer, "D-6"),
+            ComingUpData(R.drawable.ic_coffee, "D-10"),
+            ComingUpData(R.drawable.ic_pancake, "D-15"),
+            ComingUpData(R.drawable.ic_party, "D-18"),
+            ComingUpData(R.drawable.ic_coffee, "D-20"),
+            ComingUpData(R.drawable.ic_beer, "D-25"),
+            ComingUpData(R.drawable.ic_pancake, "D-80"),
+        )
+
+        val rules = listOf<RulesData>(
+            RulesData("00시~ 불 끄기!"),
+            RulesData("23시~ 이어폰 필수!"),
+            RulesData("세탁기는 화,수,토"),
+            RulesData("일 - 청소하는 날!"),
+            RulesData("2,4주 토- 장보기"),
+        )
     }
 }
