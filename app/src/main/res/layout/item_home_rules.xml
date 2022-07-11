@@ -29,9 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textColor="@color/black"
-            android:textSize="13sp"
-            android:textStyle="bold"
+            android:textAppearance="@style/B3"
             app:layout_constraintStart_toEndOf="@id/iv_home_rules"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="머리카락 치우기" />
