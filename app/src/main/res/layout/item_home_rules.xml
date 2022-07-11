@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="9dp">
+        android:marginTop="9dp">
 
         <ImageView
             android:id="@+id/iv_home_rules"
@@ -32,6 +32,7 @@
             android:textAppearance="@style/B3"
             app:layout_constraintStart_toEndOf="@id/iv_home_rules"
             app:layout_constraintTop_toTopOf="parent"
+            android:text="@{rulesData.rules}"
             tools:text="머리카락 치우기" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
