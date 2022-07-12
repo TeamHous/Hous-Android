@@ -37,6 +37,7 @@ android {
         versionCode 1
         versionName "1.0"
         buildConfigField "String", "HOUS_URL", properties["HOUS_URL"]
+        buildConfigField "String", "DUMMY_ACCESS_TOKEN", properties["DUMMY_ACCESS_TOKEN"]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

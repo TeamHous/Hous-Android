@@ -20,6 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     private const val HOUS_URL = BuildConfig.HOUS_URL
+    private const val DUMMY_ACCESS_TOKEN = BuildConfig.DUMMY_ACCESS_TOKEN
 
     @Provides
     @Singleton
@@ -33,7 +34,7 @@ object NetworkModule {
                         .newBuilder()
                         .addHeader(
                             "Authorization",
-                            "Bearer 나중에 기입"
+                            DUMMY_ACCESS_TOKEN
                         )
                         .build()
                 )
