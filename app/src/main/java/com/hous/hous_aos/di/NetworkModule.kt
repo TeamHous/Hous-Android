@@ -60,17 +60,14 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-    @HOME
     @Provides
     fun provideHomeService(retrofit: Retrofit): HomeService =
         retrofit.create(HomeService::class.java)
 
-    @RULES
     @Provides
     fun provideRulesService(retrofit: Retrofit): RulesService =
         retrofit.create(RulesService::class.java)
 
-    @PROFILE
     @Provides
     fun provideProfileService(retrofit: Retrofit): ProfileService =
         retrofit.create(ProfileService::class.java)
