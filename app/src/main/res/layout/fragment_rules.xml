@@ -7,15 +7,16 @@
 
         <variable
             name="viewmodel"
-            type="com.hous.hous_aos.ui.rules.CategoryViewModel" />
+            type="com.hous.hous_aos.ui.rules.rule.CategoryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.rules.RulesFragment">
+        tools:context=".ui.rules.rule.RulesFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_category"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -53,5 +54,14 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/frg_bottom"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_category" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
