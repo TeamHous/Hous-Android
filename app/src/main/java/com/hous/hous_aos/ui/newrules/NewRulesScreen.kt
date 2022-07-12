@@ -37,7 +37,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
@@ -321,22 +320,35 @@ fun NewRulesDay(
     }
 }
 
+@SuppressLint("MutableCollectionMutableState")
 @Composable
 fun NewRulesManagerList() {
     val isAddButton = remember { mutableStateOf(false) }
+    val test = remember {
+        mutableStateOf(mutableListOf(listOf<Pair<String, MutableState<State>>>()))
+    }
     LazyColumn {
-        item { NewRulesManagerItem(isAddButton) }
-//        items() { }
+        item { NewRulesManagerItem(isAddButton, addDay()) }
+        items(test.value) { NewRulesManagerItem(isAddButton, it) }
         item {
             Spacer(modifier = Modifier.size(16.dp))
-            NewRulesAddMangerButton(isAddButton)
+            NewRulesAddMangerButton(isAddButton, test)
         }
     }
 }
 
+private fun addDay(): List<Pair<String, MutableState<State>>> =
+    listOf("월", "화", "수", "목", "금", "토", "일").map {
+        Pair(
+            it,
+            mutableStateOf(State.UNSELECT)
+        )
+    }
+
 @Composable
 fun NewRulesManagerItem(
-    isButton: MutableState<Boolean>
+    isButton: MutableState<Boolean>,
+    dayList: List<Pair<String, MutableState<State>>>
 ) {
     val managerText = remember { mutableStateOf("담당자 없음") }
     val isMenu = remember { mutableStateOf(true) }
@@ -360,23 +372,25 @@ fun NewRulesManagerItem(
             )
         }
         Spacer(modifier = Modifier.size(10.dp))
-        NewRulesDayList()
+        NewRulesDayList(dayList)
     }
 }
 
-@SuppressLint("UnrememberedMutableState")
 @Composable
-fun NewRulesDayList() {
-    val dayList = stringArrayResource(id = R.array.new_rules_day_list)
+fun NewRulesDayList(
+    dayList: List<Pair<String, MutableState<State>>>
+) {
     LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-        items(dayList) { NewRulesDay(it, mutableStateOf(State.UNSELECT)) }
+        items(dayList) { NewRulesDay(it.first, it.second) }
     }
 }
 
 @Composable
 private fun NewRulesAddMangerButton(
-    isButton: MutableState<Boolean>
+    isButton: MutableState<Boolean>,
+    test: MutableState<MutableList<List<Pair<String, MutableState<State>>>>>
 ) {
+
     if (isButton.value) {
         Box(
             modifier = Modifier
@@ -386,7 +400,7 @@ private fun NewRulesAddMangerButton(
                 .background(colorResource(id = R.color.white))
                 .padding(vertical = 4.dp)
                 .clickable {
-                    /* item add feature */
+                    test.value.add(addDay())
                     isButton.value = false
                 }
         ) {
