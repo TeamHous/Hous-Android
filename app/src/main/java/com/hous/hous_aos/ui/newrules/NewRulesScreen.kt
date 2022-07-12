@@ -111,7 +111,7 @@ fun NewRulesScreen() {
                 Spacer(modifier = Modifier.size(12.dp))
             }
 
-            item { NewRulesManagerItem(isAddButton, addDay()) }
+            item { NewRulesManagerItem(isAddButton, addDay(), checkBoxState) }
 
             items(test.value) {
                 NewRulesManagerItem(isAddButton, it)
@@ -260,14 +260,17 @@ fun NewRulesCheckBox(
 ) {
     when (checkBoxState.value) {
         State.UNSELECT -> NewRulesBoxRow(
+            checkBoxState,
             boxColor = colorResource(id = R.color.hous_blue_bg_2),
             textColor = colorResource(id = R.color.g_4)
         )
         State.SELECT -> NewRulesBoxRow(
+            checkBoxState,
             boxColor = colorResource(id = R.color.hous_blue),
             textColor = colorResource(id = R.color.hous_blue)
         )
         State.BLOCK -> NewRulesBoxRow(
+            checkBoxState,
             boxColor = colorResource(id = R.color.g_4),
             textColor = colorResource(id = R.color.g_4)
         )
@@ -275,7 +278,11 @@ fun NewRulesCheckBox(
 }
 
 @Composable
-fun NewRulesBoxRow(boxColor: Color, textColor: Color) {
+fun NewRulesBoxRow(
+    checkBoxState: MutableState<State>,
+    boxColor: Color,
+    textColor: Color
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
@@ -284,6 +291,13 @@ fun NewRulesBoxRow(boxColor: Color, textColor: Color) {
             modifier = Modifier
                 .clip(shape = RoundedCornerShape(5.dp))
                 .background(color = boxColor)
+                .clickable {
+                    if (checkBoxState.value != State.BLOCK) {
+                        if (checkBoxState.value == State.SELECT) {
+                            checkBoxState.value = State.UNSELECT
+                        } else checkBoxState.value = State.SELECT
+                    }
+                }
                 .size(24.dp),
         ) {
             Image(
@@ -303,7 +317,8 @@ fun NewRulesBoxRow(boxColor: Color, textColor: Color) {
 @Composable
 fun NewRulesDay(
     day: String,
-    selected: MutableState<State>
+    selected: MutableState<State>,
+    checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK)
 ) {
     val color = when (selected.value) {
         State.UNSELECT -> colorResource(id = R.color.white)
@@ -322,7 +337,10 @@ fun NewRulesDay(
             .clickable {
                 if (selected.value != State.BLOCK) {
                     if (selected.value == State.SELECT) selected.value = State.UNSELECT
-                    else selected.value = State.SELECT
+                    else {
+                        selected.value = State.SELECT
+                        checkBoxState.value = State.BLOCK
+                    }
                 }
             }
     ) {
@@ -348,7 +366,8 @@ private fun addDay(): List<Pair<String, MutableState<State>>> =
 @Composable
 fun NewRulesManagerItem(
     isButton: MutableState<Boolean>,
-    dayList: List<Pair<String, MutableState<State>>>
+    dayList: List<Pair<String, MutableState<State>>>,
+    checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK)
 ) {
     if (dayList.isNotEmpty()) {
         val managerText = remember { mutableStateOf("담당자 없음") }
@@ -356,16 +375,20 @@ fun NewRulesManagerItem(
         Column {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 if (managerText.value != "담당자 없음") {
+                    checkBoxState.value = State.BLOCK
                     isButton.value = true
                     Image(
                         painter = painterResource(id = R.drawable.ic_delete),
                         contentDescription = "",
                         modifier = Modifier.clickable {
-                            /* item 제거 기능 */
+                            managerText.value = "담당자 없음"
+                            checkBoxState.value = State.UNSELECT
+                            isButton.value = false
                         }
                     )
                     Spacer(modifier = Modifier.size(12.dp))
                 }
+
                 NewRulesBox(
                     radius = 10.dp,
                     prefixText = managerText,
@@ -373,17 +396,18 @@ fun NewRulesManagerItem(
                 )
             }
             Spacer(modifier = Modifier.size(10.dp))
-            NewRulesDayList(dayList)
+            NewRulesDayList(dayList, checkBoxState)
         }
     }
 }
 
 @Composable
 fun NewRulesDayList(
-    dayList: List<Pair<String, MutableState<State>>>
+    dayList: List<Pair<String, MutableState<State>>>,
+    checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK)
 ) {
     LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-        items(dayList) { NewRulesDay(it.first, it.second) }
+        items(dayList) { NewRulesDay(it.first, it.second, checkBoxState) }
     }
 }
 
