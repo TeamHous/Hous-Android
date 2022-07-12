@@ -1,56 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.rules.RulesFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.hous.hous_aos.ui.rules.CategoryViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.rules.RulesFragment">
 
-        <ImageView
-            android:id="@+id/iv_smile"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/shape_puple_fill_10_ract"
-            android:paddingVertical="9dp"
-            android:paddingStart="6dp"
-            android:paddingEnd="7dp"
-            android:src="@drawable/ic_rules_smile"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_rules"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toEndOf="@id/iv_smile"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:itemCount="2"
-            tools:listitem="@layout/item_rules_rule" />
-
-        <ImageView
-            android:id="@+id/btn_plus"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginBottom="21dp"
-            android:src="@drawable/ic_rules_todo_plus"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/rv_rules"
-            app:layout_constraintTop_toTopOf="@id/iv_smile" />
+            android:layout_marginTop="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_smile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/shape_puple_fill_10_ract"
+                android:paddingVertical="9dp"
+                android:paddingStart="6dp"
+                android:paddingEnd="7dp"
+                android:src="@drawable/ic_rules_smile"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_rules"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_smile"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="12"
+                tools:listitem="@layout/item_rules_rule" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
