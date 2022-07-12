@@ -5,12 +5,15 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="data"
             type="com.hous.hous_aos.data.entity.rules.CategoryOfRuleResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_rule_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="20dp">
@@ -20,24 +23,23 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="4dp"
-            android:backgroundTint="@color/purple_200"
-            android:src="@{context.getDrawable(data.icon)}"
-            app:layout_constraintBottom_toBottomOf="@id/iv_bear"
+            android:src="@{context.getDrawable(data.backGround)}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_rule_icon"
             app:layout_constraintDimensionRatio="1"
-            app:layout_constraintEnd_toEndOf="@id/iv_bear"
-            app:layout_constraintStart_toStartOf="@id/iv_bear"
-            app:layout_constraintTop_toTopOf="@id/iv_bear"
-            tools:src="@drawable/ic_rules_rule_bg" />
+            app:layout_constraintEnd_toEndOf="@id/iv_rule_icon"
+            app:layout_constraintStart_toStartOf="@id/iv_rule_icon"
+            app:layout_constraintTop_toTopOf="@id/iv_rule_icon"
+            tools:src="@drawable/ic_rules_category_yellow_bg_m" />
 
         <ImageView
-            android:id="@+id/iv_bear"
+            android:id="@+id/iv_rule_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@{context.getDrawable(data.icon)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_rules_beer" />
+            tools:src="@drawable/ic_rules_beer_s" />
 
         <TextView
             android:id="@+id/tv_rule"
@@ -47,12 +49,11 @@
             android:text="@{data.name}"
             android:textAppearance="@style/B3"
             android:textColor="@color/g_6"
-            android:visibility="invisible"
+            android:visibility="@{data.isSelected == false ? View.INVISIBLE : View.VISIBLE }"
             app:layout_constraintEnd_toEndOf="@id/iv_rules_background"
             app:layout_constraintStart_toStartOf="@id/iv_rules_background"
             app:layout_constraintTop_toBottomOf="@id/iv_rules_background"
             tools:text="청소" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
