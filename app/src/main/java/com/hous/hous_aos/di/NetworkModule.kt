@@ -1,9 +1,9 @@
 package com.hous.hous_aos.di
 
 import com.hous.hous_aos.BuildConfig
-import com.hous.hous_aos.data.api.HomeService
-import com.hous.hous_aos.data.api.ProfileService
-import com.hous.hous_aos.data.api.RulesService
+import com.hous.hous_aos.data.api.HomeApi
+import com.hous.hous_aos.data.api.ProfileApi
+import com.hous.hous_aos.data.api.RulesApi
 import com.hous.hous_aos.data.source.local.LocalDataSource
 import dagger.Module
 import dagger.Provides
@@ -64,14 +64,14 @@ object NetworkModule {
             .build()
 
     @Provides
-    fun provideHomeService(retrofit: Retrofit): HomeService =
-        retrofit.create(HomeService::class.java)
+    fun provideHomeService(retrofit: Retrofit): HomeApi =
+        retrofit.create(HomeApi::class.java)
 
     @Provides
-    fun provideRulesService(retrofit: Retrofit): RulesService =
-        retrofit.create(RulesService::class.java)
+    fun provideRulesService(retrofit: Retrofit): RulesApi =
+        retrofit.create(RulesApi::class.java)
 
     @Provides
-    fun provideProfileService(retrofit: Retrofit): ProfileService =
-        retrofit.create(ProfileService::class.java)
+    fun provideProfileService(retrofit: Retrofit): ProfileApi =
+        retrofit.create(ProfileApi::class.java)
 }
