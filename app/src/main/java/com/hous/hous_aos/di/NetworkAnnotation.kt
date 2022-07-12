@@ -8,7 +8,7 @@ annotation class HOME
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class RULE
+annotation class RULES
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)

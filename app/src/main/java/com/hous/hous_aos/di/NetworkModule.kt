@@ -1,16 +1,19 @@
 package com.hous.hous_aos.di
 
 import com.hous.hous_aos.BuildConfig
+import com.hous.hous_aos.data.api.HomeService
+import com.hous.hous_aos.data.api.ProfileService
+import com.hous.hous_aos.data.api.RulesService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -56,4 +59,19 @@ object NetworkModule {
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
+    @HOME
+    @Provides
+    fun provideHomeService(retrofit: Retrofit): HomeService =
+        retrofit.create(HomeService::class.java)
+
+    @RULES
+    @Provides
+    fun provideRulesService(retrofit: Retrofit): RulesService =
+        retrofit.create(RulesService::class.java)
+
+    @PROFILE
+    @Provides
+    fun provideProfileService(retrofit: Retrofit): ProfileService =
+        retrofit.create(ProfileService::class.java)
 }
