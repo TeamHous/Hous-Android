@@ -1,4 +1,4 @@
-package com.hous.hous_aos.ui.rules
+package com.hous.hous_aos.ui.rules.rule
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentRulesBinding
 import com.hous.hous_aos.ui.rules.adapter.CategoryOfRuleAdapter
+import com.hous.hous_aos.ui.rules.rule.todo.ToDoFragment
 import com.hous.hous_aos.util.showToast
 
 class RulesFragment : Fragment() {
@@ -31,6 +34,8 @@ class RulesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initTransaction()
+        changeTransaction()
         initAdapter()
         observeCategory()
     }
@@ -48,6 +53,17 @@ class RulesFragment : Fragment() {
         categoryViewModel.CategoryOfRuleList.observe(viewLifecycleOwner) {
             categoryOfRuleAdapter.submitList(it.toList())
         }
+    }
+
+    private fun initTransaction() {
+        childFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<ToDoFragment>(R.id.frg_bottom)
+        }
+    }
+
+    private fun changeTransaction() {
+        // TODO Category <-> ToDoFragment transaction 로직
     }
 
     /** 임시로 토스트를 박아놈*/

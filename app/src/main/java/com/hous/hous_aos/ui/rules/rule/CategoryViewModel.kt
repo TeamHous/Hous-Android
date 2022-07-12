@@ -1,4 +1,4 @@
-package com.hous.hous_aos.ui.rules
+package com.hous.hous_aos.ui.rules.rule
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

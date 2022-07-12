@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hous.hous_aos.data.entity.rules.CategoryOfRuleResponse
 import com.hous.hous_aos.databinding.ItemRulesRuleBinding
-import com.hous.hous_aos.ui.rules.ItemCategoryViewType
+import com.hous.hous_aos.ui.rules.rule.ItemCategoryViewType
 
 class CategoryOfRuleAdapter(
     private val onCategoryClick: () -> Unit,

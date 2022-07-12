@@ -1,22 +1,22 @@
-package com.hous.hous_aos.ui.profile
+package com.hous.hous_aos.ui.rules.rule.todo
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.hous.hous_aos.databinding.FragmentProfileBinding
+import com.hous.hous_aos.databinding.FragmentToDoBinding
 
-class ProfileFragment : Fragment() {
-    private var _binding: FragmentProfileBinding? = null
+class ToDoFragment : Fragment() {
+
+    private var _binding: FragmentToDoBinding? = null
     private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentToDoBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
