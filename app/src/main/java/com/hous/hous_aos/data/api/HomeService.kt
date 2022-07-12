@@ -1,3 +1,3 @@
 package com.hous.hous_aos.data.api
 
-interface HousService
+interface HomeService
