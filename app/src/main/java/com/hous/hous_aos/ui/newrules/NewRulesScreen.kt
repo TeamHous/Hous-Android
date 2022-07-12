@@ -1,6 +1,5 @@
 package com.hous.hous_aos.ui.newrules
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -10,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -52,61 +52,78 @@ fun NewRulesScreen() {
     val categoryText = remember { mutableStateOf("") }
     val checkBoxState: MutableState<State> = remember { mutableStateOf(State.UNSELECT) }
     val isMenu = remember { mutableStateOf(true) }
+    val isAddButton = remember { mutableStateOf(false) }
+    val test = remember {
+        mutableStateOf(listOf(listOf<Pair<String, MutableState<State>>>()))
+    }
     Column(
         modifier = Modifier
+            .fillMaxSize()
             .background(colorResource(id = R.color.hous_blue_bg))
-            .padding(horizontal = 20.dp)
+            .padding(horizontal = 20.dp),
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Spacer(modifier = Modifier.size(50.dp))
+        LazyColumn {
+            item {
+                Spacer(modifier = Modifier.size(50.dp))
 
-        NewRulesToolbar(isAlarm)
-        Spacer(modifier = Modifier.size(27.dp))
+                NewRulesToolbar(isAlarm)
+                Spacer(modifier = Modifier.size(27.dp))
 
-        Text(
-            text = stringResource(id = R.string.new_rules_rule_name),
-            fontStyle = FontStyle(R.style.B2),
-            color = colorResource(id = R.color.hous_blue)
-        )
-        Spacer(modifier = Modifier.size(8.dp))
+                Text(
+                    text = stringResource(id = R.string.new_rules_rule_name),
+                    fontStyle = FontStyle(R.style.B2),
+                    color = colorResource(id = R.color.hous_blue)
+                )
+                Spacer(modifier = Modifier.size(8.dp))
 
-        NewRulesTextField(value)
-        Spacer(modifier = Modifier.size(16.dp))
+                NewRulesTextField(value)
+                Spacer(modifier = Modifier.size(16.dp))
 
-        Text(
-            text = stringResource(id = R.string.new_rules_category),
-            fontStyle = FontStyle(R.style.B2),
-            color = colorResource(id = R.color.hous_blue)
-        )
-        Spacer(modifier = Modifier.size(8.dp))
+                Text(
+                    text = stringResource(id = R.string.new_rules_category),
+                    fontStyle = FontStyle(R.style.B2),
+                    color = colorResource(id = R.color.hous_blue)
+                )
+                Spacer(modifier = Modifier.size(8.dp))
 
-        NewRulesBox(10.dp, categoryText, isMenu)
-        Spacer(modifier = Modifier.size(16.dp))
+                NewRulesBox(10.dp, categoryText, isMenu)
+                Spacer(modifier = Modifier.size(16.dp))
 
-        NewRulesCheckBox(checkBoxState)
-        Spacer(modifier = Modifier.size(4.dp))
+                NewRulesCheckBox(checkBoxState)
+                Spacer(modifier = Modifier.size(4.dp))
 
-        Row {
-            Spacer(Modifier.size(30.dp))
-            Text(
-                text = stringResource(id = R.string.new_rules_description),
-                fontStyle = FontStyle(R.style.Description),
-                color = colorResource(id = R.color.g_4)
-            )
+                Row {
+                    Spacer(Modifier.size(30.dp))
+                    Text(
+                        text = stringResource(id = R.string.new_rules_description),
+                        fontStyle = FontStyle(R.style.Description),
+                        color = colorResource(id = R.color.g_4)
+                    )
+                }
+                Spacer(modifier = Modifier.size(20.dp))
+
+                Text(
+                    text = stringResource(id = R.string.new_rules_manager_setting),
+                    fontStyle = FontStyle(R.style.B2),
+                    color = colorResource(id = R.color.hous_blue)
+                )
+                Spacer(modifier = Modifier.size(12.dp))
+            }
+
+            item { NewRulesManagerItem(isAddButton, addDay()) }
+
+            items(test.value) {
+                NewRulesManagerItem(isAddButton, it)
+                Spacer(modifier = Modifier.size(16.dp))
+            }
+
+            item {
+                NewRulesAddMangerButton(isAddButton, test)
+                Spacer(modifier = Modifier.size(16.dp))
+                NewRulesAddRuleButton()
+            }
         }
-        Spacer(modifier = Modifier.size(20.dp))
-
-        Text(
-            text = stringResource(id = R.string.new_rules_manager_setting),
-            fontStyle = FontStyle(R.style.B2),
-            color = colorResource(id = R.color.hous_blue)
-        )
-        Spacer(modifier = Modifier.size(12.dp))
-
-        NewRulesManagerList()
-        Spacer(modifier = Modifier.size(180.dp))
-
-        NewRulesAddRuleButton()
-        Spacer(modifier = Modifier.size(24.dp))
     }
 }
 
@@ -320,23 +337,6 @@ fun NewRulesDay(
     }
 }
 
-@SuppressLint("MutableCollectionMutableState")
-@Composable
-fun NewRulesManagerList() {
-    val isAddButton = remember { mutableStateOf(false) }
-    val test = remember {
-        mutableStateOf(mutableListOf(listOf<Pair<String, MutableState<State>>>()))
-    }
-    LazyColumn {
-        item { NewRulesManagerItem(isAddButton, addDay()) }
-        items(test.value) { NewRulesManagerItem(isAddButton, it) }
-        item {
-            Spacer(modifier = Modifier.size(16.dp))
-            NewRulesAddMangerButton(isAddButton, test)
-        }
-    }
-}
-
 private fun addDay(): List<Pair<String, MutableState<State>>> =
     listOf("월", "화", "수", "목", "금", "토", "일").map {
         Pair(
@@ -350,29 +350,31 @@ fun NewRulesManagerItem(
     isButton: MutableState<Boolean>,
     dayList: List<Pair<String, MutableState<State>>>
 ) {
-    val managerText = remember { mutableStateOf("담당자 없음") }
-    val isMenu = remember { mutableStateOf(true) }
-    Column {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            if (managerText.value != "담당자 없음") {
-                isButton.value = true
-                Image(
-                    painter = painterResource(id = R.drawable.ic_delete),
-                    contentDescription = "",
-                    modifier = Modifier.clickable {
-                        /* item 제거 기능 */
-                    }
+    if (dayList.isNotEmpty()) {
+        val managerText = remember { mutableStateOf("담당자 없음") }
+        val isMenu = remember { mutableStateOf(true) }
+        Column {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                if (managerText.value != "담당자 없음") {
+                    isButton.value = true
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_delete),
+                        contentDescription = "",
+                        modifier = Modifier.clickable {
+                            /* item 제거 기능 */
+                        }
+                    )
+                    Spacer(modifier = Modifier.size(12.dp))
+                }
+                NewRulesBox(
+                    radius = 10.dp,
+                    prefixText = managerText,
+                    isMenu = isMenu
                 )
-                Spacer(modifier = Modifier.size(12.dp))
             }
-            NewRulesBox(
-                radius = 10.dp,
-                prefixText = managerText,
-                isMenu = isMenu
-            )
+            Spacer(modifier = Modifier.size(10.dp))
+            NewRulesDayList(dayList)
         }
-        Spacer(modifier = Modifier.size(10.dp))
-        NewRulesDayList(dayList)
     }
 }
 
@@ -388,9 +390,8 @@ fun NewRulesDayList(
 @Composable
 private fun NewRulesAddMangerButton(
     isButton: MutableState<Boolean>,
-    test: MutableState<MutableList<List<Pair<String, MutableState<State>>>>>
+    test: MutableState<List<List<Pair<String, MutableState<State>>>>>
 ) {
-
     if (isButton.value) {
         Box(
             modifier = Modifier
@@ -400,7 +401,10 @@ private fun NewRulesAddMangerButton(
                 .background(colorResource(id = R.color.white))
                 .padding(vertical = 4.dp)
                 .clickable {
-                    test.value.add(addDay())
+                    val ttt = mutableListOf<List<Pair<String, MutableState<State>>>>()
+                    test.value.forEach { ttt.add(it) }
+                    ttt.add(addDay())
+                    test.value = ttt
                     isButton.value = false
                 }
         ) {
@@ -427,7 +431,7 @@ private fun NewRulesAddRuleButton() {
             .clip(shape = RoundedCornerShape(15.dp))
             .background(colorResource(id = R.color.hous_blue))
             .padding(vertical = 12.dp)
-            .clickable { /* 서버 통신 */ }
+            .clickable { /* 서버 통신 */ },
     ) {
         Box(
             modifier = Modifier
