@@ -22,7 +22,7 @@ class ToDoAdapter : RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder>() {
         holder.onBind(toDoList[position])
     }
 
-    override fun getItemCount(): Int = toDoList.size
+    override fun getItemCount(): Int = 5
 
     class ToDoViewHolder(
         private val binding: ItemHomeToDoBinding
