@@ -4,6 +4,7 @@ import com.hous.hous_aos.BuildConfig
 import com.hous.hous_aos.data.api.HomeService
 import com.hous.hous_aos.data.api.ProfileService
 import com.hous.hous_aos.data.api.RulesService
+import com.hous.hous_aos.data.source.local.LocalDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +23,9 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providesHousInterceptor(): Interceptor =
+    fun providesHousInterceptor(
+        localDataSource: LocalDataSource
+    ): Interceptor =
         Interceptor { chain ->
             with(chain) {
                 proceed(
