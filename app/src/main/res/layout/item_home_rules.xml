@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="rulesData"
+            type="com.hous.hous_aos.ui.home.RulesData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="8dp">
+
+        <ImageView
+            android:id="@+id/iv_rules"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shape_blue_fill_circle"
+            app:layout_constraintBottom_toBottomOf="@id/tv_rules"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_rules" />
+
+        <TextView
+            android:id="@+id/tv_rules"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:maxEms="7"
+            android:maxLines="1"
+            android:text="@{rulesData.rules}"
+            android:textAppearance="@style/B3"
+            app:layout_constraintStart_toEndOf="@id/iv_rules"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="머리카락 치우기" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

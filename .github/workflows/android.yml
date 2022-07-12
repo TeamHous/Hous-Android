@@ -28,6 +28,19 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
+        
+    - name: Touch local properties
+      run: touch local.properties
+      
+    - name: Access HOUS_URL
+      env:
+          HOUS_URL: ${{ secrets.HOUS_URL }}
+      run: echo "HOUS_URL=\"$HOUS_URL\"" >> local.properties
+
+    - name: Access DUMMY_ACCESS_TOKEN
+      env:
+          DUMMY_ACCESS_TOKEN: ${{ secrets.DUMMY_ACCESS_TOKEN }}
+      run: echo "DUMMY_ACCESS_TOKEN=\"$DUMMY_ACCESS_TOKEN\"" >> local.properties
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
