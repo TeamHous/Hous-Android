@@ -179,6 +179,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="15dp"
                 android:overScrollMode="never"
+                android:paddingBottom="14dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
