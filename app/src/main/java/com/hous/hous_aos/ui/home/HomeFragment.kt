@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentHomeBinding
@@ -104,16 +103,18 @@ class HomeFragment : Fragment() {
             ToDoData("야식 먹지 말자밤새모니터에튀긴침이마르기도전에"),
         )
 
-        val profile = listOf<ProfileData>(
-            ProfileData(null, "강원용", null),
-            ProfileData(null, "이준원", null),
-            ProfileData(null, "김아무개", null),
-            ProfileData(null, "나까무라", null),
-            ProfileData(null, "이영주", null),
-            ProfileData(null, "강원용", null),
-            ProfileData(null, "이준원", null),
-            ProfileData(null, "김아무개", null),
-            ProfileData(null, "룸메이트 초대\n코드 복사하기", null),
+        val profile = listOf<ProfileData?>(
+            ProfileData(1, "이영주"),
+            ProfileData(1,"강원용"),
+            ProfileData(1,"이준원"),
+            ProfileData(1,"김아무개"),
+            ProfileData(1,"나까무라"),
+            ProfileData(1,"이영주"),
+            ProfileData(1,"강원용"),
+            ProfileData(1,"이준원"),
+            ProfileData(1,"김아무개"),
+            ProfileData(1,"나까무라"),
+            null
         )
     }
 }
