@@ -145,4 +145,34 @@
             app:layout_constraintStart_toStartOf="@id/rv_to_do"
             app:layout_constraintTop_toTopOf="@id/rv_to_do" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/home_homie_profile"
+                android:textColor="@color/g_7"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@id/tv_coming_up"
+                app:layout_constraintTop_toBottomOf="@id/cl_rules_todo" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_profile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="15dp"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_profile"
+                app:spanCount="3"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_home_profile" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
