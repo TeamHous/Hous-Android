@@ -20,129 +20,174 @@
             type="Integer" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.HomeFragment">
+        android:fillViewport="true"
+        android:overScrollMode="never">
 
-        <TextView
-            android:id="@+id/tv_coming_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/home_coming_up"
-            android:textColor="@color/g_7"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.home.HomeFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_coming_up"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:overScrollMode="always"
-            android:paddingStart="20dp"
-            android:paddingEnd="0dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_coming_up"
-            tools:listitem="@layout/item_home_coming_up" />
+            <TextView
+                android:id="@+id/tv_coming_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/home_coming_up"
+                android:textColor="@color/g_7"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_rules"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/home_rules"
-            android:textColor="@color/g_7"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="@+id/rv_rules"
-            app:layout_constraintTop_toBottomOf="@id/rv_coming_up" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_coming_up"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:overScrollMode="always"
+                android:paddingStart="20dp"
+                android:paddingEnd="0dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_coming_up"
+                tools:listitem="@layout/item_home_coming_up" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_rules"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="4dp"
-            android:background="@drawable/shape_blue_bg_fill_16_rect"
-            android:orientation="vertical"
-            android:overScrollMode="never"
-            android:paddingTop="20dp"
-            android:paddingBottom="12dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toStartOf="@id/rv_to_do"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_rules"
-            tools:itemCount="5"
-            tools:listitem="@layout/item_home_rules" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_rules_todo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/rv_coming_up">
 
-        <TextView
-            android:id="@+id/tv_rules_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home_rules_empty"
-            android:textAppearance="@style/B3"
-            android:textColor="@color/g_6"
-            android:visibility="@{rulesPosition > 0 ? View.GONE : View.VISIBLE}"
-            app:layout_constraintBottom_toBottomOf="@id/rv_rules"
-            app:layout_constraintEnd_toEndOf="@id/rv_rules"
-            app:layout_constraintStart_toStartOf="@id/rv_rules"
-            app:layout_constraintTop_toTopOf="@id/rv_rules" />
+                <TextView
+                    android:id="@+id/tv_rules"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/home_rules"
+                    android:textColor="@color/g_7"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="@+id/rv_rules"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_to_do"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="@string/home_to_do"
-            android:textColor="@color/g_7"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            app:layout_constraintStart_toStartOf="@id/rv_to_do"
-            app:layout_constraintTop_toBottomOf="@id/rv_coming_up" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_rules"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/shape_blue_bg_fill_16_rect"
+                    android:orientation="vertical"
+                    android:overScrollMode="never"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="12dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toStartOf="@id/rv_to_do"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_rules"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_home_rules" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_to_do"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/shape_blue_bg_fill_16_rect"
-            android:orientation="vertical"
-            android:overScrollMode="never"
-            android:paddingTop="20dp"
-            android:paddingBottom="12dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/rv_rules"
-            app:layout_constraintTop_toBottomOf="@id/tv_to_do"
-            tools:itemCount="2"
-            tools:listitem="@layout/item_home_to_do" />
+                <TextView
+                    android:id="@+id/tv_rules_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_rules_empty"
+                    android:textAppearance="@style/B3"
+                    android:textColor="@color/g_6"
+                    android:visibility="@{rulesPosition > 0 ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="@id/rv_rules"
+                    app:layout_constraintEnd_toEndOf="@id/rv_rules"
+                    app:layout_constraintStart_toStartOf="@id/rv_rules"
+                    app:layout_constraintTop_toTopOf="@id/rv_rules" />
 
-        <TextView
-            android:id="@+id/tv_to_do_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home_to_do_empty"
-            android:textAppearance="@style/B3"
-            android:textColor="@color/g_6"
-            android:visibility="@{toDoPosition > 0 ? View.GONE : View.VISIBLE}"
-            app:layout_constraintBottom_toBottomOf="@id/rv_to_do"
-            app:layout_constraintEnd_toEndOf="@id/rv_to_do"
-            app:layout_constraintStart_toStartOf="@id/rv_to_do"
-            app:layout_constraintTop_toTopOf="@id/rv_to_do" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tv_to_do"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/home_to_do"
+                    android:textColor="@color/g_7"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="@id/rv_to_do"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_to_do"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/shape_blue_bg_fill_16_rect"
+                    android:orientation="vertical"
+                    android:overScrollMode="never"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="12dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/rv_rules"
+                    app:layout_constraintTop_toBottomOf="@id/tv_to_do"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_home_to_do" />
+
+                <TextView
+                    android:id="@+id/tv_to_do_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_to_do_empty"
+                    android:textAppearance="@style/B3"
+                    android:textColor="@color/g_6"
+                    android:visibility="@{toDoPosition > 0 ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="@id/rv_to_do"
+                    app:layout_constraintEnd_toEndOf="@id/rv_to_do"
+                    app:layout_constraintStart_toStartOf="@id/rv_to_do"
+                    app:layout_constraintTop_toTopOf="@id/rv_to_do" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/home_homie_profile"
+                android:textColor="@color/g_7"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="@id/tv_coming_up"
+                app:layout_constraintTop_toBottomOf="@id/cl_rules_todo" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_profile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="15dp"
+                android:overScrollMode="never"
+                android:paddingBottom="14dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_profile"
+                app:spanCount="3"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_home_profile" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

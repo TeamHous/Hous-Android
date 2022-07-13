@@ -20,13 +20,13 @@
             android:id="@+id/cb_to_do"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginVertical="3dp"
             android:background="@drawable/sel_home_to_do_check_box"
             android:button="@android:color/transparent"
             android:clickable="false"
             app:layout_constraintBottom_toBottomOf="@id/tv_to_do"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginVertical="3dp"
             app:layout_constraintTop_toTopOf="@id/tv_to_do" />
 
         <TextView
@@ -39,6 +39,7 @@
             android:maxLines="1"
             android:text="@{toDoData.rules}"
             android:textAppearance="@style/B3"
+            android:textColor="@color/hous_black"
             app:layout_constraintStart_toEndOf="@id/cb_to_do"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="청소기 돌리기" />
