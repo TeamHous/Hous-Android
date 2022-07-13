@@ -15,6 +15,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="2"
-        tools:listitem="@layout/item_rules_today_to_do_item_one" />
+        tools:itemCount="5"
+        tools:listitem="@layout/item_rules_today_to_do_item_multi" />
 </androidx.constraintlayout.widget.ConstraintLayout>
