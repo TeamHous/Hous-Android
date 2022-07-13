@@ -52,7 +52,6 @@ fun NewRulesScreen() {
     val value: MutableState<String> = remember { mutableStateOf("") }
     val categoryText = remember { mutableStateOf("") }
     val checkBoxState: MutableState<State> = remember { mutableStateOf(State.UNSELECT) }
-    val isManagerAddBtn = remember { mutableStateOf(false) }
     val isRuleAddButton = remember { mutableStateOf(false) }
     val test = remember {
         mutableStateOf(
@@ -130,7 +129,6 @@ fun NewRulesScreen() {
 
             itemsIndexed(test.value) { index, value ->
                 NewRulesManagerItem(
-                    isManagerAddBtn,
                     test,
                     value.second,
                     index,
@@ -141,7 +139,7 @@ fun NewRulesScreen() {
             }
 
             item {
-                NewRulesAddMangerButton(isManagerAddBtn, test)
+                NewRulesAddMangerButton(test)
                 Spacer(modifier = Modifier.size(16.dp))
                 NewRulesAddRuleButton()
             }
@@ -414,7 +412,6 @@ private fun addDay(): Pair<MutableState<String>, List<Pair<String, MutableState<
 
 @Composable
 fun NewRulesManagerItem(
-    isButton: MutableState<Boolean>,
     test: MutableState<List<Pair<MutableState<String>, List<Pair<String, MutableState<State>>>>>>,
     dayList: List<Pair<String, MutableState<State>>>,
     index: Int,
@@ -440,17 +437,15 @@ fun NewRulesManagerItem(
                             checkBoxState.value = State.UNSELECT
                             dayList.forEach { it.second.value = State.UNSELECT }
                         }
-                        isButton.value = false
                     }
                 )
                 Spacer(modifier = Modifier.size(12.dp))
-            }
+            } else if (test.value[0].first.value == "담당자 없음") checkBoxState.value = State.UNSELECT
 
             NewRulesBox(
                 radius = 10.dp,
                 prefixText = test.value[index].first,
                 checkBoxState = checkBoxState,
-                isButton = isButton
             )
         }
         Spacer(modifier = Modifier.size(10.dp))
@@ -470,10 +465,9 @@ fun NewRulesDayList(
 
 @Composable
 private fun NewRulesAddMangerButton(
-    isButton: MutableState<Boolean>,
     test: MutableState<List<Pair<MutableState<String>, List<Pair<String, MutableState<State>>>>>>
 ) {
-    if (isButton.value) {
+    if (test.value[test.value.size - 1].first.value != "담당자 없음") {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -487,7 +481,6 @@ private fun NewRulesAddMangerButton(
                     test.value.forEach { ttt.add(it) }
                     ttt.add(addDay())
                     test.value = ttt
-                    isButton.value = false
                 }
         ) {
             Box(
