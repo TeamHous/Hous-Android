@@ -14,6 +14,7 @@ class HomeFragment : Fragment() {
     private lateinit var comingUpAdapter: ComingUpAdapter
     private lateinit var rulesAdapter: RulesAdapter
     private lateinit var toDoAdapter: ToDoAdapter
+    private lateinit var profileAdapter: ProfileAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +57,13 @@ class HomeFragment : Fragment() {
         binding.rvToDo.adapter = toDoAdapter
         toDoAdapter.toDoList.addAll(
             toDo
+        )
+        toDoAdapter.notifyDataSetChanged()
+
+        profileAdapter = ProfileAdapter()
+        binding.rvProfile.adapter = profileAdapter
+        profileAdapter.profileList.addAll(
+            profile
         )
         toDoAdapter.notifyDataSetChanged()
     }
