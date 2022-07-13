@@ -51,7 +51,7 @@ class ProfileAdapter() :
         val data = currentList[position]
         when (holder) {
             is ProfileViewHolder -> holder.onBind(data)
-            is CopyViewHolder -> holder.onBind(data)
+            is CopyViewHolder -> holder.onBind()
         }
     }
 
@@ -64,8 +64,8 @@ class ProfileAdapter() :
 
     class CopyViewHolder(val binding: ItemHomeProfileCopyBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: ProfileData) {
-            binding.profileData = data
+        fun onBind() {
+            binding.tvProfileCopy.text = "룸메이트 초대\n코드 복사하기"
         }
     }
 
