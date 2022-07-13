@@ -34,7 +34,7 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;📁 entity
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;📁 service
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;📁 api
 
 📁 di
 
