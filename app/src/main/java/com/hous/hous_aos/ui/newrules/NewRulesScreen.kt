@@ -45,10 +45,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
+import com.hous.hous_aos.data.model.request.NewRulesRequest
 
 @Composable
 fun NewRulesScreen() {
-    val isAlarm = remember { mutableStateOf(false) }
+    val uiState = remember { mutableStateOf(NewRulesRequest()) }
     val value: MutableState<String> = remember { mutableStateOf("") }
     val categoryText = remember { mutableStateOf("") }
     val checkBoxState: MutableState<State> = remember { mutableStateOf(State.UNSELECT) }
@@ -83,7 +84,7 @@ fun NewRulesScreen() {
             item {
                 Spacer(modifier = Modifier.size(50.dp))
 
-                NewRulesToolbar(isAlarm)
+                NewRulesToolbar(uiState)
                 Spacer(modifier = Modifier.size(27.dp))
 
                 Text(
@@ -149,7 +150,7 @@ fun NewRulesScreen() {
 
 @Composable
 fun NewRulesToolbar(
-    isAlarm: MutableState<Boolean>
+    uiState: MutableState<NewRulesRequest>
 ) {
     Row(
         modifier = Modifier
@@ -164,17 +165,21 @@ fun NewRulesToolbar(
             text = stringResource(id = R.string.new_rules_title),
             fontStyle = FontStyle(R.style.B1)
         )
-        if (isAlarm.value) {
+        if (uiState.value.notificationState) {
             Image(
                 painter = painterResource(id = R.drawable.ic_alarmon),
                 contentDescription = "",
-                modifier = Modifier.clickable { isAlarm.value = !isAlarm.value }
+                modifier = Modifier.clickable {
+                    uiState.value = uiState.value.copy(notificationState = false)
+                }
             )
         } else {
             Image(
                 painter = painterResource(id = R.drawable.ic_alarmoff),
                 contentDescription = "",
-                modifier = Modifier.clickable { isAlarm.value = !isAlarm.value }
+                modifier = Modifier.clickable {
+                    uiState.value = uiState.value.copy(notificationState = true)
+                }
             )
         }
     }
