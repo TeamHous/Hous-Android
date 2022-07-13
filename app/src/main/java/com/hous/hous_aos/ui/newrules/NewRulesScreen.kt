@@ -45,12 +45,34 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
-import com.hous.hous_aos.data.model.request.NewRulesRequest
+import com.hous.hous_aos.data.model.response.NewRulesResponse
+
+data class NewRulesUiState(
+    val ruleName: String = "",
+    val categoryName: String = "",
+    val categoryId: String = "",
+    val notificationState: Boolean = false,
+    val isKeyRules: Boolean = false,
+    val ruleCategory: List<NewRulesResponse.Category> =
+        listOf(
+            NewRulesResponse.Category("1", "청소기"),
+            NewRulesResponse.Category("2", "분리수거"),
+            NewRulesResponse.Category("3", "세탁기"),
+            NewRulesResponse.Category("4", "물 주기"),
+        ),
+    val homies: List<NewRulesResponse.Homie> =
+        listOf(
+            NewRulesResponse.Homie("1", "강원용", "RED"),
+            NewRulesResponse.Homie("2", "이영주", "BLUE"),
+            NewRulesResponse.Homie("3", "이준원", "YELLOW"),
+            NewRulesResponse.Homie("4", "최인영", "GREEN"),
+            NewRulesResponse.Homie("5", "최소현", "PURPLE"),
+        )
+)
 
 @Composable
 fun NewRulesScreen() {
-    val uiState = remember { mutableStateOf(NewRulesRequest()) }
-    val categoryText = remember { mutableStateOf("") }
+    val uiState = remember { mutableStateOf(NewRulesUiState()) }
     val checkBoxState: MutableState<State> = remember { mutableStateOf(State.UNSELECT) }
     val isRuleAddButton = remember { mutableStateOf(false) }
     val test = remember {
@@ -103,7 +125,7 @@ fun NewRulesScreen() {
                 )
                 Spacer(modifier = Modifier.size(8.dp))
 
-                NewRulesBox(10.dp, categoryText)
+                CategoryBox(10.dp, uiState)
                 Spacer(modifier = Modifier.size(16.dp))
 
                 NewRulesCheckBox(checkBoxState, test.value[0].second)
@@ -134,6 +156,7 @@ fun NewRulesScreen() {
                     index,
                     checkBoxState,
                     test.value.size,
+                    uiState
                 )
                 Spacer(modifier = Modifier.size(16.dp))
             }
@@ -149,7 +172,7 @@ fun NewRulesScreen() {
 
 @Composable
 fun NewRulesToolbar(
-    uiState: MutableState<NewRulesRequest>
+    uiState: MutableState<NewRulesUiState>
 ) {
     Row(
         modifier = Modifier
@@ -186,7 +209,7 @@ fun NewRulesToolbar(
 
 @Composable
 fun NewRulesTextField(
-    uiState: MutableState<NewRulesRequest>
+    uiState: MutableState<NewRulesUiState>
 ) {
     val maxChar = 16
     BasicTextField(
@@ -211,11 +234,10 @@ fun NewRulesTextField(
 }
 
 @Composable
-private fun NewRulesBox(
+private fun CategoryBox(
     radius: Dp,
-    prefixText: MutableState<String>,
+    uiState: MutableState<NewRulesUiState>,
     checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK),
-    isButton: MutableState<Boolean> = mutableStateOf(false)
 ) {
     Box(
         modifier = Modifier
@@ -231,7 +253,7 @@ private fun NewRulesBox(
                 .align(Alignment.CenterStart),
         ) {
             Text(
-                text = prefixText.value,
+                text = uiState.value.categoryName,
                 fontStyle = FontStyle(R.style.B2),
                 color = colorResource(id = R.color.g_6)
             )
@@ -241,16 +263,15 @@ private fun NewRulesBox(
                 .wrapContentSize()
                 .align(Alignment.CenterEnd),
         ) {
-            NewRulesDropDownMenu(prefixText, checkBoxState, isButton)
+            CategoryDropDownMenu(uiState, checkBoxState)
         }
     }
 }
 
 @Composable
-private fun NewRulesDropDownMenu(
-    categoryText: MutableState<String>,
+private fun CategoryDropDownMenu(
+    uiState: MutableState<NewRulesUiState>,
     checkBoxState: MutableState<State>,
-    isButton: MutableState<Boolean>
 ) {
     if (checkBoxState.value != State.SELECT) {
         var isExpanded by remember { mutableStateOf(false) }
@@ -267,22 +288,87 @@ private fun NewRulesDropDownMenu(
             expanded = isExpanded,
             onDismissRequest = { isExpanded = false }
         ) {
-            DropdownMenuItem(
-                onClick = {
-                    categoryText.value = "청소"
-                    isButton.value = true
+            uiState.value.ruleCategory.forEach {
+                DropdownMenuItem(
+                    onClick = {
+                        uiState.value = uiState.value.copy(categoryId = it._id)
+                        uiState.value = uiState.value.copy(categoryName = it.categoryName)
+                        isExpanded = false
+                    }
+                ) {
+                    Text(it.categoryName)
                 }
-            ) {
-                Text("청소")
             }
+        }
+    }
+}
 
-            DropdownMenuItem(
-                onClick = {
-                    categoryText.value = "카테고리"
-                    isButton.value = true
+@Composable
+private fun ManagerBox(
+    radius: Dp,
+    test: Pair<MutableState<String>, List<Pair<String, MutableState<State>>>>,
+    uiState: MutableState<NewRulesUiState>,
+    checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK),
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .size(36.dp)
+            .clip(shape = RoundedCornerShape(radius))
+            .background(colorResource(id = R.color.white))
+            .padding(horizontal = 12.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .wrapContentSize()
+                .align(Alignment.CenterStart),
+        ) {
+            Text(
+                text = test.first.value,
+                fontStyle = FontStyle(R.style.B2),
+                color = colorResource(id = R.color.g_6)
+            )
+        }
+        Box(
+            modifier = Modifier
+                .wrapContentSize()
+                .align(Alignment.CenterEnd),
+        ) {
+            ManagerDropDownMenu(test, uiState, checkBoxState)
+        }
+    }
+}
+
+@Composable
+private fun ManagerDropDownMenu(
+    test: Pair<MutableState<String>, List<Pair<String, MutableState<State>>>>,
+    uiState: MutableState<NewRulesUiState>,
+    checkBoxState: MutableState<State>,
+) {
+    if (checkBoxState.value != State.SELECT) {
+        var isExpanded by remember { mutableStateOf(false) }
+        Image(
+            modifier = Modifier
+                .fillMaxHeight()
+                .clickable { isExpanded = true },
+            painter = painterResource(id = R.drawable.ic_open),
+            contentDescription = ""
+        )
+
+        DropdownMenu(
+            modifier = Modifier.fillMaxWidth(),
+            expanded = isExpanded,
+            onDismissRequest = { isExpanded = false }
+        ) {
+            uiState.value.homies.forEach {
+                DropdownMenuItem(
+                    onClick = {
+                        test.first.value = it.name
+                        isExpanded = false
+                    }
+                ) {
+                    Text(it.name)
                 }
-            ) {
-                Text("카테고리")
             }
         }
     }
@@ -422,7 +508,8 @@ fun NewRulesManagerItem(
     dayList: List<Pair<String, MutableState<State>>>,
     index: Int,
     checkBoxState: MutableState<State>,
-    listSize: Int
+    listSize: Int,
+    uiState: MutableState<NewRulesUiState>
 ) {
     Column {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -448,9 +535,10 @@ fun NewRulesManagerItem(
                 Spacer(modifier = Modifier.size(12.dp))
             } else if (test.value[0].first.value == "담당자 없음") checkBoxState.value = State.UNSELECT
 
-            NewRulesBox(
+            ManagerBox(
                 radius = 10.dp,
-                prefixText = test.value[index].first,
+                test = test.value[index],
+                uiState = uiState,
                 checkBoxState = checkBoxState,
             )
         }
