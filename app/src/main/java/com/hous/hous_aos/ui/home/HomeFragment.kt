@@ -94,5 +94,17 @@ class HomeFragment : Fragment() {
             ToDoData("물 사기밤새모니터에튀긴침이마르기도전에"),
             ToDoData("야식 먹지 말자밤새모니터에튀긴침이마르기도전에"),
         )
+
+        val profile = listOf<ProfileData>(
+            ProfileData("강원용"),
+            ProfileData("이준원"),
+            ProfileData("김아무개"),
+            ProfileData("나까무라"),
+            ProfileData("이영주"),
+            ProfileData("강원용"),
+            ProfileData("이준원"),
+            ProfileData("김아무개"),
+            ProfileData("나까무라"),
+        )
     }
 }
