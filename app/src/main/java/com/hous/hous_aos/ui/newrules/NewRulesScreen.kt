@@ -50,7 +50,6 @@ import com.hous.hous_aos.data.model.request.NewRulesRequest
 @Composable
 fun NewRulesScreen() {
     val uiState = remember { mutableStateOf(NewRulesRequest()) }
-    val value: MutableState<String> = remember { mutableStateOf("") }
     val categoryText = remember { mutableStateOf("") }
     val checkBoxState: MutableState<State> = remember { mutableStateOf(State.UNSELECT) }
     val isRuleAddButton = remember { mutableStateOf(false) }
@@ -94,7 +93,7 @@ fun NewRulesScreen() {
                 )
                 Spacer(modifier = Modifier.size(8.dp))
 
-                NewRulesTextField(value)
+                NewRulesTextField(uiState)
                 Spacer(modifier = Modifier.size(16.dp))
 
                 Text(
@@ -187,12 +186,14 @@ fun NewRulesToolbar(
 
 @Composable
 fun NewRulesTextField(
-    text: MutableState<String>
+    uiState: MutableState<NewRulesRequest>
 ) {
     val maxChar = 16
     BasicTextField(
-        value = text.value,
-        onValueChange = { if (it.length < maxChar) text.value = it },
+        value = uiState.value.ruleName,
+        onValueChange = {
+            if (it.length < maxChar) uiState.value = uiState.value.copy(ruleName = it)
+        },
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(10.dp))
