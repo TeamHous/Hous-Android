@@ -43,7 +43,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="52dp"
             android:layout_marginBottom="16dp"
-            android:text="@{profileData.name}"
+            android:text="@string/home_profile_copy"
             android:textAppearance="@style/Description"
             android:textColor="@color/g_5"
             app:layout_constraintBottom_toBottomOf="@id/iv_profile_copy"
