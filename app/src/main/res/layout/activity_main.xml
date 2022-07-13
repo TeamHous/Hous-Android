@@ -35,8 +35,31 @@
                 android:text="@string/home_title"
                 android:textColor="@color/hous_black"
                 android:textSize="28sp"
-                android:textStyle="bold" />
-        </androidx.appcompat.widget.Toolbar>
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_main_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:src="@drawable/ic_main_edit"
+                android:visibility="@{position==2?View.VISIBLE:View.GONE}"
+                app:layout_constraintEnd_toStartOf="@id/iv_main_setting"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_main_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_main_setting"
+                android:visibility="@{position==2?View.VISIBLE:View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fcv_main"
