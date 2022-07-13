@@ -30,7 +30,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:background="@drawable/shape_puple_fill_10_ract"
+                android:background="@drawable/shape_purple_fill_10_rect"
                 android:paddingVertical="9dp"
                 android:paddingStart="6dp"
                 android:paddingEnd="7dp"

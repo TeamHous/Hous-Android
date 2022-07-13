@@ -14,6 +14,7 @@ class HomeFragment : Fragment() {
     private lateinit var comingUpAdapter: ComingUpAdapter
     private lateinit var rulesAdapter: RulesAdapter
     private lateinit var toDoAdapter: ToDoAdapter
+    private lateinit var profileAdapter: ProfileAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +59,13 @@ class HomeFragment : Fragment() {
             toDo
         )
         toDoAdapter.notifyDataSetChanged()
+
+        profileAdapter = ProfileAdapter()
+        binding.rvProfile.adapter = profileAdapter
+        profileAdapter.submitList(
+            profile
+        )
+        toDoAdapter.notifyDataSetChanged()
     }
 
     companion object {
@@ -74,11 +82,17 @@ class HomeFragment : Fragment() {
         )
 
         val rules = listOf<RulesData>(
-            RulesData("00시~ 불 끄기!밤새모니터에튀긴침이마르기도전에"),
-            RulesData("23시~ 이어폰 필수!밤새모니터에튀긴침이마르기도전에"),
-            RulesData("세탁기는 화,수,토밤새모니터에튀긴침이마르기도전에"),
-            RulesData("일 - 청소하는 날!밤새모니터에튀긴침이마르기도전에"),
-            RulesData("2,4주 토- 장보기밤새모니터에튀긴침이마르기도전에"),
+//            RulesData("00시~ 불 끄기!밤새모니터에튀긴침이마르기도전에"),
+//            RulesData("23시~ 이어폰 필수!밤새모니터에튀긴침이마르기도전에"),
+//            RulesData("세탁기는 화,수,토밤새모니터에튀긴침이마르기도전에"),
+//            RulesData("일 - 청소하는 날!밤새모니터에튀긴침이마르기도전에"),
+//            RulesData("2,4주 토- 장보기밤새모니터에튀긴침이마르기도전에"),
+//            RulesData("00시~ 불 끄기!밤새모니터에튀긴침이마르기도전에"),
+//            RulesData("23시~ 이어폰 필수!밤새모니터에튀긴침이마르기도전에"),
+//            RulesData("세탁기는 화,수,토밤새모니터에튀긴침이마르기도전에"),
+//            RulesData("일 - 청소하는 날!밤새모니터에튀긴침이마르기도전에"),
+//            RulesData("2,4주 토- 장보기밤새모니터에튀긴침이마르기도전에"),
+
         )
 
         val toDo = listOf<ToDoData>(
@@ -87,6 +101,20 @@ class HomeFragment : Fragment() {
             ToDoData("아침 설거지ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ밤새모니터에튀긴침이마르기도전에"),
             ToDoData("물 사기밤새모니터에튀긴침이마르기도전에"),
             ToDoData("야식 먹지 말자밤새모니터에튀긴침이마르기도전에"),
+        )
+
+        val profile = listOf<ProfileData?>(
+            ProfileData(1, "이영주"),
+            ProfileData(1,"강원용"),
+            ProfileData(1,"이준원"),
+            ProfileData(1,"김아무개"),
+            ProfileData(1,"나까무라"),
+            ProfileData(1,"이영주"),
+            ProfileData(1,"강원용"),
+            ProfileData(1,"이준원"),
+            ProfileData(1,"김아무개"),
+            ProfileData(1,"나까무라"),
+            null
         )
     }
 }

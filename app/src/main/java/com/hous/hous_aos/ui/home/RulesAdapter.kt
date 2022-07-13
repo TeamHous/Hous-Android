@@ -22,7 +22,9 @@ class RulesAdapter : RecyclerView.Adapter<RulesAdapter.RulesViewHolder>() {
         holder.onBind(rulesList[position])
     }
 
-    override fun getItemCount(): Int = rulesList.size
+    override fun getItemCount() : Int {
+        return if(rulesList.size > 4) 5 else rulesList.size
+    }
 
     class RulesViewHolder(
         private val binding: ItemHomeRulesBinding

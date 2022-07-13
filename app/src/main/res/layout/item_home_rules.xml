@@ -35,9 +35,10 @@
             android:maxLines="1"
             android:text="@{rulesData.rules}"
             android:textAppearance="@style/B3"
+            android:textColor="@color/hous_black"
             app:layout_constraintStart_toEndOf="@id/iv_rules"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="머리카락 치우기" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
