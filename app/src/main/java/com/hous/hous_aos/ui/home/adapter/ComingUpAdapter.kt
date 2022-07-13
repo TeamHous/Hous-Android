@@ -1,10 +1,11 @@
-package com.hous.hous_aos.ui.home
+package com.hous.hous_aos.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.ItemHomeComingUpBinding
+import com.hous.hous_aos.ui.home.ComingUpData
 
 class ComingUpAdapter : RecyclerView.Adapter<ComingUpAdapter.ComingUpViewHolder>() {
     val comingUpList = mutableListOf(ComingUpData(R.drawable.ic_plus, " "))
