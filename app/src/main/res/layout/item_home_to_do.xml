@@ -39,6 +39,7 @@
             android:maxLines="1"
             android:text="@{toDoData.rules}"
             android:textAppearance="@style/B3"
+            android:textColor="@color/hous_black"
             app:layout_constraintStart_toEndOf="@id/cb_to_do"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="청소기 돌리기" />
