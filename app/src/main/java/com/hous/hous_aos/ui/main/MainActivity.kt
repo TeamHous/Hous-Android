@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
             setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.ic_bot_nav_home -> {
+                        binding.position = 0
                         background = ContextCompat.getDrawable(
                             this@MainActivity,
                             R.drawable.shape_yellow_fill_20_rect
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
                         true
                     }
                     R.id.ic_bot_nav_rules -> {
+                        binding.position = 1
                         background = ContextCompat.getDrawable(
                             this@MainActivity,
                             R.drawable.shape_blue_fill_20_rect
@@ -70,6 +72,7 @@ class MainActivity : AppCompatActivity() {
                         true
                     }
                     else -> {
+                        binding.position = 2
                         background = ContextCompat.getDrawable(
                             this@MainActivity,
                             R.drawable.shape_red_fill_20_rect
