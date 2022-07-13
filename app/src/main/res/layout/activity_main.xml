@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="50dp"
                 android:text="@string/home_title"
                 android:textColor="@color/hous_black"
                 android:textSize="28sp"
