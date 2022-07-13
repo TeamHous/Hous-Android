@@ -52,10 +52,24 @@ fun NewRulesScreen() {
     val categoryText = remember { mutableStateOf("") }
     val checkBoxState: MutableState<State> = remember { mutableStateOf(State.UNSELECT) }
     val isMenu = remember { mutableStateOf(true) }
-    val isAddButton = remember { mutableStateOf(false) }
+    val isManagerAddBtn = remember { mutableStateOf(false) }
+    val isRuleAddButton = remember { mutableStateOf(false) }
     val test = remember {
-        mutableStateOf(listOf(listOf<Pair<String, MutableState<State>>>()))
+        mutableStateOf(
+            listOf(
+                listOf(
+                    Pair("월", mutableStateOf(State.UNSELECT)),
+                    Pair("화", mutableStateOf(State.UNSELECT)),
+                    Pair("수", mutableStateOf(State.UNSELECT)),
+                    Pair("목", mutableStateOf(State.UNSELECT)),
+                    Pair("금", mutableStateOf(State.UNSELECT)),
+                    Pair("토", mutableStateOf(State.UNSELECT)),
+                    Pair("일", mutableStateOf(State.UNSELECT)),
+                )
+            )
+        )
     }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -111,15 +125,13 @@ fun NewRulesScreen() {
                 Spacer(modifier = Modifier.size(12.dp))
             }
 
-            item { NewRulesManagerItem(isAddButton, addDay(), checkBoxState) }
-
             items(test.value) {
-                NewRulesManagerItem(isAddButton, it)
+                NewRulesManagerItem(isManagerAddBtn, it, checkBoxState, test.value.size)
                 Spacer(modifier = Modifier.size(16.dp))
             }
 
             item {
-                NewRulesAddMangerButton(isAddButton, test)
+                NewRulesAddMangerButton(isManagerAddBtn, test)
                 Spacer(modifier = Modifier.size(16.dp))
                 NewRulesAddRuleButton()
             }
@@ -188,7 +200,8 @@ fun NewRulesTextField(
 private fun NewRulesBox(
     radius: Dp,
     prefixText: MutableState<String>,
-    isMenu: MutableState<Boolean>
+    isMenu: MutableState<Boolean>,
+    isButton: MutableState<Boolean> = mutableStateOf(false)
 ) {
     Box(
         modifier = Modifier
@@ -214,7 +227,7 @@ private fun NewRulesBox(
                 .wrapContentSize()
                 .align(Alignment.CenterEnd),
         ) {
-            NewRulesDropDownMenu(prefixText, isMenu)
+            NewRulesDropDownMenu(prefixText, isMenu, isButton)
         }
     }
 }
@@ -222,7 +235,8 @@ private fun NewRulesBox(
 @Composable
 private fun NewRulesDropDownMenu(
     categoryText: MutableState<String>,
-    isMenu: MutableState<Boolean>
+    isMenu: MutableState<Boolean>,
+    isButton: MutableState<Boolean>
 ) {
     if (isMenu.value) {
         var isExpanded by remember { mutableStateOf(false) }
@@ -240,13 +254,19 @@ private fun NewRulesDropDownMenu(
             onDismissRequest = { isExpanded = false }
         ) {
             DropdownMenuItem(
-                onClick = { categoryText.value = "청소" }
+                onClick = {
+                    categoryText.value = "청소"
+                    isButton.value = true
+                }
             ) {
                 Text("청소")
             }
 
             DropdownMenuItem(
-                onClick = { categoryText.value = "카테고리" }
+                onClick = {
+                    categoryText.value = "카테고리"
+                    isButton.value = true
+                }
             ) {
                 Text("카테고리")
             }
@@ -367,37 +387,37 @@ private fun addDay(): List<Pair<String, MutableState<State>>> =
 fun NewRulesManagerItem(
     isButton: MutableState<Boolean>,
     dayList: List<Pair<String, MutableState<State>>>,
-    checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK)
+    checkBoxState: MutableState<State>,
+    listSize: Int
 ) {
-    if (dayList.isNotEmpty()) {
-        val managerText = remember { mutableStateOf("담당자 없음") }
-        val isMenu = remember { mutableStateOf(true) }
-        Column {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                if (managerText.value != "담당자 없음") {
-                    checkBoxState.value = State.BLOCK
-                    isButton.value = true
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_delete),
-                        contentDescription = "",
-                        modifier = Modifier.clickable {
-                            managerText.value = "담당자 없음"
-                            checkBoxState.value = State.UNSELECT
-                            isButton.value = false
-                        }
-                    )
-                    Spacer(modifier = Modifier.size(12.dp))
-                }
 
-                NewRulesBox(
-                    radius = 10.dp,
-                    prefixText = managerText,
-                    isMenu = isMenu
+    val managerText = remember { mutableStateOf("담당자 없음") }
+    val isMenu = remember { mutableStateOf(true) }
+    Column {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            if (managerText.value != "담당자 없음") {
+                checkBoxState.value = State.BLOCK
+                Image(
+                    painter = painterResource(id = R.drawable.ic_delete),
+                    contentDescription = "",
+                    modifier = Modifier.clickable {
+                        managerText.value = "담당자 없음"
+                        if (listSize == 1) checkBoxState.value = State.UNSELECT
+                        isButton.value = false
+                    }
                 )
+                Spacer(modifier = Modifier.size(12.dp))
             }
-            Spacer(modifier = Modifier.size(10.dp))
-            NewRulesDayList(dayList, checkBoxState)
+
+            NewRulesBox(
+                radius = 10.dp,
+                prefixText = managerText,
+                isMenu = isMenu,
+                isButton
+            )
         }
+        Spacer(modifier = Modifier.size(10.dp))
+        NewRulesDayList(dayList, checkBoxState)
     }
 }
 
