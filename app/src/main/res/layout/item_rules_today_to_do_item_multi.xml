@@ -1,116 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tool="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tool="http://schemas.android.com/tools">
 
-    <com.google.android.material.card.MaterialCardView
+    <data>
+
+        <variable
+            name="iconColorOne"
+            type="com.hous.hous_aos.ui.rules.adapter.IconColor" />
+
+        <variable
+            name="iconColorTwo"
+            type="com.hous.hous_aos.ui.rules.adapter.IconColor" />
+
+        <variable
+            name="iconColorThree"
+            type="com.hous.hous_aos.ui.rules.adapter.IconColor" />
+
+        <variable
+            name="iconColorFour"
+            type="com.hous.hous_aos.ui.rules.adapter.IconColor" />
+
+        <variable
+            name="data"
+            type="com.hous.hous_aos.data.entity.rules.TodayTodoResponse" />
+
+        <variable
+            name="count"
+            type="Integer" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="@color/hous_blue_bg"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/hous_blue_bg"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/iv_manager_four"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginBottom="20dp"
-                android:backgroundTint="@color/hous_blue"
-                app:cardCornerRadius="50dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tool:backgroundTint="@color/hous_red" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/iv_manager_two"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="20dp"
-                android:backgroundTint="@color/hous_blue"
-                app:cardCornerRadius="50dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/iv_manager_four"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginBottom="20dp"
+                    android:backgroundTint="@{count>=4 ? context.getColor(iconColorFour.colorRes) : context.getColor(iconColorOne.colorRes) }"
+                    app:cardCornerRadius="50dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:visibility="@{count >= 4 ? true : false}"
+                    tool:backgroundTint="@color/hous_red" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/iv_manager_three"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="40dp"
-                android:backgroundTint="@color/hous_yellow"
-                app:cardCornerRadius="50dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/iv_manager_one"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:backgroundTint="@{context.getColor(iconColorOne.colorRes)}"
+                    app:cardCornerRadius="50dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/iv_manager_one"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="40dp"
-                android:backgroundTint="@color/hous_purple"
-                app:cardCornerRadius="50dp"
-                app:layout_constraintEnd_toStartOf="@id/tv_today_to_do"
-                app:layout_constraintTop_toTopOf="parent" />
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/iv_manager_three"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="40dp"
+                    android:backgroundTint="@{count>=3 ? context.getColor(iconColorThree.colorRes) : context.getColor(iconColorOne.colorRes) }"
+                    app:cardCornerRadius="50dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:visibility="@{count>=3 ? true : false}" />
 
-            <TextView
-                android:id="@+id/tv_today_to_do"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="76dp"
-                android:layout_marginTop="19dp"
-                android:textAppearance="@style/B2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tool:text="거실 청소기 돌리기" />
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/iv_manager_two"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="40dp"
+                    android:backgroundTint="@{context.getColor(iconColorTwo.colorRes)}"
+                    app:cardCornerRadius="50dp"
+                    app:layout_constraintEnd_toStartOf="@id/tv_today_to_do"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_manager"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:textAppearance="@style/B3"
-                android:textColor="@color/hous_blue"
-                app:layout_constraintStart_toStartOf="@id/tv_today_to_do"
-                app:layout_constraintTop_toBottomOf="@id/tv_today_to_do"
-                tool:text="최인영, 최소현, 이다영 외 2명" />
+                <TextView
+                    android:id="@+id/tv_today_to_do"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="76dp"
+                    android:layout_marginTop="19dp"
+                    android:text="@{data.ruleName}"
+                    android:textAppearance="@style/B2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tool:text="거실 청소기 돌리기" />
 
-            <ImageView
-                android:id="@+id/iv_done"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="28dp"
-                android:layout_marginEnd="24dp"
-                android:src="@drawable/ic_rules_done"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/tv_manager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="18dp"
+                    android:textAppearance="@style/B3"
+                    android:textColor="@color/hous_blue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_today_to_do"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_today_to_do"
+                    tool:text="최인영, 최소현, 이다영 외 2명" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginBottom="8dp"
-                android:backgroundTint="@color/hous_blue"
-                app:cardCornerRadius="50dp"
-                app:layout_constraintBottom_toTopOf="@id/iv_done"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/iv_done"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/iv_done"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="28dp"
+                    android:layout_marginEnd="24dp"
+                    android:src="@drawable/ic_rules_done"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:visibility="@{data.isAllChecked}" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:backgroundTint="@color/hous_blue"
+                    app:cardCornerRadius="50dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:visibility="@{data.isTemporaryManager}" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
