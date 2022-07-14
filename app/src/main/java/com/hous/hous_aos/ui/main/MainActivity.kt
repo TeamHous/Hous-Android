@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.ic_bot_nav_home -> {
-                        binding.position = 0
+                        binding.position = HOME
                         background = ContextCompat.getDrawable(
                             this@MainActivity,
                             R.drawable.shape_yellow_fill_20_rect
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                         true
                     }
                     R.id.ic_bot_nav_rules -> {
-                        binding.position = 1
+                        binding.position = RULES
                         background = ContextCompat.getDrawable(
                             this@MainActivity,
                             R.drawable.shape_blue_fill_20_rect
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
                         true
                     }
                     else -> {
-                        binding.position = 2
+                        binding.position = PROFILE
                         background = ContextCompat.getDrawable(
                             this@MainActivity,
                             R.drawable.shape_red_fill_20_rect
@@ -95,5 +95,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+    companion object{
+        val HOME = 0
+        val RULES = 1
+        val PROFILE = 2
     }
 }
