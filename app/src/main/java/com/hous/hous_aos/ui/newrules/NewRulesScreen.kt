@@ -101,6 +101,9 @@ fun NewRulesScreen() {
             )
         )
     }
+    isRuleAddButton.value = uiState.value.ruleName.isNotEmpty() &&
+        uiState.value.categoryName.isNotEmpty() &&
+        (checkBoxState.value == State.SELECT || IsAdd(test))
 
     Column(
         modifier = Modifier
@@ -175,8 +178,29 @@ fun NewRulesScreen() {
                 NewRulesAddMangerButton(test, uiState)
             }
         }
-        NewRulesAddRuleButton()
+        NewRulesAddRuleButton(isRuleAddButton)
     }
+}
+
+@Composable
+fun IsAdd(
+    test: MutableState<List<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>>
+): Boolean {
+    var isAdd = true
+    for (dayList in test.value) {
+        var temp = false
+        for (dayState in dayList.second) {
+            if (dayState.second.value == State.SELECT) {
+                temp = true
+                break
+            }
+        }
+        if (!temp) {
+            isAdd = false
+            break
+        }
+    }
+    return isAdd
 }
 
 @Composable
@@ -694,13 +718,17 @@ private fun NewRulesAddMangerButton(
 }
 
 @Composable
-private fun NewRulesAddRuleButton() {
+private fun NewRulesAddRuleButton(
+    isAddButton: MutableState<Boolean>
+) {
+    val color =
+        if (isAddButton.value) colorResource(id = R.color.hous_blue) else colorResource(id = R.color.g_3)
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .size(48.dp)
             .clip(shape = RoundedCornerShape(15.dp))
-            .background(colorResource(id = R.color.hous_blue))
+            .background(color)
             .padding(vertical = 12.dp)
             .clickable { /* 서버 통신 */ },
         contentAlignment = BottomCenter
