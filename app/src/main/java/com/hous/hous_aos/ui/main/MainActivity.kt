@@ -1,6 +1,7 @@
 package com.hous.hous_aos.ui.main
 
 import android.os.Bundle
+import androidx.annotation.Dimension
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
                             R.color.sel_bot_navi_home_color
                         )
                         binding.tvMainTitle.text = getString(R.string.home_title)
+                        binding.tvMainTitle.setTextSize(Dimension.SP, 28F)
                         supportFragmentManager.commit {
                             replace<HomeFragment>(R.id.fcv_main)
                             setReorderingAllowed(true)
@@ -64,7 +66,8 @@ class MainActivity : AppCompatActivity() {
                             this@MainActivity,
                             R.color.sel_bot_navi_rule_color
                         )
-                        binding.tvMainTitle.text = getString(R.string.rules_title)
+                        binding.tvMainTitle.text = getString(R.string.home_title)
+                        binding.tvMainTitle.setTextSize(Dimension.SP, 20F)
                         supportFragmentManager.commit {
                             replace<RulesFragment>(R.id.fcv_main)
                             setReorderingAllowed(true)
@@ -86,6 +89,7 @@ class MainActivity : AppCompatActivity() {
                             R.color.sel_bot_navi_profile_color
                         )
                         binding.tvMainTitle.text = getString(R.string.profile_title)
+                        binding.tvMainTitle.setTextSize(Dimension.SP, 20F)
                         supportFragmentManager.commit {
                             replace<ProfileFragment>(R.id.fcv_main)
                             setReorderingAllowed(true)
