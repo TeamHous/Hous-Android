@@ -80,7 +80,7 @@ fun NewRulesScreen() {
         mutableStateOf(
             listOf(
                 Pair(
-                    mutableStateOf(NewRulesResponse.Homie("", "담당자 없음", "GREY")),
+                    mutableStateOf(NewRulesResponse.Homie("", "담당자 없음", "NULL")),
                     listOf(
                         Pair("월", mutableStateOf(State.UNSELECT)),
                         Pair("화", mutableStateOf(State.UNSELECT)),
@@ -326,19 +326,21 @@ private fun ManagerBox(
             "GREEN" -> colorResource(id = R.color.hous_green)
             "PURPLE" -> colorResource(id = R.color.hous_purple)
             "GREY" -> colorResource(id = R.color.g_3)
-            else -> colorResource(id = R.color.white)
+            else -> null
         }
         Row(
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Box(
-                modifier = Modifier
-                    .clip(shape = CircleShape)
-                    .size(16.dp)
-                    .background(color)
-            )
-            Spacer(modifier = Modifier.size(6.dp))
+            if (color != null) {
+                Box(
+                    modifier = Modifier
+                        .clip(shape = CircleShape)
+                        .size(16.dp)
+                        .background(color)
+                )
+                Spacer(modifier = Modifier.size(6.dp))
+            }
             Text(
                 text = test.first.value.name,
                 fontStyle = FontStyle(R.style.B2),
@@ -534,7 +536,7 @@ fun NewRulesDay(
 
 private fun addDay(): Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>> =
     Pair(
-        mutableStateOf(NewRulesResponse.Homie("", "담당자 없음", "GREY")),
+        mutableStateOf(NewRulesResponse.Homie("", "담당자 없음", "NULL")),
         listOf("월", "화", "수", "목", "금", "토", "일").map {
             Pair(
                 it,
@@ -572,7 +574,7 @@ fun NewRulesManagerItem(
                             test.value[index].first.value =
                                 test.value[index].first.value.copy(name = "담당자 없음")
                             test.value[index].first.value =
-                                test.value[index].first.value.copy(typeColor = "GREY")
+                                test.value[index].first.value.copy(typeColor = "NULL")
                             checkBoxState.value = State.UNSELECT
                             dayList.forEach { it.second.value = State.UNSELECT }
                         }
