@@ -40,6 +40,10 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        comingUpAdapter = null
+        rulesAdapter = null
+        toDoAdapter = null
+        profileAdapter = null
     }
 
     private fun initAdapter() {
