@@ -100,7 +100,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    companion object{
+
+    companion object {
         val HOME = 0
         val RULES = 1
         val PROFILE = 2
