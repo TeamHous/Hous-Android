@@ -169,7 +169,7 @@ fun NewRulesScreen() {
             }
 
             item {
-                NewRulesAddMangerButton(test)
+                NewRulesAddMangerButton(test, uiState)
                 Spacer(modifier = Modifier.size(16.dp))
                 NewRulesAddRuleButton()
             }
@@ -268,7 +268,7 @@ private fun CategoryBox(
         Box(
             modifier = Modifier
                 .wrapContentSize()
-                .align(Alignment.CenterEnd),
+                .align(CenterEnd),
         ) {
             CategoryDropDownMenu(uiState, checkBoxState)
         }
@@ -317,7 +317,7 @@ private fun ManagerBox(
     radius: Dp,
     test: Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>,
     uiState: MutableState<NewRulesUiState>,
-    checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK)
+    checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK),
 ) {
     Box(
         modifier = Modifier
@@ -355,6 +355,7 @@ private fun ManagerBox(
                 color = colorResource(id = R.color.black)
             )
         }
+
         Box(
             modifier = Modifier
                 .fillMaxSize(),
@@ -370,7 +371,7 @@ private fun ManagerDropDownMenu(
     uiState: MutableState<NewRulesUiState>,
     checkBoxState: MutableState<State>
 ) {
-    if (checkBoxState.value != State.SELECT) {
+    if (checkBoxState.value != State.SELECT && isAddDay(uiState)) {
         var isExpanded by remember { mutableStateOf(false) }
 
         Image(
@@ -509,6 +510,7 @@ fun NewRulesDay(
     selected: MutableState<State>,
     checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK),
     dayList: List<Pair<String, MutableState<State>>>,
+    totalSize: Int
 ) {
     val color = when (selected.value) {
         State.UNSELECT -> colorResource(id = R.color.white)
@@ -519,7 +521,6 @@ fun NewRulesDay(
         State.BLOCK -> colorResource(id = R.color.g_4)
         else -> colorResource(id = R.color.hous_blue)
     }
-    if (checkBoxState.value == State.SELECT) selected.value = State.BLOCK
 
     Box(
         modifier = Modifier
@@ -530,9 +531,11 @@ fun NewRulesDay(
                 if (selected.value != State.BLOCK) {
                     if (selected.value == State.SELECT) {
                         selected.value = State.UNSELECT
-                        var isCheck = true
-                        dayList.forEach { if (it.second.value == State.SELECT) isCheck = false }
-                        if (isCheck) checkBoxState.value = State.UNSELECT
+                        if (totalSize == 1) {
+                            var isCheck = true
+                            dayList.forEach { if (it.second.value == State.SELECT) isCheck = false }
+                            if (isCheck) checkBoxState.value = State.UNSELECT
+                        }
                     } else {
                         selected.value = State.SELECT
                         checkBoxState.value = State.BLOCK
@@ -551,9 +554,29 @@ fun NewRulesDay(
     }
 }
 
-private fun addDay(): Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>> =
-    Pair(
-        mutableStateOf(NewRulesResponse.Homie("", "담당자 없음", "NULL")),
+private fun isAddDay(
+    uiState: MutableState<NewRulesUiState>
+): Boolean {
+    var temp = false
+    uiState.value.homies.forEach { homie ->
+        if (uiState.value.homieState[homie.name]!!) temp = true
+    }
+    return temp
+}
+
+private fun addDay(
+    uiState: MutableState<NewRulesUiState>
+): Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>> {
+    var temp: NewRulesResponse.Homie = NewRulesResponse.Homie("", "", "")
+    for (i in uiState.value.homies) {
+        if (uiState.value.homieState[i.name]!!) {
+            temp = NewRulesResponse.Homie(i._id, i.name, i.typeColor)
+            uiState.value.homieState[temp.name] = false
+            break
+        }
+    }
+    return Pair(
+        mutableStateOf(NewRulesResponse.Homie(temp._id, temp.name, temp.typeColor)),
         listOf("월", "화", "수", "목", "금", "토", "일").map {
             Pair(
                 it,
@@ -561,6 +584,7 @@ private fun addDay(): Pair<MutableState<NewRulesResponse.Homie>, List<Pair<Strin
             )
         }
     )
+}
 
 @Composable
 fun NewRulesManagerItem(
@@ -611,25 +635,27 @@ fun NewRulesManagerItem(
             )
         }
         Spacer(modifier = Modifier.size(10.dp))
-        NewRulesDayList(dayList, checkBoxState)
+        NewRulesDayList(dayList, checkBoxState, listSize)
     }
 }
 
 @Composable
 fun NewRulesDayList(
     dayList: List<Pair<String, MutableState<State>>>,
-    checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK)
+    checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK),
+    totalSize: Int
 ) {
     LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-        items(dayList) { NewRulesDay(it.first, it.second, checkBoxState, dayList) }
+        items(dayList) { NewRulesDay(it.first, it.second, checkBoxState, dayList, totalSize) }
     }
 }
 
 @Composable
 private fun NewRulesAddMangerButton(
-    test: MutableState<List<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>>
+    test: MutableState<List<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>>,
+    uiState: MutableState<NewRulesUiState>
 ) {
-    if (test.value[test.value.size - 1].first.value.name != "담당자 없음") {
+    if (test.value[test.value.size - 1].first.value.name != "담당자 없음" && isAddDay(uiState)) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -638,11 +664,13 @@ private fun NewRulesAddMangerButton(
                 .background(colorResource(id = R.color.white))
                 .padding(vertical = 4.dp)
                 .clickable {
-                    val ttt =
-                        mutableListOf<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>()
-                    test.value.forEach { ttt.add(it) }
-                    ttt.add(addDay())
-                    test.value = ttt
+                    if (isAddDay(uiState)) {
+                        val ttt =
+                            mutableListOf<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>()
+                        test.value.forEach { ttt.add(it) }
+                        ttt.add(addDay(uiState))
+                        test.value = ttt
+                    }
                 }
         ) {
             Box(
