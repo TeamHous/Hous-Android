@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.hous.hous_aos.ui.rules.rule.todo.today.TodayToDoViewModel" />
