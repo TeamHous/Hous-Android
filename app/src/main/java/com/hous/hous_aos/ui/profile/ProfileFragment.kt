@@ -10,7 +10,7 @@ import com.hous.hous_aos.databinding.FragmentProfileBinding
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    private lateinit var tagAdapter: TagAdapter
+    private var tagAdapter: TagAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +26,7 @@ class ProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        tagAdapter = null
     }
 
     private fun initInfo() {
@@ -35,7 +36,7 @@ class ProfileFragment : Fragment() {
     private fun initAdapter() {
         tagAdapter = TagAdapter()
         binding.rvTag.adapter = tagAdapter
-        tagAdapter.submitList(
+        requireNotNull(tagAdapter).submitList(
             listOf<TagData>(
                 TagData("이빵주"),
                 TagData("팬더"),
