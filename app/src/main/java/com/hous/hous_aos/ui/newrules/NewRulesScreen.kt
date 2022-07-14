@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -54,7 +53,6 @@ data class NewRulesUiState(
     val categoryName: String = "",
     val categoryId: String = "",
     val notificationState: Boolean = false,
-    val isKeyRules: Boolean = false,
     val ruleCategory: List<NewRulesResponse.Category> =
         listOf(
             NewRulesResponse.Category("1", "청소기"),
@@ -69,7 +67,14 @@ data class NewRulesUiState(
             NewRulesResponse.Homie("3", "이준원", "YELLOW"),
             NewRulesResponse.Homie("4", "최인영", "GREEN"),
             NewRulesResponse.Homie("5", "최소현", "PURPLE"),
-        )
+        ),
+    val homieState: HashMap<String, Boolean> = hashMapOf(
+        "강원용" to true,
+        "이영주" to true,
+        "이준원" to true,
+        "최인영" to true,
+        "최소현" to true,
+    )
 )
 
 @Composable
@@ -312,7 +317,7 @@ private fun ManagerBox(
     radius: Dp,
     test: Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>,
     uiState: MutableState<NewRulesUiState>,
-    checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK),
+    checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK)
 ) {
     Box(
         modifier = Modifier
@@ -363,7 +368,7 @@ private fun ManagerBox(
 private fun ManagerDropDownMenu(
     test: Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>,
     uiState: MutableState<NewRulesUiState>,
-    checkBoxState: MutableState<State>,
+    checkBoxState: MutableState<State>
 ) {
     if (checkBoxState.value != State.SELECT) {
         var isExpanded by remember { mutableStateOf(false) }
@@ -385,38 +390,43 @@ private fun ManagerDropDownMenu(
             onDismissRequest = { isExpanded = false }
         ) {
             uiState.value.homies.forEach {
-                DropdownMenuItem(
-                    onClick = {
-                        test.first.value = test.first.value.copy(_id = it._id)
-                        test.first.value = test.first.value.copy(name = it.name)
-                        test.first.value = test.first.value.copy(typeColor = it.typeColor)
-                        isExpanded = false
-                    }
-                ) {
-                    val color = when (it.typeColor) {
-                        "RED" -> colorResource(id = R.color.hous_red)
-                        "BLUE" -> colorResource(id = R.color.hous_blue)
-                        "YELLOW" -> colorResource(id = R.color.hous_yellow)
-                        "GREEN" -> colorResource(id = R.color.hous_green)
-                        "PURPLE" -> colorResource(id = R.color.hous_purple)
-                        else -> colorResource(id = R.color.g_3)
-                    }
-                    Row(
-                        modifier = Modifier.wrapContentSize(),
-                        verticalAlignment = Alignment.CenterVertically
+                if (uiState.value.homieState[it.name]!!) {
+                    DropdownMenuItem(
+                        onClick = {
+                            if (test.first.value.name != "담당자 없음")
+                                uiState.value.homieState[test.first.value.name] = true
+                            test.first.value = test.first.value.copy(_id = it._id)
+                            test.first.value = test.first.value.copy(name = it.name)
+                            test.first.value = test.first.value.copy(typeColor = it.typeColor)
+                            uiState.value.homieState[it.name] = false
+                            isExpanded = false
+                        }
                     ) {
-                        Box(
-                            modifier = Modifier
-                                .clip(shape = CircleShape)
-                                .size(16.dp)
-                                .background(color)
-                        )
-                        Spacer(modifier = Modifier.size(6.dp))
-                        Text(
-                            text = it.name,
-                            fontStyle = FontStyle(R.style.B2),
-                            color = colorResource(id = R.color.black)
-                        )
+                        val color = when (it.typeColor) {
+                            "RED" -> colorResource(id = R.color.hous_red)
+                            "BLUE" -> colorResource(id = R.color.hous_blue)
+                            "YELLOW" -> colorResource(id = R.color.hous_yellow)
+                            "GREEN" -> colorResource(id = R.color.hous_green)
+                            "PURPLE" -> colorResource(id = R.color.hous_purple)
+                            else -> colorResource(id = R.color.g_3)
+                        }
+                        Row(
+                            modifier = Modifier.wrapContentSize(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .clip(shape = CircleShape)
+                                    .size(16.dp)
+                                    .background(color)
+                            )
+                            Spacer(modifier = Modifier.size(6.dp))
+                            Text(
+                                text = it.name,
+                                fontStyle = FontStyle(R.style.B2),
+                                color = colorResource(id = R.color.black)
+                            )
+                        }
                     }
                 }
             }
@@ -570,12 +580,14 @@ fun NewRulesManagerItem(
                     contentDescription = "",
                     modifier = Modifier.clickable {
                         if (listSize > 1) {
+                            uiState.value.homieState[test.value[index].first.value.name] = true
                             val ttt =
                                 mutableListOf<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>()
                             test.value.forEach { ttt.add(it) }
                             ttt.removeAt(index)
                             test.value = ttt
                         } else {
+                            uiState.value.homieState[test.value[index].first.value.name] = true
                             test.value[index].first.value =
                                 test.value[index].first.value.copy(_id = "")
                             test.value[index].first.value =
