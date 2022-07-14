@@ -24,7 +24,7 @@ class ComingUpAdapter :
     class ComingUpViewHolder(val binding: ItemHomeComingUpBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: ComingUpData) {
-            binding.ivComingUpImage.setImageResource(data.image)
+            binding.ivComingUp.setImageResource(data.image)
             binding.comingUpData = data
             binding.position = adapterPosition
         }
