@@ -1,9 +1,10 @@
-package com.hous.hous_aos.ui.home
+package com.hous.hous_aos.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hous.hous_aos.databinding.ItemHomeToDoBinding
+import com.hous.hous_aos.ui.home.ToDoData
 
 class ToDoAdapter : RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder>() {
     val toDoList = mutableListOf<ToDoData>()
