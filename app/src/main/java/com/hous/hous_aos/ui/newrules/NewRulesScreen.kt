@@ -31,6 +31,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.BottomCenter
 import androidx.compose.ui.Alignment.Companion.CenterEnd
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -105,10 +106,12 @@ fun NewRulesScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(colorResource(id = R.color.hous_blue_bg))
-            .padding(horizontal = 20.dp),
-        verticalArrangement = Arrangement.SpaceBetween
+            .padding(horizontal = 20.dp)
     ) {
-        LazyColumn {
+        LazyColumn(
+            modifier = Modifier
+                .weight(1f)
+        ) {
             item {
                 Spacer(modifier = Modifier.size(50.dp))
 
@@ -170,10 +173,9 @@ fun NewRulesScreen() {
 
             item {
                 NewRulesAddMangerButton(test, uiState)
-                Spacer(modifier = Modifier.size(16.dp))
-                NewRulesAddRuleButton()
             }
         }
+        NewRulesAddRuleButton()
     }
 }
 
@@ -701,6 +703,7 @@ private fun NewRulesAddRuleButton() {
             .background(colorResource(id = R.color.hous_blue))
             .padding(vertical = 12.dp)
             .clickable { /* 서버 통신 */ },
+        contentAlignment = BottomCenter
     ) {
         Box(
             modifier = Modifier
