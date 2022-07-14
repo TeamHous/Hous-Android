@@ -107,15 +107,15 @@ class HomeFragment : Fragment() {
 
         val profile = listOf<ProfileData?>(
             ProfileData(1, "이영주"),
-            ProfileData(1,"강원용"),
-            ProfileData(1,"이준원"),
-            ProfileData(1,"김아무개"),
-            ProfileData(1,"나까무라"),
-            ProfileData(1,"이영주"),
-            ProfileData(1,"강원용"),
-            ProfileData(1,"이준원"),
-            ProfileData(1,"김아무개"),
-            ProfileData(1,"나까무라"),
+            ProfileData(1, "강원용"),
+            ProfileData(1, "이준원"),
+            ProfileData(1, "김아무개"),
+            ProfileData(1, "나까무라"),
+            ProfileData(1, "이영주"),
+            ProfileData(1, "강원용"),
+            ProfileData(1, "이준원"),
+            ProfileData(1, "김아무개"),
+            ProfileData(1, "나까무라"),
             null
         )
     }
