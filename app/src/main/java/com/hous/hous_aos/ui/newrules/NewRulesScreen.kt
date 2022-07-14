@@ -37,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -278,10 +279,12 @@ private fun CategoryDropDownMenu(
         var isExpanded by remember { mutableStateOf(false) }
         Image(
             modifier = Modifier
-                .fillMaxHeight()
+                .fillMaxSize()
                 .clickable { isExpanded = true },
             painter = painterResource(id = R.drawable.ic_open),
-            contentDescription = ""
+            contentDescription = "",
+            alignment = CenterEnd,
+            contentScale = ContentScale.Inside
         )
 
         DropdownMenu(
@@ -313,7 +316,7 @@ private fun ManagerBox(
 ) {
     Box(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .size(36.dp)
             .clip(shape = RoundedCornerShape(radius))
             .background(colorResource(id = R.color.white))
@@ -349,7 +352,7 @@ private fun ManagerBox(
         }
         Box(
             modifier = Modifier
-                .align(CenterEnd)
+                .fillMaxSize(),
         ) {
             ManagerDropDownMenu(test, uiState, checkBoxState)
         }
@@ -364,16 +367,20 @@ private fun ManagerDropDownMenu(
 ) {
     if (checkBoxState.value != State.SELECT) {
         var isExpanded by remember { mutableStateOf(false) }
+
         Image(
             modifier = Modifier
-                .fillMaxHeight()
+                .fillMaxSize()
                 .clickable { isExpanded = true },
             painter = painterResource(id = R.drawable.ic_open),
-            contentDescription = ""
+            contentDescription = "",
+            alignment = CenterEnd,
+            contentScale = ContentScale.Inside
         )
 
         DropdownMenu(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth(),
             expanded = isExpanded,
             onDismissRequest = { isExpanded = false }
         ) {
