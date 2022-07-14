@@ -511,7 +511,8 @@ fun NewRulesDay(
     selected: MutableState<State>,
     checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK),
     dayList: List<Pair<String, MutableState<State>>>,
-    totalSize: Int
+    totalSize: Int,
+    test: Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>,
 ) {
     val color = when (selected.value) {
         State.UNSELECT -> colorResource(id = R.color.white)
@@ -535,7 +536,8 @@ fun NewRulesDay(
                         if (totalSize == 1) {
                             var isCheck = true
                             dayList.forEach { if (it.second.value == State.SELECT) isCheck = false }
-                            if (isCheck) checkBoxState.value = State.UNSELECT
+                            if (isCheck && test.first.value.name == "담당자 없음") checkBoxState.value =
+                                State.UNSELECT
                         }
                     } else {
                         selected.value = State.SELECT
@@ -636,7 +638,7 @@ fun NewRulesManagerItem(
             )
         }
         Spacer(modifier = Modifier.size(10.dp))
-        NewRulesDayList(dayList, checkBoxState, listSize)
+        NewRulesDayList(dayList, checkBoxState, listSize, test.value[0])
     }
 }
 
@@ -644,10 +646,11 @@ fun NewRulesManagerItem(
 fun NewRulesDayList(
     dayList: List<Pair<String, MutableState<State>>>,
     checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK),
-    totalSize: Int
+    totalSize: Int,
+    test: Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>
 ) {
     LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-        items(dayList) { NewRulesDay(it.first, it.second, checkBoxState, dayList, totalSize) }
+        items(dayList) { NewRulesDay(it.first, it.second, checkBoxState, dayList, totalSize, test) }
     }
 }
 
