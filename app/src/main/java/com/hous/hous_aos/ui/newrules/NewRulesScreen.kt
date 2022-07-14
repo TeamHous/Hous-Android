@@ -32,6 +32,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -79,7 +80,7 @@ fun NewRulesScreen() {
         mutableStateOf(
             listOf(
                 Pair(
-                    mutableStateOf("담당자 없음"),
+                    mutableStateOf(NewRulesResponse.Homie("", "담당자 없음", "GREY")),
                     listOf(
                         Pair("월", mutableStateOf(State.UNSELECT)),
                         Pair("화", mutableStateOf(State.UNSELECT)),
@@ -306,7 +307,7 @@ private fun CategoryDropDownMenu(
 @Composable
 private fun ManagerBox(
     radius: Dp,
-    test: Pair<MutableState<String>, List<Pair<String, MutableState<State>>>>,
+    test: Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>,
     uiState: MutableState<NewRulesUiState>,
     checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK),
 ) {
@@ -318,30 +319,42 @@ private fun ManagerBox(
             .background(colorResource(id = R.color.white))
             .padding(horizontal = 12.dp)
     ) {
-        Box(
-            modifier = Modifier
-                .wrapContentSize()
-                .align(Alignment.CenterStart),
-        ) {
-            Text(
-                text = test.first.value,
-                fontStyle = FontStyle(R.style.B2),
-                color = colorResource(id = R.color.g_6)
-            )
+        val color = when (test.first.value.typeColor) {
+            "RED" -> colorResource(id = R.color.hous_red)
+            "BLUE" -> colorResource(id = R.color.hous_blue)
+            "YELLOW" -> colorResource(id = R.color.hous_yellow)
+            "GREEN" -> colorResource(id = R.color.hous_green)
+            "PURPLE" -> colorResource(id = R.color.hous_purple)
+            "GREY" -> colorResource(id = R.color.g_3)
+            else -> colorResource(id = R.color.white)
         }
-        Box(
-            modifier = Modifier
-                .wrapContentSize()
-                .align(Alignment.CenterEnd),
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            ManagerDropDownMenu(test, uiState, checkBoxState)
+            Box(
+                modifier = Modifier
+                    .clip(shape = CircleShape)
+                    .size(16.dp)
+                    .background(color)
+            )
+            Spacer(modifier = Modifier.size(6.dp))
+            Text(
+                text = test.first.value.name,
+                fontStyle = FontStyle(R.style.B2),
+                color = colorResource(id = R.color.black)
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            Box {
+                ManagerDropDownMenu(test, uiState, checkBoxState)
+            }
         }
     }
 }
 
 @Composable
 private fun ManagerDropDownMenu(
-    test: Pair<MutableState<String>, List<Pair<String, MutableState<State>>>>,
+    test: Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>,
     uiState: MutableState<NewRulesUiState>,
     checkBoxState: MutableState<State>,
 ) {
@@ -363,7 +376,9 @@ private fun ManagerDropDownMenu(
             uiState.value.homies.forEach {
                 DropdownMenuItem(
                     onClick = {
-                        test.first.value = it.name
+                        test.first.value = test.first.value.copy(_id = it._id)
+                        test.first.value = test.first.value.copy(name = it.name)
+                        test.first.value = test.first.value.copy(typeColor = it.typeColor)
                         isExpanded = false
                     }
                 ) {
@@ -376,7 +391,8 @@ private fun ManagerDropDownMenu(
                         else -> colorResource(id = R.color.g_3)
                     }
                     Row(
-                        horizontalArrangement = Arrangement.Center
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = CenterVertically
                     ) {
                         Box(
                             modifier = Modifier
@@ -514,9 +530,9 @@ fun NewRulesDay(
     }
 }
 
-private fun addDay(): Pair<MutableState<String>, List<Pair<String, MutableState<State>>>> =
+private fun addDay(): Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>> =
     Pair(
-        mutableStateOf("담당자 없음"),
+        mutableStateOf(NewRulesResponse.Homie("", "담당자 없음", "GREY")),
         listOf("월", "화", "수", "목", "금", "토", "일").map {
             Pair(
                 it,
@@ -527,7 +543,7 @@ private fun addDay(): Pair<MutableState<String>, List<Pair<String, MutableState<
 
 @Composable
 fun NewRulesManagerItem(
-    test: MutableState<List<Pair<MutableState<String>, List<Pair<String, MutableState<State>>>>>>,
+    test: MutableState<List<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>>,
     dayList: List<Pair<String, MutableState<State>>>,
     index: Int,
     checkBoxState: MutableState<State>,
@@ -536,7 +552,7 @@ fun NewRulesManagerItem(
 ) {
     Column {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            if (test.value[index].first.value != "담당자 없음") {
+            if (test.value[index].first.value.name != "담당자 없음") {
                 checkBoxState.value = State.BLOCK
                 Image(
                     painter = painterResource(id = R.drawable.ic_delete),
@@ -544,19 +560,21 @@ fun NewRulesManagerItem(
                     modifier = Modifier.clickable {
                         if (listSize > 1) {
                             val ttt =
-                                mutableListOf<Pair<MutableState<String>, List<Pair<String, MutableState<State>>>>>()
+                                mutableListOf<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>()
                             test.value.forEach { ttt.add(it) }
                             ttt.removeAt(index)
                             test.value = ttt
                         } else {
-                            test.value[index].first.value = "담당자 없음"
+                            test.value[index].first.value =
+                                test.value[index].first.value.copy(name = "담당자 없음")
                             checkBoxState.value = State.UNSELECT
                             dayList.forEach { it.second.value = State.UNSELECT }
                         }
                     }
                 )
                 Spacer(modifier = Modifier.size(12.dp))
-            } else if (test.value[0].first.value == "담당자 없음") checkBoxState.value = State.UNSELECT
+            } else if (test.value[0].first.value.name == "담당자 없음") checkBoxState.value =
+                State.UNSELECT
 
             ManagerBox(
                 radius = 10.dp,
@@ -582,9 +600,9 @@ fun NewRulesDayList(
 
 @Composable
 private fun NewRulesAddMangerButton(
-    test: MutableState<List<Pair<MutableState<String>, List<Pair<String, MutableState<State>>>>>>
+    test: MutableState<List<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>>
 ) {
-    if (test.value[test.value.size - 1].first.value != "담당자 없음") {
+    if (test.value[test.value.size - 1].first.value.name != "담당자 없음") {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -594,7 +612,7 @@ private fun NewRulesAddMangerButton(
                 .padding(vertical = 4.dp)
                 .clickable {
                     val ttt =
-                        mutableListOf<Pair<MutableState<String>, List<Pair<String, MutableState<State>>>>>()
+                        mutableListOf<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>()
                     test.value.forEach { ttt.add(it) }
                     ttt.add(addDay())
                     test.value = ttt
