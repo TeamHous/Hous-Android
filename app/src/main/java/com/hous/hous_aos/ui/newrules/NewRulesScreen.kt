@@ -32,7 +32,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterVertically
+import androidx.compose.ui.Alignment.Companion.CenterEnd
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -317,7 +317,7 @@ private fun ManagerBox(
             .size(36.dp)
             .clip(shape = RoundedCornerShape(radius))
             .background(colorResource(id = R.color.white))
-            .padding(horizontal = 12.dp)
+            .padding(horizontal = 12.dp),
     ) {
         val color = when (test.first.value.typeColor) {
             "RED" -> colorResource(id = R.color.hous_red)
@@ -329,7 +329,7 @@ private fun ManagerBox(
             else -> colorResource(id = R.color.white)
         }
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(
@@ -344,10 +344,12 @@ private fun ManagerBox(
                 fontStyle = FontStyle(R.style.B2),
                 color = colorResource(id = R.color.black)
             )
-            Spacer(modifier = Modifier.weight(1f))
-            Box {
-                ManagerDropDownMenu(test, uiState, checkBoxState)
-            }
+        }
+        Box(
+            modifier = Modifier
+                .align(CenterEnd)
+        ) {
+            ManagerDropDownMenu(test, uiState, checkBoxState)
         }
     }
 }
@@ -391,8 +393,8 @@ private fun ManagerDropDownMenu(
                         else -> colorResource(id = R.color.g_3)
                     }
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = CenterVertically
+                        modifier = Modifier.wrapContentSize(),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         Box(
                             modifier = Modifier
@@ -566,15 +568,19 @@ fun NewRulesManagerItem(
                             test.value = ttt
                         } else {
                             test.value[index].first.value =
+                                test.value[index].first.value.copy(_id = "")
+                            test.value[index].first.value =
                                 test.value[index].first.value.copy(name = "담당자 없음")
+                            test.value[index].first.value =
+                                test.value[index].first.value.copy(typeColor = "GREY")
                             checkBoxState.value = State.UNSELECT
                             dayList.forEach { it.second.value = State.UNSELECT }
                         }
                     }
                 )
                 Spacer(modifier = Modifier.size(12.dp))
-            } else if (test.value[0].first.value.name == "담당자 없음") checkBoxState.value =
-                State.UNSELECT
+            } else if (test.value[0].first.value.name == "담당자 없음")
+                checkBoxState.value = State.UNSELECT
 
             ManagerBox(
                 radius = 10.dp,
