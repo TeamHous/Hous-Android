@@ -13,17 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
-        android:layout_marginBottom="10dp">
-
-        <ImageView
-            android:id="@+id/iv_profile_last_bg"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_yellow_bg_fill_10_rect"
-            app:layout_constraintBottom_toBottomOf="@id/iv_profile_copy"
-            app:layout_constraintEnd_toEndOf="@id/iv_profile_copy"
-            app:layout_constraintStart_toStartOf="@id/iv_profile_copy"
-            app:layout_constraintTop_toTopOf="@id/iv_profile_copy" />
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_yellow_bg_fill_10_rect">
 
         <ImageView
             android:id="@+id/iv_profile_copy"
