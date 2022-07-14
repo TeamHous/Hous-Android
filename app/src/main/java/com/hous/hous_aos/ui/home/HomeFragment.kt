@@ -45,21 +45,20 @@ class HomeFragment : Fragment() {
     private fun initAdapter() {
         comingUpAdapter = ComingUpAdapter()
         binding.rvComingUp.adapter = comingUpAdapter
-        comingUpAdapter.comingUpList.addAll(
+        comingUpAdapter.submitList(
             comingUp
         )
-        comingUpAdapter.notifyDataSetChanged()
 
         rulesAdapter = RulesAdapter()
         binding.rvRules.adapter = rulesAdapter
-        rulesAdapter.rulesList.addAll(
+        rulesAdapter.submitList(
             rules
         )
         rulesAdapter.notifyDataSetChanged()
 
         toDoAdapter = ToDoAdapter()
         binding.rvToDo.adapter = toDoAdapter
-        toDoAdapter.toDoList.addAll(
+        toDoAdapter.submitList(
             toDo
         )
         toDoAdapter.notifyDataSetChanged()
