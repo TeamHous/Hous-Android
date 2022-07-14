@@ -15,10 +15,10 @@ import com.hous.hous_aos.ui.home.adapter.ToDoAdapter
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var comingUpAdapter: ComingUpAdapter
-    private lateinit var rulesAdapter: RulesAdapter
-    private lateinit var toDoAdapter: ToDoAdapter
-    private lateinit var profileAdapter: ProfileAdapter
+    private var comingUpAdapter: ComingUpAdapter? = null
+    private var rulesAdapter: RulesAdapter? = null
+    private var toDoAdapter: ToDoAdapter? = null
+    private var profileAdapter: ProfileAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,27 +45,25 @@ class HomeFragment : Fragment() {
     private fun initAdapter() {
         comingUpAdapter = ComingUpAdapter()
         binding.rvComingUp.adapter = comingUpAdapter
-        comingUpAdapter.submitList(
+        requireNotNull(comingUpAdapter).submitList(
             comingUp
         )
 
         rulesAdapter = RulesAdapter()
         binding.rvRules.adapter = rulesAdapter
-        rulesAdapter.submitList(
+        requireNotNull(rulesAdapter).submitList(
             rules
         )
-        rulesAdapter.notifyDataSetChanged()
 
         toDoAdapter = ToDoAdapter()
         binding.rvToDo.adapter = toDoAdapter
-        toDoAdapter.submitList(
+        requireNotNull(toDoAdapter).submitList(
             toDo
         )
-        toDoAdapter.notifyDataSetChanged()
 
         profileAdapter = ProfileAdapter()
         binding.rvProfile.adapter = profileAdapter
-        profileAdapter.submitList(
+        requireNotNull(profileAdapter).submitList(
             profile
         )
     }
