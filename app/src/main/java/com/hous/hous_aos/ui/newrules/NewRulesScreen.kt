@@ -367,7 +367,30 @@ private fun ManagerDropDownMenu(
                         isExpanded = false
                     }
                 ) {
-                    Text(it.name)
+                    val color = when (it.typeColor) {
+                        "RED" -> colorResource(id = R.color.hous_red)
+                        "BLUE" -> colorResource(id = R.color.hous_blue)
+                        "YELLOW" -> colorResource(id = R.color.hous_yellow)
+                        "GREEN" -> colorResource(id = R.color.hous_green)
+                        "PURPLE" -> colorResource(id = R.color.hous_purple)
+                        else -> colorResource(id = R.color.g_3)
+                    }
+                    Row(
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .clip(shape = CircleShape)
+                                .size(16.dp)
+                                .background(color)
+                        )
+                        Spacer(modifier = Modifier.size(6.dp))
+                        Text(
+                            text = it.name,
+                            fontStyle = FontStyle(R.style.B2),
+                            color = colorResource(id = R.color.black)
+                        )
+                    }
                 }
             }
         }
