@@ -112,7 +112,7 @@ fun NewRulesScreen() {
             item {
                 Spacer(modifier = Modifier.size(50.dp))
 
-                NewRulesToolbar(uiState)
+                NewRulesToolbar(uiState, checkBoxState)
                 Spacer(modifier = Modifier.size(27.dp))
 
                 Text(
@@ -179,7 +179,8 @@ fun NewRulesScreen() {
 
 @Composable
 fun NewRulesToolbar(
-    uiState: MutableState<NewRulesUiState>
+    uiState: MutableState<NewRulesUiState>,
+    checkBoxState: MutableState<State>
 ) {
     Row(
         modifier = Modifier
@@ -194,7 +195,7 @@ fun NewRulesToolbar(
             text = stringResource(id = R.string.new_rules_title),
             fontStyle = FontStyle(R.style.B1)
         )
-        if (uiState.value.notificationState) {
+        if (uiState.value.notificationState && checkBoxState.value != State.SELECT) {
             Image(
                 painter = painterResource(id = R.drawable.ic_alarmon),
                 contentDescription = "",
