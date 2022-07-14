@@ -67,7 +67,26 @@ data class NewRulesUiState(
             NewRulesResponse.Homie("3", "이준원", "YELLOW"),
             NewRulesResponse.Homie("4", "최인영", "GREEN"),
             NewRulesResponse.Homie("5", "최소현", "PURPLE"),
-        )
+        ),
+    val managerList: List<Manager> = listOf(Manager())
+)
+
+data class Manager(
+    val homie: NewRulesResponse.Homie = NewRulesResponse.Homie("", "담당자 없음", "GREY"),
+    val managerDayList: ManagerDay = ManagerDay()
+)
+
+data class ManagerDay(
+    val dayList: List<String> = listOf("월", "화", "수", "목", "금", "토", "일"),
+    val dayState: List<State> = listOf(
+        State.UNSELECT,
+        State.UNSELECT,
+        State.UNSELECT,
+        State.UNSELECT,
+        State.UNSELECT,
+        State.UNSELECT,
+        State.UNSELECT
+    )
 )
 
 @Composable
@@ -128,7 +147,7 @@ fun NewRulesScreen() {
                 CategoryBox(10.dp, uiState)
                 Spacer(modifier = Modifier.size(16.dp))
 
-                NewRulesCheckBox(checkBoxState, test.value[0].second)
+                NewRulesCheckBox(checkBoxState, uiState)
                 Spacer(modifier = Modifier.size(4.dp))
 
                 Row {
@@ -255,7 +274,7 @@ private fun CategoryBox(
             Text(
                 text = uiState.value.categoryName,
                 fontStyle = FontStyle(R.style.B2),
-                color = colorResource(id = R.color.g_6)
+                color = colorResource(id = R.color.black)
             )
         }
         Box(
@@ -326,7 +345,7 @@ private fun ManagerBox(
             Text(
                 text = test.first.value,
                 fontStyle = FontStyle(R.style.B2),
-                color = colorResource(id = R.color.g_6)
+                color = colorResource(id = R.color.black)
             )
         }
         Box(
@@ -367,7 +386,30 @@ private fun ManagerDropDownMenu(
                         isExpanded = false
                     }
                 ) {
-                    Text(it.name)
+                    val color = when (it.typeColor) {
+                        "RED" -> colorResource(id = R.color.hous_red)
+                        "BLUE" -> colorResource(id = R.color.hous_blue)
+                        "YELLOW" -> colorResource(id = R.color.hous_yellow)
+                        "GREEN" -> colorResource(id = R.color.hous_green)
+                        "PURPLE" -> colorResource(id = R.color.hous_purple)
+                        else -> colorResource(id = R.color.g_3)
+                    }
+                    Row(
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .clip(shape = CircleShape)
+                                .size(16.dp)
+                                .background(color)
+                        )
+                        Spacer(modifier = Modifier.size(6.dp))
+                        Text(
+                            text = it.name,
+                            fontStyle = FontStyle(R.style.B2),
+                            color = colorResource(id = R.color.black)
+                        )
+                    }
                 }
             }
         }
@@ -377,26 +419,26 @@ private fun ManagerDropDownMenu(
 @Composable
 fun NewRulesCheckBox(
     checkBoxState: MutableState<State>,
-    dayList: List<Pair<String, MutableState<State>>>,
+    uiState: MutableState<NewRulesUiState>
 ) {
     when (checkBoxState.value) {
         State.UNSELECT -> NewRulesBoxRow(
             checkBoxState,
             boxColor = colorResource(id = R.color.hous_blue_bg_2),
             textColor = colorResource(id = R.color.g_4),
-            dayList = dayList
+            uiState = uiState
         )
         State.SELECT -> NewRulesBoxRow(
             checkBoxState,
             boxColor = colorResource(id = R.color.hous_blue),
             textColor = colorResource(id = R.color.hous_blue),
-            dayList = dayList
+            uiState = uiState
         )
         State.BLOCK -> NewRulesBoxRow(
             checkBoxState,
             boxColor = colorResource(id = R.color.g_4),
             textColor = colorResource(id = R.color.g_4),
-            dayList = dayList
+            uiState = uiState
         )
     }
 }
@@ -406,7 +448,7 @@ fun NewRulesBoxRow(
     checkBoxState: MutableState<State>,
     boxColor: Color,
     textColor: Color,
-    dayList: List<Pair<String, MutableState<State>>>,
+    uiState: MutableState<NewRulesUiState>
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -419,11 +461,41 @@ fun NewRulesBoxRow(
                 .clickable {
                     if (checkBoxState.value != State.BLOCK) {
                         if (checkBoxState.value == State.SELECT) {
+                            val tempManagerList = listOf(
+                                Manager(
+                                    managerDayList = ManagerDay(
+                                        dayState = listOf(
+                                            State.UNSELECT,
+                                            State.UNSELECT,
+                                            State.UNSELECT,
+                                            State.UNSELECT,
+                                            State.UNSELECT,
+                                            State.UNSELECT,
+                                            State.UNSELECT
+                                        )
+                                    )
+                                )
+                            )
                             checkBoxState.value = State.UNSELECT
-                            dayList.forEach { it.second.value = State.UNSELECT }
+                            uiState.value = uiState.value.copy(managerList = tempManagerList)
                         } else {
+                            val tempManagerList = listOf(
+                                Manager(
+                                    managerDayList = ManagerDay(
+                                        dayState = listOf(
+                                            State.BLOCK,
+                                            State.BLOCK,
+                                            State.BLOCK,
+                                            State.BLOCK,
+                                            State.BLOCK,
+                                            State.BLOCK,
+                                            State.BLOCK
+                                        )
+                                    ),
+                                )
+                            )
                             checkBoxState.value = State.SELECT
-                            dayList.forEach { it.second.value = State.BLOCK }
+                            uiState.value = uiState.value.copy(managerList = tempManagerList)
                         }
                     }
                 }
