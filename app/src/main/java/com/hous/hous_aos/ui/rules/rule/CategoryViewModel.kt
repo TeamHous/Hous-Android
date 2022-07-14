@@ -7,26 +7,26 @@ import com.hous.hous_aos.data.entity.rules.CategoryOfRuleResponse
 
 class CategoryViewModel : ViewModel() {
 
-    private var _CategoryOfRuleList =
+    private var _categoryOfRuleList =
         MutableLiveData<MutableList<CategoryOfRuleResponse>>()
-    val CategoryOfRuleList get() = _CategoryOfRuleList
+    val categoryOfRuleList get() = _categoryOfRuleList
 
     init {
         fetchToCategoryOfRuleList()
     }
 
     fun onChangeIsSelected(position: Int) {
-        val tmpCategoryOfRuleList = requireNotNull(_CategoryOfRuleList.value).map { data ->
+        val tmpCategoryOfRuleList = requireNotNull(_categoryOfRuleList.value).map { data ->
             data.copy().apply { isSelected = false }
         }
         tmpCategoryOfRuleList[position].isSelected = true
-        _CategoryOfRuleList.value = tmpCategoryOfRuleList.toMutableList()
+        _categoryOfRuleList.value = tmpCategoryOfRuleList.toMutableList()
     }
 
     private fun fetchToCategoryOfRuleList() {
         /**  dummy data입니다만..??
          * */
-        _CategoryOfRuleList.value = mutableListOf(
+        _categoryOfRuleList.value = mutableListOf(
             CategoryOfRuleResponse(
                 name = "라면을",
                 icon = R.drawable.ic_rules_heart_s,

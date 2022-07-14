@@ -50,7 +50,7 @@ class RulesFragment : Fragment() {
     }
 
     private fun observeCategory() {
-        categoryViewModel.CategoryOfRuleList.observe(viewLifecycleOwner) {
+        categoryViewModel.categoryOfRuleList.observe(viewLifecycleOwner) {
             categoryOfRuleAdapter.submitList(it.toList())
         }
     }
