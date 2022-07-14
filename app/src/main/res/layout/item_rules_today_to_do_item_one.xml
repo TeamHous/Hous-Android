@@ -49,7 +49,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="16dp"
                     app:cardCornerRadius="50dp"
-                    android:backgroundTint="@{context.getColor(iconColor.colorRes)}"
+                    app:colorRes="@{iconColor.colorRes}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/tv_today_to_do"
                     app:layout_constraintStart_toStartOf="parent"

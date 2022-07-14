@@ -52,8 +52,8 @@
                     android:layout_height="20dp"
                     android:layout_marginStart="40dp"
                     android:layout_marginBottom="20dp"
-                    android:backgroundTint="@{count>=4 ? context.getColor(iconColorFour.colorRes) : context.getColor(iconColorOne.colorRes) }"
                     app:cardCornerRadius="50dp"
+                    app:colorRes="@{count>=4 ? iconColorFour.colorRes : -1}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:visibility="@{count >= 4 ? true : false}"
@@ -65,8 +65,8 @@
                     android:layout_height="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginBottom="20dp"
-                    android:backgroundTint="@{context.getColor(iconColorOne.colorRes)}"
                     app:cardCornerRadius="50dp"
+                    app:colorRes="@{iconColorOne.colorRes}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -77,8 +77,8 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="40dp"
-                    android:backgroundTint="@{count>=3 ? context.getColor(iconColorThree.colorRes) : context.getColor(iconColorOne.colorRes) }"
                     app:cardCornerRadius="50dp"
+                    app:colorRes="@{count>=3 ? iconColorThree.colorRes : -1}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:visibility="@{count>=3 ? true : false}" />
@@ -91,8 +91,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="40dp"
-                    android:backgroundTint="@{context.getColor(iconColorTwo.colorRes)}"
                     app:cardCornerRadius="50dp"
+                    app:colorRes="@{iconColorTwo.colorRes}"
                     app:layout_constraintEnd_toStartOf="@id/tv_today_to_do"
                     app:layout_constraintTop_toTopOf="parent" />
 
