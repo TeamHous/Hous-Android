@@ -11,20 +11,12 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginBottom="10dp">
-
-        <ImageView
-            android:id="@+id/iv_profile_bg"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_g2_fill_10_rect"
-            app:layout_constraintBottom_toBottomOf="@id/iv_profile"
-            app:layout_constraintEnd_toEndOf="@id/iv_profile"
-            app:layout_constraintStart_toStartOf="@id/iv_profile"
-            app:layout_constraintTop_toTopOf="@id/iv_profile" />
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_g2_fill_10_rect">
 
         <ImageView
             android:id="@+id/iv_profile"
@@ -47,10 +39,10 @@
             android:text="@{profileData.name}"
             android:textAppearance="@style/Description"
             android:textColor="@color/hous_black"
-            app:layout_constraintBottom_toBottomOf="@id/iv_profile_bg"
-            app:layout_constraintEnd_toEndOf="@id/iv_profile_bg"
-            app:layout_constraintStart_toStartOf="@id/iv_profile_bg"
-            app:layout_constraintTop_toTopOf="@id/iv_profile_bg"
+            app:layout_constraintBottom_toBottomOf="@id/cl_profile"
+            app:layout_constraintEnd_toEndOf="@id/cl_profile"
+            app:layout_constraintStart_toStartOf="@id/cl_profile"
+            app:layout_constraintTop_toTopOf="@id/cl_profile"
             tools:text="이영주" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
