@@ -104,24 +104,25 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
             binding.data = data
             binding.tvManager.text = changeListToString(requireNotNull(data.managerDataList))
             when (data.iconList.size) {
-                2 -> {
-                    binding.count = 2
+                ICON_LIST_SIZE_TWO -> {
+                    binding.count = ICON_LIST_SIZE_TWO
                     binding.iconColorOne = getIconColor(data.iconList[0])
                     binding.iconColorTwo = getIconColor(data.iconList[1])
                 }
-                3 -> {
-                    binding.count = 3
+                ICON_LIST_SIZE_THREE -> {
+                    binding.count = ICON_LIST_SIZE_THREE
                     binding.iconColorOne = getIconColor(data.iconList[0])
                     binding.iconColorTwo = getIconColor(data.iconList[1])
                     binding.iconColorThree = getIconColor(data.iconList[2])
                 }
-                else -> {
-                    binding.count = 4
+                ICON_LIST_SIZE_OVER_FOUR -> {
+                    binding.count = ICON_LIST_SIZE_OVER_FOUR
                     binding.iconColorOne = getIconColor(data.iconList[0])
                     binding.iconColorTwo = getIconColor(data.iconList[1])
                     binding.iconColorThree = getIconColor(data.iconList[2])
                     binding.iconColorFour = getIconColor(data.iconList[3])
                 }
+                else -> throw IllegalArgumentException("잘못된 data.iconList.size 값 : ${data.iconList.size}이 들어왔습니다.")
             }
         }
 
@@ -172,6 +173,9 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
                     return oldItem == newItem
                 }
             }
+        private const val ICON_LIST_SIZE_TWO = 2
+        private const val ICON_LIST_SIZE_THREE = 3
+        private const val ICON_LIST_SIZE_OVER_FOUR = 4
         private const val BLUE = "blue"
         private const val RED = "red"
         private const val PURPLE = "purple"
