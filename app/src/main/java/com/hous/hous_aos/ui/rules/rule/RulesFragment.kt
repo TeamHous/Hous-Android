@@ -11,7 +11,7 @@ import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentRulesBinding
-import com.hous.hous_aos.ui.rules.adapter.CategoryOfRuleAdapter
+import com.hous.hous_aos.ui.rules.rule.category.CategoryOfRuleAdapter
 import com.hous.hous_aos.ui.rules.rule.todo.ToDoFragment
 import com.hous.hous_aos.util.showToast
 
