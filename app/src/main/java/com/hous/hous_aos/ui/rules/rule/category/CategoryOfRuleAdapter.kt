@@ -1,4 +1,4 @@
-package com.hous.hous_aos.ui.rules.adapter
+package com.hous.hous_aos.ui.rules.rule.category
 
 import android.view.LayoutInflater
 import android.view.View
