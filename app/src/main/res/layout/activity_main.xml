@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -32,12 +33,44 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="50dp"
+                android:fontFamily="@font/montserrat_semibold"
                 android:text="@string/home_title"
                 android:textColor="@color/hous_black"
                 android:textSize="28sp"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Hous-" />
+
+            <TextView
+                android:id="@+id/tv_main_title_space"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/spoqa_han_sans_neo_bold"
+                android:text=" "
+                android:textColor="@color/hous_black"
+                android:textSize="24sp"
+                android:textStyle="normal"
+                android:visibility="@{position==1?View.VISIBLE:View.GONE}"
+                app:layout_constraintStart_toEndOf="@id/tv_main_title"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text=" " />
+
+            <TextView
+                android:id="@+id/tv_main_title_kor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/spoqa_han_sans_neo_bold"
+                android:text="@string/rules_title"
+                android:textColor="@color/hous_black"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                android:visibility="@{position==1?View.VISIBLE:View.GONE}"
+                app:layout_constraintStart_toEndOf="@id/tv_main_title_space"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="규칙" />
 
             <ImageView
                 android:id="@+id/iv_main_edit"
