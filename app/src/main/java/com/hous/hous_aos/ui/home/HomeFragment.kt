@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentHomeBinding
+import com.hous.hous_aos.ui.home.adapter.ComingUpAdapter
+import com.hous.hous_aos.ui.home.adapter.ProfileAdapter
+import com.hous.hous_aos.ui.home.adapter.RulesAdapter
+import com.hous.hous_aos.ui.home.adapter.ToDoAdapter
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null

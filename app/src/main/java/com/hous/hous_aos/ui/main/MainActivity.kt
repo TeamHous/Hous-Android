@@ -1,6 +1,7 @@
 package com.hous.hous_aos.ui.main
 
 import android.os.Bundle
+import androidx.annotation.Dimension
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
             setOnItemSelectedListener {
                 when (it.itemId) {
                     R.id.ic_bot_nav_home -> {
+                        binding.position = HOME
                         background = ContextCompat.getDrawable(
                             this@MainActivity,
                             R.drawable.shape_yellow_fill_20_rect
@@ -43,6 +45,7 @@ class MainActivity : AppCompatActivity() {
                             R.color.sel_bot_navi_home_color
                         )
                         binding.tvMainTitle.text = getString(R.string.home_title)
+                        binding.tvMainTitle.setTextSize(Dimension.SP, 28F)
                         supportFragmentManager.commit {
                             replace<HomeFragment>(R.id.fcv_main)
                             setReorderingAllowed(true)
@@ -50,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                         true
                     }
                     R.id.ic_bot_nav_rules -> {
+                        binding.position = RULES
                         background = ContextCompat.getDrawable(
                             this@MainActivity,
                             R.drawable.shape_blue_fill_20_rect
@@ -62,7 +66,8 @@ class MainActivity : AppCompatActivity() {
                             this@MainActivity,
                             R.color.sel_bot_navi_rule_color
                         )
-                        binding.tvMainTitle.text = getString(R.string.rules_title)
+                        binding.tvMainTitle.text = getString(R.string.home_title)
+                        binding.tvMainTitle.setTextSize(Dimension.SP, 20F)
                         supportFragmentManager.commit {
                             replace<RulesFragment>(R.id.fcv_main)
                             setReorderingAllowed(true)
@@ -70,6 +75,7 @@ class MainActivity : AppCompatActivity() {
                         true
                     }
                     else -> {
+                        binding.position = PROFILE
                         background = ContextCompat.getDrawable(
                             this@MainActivity,
                             R.drawable.shape_red_fill_20_rect
@@ -83,6 +89,7 @@ class MainActivity : AppCompatActivity() {
                             R.color.sel_bot_navi_profile_color
                         )
                         binding.tvMainTitle.text = getString(R.string.profile_title)
+                        binding.tvMainTitle.setTextSize(Dimension.SP, 20F)
                         supportFragmentManager.commit {
                             replace<ProfileFragment>(R.id.fcv_main)
                             setReorderingAllowed(true)
@@ -92,5 +99,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+    companion object{
+        val HOME = 0
+        val RULES = 1
+        val PROFILE = 2
     }
 }
