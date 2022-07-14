@@ -69,7 +69,6 @@ class HomeFragment : Fragment() {
         profileAdapter.submitList(
             profile
         )
-        toDoAdapter.notifyDataSetChanged()
     }
 
     companion object {
