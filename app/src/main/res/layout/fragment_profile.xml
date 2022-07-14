@@ -115,7 +115,7 @@
             app:layout_constraintEnd_toEndOf="@id/iv_tendency_bg"
             app:layout_constraintStart_toStartOf="@id/iv_tendency_bg"
             app:layout_constraintTop_toTopOf="@id/iv_tendency_bg" />
-        
+
         <TextView
             android:id="@+id/tv_badge"
             android:layout_width="wrap_content"
