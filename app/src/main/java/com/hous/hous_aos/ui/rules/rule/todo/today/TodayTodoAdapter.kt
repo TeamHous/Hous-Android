@@ -17,11 +17,11 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
 ) {
 
     override fun getItemViewType(position: Int): Int {
-        return if (currentList[position].number == 0) {
+        return if (currentList[position].number == MANAGER_NUMBER_ZERO) {
             ItemToDoViewType.NONE_MANAGER_VIEW_TYPE.index
-        } else if (currentList[position].number == 1) {
+        } else if (currentList[position].number == MANAGER_NUMBER_ONE) {
             ItemToDoViewType.ONE_MANAGER_VIEW_TYPE.index
-        } else if (currentList[position].number >= 2) {
+        } else if (currentList[position].number >= MANAGER_NUMBER_TWO) {
             ItemToDoViewType.MUTI_MANAGER_VIEW_TYPE.index
         } else throw IllegalArgumentException("잘못된 position:$position 이 들어왔습니다.")
     }
@@ -173,6 +173,9 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
                     return oldItem == newItem
                 }
             }
+        private const val MANAGER_NUMBER_ZERO = 0
+        private const val MANAGER_NUMBER_ONE = 1
+        private const val MANAGER_NUMBER_TWO = 2
         private const val ICON_LIST_SIZE_TWO = 2
         private const val ICON_LIST_SIZE_THREE = 3
         private const val ICON_LIST_SIZE_OVER_FOUR = 4
