@@ -30,6 +30,7 @@
     <color name="g_7">#3d3d3d</color>
     <color name="hous_black">#161616</color>
     <color name="g_3">#e1e1e1</color>
+    <color name="test_color">#fafafa</color>
 
     <color name="hous_bot_navi_home">#fff6e0</color>
     <color name="hous_bot_navi_rule">#c6ddff</color>
