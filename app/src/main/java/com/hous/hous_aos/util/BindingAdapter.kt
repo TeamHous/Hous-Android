@@ -20,3 +20,10 @@ fun View.setVisibility(isVisible: Boolean) {
 fun ImageView.setDrawable(@Nullable @DrawableRes drawableRes: Int) {
     if (drawableRes != -1) this.setImageResource(drawableRes)
 }
+
+@BindingAdapter("app:colorRes")
+fun CardView.setColor(@ColorRes colorRes: Int) {
+    if (colorRes != -1) {
+        this.backgroundTintList = context.getColorStateList(colorRes)
+    }
+}
