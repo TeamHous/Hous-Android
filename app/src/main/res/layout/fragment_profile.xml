@@ -107,6 +107,7 @@
             android:layout_marginHorizontal="88dp"
             android:layout_marginVertical="30dp"
             android:background="@drawable/shape_red_fill_15_rect"
+            android:stateListAnimator="@null"
             android:text="@string/profile_test"
             android:textAppearance="@style/B1"
             android:textColor="@color/test_color"
