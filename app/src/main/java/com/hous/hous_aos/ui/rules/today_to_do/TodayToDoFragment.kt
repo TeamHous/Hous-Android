@@ -1,4 +1,4 @@
-package com.hous.hous_aos.ui.rules.rule.todo.today
+package com.hous.hous_aos.ui.rules.today_to_do
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentTodayToDoBinding
 import com.hous.hous_aos.ui.rules.adapter.TodayTodoAdapter
+import com.hous.hous_aos.ui.rules.my_to_do.MyToDoFragment
 
 class TodayToDoFragment : Fragment() {
 
@@ -33,6 +36,7 @@ class TodayToDoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
         observeCategory()
+        setOnClickMyToDO()
     }
 
     override fun onDestroyView() {
@@ -48,6 +52,19 @@ class TodayToDoFragment : Fragment() {
     private fun observeCategory() {
         viewModel.todayTodoList.observe(viewLifecycleOwner) {
             todayTodDoAdapter.submitList(it.toList())
+        }
+    }
+
+    private fun setOnClickMyToDO() {
+        binding.clMyToDo.setOnClickListener {
+            traverseToMyToDo()
+        }
+    }
+
+    private fun traverseToMyToDo() {
+        parentFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<MyToDoFragment>(R.id.frg_bottom)
         }
     }
 }

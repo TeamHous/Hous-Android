@@ -1,4 +1,4 @@
-package com.hous.hous_aos.ui.rules.rule.category
+package com.hous.hous_aos.ui.rules
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hous.hous_aos.data.entity.rules.CategoryOfRuleResponse
 import com.hous.hous_aos.databinding.ItemRulesRuleBinding
-import com.hous.hous_aos.ui.rules.rule.ItemCategoryViewType
 
-class CategoryOfRuleAdapter(
+class HomeRulesCategoryAdapter(
     private val onCategoryClick: () -> Unit,
     private val onPlusClick: () -> Unit,
     private val onChangeIsSelected: (Int) -> Unit,

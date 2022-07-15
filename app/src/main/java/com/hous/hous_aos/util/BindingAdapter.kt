@@ -2,7 +2,6 @@ package com.hous.hous_aos.util
 
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.Nullable
@@ -27,11 +26,6 @@ fun CardView.setColor(@ColorRes colorRes: Int) {
     if (colorRes != -1) {
         this.backgroundTintList = context.getColorStateList(colorRes)
     }
-}
-
-@BindingAdapter("app:isSelected")
-fun TextView.setSelected(isSelected: Boolean) {
-    this.isSelected = isSelected
 }
 
 @BindingAdapter("app:isSelected")

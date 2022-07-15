@@ -1,4 +1,4 @@
-package com.hous.hous_aos.ui.rules.rule
+package com.hous.hous_aos.ui.rules
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,14 +11,13 @@ import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentRulesBinding
-import com.hous.hous_aos.ui.rules.rule.category.CategoryOfRuleAdapter
-import com.hous.hous_aos.ui.rules.rule.todo.ToDoFragment
+import com.hous.hous_aos.ui.rules.today_to_do.TodayToDoFragment
 import com.hous.hous_aos.util.showToast
 
 class RulesFragment : Fragment() {
     private var _binding: FragmentRulesBinding? = null
     private val binding get() = _binding ?: error("null값 들어감")
-    private lateinit var categoryOfRuleAdapter: CategoryOfRuleAdapter
+    private lateinit var homeRulesCategoryAdapter: HomeRulesCategoryAdapter
     private val viewModel: RulesViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,24 +41,24 @@ class RulesFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        categoryOfRuleAdapter = CategoryOfRuleAdapter(
+        homeRulesCategoryAdapter = HomeRulesCategoryAdapter(
             onCategoryClick = { onClickCategoryIcon() },
             onPlusClick = { onClickPlusIcon() },
             onChangeIsSelected = { setCategoryIsSelected(it) }
         )
-        binding.rvRules.adapter = categoryOfRuleAdapter
+        binding.rvRules.adapter = homeRulesCategoryAdapter
     }
 
     private fun observeCategory() {
         viewModel.categoryOfRuleList.observe(viewLifecycleOwner) {
-            categoryOfRuleAdapter.submitList(it.toList())
+            homeRulesCategoryAdapter.submitList(it.toList())
         }
     }
 
     private fun initTransaction() {
         childFragmentManager.commit {
             setReorderingAllowed(true)
-            replace<ToDoFragment>(R.id.frg_bottom)
+            replace<TodayToDoFragment>(R.id.frg_bottom)
         }
     }
 
@@ -80,11 +79,13 @@ class RulesFragment : Fragment() {
 
     /** 임시로 토스트를 박아놈*/
     private fun onClickCategoryIcon() {
-        requireActivity().showToast("살려줘 잠 좀 자고싶어!!!!")
+        // TODO ToDoTaskFragment로 이동
+        requireActivity().showToast("ToDoTaskFragment로 이동")
     }
 
     private fun onClickPlusIcon() {
-        requireActivity().showToast("sadasdsad!")
+        // TODO 카테고리 수정 Fragment로 이동
+        requireActivity().showToast(" 카테고리 수정 Fragment로 이동")
     }
 
     private fun setCategoryIsSelected(position: Int) {

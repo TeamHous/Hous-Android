@@ -1,4 +1,4 @@
-package com.hous.hous_aos.ui.rules.rule.todo.today
+package com.hous.hous_aos.ui.rules.today_to_do
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -6,6 +6,7 @@ import com.hous.hous_aos.data.entity.rules.ManagerData
 import com.hous.hous_aos.data.entity.rules.TodayTodoResponse
 
 class TodayToDoViewModel : ViewModel() {
+
     private var _todayTodoList =
         MutableLiveData<MutableList<TodayTodoResponse>>()
     val todayTodoList get() = _todayTodoList

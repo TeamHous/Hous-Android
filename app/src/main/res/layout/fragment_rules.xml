@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.hous.hous_aos.ui.rules.rule.RulesViewModel" />
+            type="com.hous.hous_aos.ui.rules.RulesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.rules.rule.RulesFragment">
+        tools:context=".ui.rules.RulesFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_category"
