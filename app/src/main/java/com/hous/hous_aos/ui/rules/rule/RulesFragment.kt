@@ -19,14 +19,14 @@ class RulesFragment : Fragment() {
     private var _binding: FragmentRulesBinding? = null
     private val binding get() = _binding ?: error("null값 들어감")
     private lateinit var categoryOfRuleAdapter: CategoryOfRuleAdapter
-    private val categoryViewModel: CategoryViewModel by viewModels()
+    private val viewModel: CategoryViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rules, container, false)
-        binding.viewmodel = categoryViewModel
+        binding.viewModel = viewModel
         binding.lifecycleOwner = this@RulesFragment
 
         return binding.root
@@ -38,19 +38,20 @@ class RulesFragment : Fragment() {
         changeTransaction()
         initAdapter()
         observeCategory()
+        onClickSmileIcon()
     }
 
     private fun initAdapter() {
         categoryOfRuleAdapter = CategoryOfRuleAdapter(
             onCategoryClick = { onClickCategoryIcon() },
             onPlusClick = { onClickPlusIcon() },
-            onChangeIsSelected = { onChangeIsSelected(it) }
+            onChangeIsSelected = { setCategoryIsSelected(it) }
         )
         binding.rvRules.adapter = categoryOfRuleAdapter
     }
 
     private fun observeCategory() {
-        categoryViewModel.categoryOfRuleList.observe(viewLifecycleOwner) {
+        viewModel.categoryOfRuleList.observe(viewLifecycleOwner) {
             categoryOfRuleAdapter.submitList(it.toList())
         }
     }
@@ -66,6 +67,17 @@ class RulesFragment : Fragment() {
         // TODO Category <-> ToDoFragment transaction 로직
     }
 
+    // TODO 오늘의 to-do로 돌아가기
+    private fun onClickSmileIcon() {
+        binding.ivSmile.setOnClickListener {
+            when (viewModel.isSelectedCategorySmile.value) {
+                false -> viewModel.setSmileSelected()
+                true -> requireContext().showToast("웃음웃음우스음~!!!!!!!!")
+                else -> throw IllegalArgumentException("viewModel.isSelectedCategorySmile.value: ${viewModel.isSelectedCategorySmile.value}")
+            }
+        }
+    }
+
     /** 임시로 토스트를 박아놈*/
     private fun onClickCategoryIcon() {
         requireActivity().showToast("살려줘 잠 좀 자고싶어!!!!")
@@ -75,8 +87,8 @@ class RulesFragment : Fragment() {
         requireActivity().showToast("sadasdsad!")
     }
 
-    private fun onChangeIsSelected(position: Int) {
-        categoryViewModel.onChangeIsSelected(position)
+    private fun setCategoryIsSelected(position: Int) {
+        viewModel.setCategorySelected(position)
     }
 
     override fun onDestroyView() {
