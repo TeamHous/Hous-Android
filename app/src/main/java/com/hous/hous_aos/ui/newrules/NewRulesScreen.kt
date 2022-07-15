@@ -87,9 +87,6 @@ fun NewRulesScreen() {
         )
     }
     val focusManager = LocalFocusManager.current
-    isRuleAddButton.value = uiState.value.ruleName.isNotEmpty() &&
-        uiState.value.categoryName.isNotEmpty() &&
-        (checkBoxState.value == State.SELECT || IsAdd(test))
 
     Column(
         modifier = Modifier
@@ -102,6 +99,10 @@ fun NewRulesScreen() {
                 })
             }
     ) {
+        /* 버튼 on / off */
+//        isRuleAddButton.value = uiState.value.ruleName.isNotEmpty() &&
+//            uiState.value.categoryName.isNotEmpty() &&
+//            (checkBoxState.value == State.SELECT || IsAdd(test))
         LazyColumn(
             modifier = Modifier
                 .weight(1f)
