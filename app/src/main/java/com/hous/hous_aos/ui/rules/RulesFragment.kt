@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import androidx.fragment.app.viewModels
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentRulesBinding
+import com.hous.hous_aos.ui.rules.my_to_do.MyToDoFragment
+import com.hous.hous_aos.ui.rules.rules_table.RulesTableFragment
 import com.hous.hous_aos.ui.rules.today_to_do.TodayToDoFragment
 import com.hous.hous_aos.util.showToast
 
@@ -18,7 +20,7 @@ class RulesFragment : Fragment() {
     private var _binding: FragmentRulesBinding? = null
     private val binding get() = _binding ?: error("null값 들어감")
     private lateinit var homeRulesCategoryAdapter: HomeRulesCategoryAdapter
-    private val viewModel: RulesViewModel by viewModels()
+    private val viewModel: RulesViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,7 +28,7 @@ class RulesFragment : Fragment() {
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rules, container, false)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this@RulesFragment
+        binding.lifecycleOwner = requireActivity()
 
         return binding.root
     }
@@ -46,6 +48,7 @@ class RulesFragment : Fragment() {
             onPlusClick = { onClickPlusIcon() },
             onChangeIsSelected = { setCategoryIsSelected(it) }
         )
+
         binding.rvRules.adapter = homeRulesCategoryAdapter
     }
 
@@ -56,9 +59,20 @@ class RulesFragment : Fragment() {
     }
 
     private fun initTransaction() {
-        childFragmentManager.commit {
-            setReorderingAllowed(true)
-            replace<TodayToDoFragment>(R.id.frg_bottom)
+        when (viewModel.toDoViewType.value) {
+            ToDoViewType.TODAY_TO_DO -> {
+                childFragmentManager.commit {
+                    setReorderingAllowed(true)
+                    replace<TodayToDoFragment>(R.id.frg_bottom)
+                }
+            }
+            ToDoViewType.MY_TO_DO -> {
+                childFragmentManager.commit {
+                    setReorderingAllowed(true)
+                    replace<MyToDoFragment>(R.id.frg_bottom)
+                }
+            }
+            else -> IllegalArgumentException("viewModel.toDoViewType.value: ${viewModel.toDoViewType.value}")
         }
     }
 
@@ -66,25 +80,35 @@ class RulesFragment : Fragment() {
         // TODO Category <-> ToDoFragment transaction 로직
     }
 
-    // TODO 오늘의 to-do로 돌아가기
+    /** to-do로 돌아가기*/
     private fun onClickSmileIcon() {
         binding.ivSmile.setOnClickListener {
             when (viewModel.isSelectedCategorySmile.value) {
-                false -> viewModel.setSmileSelected()
-                true -> requireContext().showToast("웃음웃음우스음~!!!!!!!!")
+                false -> {
+                    viewModel.setSmileSelected(true)
+                    viewModel.initCategorySelected()
+                    parentFragmentManager.commit {
+                        setReorderingAllowed(true)
+                        replace<RulesFragment>(R.id.fcv_main)
+                    }
+                }
+                true -> return@setOnClickListener
                 else -> throw IllegalArgumentException("viewModel.isSelectedCategorySmile.value: ${viewModel.isSelectedCategorySmile.value}")
             }
         }
     }
 
-    /** 임시로 토스트를 박아놈*/
+    /** RulesTableFragment로 이동 */
     private fun onClickCategoryIcon() {
-        // TODO ToDoTaskFragment로 이동
-        requireActivity().showToast("ToDoTaskFragment로 이동")
+        viewModel.setSmileSelected(false)
+        childFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<RulesTableFragment>(R.id.frg_bottom)
+        }
     }
 
+    /** 추가 Fragment로 이동 */
     private fun onClickPlusIcon() {
-        // TODO 카테고리 수정 Fragment로 이동
         requireActivity().showToast(" 카테고리 수정 Fragment로 이동")
     }
 
@@ -98,6 +122,6 @@ class RulesFragment : Fragment() {
     }
 
     private companion object {
-        const val TAG = "RulesFragment"
+        private const val TAG = "RulesFragment"
     }
 }

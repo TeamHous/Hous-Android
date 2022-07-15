@@ -5,19 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.*
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentMyToDoBinding
+import com.hous.hous_aos.ui.rules.RulesViewModel
+import com.hous.hous_aos.ui.rules.ToDoViewType
 import com.hous.hous_aos.ui.rules.today_to_do.TodayToDoFragment
 
 class MyToDoFragment : Fragment() {
 
     private var _binding: FragmentMyToDoBinding? = null
     private val binding get() = _binding ?: error("binding에 null 들어감")
-    private val viewModel: MyToDoViewModel by viewModels()
+    private val viewModel: RulesViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,7 +24,7 @@ class MyToDoFragment : Fragment() {
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_to_do, container, false)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this@MyToDoFragment
+        binding.lifecycleOwner = requireActivity()
         return binding.root
     }
 
@@ -36,14 +35,11 @@ class MyToDoFragment : Fragment() {
 
     private fun setOnClickMyToDO() {
         binding.clMyToDo.setOnClickListener {
-            traverseToTodayToDo()
-        }
-    }
-
-    private fun traverseToTodayToDo() {
-        parentFragmentManager.commit {
-            setReorderingAllowed(true)
-            replace<TodayToDoFragment>(R.id.frg_bottom)
+            viewModel.setToDoViewType(ToDoViewType.TODAY_TO_DO)
+            parentFragmentManager.commit {
+                setReorderingAllowed(true)
+                replace<TodayToDoFragment>(R.id.frg_bottom)
+            }
         }
     }
 

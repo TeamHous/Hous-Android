@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentRulesTableBinding
 import com.hous.hous_aos.ui.rules.RulesViewModel
@@ -15,7 +15,7 @@ class RulesTableFragment : Fragment() {
 
     private var _binding: FragmentRulesTableBinding? = null
     private val binding get() = _binding ?: error("binding에 null이 들어갔어요!!")
-    private val viewModel: RulesViewModel by viewModels()
+    private val viewModel: RulesViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

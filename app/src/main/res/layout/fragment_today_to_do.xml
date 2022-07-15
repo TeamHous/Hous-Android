@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.hous.hous_aos.ui.rules.today_to_do.TodayToDoViewModel" />
+            type="com.hous.hous_aos.ui.rules.RulesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.hous.hous_aos.ui.rules.my_to_do.MyToDoViewModel" />
+            type="com.hous.hous_aos.ui.rules.RulesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -100,6 +100,11 @@
             app:layout_constraintStart_toStartOf="@id/cl_today_to_do"
             app:layout_constraintTop_toBottomOf="@id/cl_today_to_do"
             app:layout_constraintVertical_bias="1.0">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="나의 To-do"
+                android:textSize="50sp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
