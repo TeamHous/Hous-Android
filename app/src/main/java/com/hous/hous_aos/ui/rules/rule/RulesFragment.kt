@@ -19,7 +19,7 @@ class RulesFragment : Fragment() {
     private var _binding: FragmentRulesBinding? = null
     private val binding get() = _binding ?: error("null값 들어감")
     private lateinit var categoryOfRuleAdapter: CategoryOfRuleAdapter
-    private val viewModel: CategoryViewModel by viewModels()
+    private val viewModel: RulesViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

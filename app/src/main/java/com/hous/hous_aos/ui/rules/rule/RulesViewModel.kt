@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.hous.hous_aos.R
 import com.hous.hous_aos.data.entity.rules.CategoryOfRuleResponse
 
-class CategoryViewModel : ViewModel() {
+class RulesViewModel : ViewModel() {
     private var _isSelectedCategorySmile = MutableLiveData<Boolean>(true)
     val isSelectedCategorySmile: LiveData<Boolean> get() = _isSelectedCategorySmile
 

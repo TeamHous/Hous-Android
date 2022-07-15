@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.hous.hous_aos.ui.rules.rule.CategoryViewModel" />
+            type="com.hous.hous_aos.ui.rules.rule.RulesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
