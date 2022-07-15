@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
 import com.hous.hous_aos.ui.newrules.NewRulesUiState
-import com.hous.hous_aos.ui.newrules.State
 
 @Composable
 fun CategoryItem(

@@ -8,7 +8,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.data.model.response.NewRulesResponse
-import com.hous.hous_aos.ui.newrules.State
 
 @Composable
 fun NewRulesDayList(

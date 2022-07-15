@@ -9,7 +9,6 @@ import androidx.compose.ui.res.painterResource
 import com.hous.hous_aos.R
 import com.hous.hous_aos.data.model.response.NewRulesResponse
 import com.hous.hous_aos.ui.newrules.NewRulesUiState
-import com.hous.hous_aos.ui.newrules.State
 
 @Composable
 fun DeleteButton(

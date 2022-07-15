@@ -14,7 +14,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import com.hous.hous_aos.R
 import com.hous.hous_aos.ui.newrules.NewRulesUiState
-import com.hous.hous_aos.ui.newrules.State
 
 @Composable
 fun NewRulesToolbar(

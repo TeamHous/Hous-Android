@@ -18,7 +18,6 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
 import com.hous.hous_aos.data.model.response.NewRulesResponse
-import com.hous.hous_aos.ui.newrules.State
 
 @Composable
 fun NewRulesDay(
