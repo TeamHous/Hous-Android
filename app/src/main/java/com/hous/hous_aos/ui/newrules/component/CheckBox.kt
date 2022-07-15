@@ -25,37 +25,42 @@ import com.hous.hous_aos.R
 
 @Composable
 fun NewRulesCheckBox(
-    checkBoxState: MutableState<State>,
+    checkBoxState: State,
     dayList: List<Pair<String, MutableState<State>>>,
+    setCheckBoxState: (State) -> Unit
 ) {
-    when (checkBoxState.value) {
+    when (checkBoxState) {
         State.UNSELECT -> NewRulesBoxRow(
             checkBoxState,
             boxColor = colorResource(id = R.color.hous_blue_bg_2),
             textColor = colorResource(id = R.color.g_4),
-            dayList = dayList
+            dayList = dayList,
+            setCheckBoxState = setCheckBoxState
         )
         State.SELECT -> NewRulesBoxRow(
             checkBoxState,
             boxColor = colorResource(id = R.color.hous_blue),
             textColor = colorResource(id = R.color.hous_blue),
-            dayList = dayList
+            dayList = dayList,
+            setCheckBoxState = setCheckBoxState
         )
         State.BLOCK -> NewRulesBoxRow(
             checkBoxState,
             boxColor = colorResource(id = R.color.g_4),
             textColor = colorResource(id = R.color.g_4),
-            dayList = dayList
+            dayList = dayList,
+            setCheckBoxState = setCheckBoxState
         )
     }
 }
 
 @Composable
 fun NewRulesBoxRow(
-    checkBoxState: MutableState<State>,
+    checkBoxState: State,
     boxColor: Color,
     textColor: Color,
     dayList: List<Pair<String, MutableState<State>>>,
+    setCheckBoxState: (State) -> Unit
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -66,12 +71,12 @@ fun NewRulesBoxRow(
                 .clip(shape = RoundedCornerShape(5.dp))
                 .background(color = boxColor)
                 .clickable {
-                    if (checkBoxState.value != State.BLOCK) {
-                        if (checkBoxState.value == State.SELECT) {
-                            checkBoxState.value = State.UNSELECT
+                    if (checkBoxState != State.BLOCK) {
+                        if (checkBoxState == State.SELECT) {
+                            setCheckBoxState(State.UNSELECT)
                             dayList.forEach { it.second.value = State.UNSELECT }
                         } else {
-                            checkBoxState.value = State.SELECT
+                            setCheckBoxState(State.SELECT)
                             dayList.forEach { it.second.value = State.BLOCK }
                         }
                     }

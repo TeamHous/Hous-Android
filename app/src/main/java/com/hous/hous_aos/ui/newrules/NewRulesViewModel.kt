@@ -24,6 +24,14 @@ class NewRulesViewModel : ViewModel() {
         )
     }
 
+    fun setCheckBoxState(state: State) {
+        when (state) {
+            State.UNSELECT -> _uiState.value = _uiState.value.copy(checkBoxState = State.UNSELECT)
+            State.SELECT -> _uiState.value = _uiState.value.copy(checkBoxState = State.SELECT)
+            State.BLOCK -> _uiState.value = _uiState.value.copy(checkBoxState = State.BLOCK)
+        }
+    }
+
     fun toggleNotificationState(isChange: Boolean) {
         _uiState.value = _uiState.value.copy(notificationState = isChange)
     }

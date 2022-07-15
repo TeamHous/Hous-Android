@@ -121,7 +121,11 @@ fun NewRulesScreen(
                 )
                 Spacer(modifier = Modifier.size(16.dp))
 
-                NewRulesCheckBox(checkBoxState, test.value[0].second)
+                NewRulesCheckBox(
+                    checkBoxState = uiState.checkBoxState,
+                    dayList = test.value[0].second,
+                    setCheckBoxState = viewModel::setCheckBoxState
+                )
                 Spacer(modifier = Modifier.size(4.dp))
 
                 Row {
