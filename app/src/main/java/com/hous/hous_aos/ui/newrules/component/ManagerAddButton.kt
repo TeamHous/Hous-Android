@@ -19,16 +19,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
 import com.hous.hous_aos.data.model.response.NewRulesResponse
-import com.hous.hous_aos.ui.newrules.NewRulesUiState
 import com.hous.hous_aos.ui.newrules.addDay
 import com.hous.hous_aos.ui.newrules.isAddDay
 
 @Composable
 fun NewRulesAddMangerButton(
     test: MutableState<List<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>>,
-    uiState: MutableState<NewRulesUiState>
+    homies: List<NewRulesResponse.Homie>,
+    homieState: HashMap<String, Boolean>
 ) {
-    if (test.value[test.value.size - 1].first.value.name != "담당자 없음" && isAddDay(uiState)) {
+    if (
+        test.value[test.value.size - 1].first.value.name != "담당자 없음" &&
+        isAddDay(homies, homieState)
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -37,11 +40,11 @@ fun NewRulesAddMangerButton(
                 .background(colorResource(id = R.color.white))
                 .padding(vertical = 4.dp)
                 .clickable {
-                    if (isAddDay(uiState)) {
+                    if (isAddDay(homies, homieState)) {
                         val ttt =
                             mutableListOf<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>()
                         test.value.forEach { ttt.add(it) }
-                        ttt.add(addDay(uiState))
+                        ttt.add(addDay(homies, homieState))
                         test.value = ttt
                     }
                 }

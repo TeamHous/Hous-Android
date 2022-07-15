@@ -21,10 +21,10 @@ import com.hous.hous_aos.R
 
 @Composable
 fun NewRulesAddRuleButton(
-    isAddButton: Boolean
+    isAddButton: MutableState<Boolean>
 ) {
     val color =
-        if (isAddButton) colorResource(id = R.color.hous_blue) else colorResource(id = R.color.g_3)
+        if (isAddButton.value) colorResource(id = R.color.hous_blue) else colorResource(id = R.color.g_3)
     Box(
         modifier = Modifier
             .fillMaxWidth()

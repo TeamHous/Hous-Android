@@ -161,7 +161,11 @@ fun NewRulesScreen(
             }
 
             item {
-                NewRulesAddMangerButton(test, uiState)
+                NewRulesAddMangerButton(
+                    test = test,
+                    homies = uiState.homies,
+                    homieState = uiState.homieState,
+                )
             }
         }
         NewRulesAddRuleButton(isRuleAddButton)
@@ -200,13 +204,14 @@ fun isAddDay(
 }
 
 fun addDay(
-    uiState: MutableState<NewRulesUiState>
+    homies: List<NewRulesResponse.Homie>,
+    homieState: HashMap<String, Boolean>
 ): Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>> {
     var temp: NewRulesResponse.Homie = NewRulesResponse.Homie("", "", "")
-    for (i in uiState.value.homies) {
-        if (uiState.value.homieState[i.name]!!) {
+    for (i in homies) {
+        if (homieState[i.name]!!) {
             temp = NewRulesResponse.Homie(i._id, i.name, i.typeColor)
-            uiState.value.homieState[temp.name] = false
+            homieState[temp.name] = false
             break
         }
     }
@@ -224,5 +229,5 @@ fun addDay(
 @Preview
 @Composable
 fun NewRulesPreview() {
-    NewRulesScreen()
+//    NewRulesScreen()
 }
