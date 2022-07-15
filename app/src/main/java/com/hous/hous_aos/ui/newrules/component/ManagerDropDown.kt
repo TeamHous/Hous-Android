@@ -30,16 +30,16 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
 import com.hous.hous_aos.data.model.response.NewRulesResponse
-import com.hous.hous_aos.ui.newrules.NewRulesUiState
 import com.hous.hous_aos.ui.newrules.isAddDay
 
 @Composable
 fun ManagerDropDownMenu(
     test: Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>,
-    uiState: MutableState<NewRulesUiState>,
-    checkBoxState: MutableState<State>
+    homies: List<NewRulesResponse.Homie>,
+    homieState: HashMap<String, Boolean>,
+    checkBoxState: State
 ) {
-    if (checkBoxState.value != State.SELECT && isAddDay(uiState)) {
+    if (checkBoxState != State.SELECT && isAddDay(homies, homieState)) {
         var isExpanded by remember { mutableStateOf(false) }
 
         Image(
@@ -58,16 +58,16 @@ fun ManagerDropDownMenu(
             expanded = isExpanded,
             onDismissRequest = { isExpanded = false }
         ) {
-            uiState.value.homies.forEach {
-                if (uiState.value.homieState[it.name]!!) {
+            homies.forEach {
+                if (homieState[it.name]!!) {
                     DropdownMenuItem(
                         onClick = {
                             if (test.first.value.name != "담당자 없음")
-                                uiState.value.homieState[test.first.value.name] = true
+                                homieState[test.first.value.name] = true
                             test.first.value = test.first.value.copy(_id = it._id)
                             test.first.value = test.first.value.copy(name = it.name)
                             test.first.value = test.first.value.copy(typeColor = it.typeColor)
-                            uiState.value.homieState[it.name] = false
+                            homieState[it.name] = false
                             isExpanded = false
                         }
                     ) {

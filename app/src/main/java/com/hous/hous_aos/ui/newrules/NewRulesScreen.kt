@@ -148,12 +148,14 @@ fun NewRulesScreen(
 
             itemsIndexed(test.value) { index, value ->
                 ManagerItem(
-                    test,
-                    value.second,
-                    index,
-                    checkBoxState,
-                    test.value.size,
-                    uiState
+                    test = test,
+                    dayList = value.second,
+                    index = index,
+                    checkBoxState = uiState.checkBoxState,
+                    listSize = test.value.size,
+                    homies = uiState.homies,
+                    homieState = uiState.homieState,
+                    setCheckBoxState = viewModel::setCheckBoxState
                 )
                 Spacer(modifier = Modifier.size(16.dp))
             }
@@ -187,11 +189,12 @@ fun IsAdd(
 }
 
 fun isAddDay(
-    uiState: MutableState<NewRulesUiState>
+    homies: List<NewRulesResponse.Homie>,
+    homieState: HashMap<String, Boolean>
 ): Boolean {
     var temp = false
-    uiState.value.homies.forEach { homie ->
-        if (uiState.value.homieState[homie.name]!!) temp = true
+    homies.forEach { h ->
+        if (homieState[h.name]!!) temp = true
     }
     return temp
 }

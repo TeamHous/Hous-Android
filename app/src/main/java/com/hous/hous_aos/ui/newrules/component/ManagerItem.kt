@@ -10,40 +10,47 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.data.model.response.NewRulesResponse
-import com.hous.hous_aos.ui.newrules.NewRulesUiState
 
 @Composable
 fun ManagerItem(
     test: MutableState<List<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>>,
     dayList: List<Pair<String, MutableState<State>>>,
     index: Int,
-    checkBoxState: MutableState<State>,
+    checkBoxState: State,
     listSize: Int,
-    uiState: MutableState<NewRulesUiState>
+    homies: List<NewRulesResponse.Homie>,
+    homieState: HashMap<String, Boolean>,
+    setCheckBoxState: (State) -> Unit
 ) {
     Column {
         Row(verticalAlignment = Alignment.CenterVertically) {
             if (test.value[index].first.value.name != "담당자 없음") {
                 DeleteButton(
-                    test,
-                    dayList,
-                    index,
-                    checkBoxState,
-                    listSize,
-                    uiState
+                    test = test,
+                    dayList = dayList,
+                    index = index,
+                    listSize = listSize,
+                    homieState = homieState,
+                    setCheckBoxState = setCheckBoxState
                 )
                 Spacer(modifier = Modifier.size(12.dp))
             } else if (test.value[0].first.value.name == "담당자 없음")
-                checkBoxState.value = State.UNSELECT
+                setCheckBoxState(State.UNSELECT)
 
             ManagerBox(
                 radius = 10.dp,
                 test = test.value[index],
-                uiState = uiState,
+                homies = homies,
+                homieState = homieState,
                 checkBoxState = checkBoxState,
             )
         }
         Spacer(modifier = Modifier.size(10.dp))
-        NewRulesDayList(dayList, checkBoxState, listSize, test.value[0])
+        NewRulesDayList(
+            dayList = dayList,
+            totalSize = listSize,
+            test = test.value[0],
+            setCheckBoxState = setCheckBoxState
+        )
     }
 }

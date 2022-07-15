@@ -9,7 +9,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,10 +22,10 @@ import com.hous.hous_aos.data.model.response.NewRulesResponse
 fun NewRulesDay(
     day: String,
     selected: MutableState<State>,
-    checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK),
     dayList: List<Pair<String, MutableState<State>>>,
     totalSize: Int,
     test: Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>,
+    setCheckBoxState: (State) -> Unit
 ) {
     val color = when (selected.value) {
         State.UNSELECT -> colorResource(id = R.color.white)
@@ -50,12 +49,12 @@ fun NewRulesDay(
                         if (totalSize == 1) {
                             var isCheck = true
                             dayList.forEach { if (it.second.value == State.SELECT) isCheck = false }
-                            if (isCheck && test.first.value.name == "담당자 없음") checkBoxState.value =
-                                State.UNSELECT
+                            if (isCheck && test.first.value.name == "담당자 없음")
+                                setCheckBoxState(State.UNSELECT)
                         }
                     } else {
                         selected.value = State.SELECT
-                        checkBoxState.value = State.BLOCK
+                        setCheckBoxState(State.BLOCK)
                     }
                 }
             }
