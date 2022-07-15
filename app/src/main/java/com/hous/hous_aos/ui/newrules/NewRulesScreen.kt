@@ -41,7 +41,7 @@ fun NewRulesScreen(
     viewModel: NewRulesViewModel
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val isRuleAddButton = remember { mutableStateOf(false) }
+    val buttonState by viewModel.buttonState.collectAsState()
     val test = remember {
         mutableStateOf(
             listOf(
@@ -73,10 +73,6 @@ fun NewRulesScreen(
                 })
             }
     ) {
-        /* 버튼 on / off */
-//        isRuleAddButton.value = uiState.value.ruleName.isNotEmpty() &&
-//            uiState.value.categoryName.isNotEmpty() &&
-//            (checkBoxState.value == State.SELECT || IsAdd(test))
         LazyColumn(
             modifier = Modifier
                 .weight(1f)
@@ -167,7 +163,7 @@ fun NewRulesScreen(
                 )
             }
         }
-        NewRulesAddRuleButton(isRuleAddButton)
+        NewRulesAddRuleButton(buttonState)
     }
 }
 
