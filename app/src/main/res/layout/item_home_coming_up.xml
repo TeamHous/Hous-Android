@@ -47,10 +47,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="18dp"
-            android:text="@{comingUpData.day}"
             android:layout_marginVertical="23dp"
             android:fontFamily="@font/montserrat_semibold"
             android:letterSpacing="0.03"
+            android:text="@{comingUpData.day}"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="normal"
@@ -60,6 +60,5 @@
             app:layout_constraintStart_toStartOf="@id/iv_coming_up_shape"
             app:layout_constraintTop_toTopOf="@id/iv_coming_up_shape"
             tools:text="D-10" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
