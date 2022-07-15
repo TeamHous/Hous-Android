@@ -1,11 +1,14 @@
 package com.hous.hous_aos.ui.rules.rule
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hous.hous_aos.R
 import com.hous.hous_aos.data.entity.rules.CategoryOfRuleResponse
 
 class CategoryViewModel : ViewModel() {
+    private var _isSelectedCategorySmile = MutableLiveData<Boolean>(true)
+    val isSelectedCategorySmile: LiveData<Boolean> get() = _isSelectedCategorySmile
 
     private var _categoryOfRuleList =
         MutableLiveData<MutableList<CategoryOfRuleResponse>>()
@@ -15,7 +18,11 @@ class CategoryViewModel : ViewModel() {
         fetchToCategoryOfRuleList()
     }
 
-    fun onChangeIsSelected(position: Int) {
+    fun setSmileSelected() {
+        _isSelectedCategorySmile.value = !requireNotNull(isSelectedCategorySmile.value)
+    }
+
+    fun setCategorySelected(position: Int) {
         val tmpCategoryOfRuleList = requireNotNull(_categoryOfRuleList.value).map { data ->
             data.copy().apply { isSelected = false }
         }
