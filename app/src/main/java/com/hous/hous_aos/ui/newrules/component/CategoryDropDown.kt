@@ -8,7 +8,6 @@ import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -18,14 +17,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.hous.hous_aos.R
-import com.hous.hous_aos.ui.newrules.NewRulesUiState
+import com.hous.hous_aos.data.model.response.NewRulesResponse
 
 @Composable
 fun CategoryDropDownMenu(
-    uiState: MutableState<NewRulesUiState>,
-    checkBoxState: MutableState<State>,
+    ruleCategoryList: List<NewRulesResponse.Category>,
+    checkBoxState: State,
+    setCategory: (String, String) -> Unit
 ) {
-    if (checkBoxState.value != State.SELECT) {
+    if (checkBoxState != State.SELECT) {
         var isExpanded by remember { mutableStateOf(false) }
         Image(
             modifier = Modifier
@@ -42,15 +42,14 @@ fun CategoryDropDownMenu(
             expanded = isExpanded,
             onDismissRequest = { isExpanded = false }
         ) {
-            uiState.value.ruleCategory.forEach {
+            ruleCategoryList.forEach { category ->
                 DropdownMenuItem(
                     onClick = {
-                        uiState.value = uiState.value.copy(categoryId = it._id)
-                        uiState.value = uiState.value.copy(categoryName = it.categoryName)
+                        setCategory(category._id, category.categoryName)
                         isExpanded = false
                     }
                 ) {
-                    Text(it.categoryName)
+                    Text(category.categoryName)
                 }
             }
         }

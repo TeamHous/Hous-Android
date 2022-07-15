@@ -100,7 +100,7 @@ fun NewRulesScreen(
 
                 NewRulesTextField(
                     ruleName = uiState.ruleName,
-                    changeRuleName = viewModel::changeRuleName,
+                    changeRuleName = viewModel::setRuleName,
                     focusManager = focusManager
                 )
                 Spacer(modifier = Modifier.size(16.dp))
@@ -112,7 +112,13 @@ fun NewRulesScreen(
                 )
                 Spacer(modifier = Modifier.size(8.dp))
 
-                CategoryItem(10.dp, uiState)
+                CategoryItem(
+                    radius = 10.dp,
+                    categoryName = uiState.categoryName,
+                    ruleCategoryList = uiState.ruleCategory,
+                    checkBoxState = uiState.checkBoxState,
+                    setCategory = viewModel::setCategoryName
+                )
                 Spacer(modifier = Modifier.size(16.dp))
 
                 NewRulesCheckBox(checkBoxState, test.value[0].second)

@@ -10,12 +10,18 @@ class NewRulesViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(NewRulesUiState())
     val uiState = _uiState.asStateFlow()
 
-    fun changeRuleName(rule: String) {
+    fun setRuleName(rule: String) {
         _uiState.value = _uiState.value.copy(ruleName = rule)
     }
 
-    fun changeCategoryName(category: String) {
-        _uiState.value = _uiState.value.copy(categoryName = category)
+    fun setCategoryName(
+        categoryId: String,
+        category: String
+    ) {
+        _uiState.value = _uiState.value.copy(
+            categoryId = categoryId,
+            categoryName = category
+        )
     }
 
     fun toggleNotificationState(isChange: Boolean) {
