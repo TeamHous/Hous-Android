@@ -1,91 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.rules.rule.todo.ToDoFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.hous.hous_aos.ui.rules.rule.todo.ToDoViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_today_to_do"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.rules.rule.todo.ToDoFragment">
 
-        <TextView
-            android:id="@+id/tv_today"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_today_to_do"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/home_rules_today"
-            android:textAppearance="@style/B1"
+            android:layout_marginStart="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="오늘의 " />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tv_today_to_do"
+            <TextView
+                android:id="@+id/tv_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_rules_today"
+                android:textAppearance="@style/B1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="오늘의 " />
+
+            <TextView
+                android:id="@+id/tv_today_to_do"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_rules_todo"
+                android:textAppearance="@style/B1"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/tv_today"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="to-do" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_my_to_do"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/home_rules_todo"
-            android:textAppearance="@style/B1"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@id/tv_today"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="to-do" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintBottom_toBottomOf="@id/cl_today_to_do"
+            app:layout_constraintEnd_toEndOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_my_to_do"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/tv_my"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_rules_my"
+                android:textAppearance="@style/B2"
+                android:textColor="@color/sel_rules_my_to_do"
+                app:isSelected="@{viewModel.isSelectedMyToDo}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="나의 "
+                tools:textColor="@color/hous_purple_bg_2" />
 
-        app:layout_constraintBottom_toBottomOf="@id/cl_today_to_do"
-        app:layout_constraintEnd_toEndOf="parent">
+            <TextView
 
-        <TextView
-            android:id="@+id/tv_my"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home_rules_my"
-            android:textAppearance="@style/B2"
-            android:textColor="@color/hous_purple_bg_2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="나의 " />
+                android:id="@+id/tv_my_to_do"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_to_do"
+                android:textAppearance="@style/B2"
+                android:textColor="@color/sel_rules_my_to_do"
+                app:isSelected="@{viewModel.isSelectedMyToDo}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_my"
+                tools:text="to-do"
+                tools:textColor="@color/hous_purple_bg_2" />
 
-        <TextView
-            android:id="@+id/tv_my_to_do"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home_to_do"
-            android:textAppearance="@style/B2"
-            android:textColor="@color/hous_purple_bg_2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_my"
-            tools:text="to-do" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="4dp"
+                android:src="@drawable/ic_rules_check_lightpurple"
+                app:isSelected="@{viewModel.isSelectedMyToDo}"
+                app:layout_constraintBottom_toBottomOf="@id/tv_my_to_do"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_my_to_do"
+                app:tint="@color/sel_rules_my_to_do" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/frg_to_do"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="3dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="4dp"
-            android:src="@drawable/ic_rules_check_lightpurple"
-            app:layout_constraintBottom_toBottomOf="@id/tv_my_to_do"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_my_to_do" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/cl_my_to_do"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/cl_today_to_do"
+            app:layout_constraintTop_toBottomOf="@id/cl_today_to_do"
+            app:layout_constraintVertical_bias="1.0" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/frg_to_do"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/cl_my_to_do"
-        app:layout_constraintStart_toStartOf="@id/cl_today_to_do"
-        app:layout_constraintTop_toBottomOf="@id/cl_today_to_do" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
