@@ -11,7 +11,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,14 +20,17 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
 import com.hous.hous_aos.data.model.response.NewRulesResponse
+import com.hous.hous_aos.ui.newrules.Manager
 
 @Composable
 fun ManagerBox(
     radius: Dp,
-    test: Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>,
+    managerIndex: Int,
+    manager: Manager,
     homies: List<NewRulesResponse.Homie>,
     homieState: HashMap<String, Boolean>,
-    checkBoxState: State
+    checkBoxState: State,
+    choiceManager: (Int, NewRulesResponse.Homie) -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -38,7 +40,7 @@ fun ManagerBox(
             .background(colorResource(id = R.color.white))
             .padding(horizontal = 12.dp),
     ) {
-        val color = when (test.first.value.typeColor) {
+        val color = when (manager.managerHomie.typeColor) {
             "RED" -> colorResource(id = R.color.hous_red)
             "BLUE" -> colorResource(id = R.color.hous_blue)
             "YELLOW" -> colorResource(id = R.color.hous_yellow)
@@ -61,7 +63,7 @@ fun ManagerBox(
                 Spacer(modifier = Modifier.size(6.dp))
             }
             Text(
-                text = test.first.value.name,
+                text = manager.managerHomie.name,
                 fontStyle = FontStyle(R.style.B2),
                 color = colorResource(id = R.color.black)
             )
@@ -72,10 +74,11 @@ fun ManagerBox(
                 .fillMaxSize(),
         ) {
             ManagerDropDownMenu(
-                test = test,
+                managerIndex = managerIndex,
                 homies = homies,
                 homieState = homieState,
-                checkBoxState = checkBoxState
+                checkBoxState = checkBoxState,
+                choiceManager = choiceManager
             )
         }
     }

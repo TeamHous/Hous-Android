@@ -18,8 +18,26 @@ class NewRulesViewModel : ViewModel() {
     val buttonState: StateFlow<Boolean> = uiState.map {
         it.ruleCategory.isNotEmpty() &&
             it.categoryName.isNotEmpty() &&
-            (uiState.value.checkBoxState == State.SELECT)
+            (uiState.value.checkBoxState == State.SELECT || isDayCheck())
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(3000L), false)
+
+    private fun isDayCheck(): Boolean {
+        var isDay = true
+        for (manager in uiState.value.ManagerList) {
+            var temp = false
+            for (dayList in manager.dayDataList) {
+                if (dayList.dayState == State.SELECT) {
+                    temp = true
+                    break
+                }
+            }
+            if (!temp) {
+                isDay = false
+                break
+            }
+        }
+        return isDay
+    }
 
     fun setRuleName(rule: String) {
         _uiState.value = _uiState.value.copy(ruleName = rule)
@@ -46,6 +64,132 @@ class NewRulesViewModel : ViewModel() {
 
     fun toggleNotificationState(isChange: Boolean) {
         _uiState.value = _uiState.value.copy(notificationState = isChange)
+    }
+
+    fun setAllDayData(isChange: Boolean) {
+        if (isChange) {
+            val tempManager = listOf(
+                Manager(
+                    uiState.value.ManagerList[0].managerHomie,
+                    dayDataList = listOf(
+                        DayData("월", State.UNSELECT),
+                        DayData("화", State.UNSELECT),
+                        DayData("수", State.UNSELECT),
+                        DayData("목", State.UNSELECT),
+                        DayData("금", State.UNSELECT),
+                        DayData("토", State.UNSELECT),
+                        DayData("일", State.UNSELECT),
+                    )
+                )
+            )
+            _uiState.value = _uiState.value.copy(ManagerList = tempManager)
+        } else {
+            val tempManager = listOf(
+                Manager(
+                    uiState.value.ManagerList[0].managerHomie,
+                    dayDataList = listOf(
+                        DayData("월", State.BLOCK),
+                        DayData("화", State.BLOCK),
+                        DayData("수", State.BLOCK),
+                        DayData("목", State.BLOCK),
+                        DayData("금", State.BLOCK),
+                        DayData("토", State.BLOCK),
+                        DayData("일", State.BLOCK),
+                    )
+                )
+            )
+            _uiState.value = _uiState.value.copy(ManagerList = tempManager)
+        }
+    }
+
+    fun deleteManager(index: Int) {
+        uiState.value.homieState[uiState.value.ManagerList[index].managerHomie.name] = true
+        if (uiState.value.ManagerList.size > 1) {
+            val tempManager = mutableListOf<Manager>()
+            _uiState.value.ManagerList.forEach { manager -> tempManager.add(manager) }
+            tempManager.removeAt(index)
+            _uiState.value = _uiState.value.copy(ManagerList = tempManager)
+        } else {
+            _uiState.value = _uiState.value.copy(ManagerList = listOf(Manager()))
+            _uiState.value = _uiState.value.copy(checkBoxState = State.UNSELECT)
+        }
+    }
+
+    fun choiceManager(managerIndex: Int, homie: NewRulesResponse.Homie) {
+        if (uiState.value.ManagerList[managerIndex].managerHomie.name != "담당자 없음")
+            _uiState.value.homieState[uiState.value.ManagerList[managerIndex].managerHomie.name] =
+                true
+        val tempManager = Manager(
+            managerHomie = homie,
+            dayDataList = uiState.value.ManagerList[managerIndex].dayDataList
+        )
+        val tempManagerList = mutableListOf<Manager>()
+        _uiState.value.ManagerList.forEach { manager -> tempManagerList.add(manager) }
+        tempManagerList[managerIndex] = tempManager
+        _uiState.value.homieState[homie.name] = false
+        _uiState.value = _uiState.value.copy(ManagerList = tempManagerList)
+    }
+
+    fun selectDay(managerIndex: Int, dayData: DayData) {
+        if (dayData.dayState != State.BLOCK) {
+            val tempManager = Manager(
+                managerHomie = _uiState.value.ManagerList[managerIndex].managerHomie,
+                dayDataList = changeDayState(dayData, managerIndex)
+            )
+            val tempManagerList = mutableListOf<Manager>()
+            uiState.value.ManagerList.forEach { manager -> tempManagerList.add(manager) }
+            tempManagerList[managerIndex] = tempManager
+            _uiState.value = _uiState.value.copy(ManagerList = tempManagerList)
+        }
+    }
+
+    fun isShowAddButton(): Boolean =
+        uiState.value.ManagerList[uiState.value.ManagerList.size - 1].managerHomie.name != "담당자 없음"
+
+    fun addManager() {
+        val tempManagerList = mutableListOf<Manager>()
+        val nextManager = Manager(managerHomie = nextManager())
+        uiState.value.ManagerList.forEach { manager -> tempManagerList.add(manager) }
+        tempManagerList.add(nextManager)
+        _uiState.value = _uiState.value.copy(ManagerList = tempManagerList)
+    }
+
+    private fun nextManager(): NewRulesResponse.Homie {
+        var tempHomie = NewRulesResponse.Homie("", "담당자 없음", "NULL")
+        for (i in uiState.value.homies) {
+            if (uiState.value.homieState[i.name]!!) {
+                tempHomie = NewRulesResponse.Homie(i._id, i.name, i.typeColor)
+                uiState.value.homieState[tempHomie.name] = false
+                break
+            }
+        }
+        return tempHomie
+    }
+
+    private fun changeDayState(dayData: DayData, managerIndex: Int): List<DayData> {
+        val tempDay = mutableListOf<DayData>()
+        uiState.value.ManagerList[managerIndex].dayDataList.forEach { d ->
+            if (d.day == dayData.day) {
+                when (dayData.dayState) {
+                    State.UNSELECT -> {
+                        tempDay.add(DayData(d.day, State.SELECT))
+                        _uiState.value = _uiState.value.copy(checkBoxState = State.BLOCK)
+                    }
+                    State.SELECT -> {
+                        tempDay.add(DayData(d.day, State.UNSELECT))
+                        if (uiState.value.ManagerList.size == 1) {
+                            var isCheck = false
+                            uiState.value.ManagerList[0].dayDataList.forEach { dayData ->
+                                if (dayData.dayState == State.SELECT) isCheck = true
+                            }
+                            if (isCheck && uiState.value.ManagerList[0].managerHomie.name == "담당자 없음")
+                                _uiState.value = _uiState.value.copy(checkBoxState = State.UNSELECT)
+                        }
+                    }
+                }
+            } else tempDay.add(d)
+        }
+        return tempDay
     }
 }
 
@@ -76,5 +220,24 @@ data class NewRulesUiState(
         "이준원" to true,
         "최인영" to true,
         "최소현" to true,
+    ),
+    val ManagerList: List<Manager> = listOf(Manager())
+)
+
+data class Manager(
+    val managerHomie: NewRulesResponse.Homie = NewRulesResponse.Homie("", "담당자 없음", "NULL"),
+    val dayDataList: List<DayData> = listOf(
+        DayData("월", State.UNSELECT),
+        DayData("화", State.UNSELECT),
+        DayData("수", State.UNSELECT),
+        DayData("목", State.UNSELECT),
+        DayData("금", State.UNSELECT),
+        DayData("토", State.UNSELECT),
+        DayData("일", State.UNSELECT),
     )
+)
+
+data class DayData(
+    val day: String,
+    val dayState: State
 )

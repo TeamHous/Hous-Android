@@ -5,51 +5,51 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.data.model.response.NewRulesResponse
+import com.hous.hous_aos.ui.newrules.DayData
+import com.hous.hous_aos.ui.newrules.Manager
 
 @Composable
 fun ManagerItem(
-    test: MutableState<List<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>>,
-    dayList: List<Pair<String, MutableState<State>>>,
-    index: Int,
+    manager: Manager,
+    currentIndex: Int,
     checkBoxState: State,
-    listSize: Int,
     homies: List<NewRulesResponse.Homie>,
     homieState: HashMap<String, Boolean>,
-    setCheckBoxState: (String, State) -> Unit
+    setCheckBoxState: (String, State) -> Unit,
+    deleteManager: (Int) -> Unit,
+    choiceManager: (Int, NewRulesResponse.Homie) -> Unit,
+    selectDay: (Int, DayData) -> Unit
 ) {
     Column {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            if (test.value[index].first.value.name != "담당자 없음") {
+            if (manager.managerHomie.name != "담당자 없음") {
                 DeleteButton(
-                    test = test,
-                    dayList = dayList,
-                    index = index,
-                    listSize = listSize,
-                    homieState = homieState,
-                    setCheckBoxState = setCheckBoxState
+                    index = currentIndex,
+                    setCheckBoxState = setCheckBoxState,
+                    deleteManager = deleteManager
                 )
                 Spacer(modifier = Modifier.size(12.dp))
             }
 
             ManagerBox(
                 radius = 10.dp,
-                test = test.value[index],
+                managerIndex = currentIndex,
                 homies = homies,
+                manager = manager,
                 homieState = homieState,
                 checkBoxState = checkBoxState,
+                choiceManager = choiceManager
             )
         }
         Spacer(modifier = Modifier.size(10.dp))
         NewRulesDayList(
-            dayList = dayList,
-            totalSize = listSize,
-            test = test.value[0],
-            setCheckBoxState = setCheckBoxState
+            manager = manager,
+            currentIndex = currentIndex,
+            selectDay = selectDay
         )
     }
 }

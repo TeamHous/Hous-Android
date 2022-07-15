@@ -2,28 +2,24 @@ package com.hous.hous_aos.ui.newrules.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.unit.dp
-import com.hous.hous_aos.data.model.response.NewRulesResponse
+import com.hous.hous_aos.ui.newrules.DayData
+import com.hous.hous_aos.ui.newrules.Manager
 
 @Composable
 fun NewRulesDayList(
-    dayList: List<Pair<String, MutableState<State>>>,
-    totalSize: Int,
-    test: Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>,
-    setCheckBoxState: (String, State) -> Unit
+    manager: Manager,
+    currentIndex: Int,
+    selectDay: (Int, DayData) -> Unit
 ) {
     LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-        items(dayList) {
+        itemsIndexed(manager.dayDataList) { _, value ->
             NewRulesDay(
-                day = it.first,
-                selected = it.second,
-                dayList = dayList,
-                totalSize = totalSize,
-                test = test,
-                setCheckBoxState = setCheckBoxState
+                dayData = value,
+                currentIndex = currentIndex,
+                selectDay = selectDay
             )
         }
     }

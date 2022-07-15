@@ -15,8 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
@@ -42,24 +40,6 @@ fun NewRulesScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val buttonState by viewModel.buttonState.collectAsState()
-    val test = remember {
-        mutableStateOf(
-            listOf(
-                Pair(
-                    mutableStateOf(NewRulesResponse.Homie("", "담당자 없음", "NULL")),
-                    listOf(
-                        Pair("월", mutableStateOf(State.UNSELECT)),
-                        Pair("화", mutableStateOf(State.UNSELECT)),
-                        Pair("수", mutableStateOf(State.UNSELECT)),
-                        Pair("목", mutableStateOf(State.UNSELECT)),
-                        Pair("금", mutableStateOf(State.UNSELECT)),
-                        Pair("토", mutableStateOf(State.UNSELECT)),
-                        Pair("일", mutableStateOf(State.UNSELECT)),
-                    )
-                )
-            )
-        )
-    }
     val focusManager = LocalFocusManager.current
 
     Column(
@@ -118,8 +98,8 @@ fun NewRulesScreen(
 
                 NewRulesCheckBox(
                     checkBoxState = uiState.checkBoxState,
-                    dayList = test.value[0].second,
-                    setCheckBoxState = viewModel::setCheckBoxState
+                    setCheckBoxState = viewModel::setCheckBoxState,
+                    setAllDayData = viewModel::setAllDayData
                 )
                 Spacer(modifier = Modifier.size(4.dp))
 
@@ -141,25 +121,27 @@ fun NewRulesScreen(
                 Spacer(modifier = Modifier.size(12.dp))
             }
 
-            itemsIndexed(test.value) { index, value ->
+            itemsIndexed(uiState.ManagerList) { index, value ->
                 ManagerItem(
-                    test = test,
-                    dayList = value.second,
-                    index = index,
+                    manager = value,
+                    currentIndex = index,
                     checkBoxState = uiState.checkBoxState,
-                    listSize = test.value.size,
                     homies = uiState.homies,
                     homieState = uiState.homieState,
-                    setCheckBoxState = viewModel::setCheckBoxState
+                    deleteManager = viewModel::deleteManager,
+                    setCheckBoxState = viewModel::setCheckBoxState,
+                    choiceManager = viewModel::choiceManager,
+                    selectDay = viewModel::selectDay
                 )
                 Spacer(modifier = Modifier.size(16.dp))
             }
 
             item {
                 NewRulesAddMangerButton(
-                    test = test,
                     homies = uiState.homies,
                     homieState = uiState.homieState,
+                    isShowAddButton = viewModel::isShowAddButton,
+                    addManager = viewModel::addManager
                 )
             }
         }
@@ -196,29 +178,6 @@ fun isAddDay(
         if (homieState[h.name]!!) temp = true
     }
     return temp
-}
-
-fun addDay(
-    homies: List<NewRulesResponse.Homie>,
-    homieState: HashMap<String, Boolean>
-): Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>> {
-    var temp: NewRulesResponse.Homie = NewRulesResponse.Homie("", "", "")
-    for (i in homies) {
-        if (homieState[i.name]!!) {
-            temp = NewRulesResponse.Homie(i._id, i.name, i.typeColor)
-            homieState[temp.name] = false
-            break
-        }
-    }
-    return Pair(
-        mutableStateOf(NewRulesResponse.Homie(temp._id, temp.name, temp.typeColor)),
-        listOf("월", "화", "수", "목", "금", "토", "일").map {
-            Pair(
-                it,
-                mutableStateOf(State.UNSELECT)
-            )
-        }
-    )
 }
 
 @Preview

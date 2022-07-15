@@ -15,7 +15,6 @@ import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,10 +33,11 @@ import com.hous.hous_aos.ui.newrules.isAddDay
 
 @Composable
 fun ManagerDropDownMenu(
-    test: Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>,
+    managerIndex: Int,
     homies: List<NewRulesResponse.Homie>,
     homieState: HashMap<String, Boolean>,
-    checkBoxState: State
+    checkBoxState: State,
+    choiceManager: (Int, NewRulesResponse.Homie) -> Unit
 ) {
     if (checkBoxState != State.SELECT && isAddDay(homies, homieState)) {
         var isExpanded by remember { mutableStateOf(false) }
@@ -58,20 +58,15 @@ fun ManagerDropDownMenu(
             expanded = isExpanded,
             onDismissRequest = { isExpanded = false }
         ) {
-            homies.forEach {
-                if (homieState[it.name]!!) {
+            homies.forEach { homie ->
+                if (homieState[homie.name]!!) {
                     DropdownMenuItem(
                         onClick = {
-                            if (test.first.value.name != "담당자 없음")
-                                homieState[test.first.value.name] = true
-                            test.first.value = test.first.value.copy(_id = it._id)
-                            test.first.value = test.first.value.copy(name = it.name)
-                            test.first.value = test.first.value.copy(typeColor = it.typeColor)
-                            homieState[it.name] = false
+                            choiceManager(managerIndex, homie)
                             isExpanded = false
                         }
                     ) {
-                        val color = when (it.typeColor) {
+                        val color = when (homie.typeColor) {
                             "RED" -> colorResource(id = R.color.hous_red)
                             "BLUE" -> colorResource(id = R.color.hous_blue)
                             "YELLOW" -> colorResource(id = R.color.hous_yellow)
@@ -91,7 +86,7 @@ fun ManagerDropDownMenu(
                             )
                             Spacer(modifier = Modifier.size(6.dp))
                             Text(
-                                text = it.name,
+                                text = homie.name,
                                 fontStyle = FontStyle(R.style.B2),
                                 color = colorResource(id = R.color.black)
                             )
