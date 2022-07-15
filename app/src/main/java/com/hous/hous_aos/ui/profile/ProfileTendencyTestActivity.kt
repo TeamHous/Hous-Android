@@ -4,13 +4,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.hous.hous_aos.R
-import com.hous.hous_aos.databinding.ActivityProfileTendencyTestBinding
+import com.hous.hous_aos.databinding.ActivityTendencyTestBinding
 
-class ProfileTendencyTestActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityProfileTendencyTestBinding
+class TendencyTestActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityTendencyTestBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_profile_tendency_test)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_tendency_test)
     }
 }
