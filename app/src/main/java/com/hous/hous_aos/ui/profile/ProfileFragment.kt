@@ -34,7 +34,7 @@ class ProfileFragment : Fragment() {
     private fun init() {
         binding.btnTendency.setOnClickListener {
             activity?.let {
-                val intent = Intent(context, ProfileTendencyTestActivity::class.java)
+                val intent = Intent(context, TestInfoActivity::class.java)
                 startActivity(intent)
             }
         }
