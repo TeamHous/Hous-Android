@@ -13,6 +13,8 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -34,39 +36,11 @@ import com.hous.hous_aos.ui.newrules.component.NewRulesTextField
 import com.hous.hous_aos.ui.newrules.component.NewRulesToolbar
 import com.hous.hous_aos.ui.newrules.component.State
 
-data class NewRulesUiState(
-    val ruleName: String = "",
-    val categoryName: String = "",
-    val categoryId: String = "",
-    val notificationState: Boolean = false,
-    val ruleCategory: List<NewRulesResponse.Category> =
-        listOf(
-            NewRulesResponse.Category("1", "청소기"),
-            NewRulesResponse.Category("2", "분리수거"),
-            NewRulesResponse.Category("3", "세탁기"),
-            NewRulesResponse.Category("4", "물 주기"),
-        ),
-    val homies: List<NewRulesResponse.Homie> =
-        listOf(
-            NewRulesResponse.Homie("1", "강원용", "RED"),
-            NewRulesResponse.Homie("2", "이영주", "BLUE"),
-            NewRulesResponse.Homie("3", "이준원", "YELLOW"),
-            NewRulesResponse.Homie("4", "최인영", "GREEN"),
-            NewRulesResponse.Homie("5", "최소현", "PURPLE"),
-        ),
-    val homieState: HashMap<String, Boolean> = hashMapOf(
-        "강원용" to true,
-        "이영주" to true,
-        "이준원" to true,
-        "최인영" to true,
-        "최소현" to true,
-    )
-)
-
 @Composable
-fun NewRulesScreen() {
-    val uiState = remember { mutableStateOf(NewRulesUiState()) }
-    val checkBoxState: MutableState<State> = remember { mutableStateOf(State.UNSELECT) }
+fun NewRulesScreen(
+    viewModel: NewRulesViewModel
+) {
+    val uiState by viewModel.uiState.collectAsState()
     val isRuleAddButton = remember { mutableStateOf(false) }
     val test = remember {
         mutableStateOf(
