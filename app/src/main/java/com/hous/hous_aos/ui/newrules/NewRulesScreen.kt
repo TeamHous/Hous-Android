@@ -84,7 +84,11 @@ fun NewRulesScreen(
             item {
                 Spacer(modifier = Modifier.size(50.dp))
 
-                NewRulesToolbar(uiState, checkBoxState)
+                NewRulesToolbar(
+                    notificationState = uiState.notificationState,
+                    checkBoxState = uiState.checkBoxState,
+                    toggleState = viewModel::toggleNotificationState
+                )
                 Spacer(modifier = Modifier.size(27.dp))
 
                 Text(
@@ -94,7 +98,11 @@ fun NewRulesScreen(
                 )
                 Spacer(modifier = Modifier.size(8.dp))
 
-                NewRulesTextField(uiState, focusManager)
+                NewRulesTextField(
+                    ruleName = uiState.ruleName,
+                    changeRuleName = viewModel::changeRuleName,
+                    focusManager = focusManager
+                )
                 Spacer(modifier = Modifier.size(16.dp))
 
                 Text(
