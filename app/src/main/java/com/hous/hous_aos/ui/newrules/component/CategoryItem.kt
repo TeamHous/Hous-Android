@@ -24,7 +24,6 @@ fun CategoryItem(
     radius: Dp,
     categoryName: String,
     ruleCategoryList: List<NewRulesResponse.Category>,
-    checkBoxState: State,
     setCategory: (String, String) -> Unit
 ) {
     Box(
@@ -53,7 +52,6 @@ fun CategoryItem(
         ) {
             CategoryDropDownMenu(
                 ruleCategoryList = ruleCategoryList,
-                checkBoxState = checkBoxState,
                 setCategory = setCategory
             )
         }

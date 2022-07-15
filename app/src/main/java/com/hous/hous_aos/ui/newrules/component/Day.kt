@@ -25,7 +25,7 @@ fun NewRulesDay(
     dayList: List<Pair<String, MutableState<State>>>,
     totalSize: Int,
     test: Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>,
-    setCheckBoxState: (State) -> Unit
+    setCheckBoxState: (String, State) -> Unit
 ) {
     val color = when (selected.value) {
         State.UNSELECT -> colorResource(id = R.color.white)
@@ -50,11 +50,11 @@ fun NewRulesDay(
                             var isCheck = true
                             dayList.forEach { if (it.second.value == State.SELECT) isCheck = false }
                             if (isCheck && test.first.value.name == "담당자 없음")
-                                setCheckBoxState(State.UNSELECT)
+                                setCheckBoxState("NewRulesDay if true", State.UNSELECT)
                         }
                     } else {
                         selected.value = State.SELECT
-                        setCheckBoxState(State.BLOCK)
+                        setCheckBoxState("NewRulesDay if false", State.BLOCK)
                     }
                 }
             }

@@ -20,7 +20,7 @@ fun ManagerItem(
     listSize: Int,
     homies: List<NewRulesResponse.Homie>,
     homieState: HashMap<String, Boolean>,
-    setCheckBoxState: (State) -> Unit
+    setCheckBoxState: (String, State) -> Unit
 ) {
     Column {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -34,8 +34,7 @@ fun ManagerItem(
                     setCheckBoxState = setCheckBoxState
                 )
                 Spacer(modifier = Modifier.size(12.dp))
-            } else if (test.value[0].first.value.name == "담당자 없음")
-                setCheckBoxState(State.UNSELECT)
+            }
 
             ManagerBox(
                 radius = 10.dp,

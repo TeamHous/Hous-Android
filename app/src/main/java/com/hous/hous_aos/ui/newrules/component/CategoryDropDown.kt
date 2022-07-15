@@ -22,35 +22,32 @@ import com.hous.hous_aos.data.model.response.NewRulesResponse
 @Composable
 fun CategoryDropDownMenu(
     ruleCategoryList: List<NewRulesResponse.Category>,
-    checkBoxState: State,
     setCategory: (String, String) -> Unit
 ) {
-    if (checkBoxState != State.SELECT) {
-        var isExpanded by remember { mutableStateOf(false) }
-        Image(
-            modifier = Modifier
-                .fillMaxSize()
-                .clickable { isExpanded = true },
-            painter = painterResource(id = R.drawable.ic_open),
-            contentDescription = "",
-            alignment = Alignment.CenterEnd,
-            contentScale = ContentScale.Inside
-        )
+    var isExpanded by remember { mutableStateOf(false) }
+    Image(
+        modifier = Modifier
+            .fillMaxSize()
+            .clickable { isExpanded = true },
+        painter = painterResource(id = R.drawable.ic_open),
+        contentDescription = "",
+        alignment = Alignment.CenterEnd,
+        contentScale = ContentScale.Inside
+    )
 
-        DropdownMenu(
-            modifier = Modifier.fillMaxWidth(),
-            expanded = isExpanded,
-            onDismissRequest = { isExpanded = false }
-        ) {
-            ruleCategoryList.forEach { category ->
-                DropdownMenuItem(
-                    onClick = {
-                        setCategory(category._id, category.categoryName)
-                        isExpanded = false
-                    }
-                ) {
-                    Text(category.categoryName)
+    DropdownMenu(
+        modifier = Modifier.fillMaxWidth(),
+        expanded = isExpanded,
+        onDismissRequest = { isExpanded = false }
+    ) {
+        ruleCategoryList.forEach { category ->
+            DropdownMenuItem(
+                onClick = {
+                    setCategory(category._id, category.categoryName)
+                    isExpanded = false
                 }
+            ) {
+                Text(category.categoryName)
             }
         }
     }

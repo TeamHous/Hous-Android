@@ -1,5 +1,6 @@
 package com.hous.hous_aos.ui.newrules
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.hous.hous_aos.data.model.response.NewRulesResponse
 import com.hous.hous_aos.ui.newrules.component.State
@@ -24,7 +25,8 @@ class NewRulesViewModel : ViewModel() {
         )
     }
 
-    fun setCheckBoxState(state: State) {
+    fun setCheckBoxState(where: String, state: State) {
+        Log.d("lsdkjflsadjlfk", "Where: $where value: $state")
         when (state) {
             State.UNSELECT -> _uiState.value = _uiState.value.copy(checkBoxState = State.UNSELECT)
             State.SELECT -> _uiState.value = _uiState.value.copy(checkBoxState = State.SELECT)

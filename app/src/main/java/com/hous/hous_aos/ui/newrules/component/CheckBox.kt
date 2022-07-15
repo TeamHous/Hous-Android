@@ -27,7 +27,7 @@ import com.hous.hous_aos.R
 fun NewRulesCheckBox(
     checkBoxState: State,
     dayList: List<Pair<String, MutableState<State>>>,
-    setCheckBoxState: (State) -> Unit
+    setCheckBoxState: (String, State) -> Unit
 ) {
     when (checkBoxState) {
         State.UNSELECT -> NewRulesBoxRow(
@@ -60,7 +60,7 @@ fun NewRulesBoxRow(
     boxColor: Color,
     textColor: Color,
     dayList: List<Pair<String, MutableState<State>>>,
-    setCheckBoxState: (State) -> Unit
+    setCheckBoxState: (String, State) -> Unit
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -73,10 +73,10 @@ fun NewRulesBoxRow(
                 .clickable {
                     if (checkBoxState != State.BLOCK) {
                         if (checkBoxState == State.SELECT) {
-                            setCheckBoxState(State.UNSELECT)
+                            setCheckBoxState("newRulesBoxRow", State.UNSELECT)
                             dayList.forEach { it.second.value = State.UNSELECT }
                         } else {
-                            setCheckBoxState(State.SELECT)
+                            setCheckBoxState("newRulesBoxRow", State.SELECT)
                             dayList.forEach { it.second.value = State.BLOCK }
                         }
                     }

@@ -116,7 +116,6 @@ fun NewRulesScreen(
                     radius = 10.dp,
                     categoryName = uiState.categoryName,
                     ruleCategoryList = uiState.ruleCategory,
-                    checkBoxState = uiState.checkBoxState,
                     setCategory = viewModel::setCategoryName
                 )
                 Spacer(modifier = Modifier.size(16.dp))

@@ -16,9 +16,9 @@ fun DeleteButton(
     index: Int,
     listSize: Int,
     homieState: HashMap<String, Boolean>,
-    setCheckBoxState: (State) -> Unit
+    setCheckBoxState: (String, State) -> Unit
 ) {
-    setCheckBoxState(State.BLOCK)
+    setCheckBoxState("DeleteButton Out", State.BLOCK)
     Image(
         painter = painterResource(id = R.drawable.ic_delete),
         contentDescription = "",
@@ -38,7 +38,7 @@ fun DeleteButton(
                     test.value[index].first.value.copy(name = "담당자 없음")
                 test.value[index].first.value =
                     test.value[index].first.value.copy(typeColor = "NULL")
-                setCheckBoxState(State.UNSELECT)
+                setCheckBoxState("DeleteButton In", State.UNSELECT)
                 dayList.forEach { it.second.value = State.UNSELECT }
             }
         }

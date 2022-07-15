@@ -13,7 +13,7 @@ fun NewRulesDayList(
     dayList: List<Pair<String, MutableState<State>>>,
     totalSize: Int,
     test: Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>,
-    setCheckBoxState: (State) -> Unit
+    setCheckBoxState: (String, State) -> Unit
 ) {
     LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
         items(dayList) {
