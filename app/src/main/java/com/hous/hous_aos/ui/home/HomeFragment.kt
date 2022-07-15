@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentHomeBinding
 import com.hous.hous_aos.ui.home.adapter.ComingUpAdapter
@@ -25,6 +26,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        val manager = GridLayoutManager(activity, 3, GridLayoutManager.VERTICAL, false)
+        binding.rvProfile.layoutManager = manager
         initAdapter()
         return binding.root
     }
