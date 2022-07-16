@@ -21,25 +21,15 @@ class TendencyTestActivity : AppCompatActivity() {
     }
 
     private fun initAdapter() {
-
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        tendencyAdapter = TendencyAdapter(
-            increase = viewModel::increaseIndex,
-            decrease = viewModel::decreaseIndex,
-            setScore = viewModel::setScore,
-            visibilityButton = viewModel::visibilityButton,
-        )
+        tendencyAdapter = TendencyAdapter()
         binding.vpTendency.adapter = tendencyAdapter
         binding.vpTendency.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.vpTendency.isUserInputEnabled = false
 
-        viewModel.uiList.observe(this) {
-            tendencyAdapter.submitList(
-                it
-            )
-        }
+        viewModel.uiState.observe(this) { tendencyAdapter.submitList(it) }
 
         viewModel.move.observe(this) { move ->
             if (move) {
