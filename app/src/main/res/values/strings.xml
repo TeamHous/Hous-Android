@@ -43,4 +43,6 @@
     <string name="home_rules_my">나의 </string>
     <string name="home_rules_todo">to-do</string>
     <string name="home_rules_select_manager">담당자 선택하기</string>
+
+    <string name="edit_rules_title">규칙 수정</string>
 </resources>

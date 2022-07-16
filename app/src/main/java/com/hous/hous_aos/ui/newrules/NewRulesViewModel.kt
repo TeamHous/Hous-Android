@@ -23,7 +23,7 @@ class NewRulesViewModel : ViewModel() {
 
     private fun isDayCheck(): Boolean {
         var isDay = true
-        for (manager in uiState.value.ManagerList) {
+        for (manager in uiState.value.managerList) {
             var temp = false
             for (dayList in manager.dayDataList) {
                 if (dayList.dayState == State.SELECT) {
@@ -70,7 +70,7 @@ class NewRulesViewModel : ViewModel() {
         if (isChange) {
             val tempManager = listOf(
                 Manager(
-                    uiState.value.ManagerList[0].managerHomie,
+                    uiState.value.managerList[0].managerHomie,
                     dayDataList = listOf(
                         DayData("월", State.UNSELECT),
                         DayData("화", State.UNSELECT),
@@ -82,11 +82,11 @@ class NewRulesViewModel : ViewModel() {
                     )
                 )
             )
-            _uiState.value = _uiState.value.copy(ManagerList = tempManager)
+            _uiState.value = _uiState.value.copy(managerList = tempManager)
         } else {
             val tempManager = listOf(
                 Manager(
-                    uiState.value.ManagerList[0].managerHomie,
+                    uiState.value.managerList[0].managerHomie,
                     dayDataList = listOf(
                         DayData("월", State.BLOCK),
                         DayData("화", State.BLOCK),
@@ -98,60 +98,60 @@ class NewRulesViewModel : ViewModel() {
                     )
                 )
             )
-            _uiState.value = _uiState.value.copy(ManagerList = tempManager)
+            _uiState.value = _uiState.value.copy(managerList = tempManager)
         }
     }
 
     fun deleteManager(index: Int) {
-        uiState.value.homieState[uiState.value.ManagerList[index].managerHomie.name] = true
-        if (uiState.value.ManagerList.size > 1) {
+        uiState.value.homieState[uiState.value.managerList[index].managerHomie.name] = true
+        if (uiState.value.managerList.size > 1) {
             val tempManager = mutableListOf<Manager>()
-            _uiState.value.ManagerList.forEach { manager -> tempManager.add(manager) }
+            _uiState.value.managerList.forEach { manager -> tempManager.add(manager) }
             tempManager.removeAt(index)
-            _uiState.value = _uiState.value.copy(ManagerList = tempManager)
+            _uiState.value = _uiState.value.copy(managerList = tempManager)
         } else {
-            _uiState.value = _uiState.value.copy(ManagerList = listOf(Manager()))
+            _uiState.value = _uiState.value.copy(managerList = listOf(Manager()))
             _uiState.value = _uiState.value.copy(checkBoxState = State.UNSELECT)
         }
     }
 
     fun choiceManager(managerIndex: Int, homie: NewRulesResponse.Homie) {
-        if (uiState.value.ManagerList[managerIndex].managerHomie.name != "담당자 없음")
-            _uiState.value.homieState[uiState.value.ManagerList[managerIndex].managerHomie.name] =
+        if (uiState.value.managerList[managerIndex].managerHomie.name != "담당자 없음")
+            _uiState.value.homieState[uiState.value.managerList[managerIndex].managerHomie.name] =
                 true
         val tempManager = Manager(
             managerHomie = homie,
-            dayDataList = uiState.value.ManagerList[managerIndex].dayDataList
+            dayDataList = uiState.value.managerList[managerIndex].dayDataList
         )
         val tempManagerList = mutableListOf<Manager>()
-        _uiState.value.ManagerList.forEach { manager -> tempManagerList.add(manager) }
+        _uiState.value.managerList.forEach { manager -> tempManagerList.add(manager) }
         tempManagerList[managerIndex] = tempManager
         _uiState.value.homieState[homie.name] = false
-        _uiState.value = _uiState.value.copy(ManagerList = tempManagerList)
+        _uiState.value = _uiState.value.copy(managerList = tempManagerList)
     }
 
     fun selectDay(managerIndex: Int, dayData: DayData) {
         if (dayData.dayState != State.BLOCK) {
             val tempManager = Manager(
-                managerHomie = _uiState.value.ManagerList[managerIndex].managerHomie,
+                managerHomie = _uiState.value.managerList[managerIndex].managerHomie,
                 dayDataList = changeDayState(dayData, managerIndex)
             )
             val tempManagerList = mutableListOf<Manager>()
-            uiState.value.ManagerList.forEach { manager -> tempManagerList.add(manager) }
+            uiState.value.managerList.forEach { manager -> tempManagerList.add(manager) }
             tempManagerList[managerIndex] = tempManager
-            _uiState.value = _uiState.value.copy(ManagerList = tempManagerList)
+            _uiState.value = _uiState.value.copy(managerList = tempManagerList)
         }
     }
 
     fun isShowAddButton(): Boolean =
-        uiState.value.ManagerList[uiState.value.ManagerList.size - 1].managerHomie.name != "담당자 없음"
+        uiState.value.managerList[uiState.value.managerList.size - 1].managerHomie.name != "담당자 없음"
 
     fun addManager() {
         val tempManagerList = mutableListOf<Manager>()
         val nextManager = Manager(managerHomie = nextManager())
-        uiState.value.ManagerList.forEach { manager -> tempManagerList.add(manager) }
+        uiState.value.managerList.forEach { manager -> tempManagerList.add(manager) }
         tempManagerList.add(nextManager)
-        _uiState.value = _uiState.value.copy(ManagerList = tempManagerList)
+        _uiState.value = _uiState.value.copy(managerList = tempManagerList)
     }
 
     private fun nextManager(): NewRulesResponse.Homie {
@@ -168,7 +168,7 @@ class NewRulesViewModel : ViewModel() {
 
     private fun changeDayState(dayData: DayData, managerIndex: Int): List<DayData> {
         val tempDay = mutableListOf<DayData>()
-        uiState.value.ManagerList[managerIndex].dayDataList.forEach { d ->
+        uiState.value.managerList[managerIndex].dayDataList.forEach { d ->
             if (d.day == dayData.day) {
                 when (dayData.dayState) {
                     State.UNSELECT -> {
@@ -177,12 +177,12 @@ class NewRulesViewModel : ViewModel() {
                     }
                     State.SELECT -> {
                         tempDay.add(DayData(d.day, State.UNSELECT))
-                        if (uiState.value.ManagerList.size == 1) {
+                        if (uiState.value.managerList.size == 1) {
                             var isCheck = false
-                            uiState.value.ManagerList[0].dayDataList.forEach { dayData ->
+                            uiState.value.managerList[0].dayDataList.forEach { dayData ->
                                 if (dayData.dayState == State.SELECT) isCheck = true
                             }
-                            if (isCheck && uiState.value.ManagerList[0].managerHomie.name == "담당자 없음")
+                            if (isCheck && uiState.value.managerList[0].managerHomie.name == "담당자 없음")
                                 _uiState.value = _uiState.value.copy(checkBoxState = State.UNSELECT)
                         }
                     }
@@ -221,7 +221,7 @@ data class NewRulesUiState(
         "최인영" to true,
         "최소현" to true,
     ),
-    val ManagerList: List<Manager> = listOf(Manager())
+    val managerList: List<Manager> = listOf(Manager())
 )
 
 data class Manager(

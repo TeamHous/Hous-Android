@@ -12,7 +12,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -32,7 +31,6 @@ import com.hous.hous_aos.ui.newrules.component.NewRulesAddRuleButton
 import com.hous.hous_aos.ui.newrules.component.NewRulesCheckBox
 import com.hous.hous_aos.ui.newrules.component.NewRulesTextField
 import com.hous.hous_aos.ui.newrules.component.NewRulesToolbar
-import com.hous.hous_aos.ui.newrules.component.State
 
 @Composable
 fun NewRulesScreen(
@@ -61,6 +59,7 @@ fun NewRulesScreen(
                 Spacer(modifier = Modifier.size(50.dp))
 
                 NewRulesToolbar(
+                    title = stringResource(id = R.string.new_rules_title),
                     notificationState = uiState.notificationState,
                     checkBoxState = uiState.checkBoxState,
                     toggleState = viewModel::toggleNotificationState
@@ -121,7 +120,7 @@ fun NewRulesScreen(
                 Spacer(modifier = Modifier.size(12.dp))
             }
 
-            itemsIndexed(uiState.ManagerList) { index, value ->
+            itemsIndexed(uiState.managerList) { index, value ->
                 ManagerItem(
                     manager = value,
                     currentIndex = index,
@@ -147,26 +146,6 @@ fun NewRulesScreen(
         }
         NewRulesAddRuleButton(buttonState)
     }
-}
-
-fun IsAdd(
-    test: MutableState<List<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>>
-): Boolean {
-    var isAdd = true
-    for (dayList in test.value) {
-        var temp = false
-        for (dayState in dayList.second) {
-            if (dayState.second.value == State.SELECT) {
-                temp = true
-                break
-            }
-        }
-        if (!temp) {
-            isAdd = false
-            break
-        }
-    }
-    return isAdd
 }
 
 fun isAddDay(

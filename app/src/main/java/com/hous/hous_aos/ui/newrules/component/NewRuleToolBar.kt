@@ -9,12 +9,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import com.hous.hous_aos.R
 
 @Composable
 fun NewRulesToolbar(
+    title: String,
     notificationState: Boolean,
     checkBoxState: State,
     toggleState: (Boolean) -> Unit
@@ -29,7 +29,7 @@ fun NewRulesToolbar(
             contentDescription = ""
         )
         Text(
-            text = stringResource(id = R.string.new_rules_title),
+            text = title,
             fontStyle = FontStyle(R.style.B1)
         )
         if (!notificationState || checkBoxState == State.SELECT) {
