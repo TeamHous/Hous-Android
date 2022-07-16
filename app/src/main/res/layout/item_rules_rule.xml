@@ -15,14 +15,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_rule_item"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="20dp">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_rules_background"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="4dp"
             android:src="@{context.getDrawable(data.backGround)}"
             app:layout_constraintBottom_toBottomOf="@id/iv_rule_icon"
             app:layout_constraintDimensionRatio="1"
@@ -33,13 +31,14 @@
 
         <ImageView
             android:id="@+id/iv_rule_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@{context.getDrawable(data.icon)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_rules_beer_s" />
+            tools:src="@drawable/ic_rules_heart_s" />
 
         <TextView
             android:id="@+id/tv_rule"
