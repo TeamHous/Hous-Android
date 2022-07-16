@@ -6,5 +6,10 @@ data class TypeTest(
     val question: String,
     val questionType: String,
     val answers: List<String>,
-    val questionImg: String
+    val questionImg: String,
+    val type: TypeState = TypeState.NONE
 )
+
+enum class TypeState {
+    NONE, ONE, TWO, THREE
+}

@@ -28,14 +28,19 @@ class TendencyTestActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        tendencyAdapter = TendencyAdapter()
+        tendencyAdapter = TendencyAdapter(
+            viewModel::select,
+            viewModel::back
+        )
         binding.vpTendency.adapter = tendencyAdapter
         binding.vpTendency.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.vpTendency.isUserInputEnabled = false
 
         viewModel.uiState
             .flowWithLifecycle(lifecycle)
-            .onEach { tendencyAdapter.submitList(it.typeTests) }
+            .onEach {
+                tendencyAdapter.submitList(it.typeTests)
+            }
             .launchIn(lifecycleScope)
 
         viewModel.move.observe(this) { move ->

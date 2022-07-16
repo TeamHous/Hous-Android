@@ -7,6 +7,8 @@
 
         <import type="android.view.View" />
 
+        <import type="com.hous.hous_aos.ui.profile.TypeState" />
+
         <variable
             name="data"
             type="com.hous.hous_aos.ui.profile.TypeTest" />
@@ -75,6 +77,7 @@
             android:layout_marginEnd="112dp"
             android:padding="14dp"
             android:src="@drawable/ic_right"
+            android:visibility="@{data.type != TypeState.NONE ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="@id/cl_index"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/cl_index"

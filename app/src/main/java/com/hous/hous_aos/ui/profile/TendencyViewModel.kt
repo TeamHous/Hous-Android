@@ -11,10 +11,30 @@ class TendencyViewModel : ViewModel() {
     val move: LiveData<Boolean> = _move
     private val _uiState = MutableStateFlow(TestUiState())
     val uiState = _uiState.asStateFlow()
+
+    fun select(position: Int, state: TypeState) {
+        val tempTest = mutableListOf<TypeTest>()
+        _uiState.value.typeTests.forEach { tempTest.add(it) }
+        val t = TypeTest(
+            _id = _uiState.value.typeTests[position]._id,
+            question = _uiState.value.typeTests[position].question,
+            questionType = _uiState.value.typeTests[position].questionType,
+            questionImg = _uiState.value.typeTests[position].questionImg,
+            answers = _uiState.value.typeTests[position].answers,
+            testNum = _uiState.value.typeTests[position].testNum,
+            type = state
+        )
+        tempTest[position] = t
+        _uiState.value = _uiState.value.copy(typeTests = tempTest)
+        _move.value = true
+    }
+
+    fun back() {
+        _move.value = false
+    }
 }
 
 data class TestUiState(
-    val totalIndex: Int = 0,
     val typeTests: List<TypeTest> = listOf(
         TypeTest(
             _id = "",
