@@ -5,12 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hous.hous_aos.data.model.response.NewRulesResponse
 import com.hous.hous_aos.ui.newrules.component.State
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 
 class NewRulesViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(NewRulesUiState())

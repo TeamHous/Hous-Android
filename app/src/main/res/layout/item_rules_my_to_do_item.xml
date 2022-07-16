@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="iconType"
+            type="com.hous.hous_aos.ui.rules.my_to_do.IconType" />
+
+        <variable
+            name="data"
+            type="com.hous.hous_aos.data.entity.rules.MyToDoResponse" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/shape_blue_bg_fill_16_rect"
+        android:backgroundTint="@color/hous_purple_bg">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginVertical="20dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/shape_blue_fill_circle"
+            android:backgroundTint="@{context.getColorStateList(iconType.colorRes)}"
+            app:imageRes="@{iconType.drawableRes}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tool:src="@drawable/ic_rules_heart_s" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{data.ruleName}"
+            android:textAppearance="@style/B1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tool:text="거실 청소기 돌리기" />
+
+        <ImageView
+            android:id="@+id/iv_check_box"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="28dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/sel_rules_my_to_do_check_box"
+            app:isSelected="@{data.checked}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

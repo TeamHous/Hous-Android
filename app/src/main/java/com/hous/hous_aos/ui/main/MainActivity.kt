@@ -11,7 +11,7 @@ import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.ActivityMainBinding
 import com.hous.hous_aos.ui.home.HomeFragment
 import com.hous.hous_aos.ui.profile.ProfileFragment
-import com.hous.hous_aos.ui.rules.rule.RulesFragment
+import com.hous.hous_aos.ui.rules.RulesFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

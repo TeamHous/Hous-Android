@@ -27,3 +27,8 @@ fun CardView.setColor(@ColorRes colorRes: Int) {
         this.backgroundTintList = context.getColorStateList(colorRes)
     }
 }
+
+@BindingAdapter("app:isSelected")
+fun ImageView.setSelected(isSelected: Boolean) {
+    this.isSelected = isSelected
+}
