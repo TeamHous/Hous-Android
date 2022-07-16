@@ -21,7 +21,7 @@ class TodayToDoFragment : Fragment() {
     private var _binding: FragmentTodayToDoBinding? = null
     private val binding get() = _binding ?: error("binding에 null 들어감")
     private val viewModel: RulesViewModel by activityViewModels()
-    private lateinit var todayTodDoAdapter: TodayTodoAdapter
+    private var todayTodDoAdapter: TodayTodoAdapter? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,6 +44,7 @@ class TodayToDoFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        todayTodDoAdapter = null
     }
 
     private fun initAdapter() {
@@ -53,7 +54,7 @@ class TodayToDoFragment : Fragment() {
 
     private fun observeCategory() {
         viewModel.todayTodoList.observe(viewLifecycleOwner) {
-            todayTodDoAdapter.submitList(it.toList())
+            requireNotNull(todayTodDoAdapter).submitList(it.toList())
         }
     }
 

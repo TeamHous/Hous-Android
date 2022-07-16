@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.hous.hous_aos.R
 import com.hous.hous_aos.data.entity.rules.CategoryOfRuleResponse
 import com.hous.hous_aos.data.entity.rules.ManagerData
+import com.hous.hous_aos.data.entity.rules.MyToDoResponse
 import com.hous.hous_aos.data.entity.rules.TodayTodoResponse
 
 class RulesViewModel : ViewModel() {
@@ -16,16 +17,25 @@ class RulesViewModel : ViewModel() {
     val isSelectedCategorySmile: LiveData<Boolean> get() = _isSelectedCategorySmile
 
     private var _categoryOfRuleList =
-        MutableLiveData<MutableList<CategoryOfRuleResponse>>()
+        MutableLiveData<List<CategoryOfRuleResponse>>()
     val categoryOfRuleList get() = _categoryOfRuleList
 
     private var _todayTodoList =
-        MutableLiveData<MutableList<TodayTodoResponse>>()
+        MutableLiveData<List<TodayTodoResponse>>()
     val todayTodoList get() = _todayTodoList
 
+    private var _myTodoList =
+        MutableLiveData<List<MyToDoResponse>>()
+    val myTodoList get() = _myTodoList
+
+    init {
+        fetchToTodayToDoList()
+        fetchToMyTodayToDoList()
+        fetchToCategoryOfRuleList()
+    }
+
     private fun fetchToCategoryOfRuleList() {
-        /**  dummy data입니다만..??
-         * */
+
         _categoryOfRuleList.value = mutableListOf(
             CategoryOfRuleResponse(
                 name = "라면을",
@@ -34,8 +44,8 @@ class RulesViewModel : ViewModel() {
             ),
             CategoryOfRuleResponse(
                 name = "너무",
-                icon = R.drawable.ic_rules_beer_s,
-                backGround = R.drawable.ic_rules_category_yellow_bg_m
+                icon = R.drawable.ic_rules_heart_s,
+                backGround = R.drawable.ic_rules_category_red_bg_m
             ),
             CategoryOfRuleResponse(
                 name = "많이",
@@ -60,35 +70,7 @@ class RulesViewModel : ViewModel() {
         )
     }
 
-    init {
-        fetchToTodayToDoList()
-        fetchToCategoryOfRuleList()
-    }
-
-    fun setToDoViewType(toDoViewType: ToDoViewType) {
-        _toDoViewType.value = toDoViewType
-    }
-
-    fun setSmileSelected(selected: Boolean) {
-        _isSelectedCategorySmile.value = selected
-    }
-
-    fun initCategorySelected() {
-        val tmpCategoryOfRuleList = requireNotNull(_categoryOfRuleList.value).map { data ->
-            data.copy().apply { isSelected = false }
-        }
-        _categoryOfRuleList.value = tmpCategoryOfRuleList.toMutableList()
-    }
-
-    fun setCategorySelected(position: Int) {
-        val tmpCategoryOfRuleList = requireNotNull(_categoryOfRuleList.value).map { data ->
-            data.copy().apply { isSelected = false }
-        }
-        tmpCategoryOfRuleList[position].isSelected = true
-        _categoryOfRuleList.value = tmpCategoryOfRuleList.toMutableList()
-    }
-
-    fun fetchToTodayToDoList() {
+    private fun fetchToTodayToDoList() {
         _todayTodoList.value = mutableListOf<TodayTodoResponse>(
             TodayTodoResponse(
                 id = "sd;jnv;aovknkv;lsnm",
@@ -150,6 +132,74 @@ class RulesViewModel : ViewModel() {
                 iconList = listOf("green", "gray")
             )
         )
+    }
+
+    private fun fetchToMyTodayToDoList() {
+        _myTodoList.value = mutableListOf(
+            MyToDoResponse(
+                id = "sjodFdsfdsfdsflc",
+                categoryIcon = "CLEAN",
+                ruleName = "거실 청소기 돌리기",
+                isChecked = false
+            ),
+            MyToDoResponse(
+                id = "sjklsdfdsfsmvklc",
+                categoryIcon = "BEER",
+                ruleName = "맥주 마시기",
+                isChecked = true
+            ),
+            MyToDoResponse(
+                id = "sjodkajofsdfdsfdmaklc",
+                categoryIcon = "LAUNDRY",
+                ruleName = "세탁기 돌리기",
+                isChecked = false
+            ),
+            MyToDoResponse(
+                id = "sjdsfsdfkmcsaklc",
+                categoryIcon = "LIGHT",
+                ruleName = "전구 갈기",
+                isChecked = true
+            ),
+            MyToDoResponse(
+                id = "sjklfansdjkdsfdsdsmvklc",
+                categoryIcon = "BEER",
+                ruleName = "맥주 마시기",
+                isChecked = true
+            )
+        )
+    }
+
+    fun setToDoViewType(toDoViewType: ToDoViewType) {
+        _toDoViewType.value = toDoViewType
+    }
+
+    fun setSmileSelected(selected: Boolean) {
+        _isSelectedCategorySmile.value = selected
+    }
+
+    fun initCategorySelected() {
+        val tmpCategoryOfRuleList = requireNotNull(_categoryOfRuleList.value).map { data ->
+            data.copy().apply { isSelected = false }
+        }
+        _categoryOfRuleList.value = tmpCategoryOfRuleList.toList()
+    }
+
+    fun setMyToDoCheckBoxSelected(position: Int) {
+        val tmpMyToDoList = requireNotNull(_myTodoList.value).map { data ->
+            data.copy()
+        }
+        val isSelected = tmpMyToDoList[position].isChecked
+        tmpMyToDoList[position].isChecked = !isSelected
+        _myTodoList.value = tmpMyToDoList.toList()
+        // TODO 서버로 id, boolean
+    }
+
+    fun setCategorySelected(position: Int) {
+        val tmpCategoryOfRuleList = requireNotNull(_categoryOfRuleList.value).map { data ->
+            data.copy().apply { isSelected = false }
+        }
+        tmpCategoryOfRuleList[position].isSelected = true
+        _categoryOfRuleList.value = tmpCategoryOfRuleList.toMutableList()
     }
 
     companion object {
