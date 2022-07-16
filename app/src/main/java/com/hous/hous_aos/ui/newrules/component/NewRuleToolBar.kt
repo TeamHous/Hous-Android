@@ -32,17 +32,19 @@ fun NewRulesToolbar(
             text = stringResource(id = R.string.new_rules_title),
             fontStyle = FontStyle(R.style.B1)
         )
-        if (notificationState && checkBoxState != State.SELECT) {
+        if (!notificationState || checkBoxState == State.SELECT) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_alarmoff),
+                contentDescription = "",
+                modifier = Modifier.clickable {
+                    if (checkBoxState != State.SELECT) toggleState(true)
+                }
+            )
+        } else {
             Image(
                 painter = painterResource(id = R.drawable.ic_alarmon),
                 contentDescription = "",
                 modifier = Modifier.clickable { toggleState(false) }
-            )
-        } else {
-            Image(
-                painter = painterResource(id = R.drawable.ic_alarmoff),
-                contentDescription = "",
-                modifier = Modifier.clickable { toggleState(true) }
             )
         }
     }
