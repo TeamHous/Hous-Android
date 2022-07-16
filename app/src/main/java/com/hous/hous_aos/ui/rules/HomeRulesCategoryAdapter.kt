@@ -10,6 +10,7 @@ import com.hous.hous_aos.data.entity.rules.CategoryOfRuleResponse
 import com.hous.hous_aos.databinding.ItemRulesRuleBinding
 
 class HomeRulesCategoryAdapter(
+    private val onLongClick: () -> Unit,
     private val onCategoryClick: () -> Unit,
     private val onPlusClick: () -> Unit,
     private val onChangeIsSelected: (Int) -> Unit,
@@ -38,6 +39,7 @@ class HomeRulesCategoryAdapter(
                     )
                 )
             else -> CategoryOfRuleViewHolder(
+                onLongClick,
                 onCategoryClick,
                 onChangeIsSelected,
                 ItemRulesRuleBinding.inflate(
@@ -56,6 +58,7 @@ class HomeRulesCategoryAdapter(
     }
 
     class CategoryOfRuleViewHolder(
+        private val onLongClick: () -> Unit,
         private val onCategoryClick: () -> Unit,
         private val onChangeIsSelected: (Int) -> Unit,
         private val binding: ItemRulesRuleBinding
@@ -63,6 +66,11 @@ class HomeRulesCategoryAdapter(
 
         fun onBind(data: CategoryOfRuleResponse) {
             binding.data = data
+            binding.clRuleItem.setOnLongClickListener {
+                onLongClick()
+                onChangeIsSelected(adapterPosition)
+                return@setOnLongClickListener true
+            }
             binding.clRuleItem.setOnClickListener {
                 onCategoryClick()
                 onChangeIsSelected(adapterPosition)

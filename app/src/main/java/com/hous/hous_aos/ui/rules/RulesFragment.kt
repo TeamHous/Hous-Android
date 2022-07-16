@@ -11,7 +11,9 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentRulesBinding
+import com.hous.hous_aos.ui.rules.edit_category.EditCategoryFragment
 import com.hous.hous_aos.ui.rules.my_to_do.MyToDoFragment
+import com.hous.hous_aos.ui.rules.new_category.NewCategoryFragment
 import com.hous.hous_aos.ui.rules.rules_table.RulesTableFragment
 import com.hous.hous_aos.ui.rules.today_to_do.TodayToDoFragment
 import com.hous.hous_aos.util.showToast
@@ -44,9 +46,10 @@ class RulesFragment : Fragment() {
 
     private fun initAdapter() {
         homeRulesCategoryAdapter = HomeRulesCategoryAdapter(
+            ::onLongClickCategoryIcon,
             onCategoryClick = { onClickCategoryIcon() },
             onPlusClick = { onClickPlusIcon() },
-            onChangeIsSelected = { setCategoryIsSelected(it) }
+            onChangeIsSelected = { setCategoryIsSelected(it) },
         )
         binding.rvRules.adapter = homeRulesCategoryAdapter
     }
@@ -96,7 +99,6 @@ class RulesFragment : Fragment() {
             }
         }
     }
-
     /** RulesTableFragment로 이동 */
     private fun onClickCategoryIcon() {
         viewModel.setSmileSelected(false)
@@ -106,9 +108,21 @@ class RulesFragment : Fragment() {
         }
     }
 
+    /** EditCategoryFragment로 이동 */
+    private fun onLongClickCategoryIcon() {
+        viewModel.setSmileSelected(false)
+        childFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<EditCategoryFragment>(R.id.frg_bottom)
+        }
+    }
+
     /** 추가 Fragment로 이동 */
     private fun onClickPlusIcon() {
-        requireActivity().showToast(" 카테고리 수정 Fragment로 이동")
+        childFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<NewCategoryFragment>(R.id.frg_bottom)
+        }
     }
 
     private fun setCategoryIsSelected(position: Int) {
