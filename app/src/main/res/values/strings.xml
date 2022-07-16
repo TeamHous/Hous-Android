@@ -14,6 +14,12 @@
     <string name="home_to_do">to-do</string>
     <string name="home_homie_profile">Homie Profile-</string>
 
+    <string name="profile_my_tendency">나의 성향</string>
+    <string name="profile_test">테스트 하러 가기</string>
+    <string name="profile_my_badge">나의 배지</string>
+    <string name="profile_rules">규칙 한 걸음</string>
+    <string name="profile_detail">자세히 보기</string>
+
     <string name="home_rules_empty">아직 규칙이 없어요 ;(</string>
     <string name="home_to_do_empty">아직 할 일이 없어요 ;(</string>
     <string name="home_profile_copy">룸메이트 초대\n코드 복사하기</string>

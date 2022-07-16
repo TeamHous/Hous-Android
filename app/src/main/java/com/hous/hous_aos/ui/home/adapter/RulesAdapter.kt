@@ -2,36 +2,38 @@ package com.hous.hous_aos.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hous.hous_aos.databinding.ItemHomeRulesBinding
 import com.hous.hous_aos.ui.home.RulesData
 
-class RulesAdapter : RecyclerView.Adapter<RulesAdapter.RulesViewHolder>() {
-    val rulesList = mutableListOf<RulesData>()
+class RulesAdapter : ListAdapter<RulesData, RulesAdapter.RulesViewHolder>(rulesDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RulesViewHolder {
         val binding =
-            ItemHomeRulesBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+            ItemHomeRulesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RulesViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RulesViewHolder, position: Int) {
-        holder.onBind(rulesList[position])
+        holder.onBind(getItem(position))
     }
 
-    override fun getItemCount() : Int {
-        return if(rulesList.size > 4) 5 else rulesList.size
-    }
-
-    class RulesViewHolder(
-        private val binding: ItemHomeRulesBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    class RulesViewHolder(val binding: ItemHomeRulesBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: RulesData) {
             binding.rulesData = data
+        }
+    }
+
+    companion object {
+        private val rulesDiffUtil = object : DiffUtil.ItemCallback<RulesData>() {
+            override fun areItemsTheSame(oldItem: RulesData, newItem: RulesData): Boolean =
+                oldItem.rules == newItem.rules
+
+            override fun areContentsTheSame(oldItem: RulesData, newItem: RulesData): Boolean =
+                oldItem == newItem
         }
     }
 }

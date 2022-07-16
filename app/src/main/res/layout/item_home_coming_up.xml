@@ -17,37 +17,35 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_coming_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp">
+        android:layout_marginEnd="8dp"
+        android:background="@{position == 0 ? @drawable/shape_yellow_bg_fill_16_rect : @drawable/shape_yellow_home_fill_16_rect}"
+        app:layout_constraintDimensionRatio="1"
+        tools:background="@drawable/shape_yellow_home_fill_16_rect">
 
         <ImageView
-            android:id="@+id/iv_coming_up_shape"
+            android:id="@+id/iv_coming_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@{position == 0 ? @drawable/shape_yellow_bg_fill_16_rect : @drawable/shape_yellow_home_fill_16_rect}"
+            android:padding="7dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/shape_yellow_home_fill_16_rect" />
-
-        <ImageView
-            android:id="@+id/iv_coming_up_image"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="7dp"
-            android:layout_marginVertical="7dp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_coming_up_shape"
-            app:layout_constraintEnd_toEndOf="@id/iv_coming_up_shape"
-            app:layout_constraintStart_toStartOf="@id/iv_coming_up_shape"
-            app:layout_constraintTop_toTopOf="@id/iv_coming_up_shape"
             tools:src="@drawable/ic_party" />
 
         <TextView
-            android:id="@+id/tv_coming_up_day"
+            android:id="@+id/tv_coming_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:layout_marginHorizontal="18dp"
             android:layout_marginVertical="23dp"
+=======
+>>>>>>> develop
             android:fontFamily="@font/montserrat_semibold"
             android:letterSpacing="0.03"
             android:text="@{comingUpData.day}"
@@ -55,10 +53,10 @@
             android:textSize="20sp"
             android:textStyle="normal"
             android:visibility="@{position == 0 ? View.INVISIBLE : View.VISIBLE}"
-            app:layout_constraintBottom_toBottomOf="@id/iv_coming_up_shape"
-            app:layout_constraintEnd_toEndOf="@id/iv_coming_up_shape"
-            app:layout_constraintStart_toStartOf="@id/iv_coming_up_shape"
-            app:layout_constraintTop_toTopOf="@id/iv_coming_up_shape"
+            app:layout_constraintBottom_toBottomOf="@id/iv_coming_up"
+            app:layout_constraintEnd_toEndOf="@id/iv_coming_up"
+            app:layout_constraintStart_toStartOf="@id/iv_coming_up"
+            app:layout_constraintTop_toTopOf="@id/iv_coming_up"
             tools:text="D-10" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

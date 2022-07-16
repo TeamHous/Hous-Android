@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentHomeBinding
 import com.hous.hous_aos.ui.home.adapter.ComingUpAdapter
@@ -15,16 +16,19 @@ import com.hous.hous_aos.ui.home.adapter.ToDoAdapter
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var comingUpAdapter: ComingUpAdapter
-    private lateinit var rulesAdapter: RulesAdapter
-    private lateinit var toDoAdapter: ToDoAdapter
-    private lateinit var profileAdapter: ProfileAdapter
+    private var comingUpAdapter: ComingUpAdapter? = null
+    private var rulesAdapter: RulesAdapter? = null
+    private var toDoAdapter: ToDoAdapter? = null
+    private var profileAdapter: ProfileAdapter? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        val manager = GridLayoutManager(activity, 3, GridLayoutManager.VERTICAL, false)
+        binding.rvProfile.layoutManager = manager
         initAdapter()
         return binding.root
     }
@@ -40,36 +44,36 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        comingUpAdapter = null
+        rulesAdapter = null
+        toDoAdapter = null
+        profileAdapter = null
     }
 
     private fun initAdapter() {
         comingUpAdapter = ComingUpAdapter()
         binding.rvComingUp.adapter = comingUpAdapter
-        comingUpAdapter.comingUpList.addAll(
+        requireNotNull(comingUpAdapter).submitList(
             comingUp
         )
-        comingUpAdapter.notifyDataSetChanged()
 
         rulesAdapter = RulesAdapter()
         binding.rvRules.adapter = rulesAdapter
-        rulesAdapter.rulesList.addAll(
+        requireNotNull(rulesAdapter).submitList(
             rules
         )
-        rulesAdapter.notifyDataSetChanged()
 
         toDoAdapter = ToDoAdapter()
         binding.rvToDo.adapter = toDoAdapter
-        toDoAdapter.toDoList.addAll(
+        requireNotNull(toDoAdapter).submitList(
             toDo
         )
-        toDoAdapter.notifyDataSetChanged()
 
         profileAdapter = ProfileAdapter()
         binding.rvProfile.adapter = profileAdapter
-        profileAdapter.submitList(
+        requireNotNull(profileAdapter).submitList(
             profile
         )
-        toDoAdapter.notifyDataSetChanged()
     }
 
     companion object {
@@ -109,15 +113,15 @@ class HomeFragment : Fragment() {
 
         val profile = listOf<ProfileData?>(
             ProfileData(1, "이영주"),
-            ProfileData(1,"강원용"),
-            ProfileData(1,"이준원"),
-            ProfileData(1,"김아무개"),
-            ProfileData(1,"나까무라"),
-            ProfileData(1,"이영주"),
-            ProfileData(1,"강원용"),
-            ProfileData(1,"이준원"),
-            ProfileData(1,"김아무개"),
-            ProfileData(1,"나까무라"),
+            ProfileData(1, "강원용"),
+            ProfileData(1, "이준원"),
+            ProfileData(1, "김아무개"),
+            ProfileData(1, "나까무라"),
+            ProfileData(1, "이영주"),
+            ProfileData(1, "강원용"),
+            ProfileData(1, "이준원"),
+            ProfileData(1, "김아무개"),
+            ProfileData(1, "나까무라"),
             null
         )
     }
