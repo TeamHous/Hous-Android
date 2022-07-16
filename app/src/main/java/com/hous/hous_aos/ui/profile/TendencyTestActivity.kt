@@ -4,9 +4,13 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.ActivityTendencyTestBinding
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class TendencyTestActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTendencyTestBinding
@@ -29,7 +33,10 @@ class TendencyTestActivity : AppCompatActivity() {
         binding.vpTendency.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.vpTendency.isUserInputEnabled = false
 
-        viewModel.uiState.observe(this) { tendencyAdapter.submitList(it) }
+        viewModel.uiState
+            .flowWithLifecycle(lifecycle)
+            .onEach { tendencyAdapter.submitList(it.typeTests) }
+            .launchIn(lifecycleScope)
 
         viewModel.move.observe(this) { move ->
             if (move) {
