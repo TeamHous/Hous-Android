@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,10 +20,10 @@ import com.hous.hous_aos.R
 
 @Composable
 fun NewRulesAddRuleButton(
-    isAddButton: MutableState<Boolean>
+    isAddButton: Boolean
 ) {
     val color =
-        if (isAddButton.value) colorResource(id = R.color.hous_blue) else colorResource(id = R.color.g_3)
+        if (isAddButton) colorResource(id = R.color.hous_blue) else colorResource(id = R.color.g_3)
     Box(
         modifier = Modifier
             .fillMaxWidth()

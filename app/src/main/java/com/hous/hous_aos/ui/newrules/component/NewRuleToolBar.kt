@@ -7,18 +7,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import com.hous.hous_aos.R
-import com.hous.hous_aos.ui.newrules.NewRulesUiState
 
 @Composable
 fun NewRulesToolbar(
-    uiState: MutableState<NewRulesUiState>,
-    checkBoxState: MutableState<State>
+    notificationState: Boolean,
+    checkBoxState: State,
+    toggleState: (Boolean) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -33,21 +32,19 @@ fun NewRulesToolbar(
             text = stringResource(id = R.string.new_rules_title),
             fontStyle = FontStyle(R.style.B1)
         )
-        if (uiState.value.notificationState && checkBoxState.value != State.SELECT) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_alarmon),
-                contentDescription = "",
-                modifier = Modifier.clickable {
-                    uiState.value = uiState.value.copy(notificationState = false)
-                }
-            )
-        } else {
+        if (!notificationState || checkBoxState == State.SELECT) {
             Image(
                 painter = painterResource(id = R.drawable.ic_alarmoff),
                 contentDescription = "",
                 modifier = Modifier.clickable {
-                    uiState.value = uiState.value.copy(notificationState = true)
+                    if (checkBoxState != State.SELECT) toggleState(true)
                 }
+            )
+        } else {
+            Image(
+                painter = painterResource(id = R.drawable.ic_alarmon),
+                contentDescription = "",
+                modifier = Modifier.clickable { toggleState(false) }
             )
         }
     }
