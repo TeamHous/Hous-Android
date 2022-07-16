@@ -199,7 +199,7 @@ class RulesViewModel : ViewModel() {
             data.copy().apply { isSelected = false }
         }
         tmpCategoryOfRuleList[position].isSelected = true
-        _categoryOfRuleList.value = tmpCategoryOfRuleList.toMutableList()
+        _categoryOfRuleList.value = tmpCategoryOfRuleList.toList()
     }
 
     companion object {
