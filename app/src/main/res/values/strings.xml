@@ -24,9 +24,11 @@
     <string name="home_to_do_empty">아직 할 일이 없어요 ;(</string>
     <string name="home_profile_copy">룸메이트 초대\n코드 복사하기</string>
 
+    <string name="test_index"><br /> /<br /> 15</string>
     <string name="test_info_title">생활패턴 체크 시작</string>
     <string name="test_info">지금부터 15개의 질문에 답변해주세요:)\n솔직한 답변은 서로를 배려할 수 있는\n좋은 기회가 될거에요!</string>
     <string name="test_start">시작하기</string>
+    <string name="test_quit">그만두기</string>
 
     <string name="new_rules_title">새로운 규칙 추가</string>
     <string name="new_rules_rule_name">규칙이름</string>

@@ -8,6 +8,7 @@ import androidx.annotation.Nullable
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 
 @BindingAdapter("app:visibility")
 fun View.setVisibility(isVisible: Boolean) {
@@ -25,5 +26,14 @@ fun ImageView.setDrawable(@Nullable @DrawableRes drawableRes: Int) {
 fun CardView.setColor(@ColorRes colorRes: Int) {
     if (colorRes != -1) {
         this.backgroundTintList = context.getColorStateList(colorRes)
+    }
+}
+
+@BindingAdapter("setImage")
+fun ImageView.setImage(imgUrl: String?) {
+    this.let {
+        Glide.with(context)
+            .load(imgUrl)
+            .into(this)
     }
 }

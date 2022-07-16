@@ -8,9 +8,11 @@
             type="com.hous.hous_aos.ui.profile.TendencyViewModel" />
     </data>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fcv_profile_tendency"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_tendency"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+
+    </androidx.viewpager2.widget.ViewPager2>
 
 </layout>
