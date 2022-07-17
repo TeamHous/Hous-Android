@@ -29,6 +29,9 @@ fun CardView.setColor(@ColorRes colorRes: Int) {
     }
 }
 
+@BindingAdapter("app:isSelected")
+fun ImageView.setSelected(isSelected: Boolean) {
+    this.isSelected = isSelected
 @BindingAdapter("setImage")
 fun ImageView.setImage(imgUrl: String?) {
     this.let {

@@ -6,14 +6,14 @@
     <data>
 
         <variable
-            name="viewmodel"
-            type="com.hous.hous_aos.ui.rules.rule.CategoryViewModel" />
+            name="viewModel"
+            type="com.hous.hous_aos.ui.rules.RulesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.rules.rule.RulesFragment">
+        tools:context=".ui.rules.RulesFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_category"
@@ -27,16 +27,11 @@
 
             <ImageView
                 android:id="@+id/iv_smile"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/shape_purple_fill_10_rect"
-                android:backgroundTint="@color/hous_purple"
-                android:paddingVertical="9dp"
-                android:paddingStart="6dp"
-                android:paddingEnd="7dp"
-                android:src="@drawable/ic_rules_smile"
-                app:layout_constraintDimensionRatio="1:1"
+
+                android:src="@drawable/sel_rules_category_smile"
+                app:isSelected="@{viewModel.isSelectedCategorySmile}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,7 +39,6 @@
                 android:id="@+id/rv_rules"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"

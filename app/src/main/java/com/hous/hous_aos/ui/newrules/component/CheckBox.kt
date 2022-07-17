@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,37 +24,42 @@ import com.hous.hous_aos.R
 
 @Composable
 fun NewRulesCheckBox(
-    checkBoxState: MutableState<State>,
-    dayList: List<Pair<String, MutableState<State>>>,
+    checkBoxState: State,
+    setCheckBoxState: (String, State) -> Unit,
+    setAllDayData: (Boolean) -> Unit
 ) {
-    when (checkBoxState.value) {
+    when (checkBoxState) {
         State.UNSELECT -> NewRulesBoxRow(
             checkBoxState,
             boxColor = colorResource(id = R.color.hous_blue_bg_2),
             textColor = colorResource(id = R.color.g_4),
-            dayList = dayList
+            setCheckBoxState = setCheckBoxState,
+            setAllDayData = setAllDayData
         )
         State.SELECT -> NewRulesBoxRow(
             checkBoxState,
             boxColor = colorResource(id = R.color.hous_blue),
             textColor = colorResource(id = R.color.hous_blue),
-            dayList = dayList
+            setCheckBoxState = setCheckBoxState,
+            setAllDayData = setAllDayData
         )
         State.BLOCK -> NewRulesBoxRow(
             checkBoxState,
             boxColor = colorResource(id = R.color.g_4),
             textColor = colorResource(id = R.color.g_4),
-            dayList = dayList
+            setCheckBoxState = setCheckBoxState,
+            setAllDayData = setAllDayData
         )
     }
 }
 
 @Composable
 fun NewRulesBoxRow(
-    checkBoxState: MutableState<State>,
+    checkBoxState: State,
     boxColor: Color,
     textColor: Color,
-    dayList: List<Pair<String, MutableState<State>>>,
+    setCheckBoxState: (String, State) -> Unit,
+    setAllDayData: (Boolean) -> Unit
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -66,13 +70,13 @@ fun NewRulesBoxRow(
                 .clip(shape = RoundedCornerShape(5.dp))
                 .background(color = boxColor)
                 .clickable {
-                    if (checkBoxState.value != State.BLOCK) {
-                        if (checkBoxState.value == State.SELECT) {
-                            checkBoxState.value = State.UNSELECT
-                            dayList.forEach { it.second.value = State.UNSELECT }
+                    if (checkBoxState != State.BLOCK) {
+                        if (checkBoxState == State.SELECT) {
+                            setCheckBoxState("newRulesBoxRow", State.UNSELECT)
+                            setAllDayData(true)
                         } else {
-                            checkBoxState.value = State.SELECT
-                            dayList.forEach { it.second.value = State.BLOCK }
+                            setCheckBoxState("newRulesBoxRow", State.SELECT)
+                            setAllDayData(false)
                         }
                     }
                 }

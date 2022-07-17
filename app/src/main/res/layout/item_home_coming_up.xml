@@ -53,6 +53,5 @@
             app:layout_constraintStart_toStartOf="@id/iv_coming_up"
             app:layout_constraintTop_toTopOf="@id/iv_coming_up"
             tools:text="D-10" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

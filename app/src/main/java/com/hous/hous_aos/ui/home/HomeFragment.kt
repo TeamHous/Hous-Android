@@ -22,7 +22,8 @@ class HomeFragment : Fragment() {
     private var profileAdapter: ProfileAdapter? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)

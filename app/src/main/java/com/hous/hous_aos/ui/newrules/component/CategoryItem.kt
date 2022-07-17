@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -19,13 +17,14 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
-import com.hous.hous_aos.ui.newrules.NewRulesUiState
+import com.hous.hous_aos.data.model.response.NewRulesResponse
 
 @Composable
 fun CategoryItem(
     radius: Dp,
-    uiState: MutableState<NewRulesUiState>,
-    checkBoxState: MutableState<State> = mutableStateOf(State.BLOCK),
+    categoryName: String,
+    ruleCategoryList: List<NewRulesResponse.Category>,
+    setCategory: (String, String) -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -41,7 +40,7 @@ fun CategoryItem(
                 .align(Alignment.CenterStart),
         ) {
             Text(
-                text = uiState.value.categoryName,
+                text = categoryName,
                 fontStyle = FontStyle(R.style.B2),
                 color = colorResource(id = R.color.g_6)
             )
@@ -51,7 +50,10 @@ fun CategoryItem(
                 .wrapContentSize()
                 .align(Alignment.CenterEnd),
         ) {
-            CategoryDropDownMenu(uiState, checkBoxState)
+            CategoryDropDownMenu(
+                ruleCategoryList = ruleCategoryList,
+                setCategory = setCategory
+            )
         }
     }
 }
