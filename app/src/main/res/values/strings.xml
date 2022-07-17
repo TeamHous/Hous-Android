@@ -29,6 +29,9 @@
     <string name="test_info">지금부터 15개의 질문에 답변해주세요:)\n솔직한 답변은 서로를 배려할 수 있는\n좋은 기회가 될거에요!</string>
     <string name="test_start">시작하기</string>
     <string name="test_quit">그만두기</string>
+    <string name="result_end">완료</string>
+    <string name="result_bad">맞춰가요</string>
+    <string name="result_good">찰떡궁합</string>
 
     <string name="new_rules_title">새로운 규칙 추가</string>
     <string name="new_rules_rule_name">규칙이름</string>
@@ -52,6 +55,4 @@
 
     <string name="type_test_dialog_content">테스트를 완료하지 않았어요.\n여기서 그만두면 내용이 삭제됩니다.</string>
     <string name="type_test_dialog_title">테스트 중단</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
