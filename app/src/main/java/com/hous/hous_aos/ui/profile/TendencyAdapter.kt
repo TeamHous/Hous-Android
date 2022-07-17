@@ -11,6 +11,7 @@ class TendencyAdapter(
     private val select: (Int, TypeState) -> Unit,
     private val backPage: () -> Unit,
     private val nextPage: () -> Unit,
+    private val sendData: () -> Unit,
     private val finish: () -> Unit
 ) :
     ListAdapter<TypeTest, TendencyAdapter.TendencyViewHolder>(tendencyDiffUtil) {
@@ -18,7 +19,7 @@ class TendencyAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TendencyViewHolder {
         val binding =
             ItemTendencyTestBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TendencyViewHolder(binding, select, backPage, nextPage, finish)
+        return TendencyViewHolder(binding, select, backPage, nextPage, sendData, finish)
     }
 
     override fun onBindViewHolder(holder: TendencyViewHolder, position: Int) {
@@ -30,15 +31,34 @@ class TendencyAdapter(
         private val select: (Int, TypeState) -> Unit,
         private val backPage: () -> Unit,
         private val nextPage: () -> Unit,
+        private val sendData: () -> Unit,
         private val finish: () -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(typeTest: TypeTest) {
             with(binding) {
                 data = typeTest
-                tvAnswer1.setOnClickListener { select(adapterPosition, TypeState.ONE) }
-                tvAnswer2.setOnClickListener { select(adapterPosition, TypeState.TWO) }
-                tvAnswer3.setOnClickListener { select(adapterPosition, TypeState.THREE) }
+                tvAnswer1.setOnClickListener {
+                    select(adapterPosition, TypeState.ONE)
+                    if (typeTest.testNum == 15) {
+                        sendData()
+                        finish()
+                    }
+                }
+                tvAnswer2.setOnClickListener {
+                    select(adapterPosition, TypeState.TWO)
+                    if (typeTest.testNum == 15) {
+                        sendData()
+                        finish()
+                    }
+                }
+                tvAnswer3.setOnClickListener {
+                    select(adapterPosition, TypeState.THREE)
+                    if (typeTest.testNum == 15) {
+                        sendData()
+                        finish()
+                    }
+                }
 
                 ivLeft.setOnClickListener { backPage() }
                 ivRight.setOnClickListener { nextPage() }

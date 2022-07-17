@@ -42,6 +42,26 @@ class TendencyViewModel : ViewModel() {
     fun nextPage() {
         _move.value = true
     }
+
+    fun sendData() {
+        sumScore()
+        /* 서버 통신 작업 */
+    }
+
+    private fun sumScore() {
+        val tempAnswer = mutableListOf(0, 0, 0, 0, 0)
+        for (index in 0..14) {
+            tempAnswer[index / 3] += getScore(uiState.value.typeTests[index].type)
+        }
+        _uiState.value = _uiState.value.copy(answerHolder = tempAnswer)
+    }
+
+    private fun getScore(state: TypeState): Int = when (state) {
+        TypeState.ONE -> 1
+        TypeState.TWO -> 2
+        TypeState.THREE -> 3
+        TypeState.NONE -> 0
+    }
 }
 
 data class TestUiState(
@@ -126,6 +146,46 @@ data class TestUiState(
             answers = listOf("test1", "test2", "test3"),
             questionImg = ""
         ),
+        TypeTest(
+            _id = "",
+            testNum = 11,
+            question = "",
+            questionType = "",
+            answers = listOf("test1", "test2", "test3"),
+            questionImg = ""
+        ),
+        TypeTest(
+            _id = "",
+            testNum = 12,
+            question = "",
+            questionType = "",
+            answers = listOf("test1", "test2", "test3"),
+            questionImg = ""
+        ),
+        TypeTest(
+            _id = "",
+            testNum = 13,
+            question = "",
+            questionType = "",
+            answers = listOf("test1", "test2", "test3"),
+            questionImg = ""
+        ),
+        TypeTest(
+            _id = "",
+            testNum = 14,
+            question = "",
+            questionType = "",
+            answers = listOf("test1", "test2", "test3"),
+            questionImg = ""
+        ),
+        TypeTest(
+            _id = "",
+            testNum = 15,
+            question = "",
+            questionType = "",
+            answers = listOf("test1", "test2", "test3"),
+            questionImg = ""
+        )
     ),
-    val answerHolder: List<Int> = listOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    val answerHolder: List<Int> = listOf(0, 0, 0, 0, 0)
 )

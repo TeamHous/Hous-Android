@@ -29,9 +29,10 @@ class TendencyTestActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         tendencyAdapter = TendencyAdapter(
-            viewModel::select,
-            viewModel::backPage,
-            viewModel::nextPage,
+            select = viewModel::select,
+            backPage = viewModel::backPage,
+            nextPage = viewModel::nextPage,
+            sendData = viewModel::sendData,
             finish = ::finish
         )
         binding.vpTendency.adapter = tendencyAdapter
