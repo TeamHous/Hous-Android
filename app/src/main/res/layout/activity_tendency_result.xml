@@ -19,7 +19,7 @@
             android:id="@+id/tv_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="18dp"
             android:layout_marginEnd="20dp"
             android:padding="15dp"
             android:text="@string/result_end"
@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="@{data.userName + `님은`}"
+                    android:text="@{data.userName}"
                     android:textAppearance="@style/B1"
                     android:textColor="@color/g_5"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -102,20 +102,18 @@
 
                     <TextView
                         android:id="@+id/tv_desc"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="8dp"
-                        android:gravity="center"
                         android:text="@{data.typeDesc}"
+                        android:textAlignment="center"
                         android:textAppearance="@style/B2"
-                        android:textColor="@{data.typeColor}"
+                        android:textColor="@color/g_7"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_comment"
-                        tools:text="육각이님은 여러 생활영역에 대해 존중의 기준이\n대체로 높은 편이에요. 함께 생활하는\n룸메이트에 대해 미리 살펴보고 배려한다면\n더 편안한 공동생활이 이루어질 수 있을 거예요."
-                        tools:textColor="@color/g_7" />
+                        tools:text="육각이님은 여러 생활영역에 대해 존중의 기준이\n대체로 높은 편이에요. 함께 생활하는\n룸메이트에 대해 미리 살펴보고 배려한다면\n더 편안한 공동생활이 이루어질 수 있을 거예요." />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
@@ -126,8 +124,7 @@
                     android:layout_marginTop="24dp"
                     android:background="@drawable/shape_green_bg_fill_15_rect"
                     android:gravity="center"
-                    android:paddingHorizontal="36dp"
-                    android:paddingVertical="7dp"
+                    android:paddingVertical="10dp"
                     android:text="@{data.typeRulesTitle}"
                     android:textAppearance="@style/H4"
                     android:textColor="@{data.typeColor}"
@@ -167,10 +164,10 @@
                         android:layout_marginStart="5dp"
                         android:text="@{data.typeRules[0]}"
                         android:textAppearance="@style/B1"
+                        android:textColor="@color/hous_black"
                         app:layout_constraintStart_toEndOf="@id/iv_shape_1"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="밤 12시 이후에는 조용히"
-                        tools:textColor="@color/g_7" />
+                        tools:text="밤 12시 이후에는 조용히" />
 
                     <ImageView
                         android:id="@+id/iv_shape_2"
@@ -191,10 +188,10 @@
                         android:layout_marginTop="6dp"
                         android:text="@{data.typeRules[1]}"
                         android:textAppearance="@style/B1"
+                        android:textColor="@color/hous_black"
                         app:layout_constraintStart_toEndOf="@id/iv_shape_2"
                         app:layout_constraintTop_toBottomOf="@id/tv_rules_1"
-                        tools:text="방 안에서 음식물 섭취하지 않기"
-                        tools:textColor="@color/g_7" />
+                        tools:text="방 안에서 음식물 섭취하지 않기" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -204,7 +201,9 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="113dp"
                     android:background="@drawable/shape_red_bg_fill_21_rect"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/cl_good"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toStartOf="parent"
@@ -237,12 +236,12 @@
 
                     <ImageView
                         android:id="@+id/iv_bad"
+                        setImage="@{data.bad.typeImg}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="1dp"
                         android:layout_marginBottom="6dp"
-                        android:src="@{data.bad.typeImg}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -257,7 +256,9 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="113dp"
                     android:background="@drawable/shape_red_bg_fill_21_rect"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/cl_bad"
                     app:layout_constraintTop_toBottomOf="@id/cl_rules">
@@ -289,12 +290,12 @@
 
                     <ImageView
                         android:id="@+id/iv_good"
+                        setImage="@{data.typeImg}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="1dp"
                         android:layout_marginBottom="6dp"
-                        android:src="@{data.good.typeImg}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
