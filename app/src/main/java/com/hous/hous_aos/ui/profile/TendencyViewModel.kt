@@ -3,8 +3,11 @@ package com.hous.hous_aos.ui.profile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
 class TendencyViewModel : ViewModel() {
     private val _move = MutableLiveData<Boolean>()
@@ -13,20 +16,23 @@ class TendencyViewModel : ViewModel() {
     val uiState = _uiState.asStateFlow()
 
     fun select(position: Int, state: TypeState) {
-        val tempTest = mutableListOf<TypeTest>()
-        _uiState.value.typeTests.forEach { tempTest.add(it) }
-        val tempTypeTest = TypeTest(
-            _id = _uiState.value.typeTests[position]._id,
-            question = _uiState.value.typeTests[position].question,
-            questionType = _uiState.value.typeTests[position].questionType,
-            questionImg = _uiState.value.typeTests[position].questionImg,
-            answers = _uiState.value.typeTests[position].answers,
-            testNum = _uiState.value.typeTests[position].testNum,
-            type = state
-        )
-        tempTest[position] = tempTypeTest
-        _uiState.value = _uiState.value.copy(typeTests = tempTest)
-        _move.value = true
+        viewModelScope.launch {
+            val tempTest = mutableListOf<TypeTest>()
+            _uiState.value.typeTests.forEach { tempTest.add(it) }
+            val tempTypeTest = TypeTest(
+                _id = _uiState.value.typeTests[position]._id,
+                question = _uiState.value.typeTests[position].question,
+                questionType = _uiState.value.typeTests[position].questionType,
+                questionImg = _uiState.value.typeTests[position].questionImg,
+                answers = _uiState.value.typeTests[position].answers,
+                testNum = _uiState.value.typeTests[position].testNum,
+                type = state
+            )
+            tempTest[position] = tempTypeTest
+            _uiState.value = _uiState.value.copy(typeTests = tempTest)
+            delay(300L)
+            _move.value = true
+        }
     }
 
     fun backPage() {
