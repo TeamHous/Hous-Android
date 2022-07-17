@@ -9,14 +9,16 @@ import com.hous.hous_aos.databinding.ItemTendencyTestBinding
 
 class TendencyAdapter(
     private val select: (Int, TypeState) -> Unit,
-    private val back: () -> Unit
+    private val backPage: () -> Unit,
+    private val nextPage: () -> Unit,
+    private val finish: () -> Unit
 ) :
     ListAdapter<TypeTest, TendencyAdapter.TendencyViewHolder>(tendencyDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TendencyViewHolder {
         val binding =
             ItemTendencyTestBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TendencyViewHolder(binding, select, back)
+        return TendencyViewHolder(binding, select, backPage, nextPage, finish)
     }
 
     override fun onBindViewHolder(holder: TendencyViewHolder, position: Int) {
@@ -26,16 +28,26 @@ class TendencyAdapter(
     class TendencyViewHolder(
         private val binding: ItemTendencyTestBinding,
         private val select: (Int, TypeState) -> Unit,
-        private val back: () -> Unit
+        private val backPage: () -> Unit,
+        private val nextPage: () -> Unit,
+        private val finish: () -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: TypeTest) {
-            binding.data = data
-            binding.tvAnswer1.setOnClickListener {
-                select(adapterPosition, TypeState.ONE)
-            }
-            binding.ivLeft.setOnClickListener {
-                back()
+        fun onBind(typeTest: TypeTest) {
+            with(binding) {
+                data = typeTest
+                tvAnswer1.setOnClickListener { select(adapterPosition, TypeState.ONE) }
+                tvAnswer2.setOnClickListener { select(adapterPosition, TypeState.TWO) }
+                tvAnswer3.setOnClickListener { select(adapterPosition, TypeState.THREE) }
+
+                ivLeft.setOnClickListener { backPage() }
+                ivRight.setOnClickListener { nextPage() }
+
+                tvAnswer1.isSelected = typeTest.type == TypeState.ONE
+                tvAnswer2.isSelected = typeTest.type == TypeState.TWO
+                tvAnswer3.isSelected = typeTest.type == TypeState.THREE
+
+                tvQuit.setOnClickListener { finish() }
             }
         }
     }

@@ -15,7 +15,7 @@ class TendencyViewModel : ViewModel() {
     fun select(position: Int, state: TypeState) {
         val tempTest = mutableListOf<TypeTest>()
         _uiState.value.typeTests.forEach { tempTest.add(it) }
-        val t = TypeTest(
+        val tempTypeTest = TypeTest(
             _id = _uiState.value.typeTests[position]._id,
             question = _uiState.value.typeTests[position].question,
             questionType = _uiState.value.typeTests[position].questionType,
@@ -24,13 +24,17 @@ class TendencyViewModel : ViewModel() {
             testNum = _uiState.value.typeTests[position].testNum,
             type = state
         )
-        tempTest[position] = t
+        tempTest[position] = tempTypeTest
         _uiState.value = _uiState.value.copy(typeTests = tempTest)
         _move.value = true
     }
 
-    fun back() {
+    fun backPage() {
         _move.value = false
+    }
+
+    fun nextPage() {
+        _move.value = true
     }
 }
 
