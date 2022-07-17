@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.hous.hous_aos.ui.profile.ResultData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.profile.TendencyResultActivity">
+
+        <TextView
+            android:id="@+id/tv_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="20dp"
+            android:padding="15dp"
+            android:text="@string/result_end"
+            android:textAppearance="@style/B1"
+            android:textColor="@color/hous_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_end">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@{data.userName + `님은`}"
+                    android:textAppearance="@style/B1"
+                    android:textColor="@color/g_5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="이영주님은" />
+
+                <TextView
+                    android:id="@+id/tv_type_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@{data.typeName}"
+                    android:textAppearance="@style/H3"
+                    android:textColor="@color/hous_black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+                    tools:text="룰 세터 오각이" />
+
+                <ImageView
+                    android:id="@+id/iv_character"
+                    setImage="@{data.typeImg}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_type_name"
+                    tools:src="@drawable/illu_test_01" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@drawable/shape_green_bg_fill_15_rect"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="27dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_character">
+
+                    <TextView
+                        android:id="@+id/tv_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{data.typeOneComment}"
+                        android:textAppearance="@style/H4"
+                        android:textColor="@{data.typeColor}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="이 공간은 내가 정의한다!"
+                        tools:textColor="@color/hous_green" />
+
+                    <TextView
+                        android:id="@+id/tv_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@{data.typeDesc}"
+                        android:textAppearance="@style/B2"
+                        android:textColor="@{data.typeColor}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_comment"
+                        tools:text="육각이님은 여러 생활영역에 대해 존중의 기준이\n대체로 높은 편이에요. 함께 생활하는\n룸메이트에 대해 미리 살펴보고 배려한다면\n더 편안한 공동생활이 이루어질 수 있을 거예요."
+                        tools:textColor="@color/g_7" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tv_rules_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/shape_green_bg_fill_15_rect"
+                    android:gravity="center"
+                    android:paddingHorizontal="36dp"
+                    android:paddingVertical="7dp"
+                    android:text="@{data.typeRulesTitle}"
+                    android:textAppearance="@style/H4"
+                    android:textColor="@{data.typeColor}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cl_comment"
+                    tools:text="육각이와 함께 정하면 좋은 Rule!"
+                    tools:textColor="@color/hous_green" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_rules"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/shape_green_bg_fill_15_rect"
+                    android:paddingVertical="17dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_rules_title">
+
+                    <ImageView
+                        android:id="@+id/iv_shape_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:src="@{data.shape}"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_rules_1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_rules_1"
+                        tools:src="@drawable/ic_hexagon" />
+
+                    <TextView
+                        android:id="@+id/tv_rules_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@{data.typeRules[0]}"
+                        android:textAppearance="@style/B1"
+                        app:layout_constraintStart_toEndOf="@id/iv_shape_1"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="밤 12시 이후에는 조용히"
+                        tools:textColor="@color/g_7" />
+
+                    <ImageView
+                        android:id="@+id/iv_shape_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:src="@{data.shape}"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_rules_2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_rules_2"
+                        tools:src="@drawable/ic_hexagon" />
+
+                    <TextView
+                        android:id="@+id/tv_rules_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="6dp"
+                        android:text="@{data.typeRules[1]}"
+                        android:textAppearance="@style/B1"
+                        app:layout_constraintStart_toEndOf="@id/iv_shape_2"
+                        app:layout_constraintTop_toBottomOf="@id/tv_rules_1"
+                        tools:text="방 안에서 음식물 섭취하지 않기"
+                        tools:textColor="@color/g_7" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_bad"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/shape_red_bg_fill_21_rect"
+                    app:layout_constraintEnd_toStartOf="@+id/cl_good"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cl_rules">
+
+                    <TextView
+                        android:id="@+id/tv_bad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="54dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/result_bad"
+                        android:textAppearance="@style/Description"
+                        android:textColor="@color/hous_red"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_bad_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{data.bad.typeName}"
+                        android:textAppearance="@style/B2"
+                        android:textColor="@color/hous_black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_bad"
+                        tools:text="슈퍼 팔로워 셋돌이" />
+
+                    <ImageView
+                        android:id="@+id/iv_bad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="6dp"
+                        android:src="@{data.bad.typeImg}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_bad_name"
+                        tools:src="@drawable/illu_result_01_s" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_good"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/shape_red_bg_fill_21_rect"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cl_bad"
+                    app:layout_constraintTop_toBottomOf="@id/cl_rules">
+
+                    <TextView
+                        android:id="@+id/tv_good"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="54dp"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/result_good"
+                        android:textAppearance="@style/Description"
+                        android:textColor="@color/hous_red"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_good_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{data.good.typeName}"
+                        android:textAppearance="@style/B2"
+                        android:textColor="@color/hous_black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_good"
+                        tools:text="슈퍼 팔로워 셋돌이" />
+
+                    <ImageView
+                        android:id="@+id/iv_good"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="6dp"
+                        android:src="@{data.good.typeImg}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_good_name"
+                        tools:src="@drawable/illu_result_01_s" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
