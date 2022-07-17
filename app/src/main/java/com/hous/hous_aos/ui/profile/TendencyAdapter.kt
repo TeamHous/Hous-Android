@@ -12,14 +12,14 @@ class TendencyAdapter(
     private val backPage: () -> Unit,
     private val nextPage: () -> Unit,
     private val sendData: () -> Unit,
-    private val finish: () -> Unit
+    private val showDialog: () -> Unit
 ) :
     ListAdapter<TypeTest, TendencyAdapter.TendencyViewHolder>(tendencyDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TendencyViewHolder {
         val binding =
             ItemTendencyTestBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TendencyViewHolder(binding, select, backPage, nextPage, sendData, finish)
+        return TendencyViewHolder(binding, select, backPage, nextPage, sendData, showDialog)
     }
 
     override fun onBindViewHolder(holder: TendencyViewHolder, position: Int) {
@@ -32,7 +32,7 @@ class TendencyAdapter(
         private val backPage: () -> Unit,
         private val nextPage: () -> Unit,
         private val sendData: () -> Unit,
-        private val finish: () -> Unit
+        private val showDialog: () -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(typeTest: TypeTest) {
@@ -42,21 +42,18 @@ class TendencyAdapter(
                     select(adapterPosition, TypeState.ONE)
                     if (typeTest.testNum == 15) {
                         sendData()
-                        finish()
                     }
                 }
                 tvAnswer2.setOnClickListener {
                     select(adapterPosition, TypeState.TWO)
                     if (typeTest.testNum == 15) {
                         sendData()
-                        finish()
                     }
                 }
                 tvAnswer3.setOnClickListener {
                     select(adapterPosition, TypeState.THREE)
                     if (typeTest.testNum == 15) {
                         sendData()
-                        finish()
                     }
                 }
 
@@ -67,7 +64,7 @@ class TendencyAdapter(
                 tvAnswer2.isSelected = typeTest.type == TypeState.TWO
                 tvAnswer3.isSelected = typeTest.type == TypeState.THREE
 
-                tvQuit.setOnClickListener { finish() }
+                tvQuit.setOnClickListener { showDialog() }
             }
         }
     }

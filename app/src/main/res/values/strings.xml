@@ -52,4 +52,6 @@
 
     <string name="type_test_dialog_content">테스트를 완료하지 않았어요.\n여기서 그만두면 내용이 삭제됩니다.</string>
     <string name="type_test_dialog_title">테스트 중단</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
