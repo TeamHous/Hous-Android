@@ -1,6 +1,7 @@
 package com.hous.hous_aos.ui.profile
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -49,6 +50,11 @@ class TendencyTestActivity : AppCompatActivity() {
 
         viewModel.move.observe(this) { move ->
             if (move) {
+                if(binding.vpTendency.currentItem == 14){
+                    val intent = Intent(this, TendencyResultActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
                 binding.vpTendency.currentItem += 1
             } else {
                 binding.vpTendency.currentItem -= 1
