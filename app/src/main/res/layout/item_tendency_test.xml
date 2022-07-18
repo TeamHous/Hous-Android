@@ -113,7 +113,7 @@
 
         <ImageView
             android:id="@+id/iv_img"
-            setImage="@{data.questionImg}"
+            setDrawable="@{data.questionImg}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginHorizontal="18dp"
