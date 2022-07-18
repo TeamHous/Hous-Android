@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.hous_aos.R
 import com.hous.hous_aos.data.entity.rules.ManagerData
 import com.hous.hous_aos.data.entity.rules.TodayTodoResponse
 import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemMultiBinding
@@ -14,9 +13,10 @@ import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemOneBinding
 import com.hous.hous_aos.ui.rules.IconColor
 import com.hous.hous_aos.ui.rules.today_to_do.ItemToDoViewType
 
-class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>(
-    TodayTodoDiffUtilCallback
-) {
+class TodayTodoAdapter(private val onClickIcon: () -> Unit) :
+    ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>(
+        TodayTodoDiffUtilCallback
+    ) {
 
     override fun getItemViewType(position: Int): Int {
         return if (currentList[position].number == MANAGER_NUMBER_ZERO) {
@@ -31,6 +31,7 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ItemToDoViewType.NONE_MANAGER_VIEW_TYPE.index -> NoneManagerViewHolder(
+                onClickIcon,
                 ItemRulesTodayToDoItemNoneBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -38,6 +39,7 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
                 )
             )
             ItemToDoViewType.ONE_MANAGER_VIEW_TYPE.index -> OneManagerViewHolder(
+                onClickIcon,
                 ItemRulesTodayToDoItemOneBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -45,6 +47,7 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
                 )
             )
             ItemToDoViewType.MUTI_MANAGER_VIEW_TYPE.index -> MultiManagerViewHolder(
+                onClickIcon,
                 ItemRulesTodayToDoItemMultiBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -65,20 +68,28 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
     }
 
     class NoneManagerViewHolder(
+        private val onClickIcon: () -> Unit,
         private val binding: ItemRulesTodayToDoItemNoneBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: TodayTodoResponse) {
             binding.data = data
+            binding.ivManagerEmpty.setOnClickListener {
+                onClickIcon()
+            }
         }
     }
 
     class OneManagerViewHolder(
+        private val onClickIcon: () -> Unit,
         private val binding: ItemRulesTodayToDoItemOneBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: TodayTodoResponse) {
             binding.data = data
             binding.tvManager.text = changeListToString(requireNotNull(data.managerDataList))
             binding.iconColor = getIconColor(data.iconList[0])
+            binding.ivManager.setOnClickListener {
+                onClickIcon()
+            }
         }
 
         private fun changeListToString(managerDataList: List<ManagerData>): String {
@@ -100,11 +111,15 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
     }
 
     class MultiManagerViewHolder(
+        private val onClickIcon: () -> Unit,
         private val binding: ItemRulesTodayToDoItemMultiBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: TodayTodoResponse) {
             binding.data = data
             binding.tvManager.text = changeListToString(requireNotNull(data.managerDataList))
+            binding.clManagerIcon.setOnClickListener {
+                onClickIcon()
+            }
             when (data.iconList.size) {
                 ICON_LIST_SIZE_TWO -> {
                     binding.count = ICON_LIST_SIZE_TWO
