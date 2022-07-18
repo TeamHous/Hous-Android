@@ -68,12 +68,12 @@ class HomeRulesCategoryAdapter(
             binding.data = data
             binding.clRuleItem.setOnLongClickListener {
                 onLongClick()
-                onChangeIsSelected(adapterPosition)
+                onChangeIsSelected(absoluteAdapterPosition)
                 return@setOnLongClickListener true
             }
             binding.clRuleItem.setOnClickListener {
                 onCategoryClick()
-                onChangeIsSelected(adapterPosition)
+                onChangeIsSelected(absoluteAdapterPosition)
             }
         }
     }

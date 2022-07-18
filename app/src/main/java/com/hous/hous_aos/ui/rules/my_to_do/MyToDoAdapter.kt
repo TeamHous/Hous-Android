@@ -34,7 +34,7 @@ class MyToDoAdapter(private val onClickIcon: (Int) -> Unit) :
             binding.ivCheckBox.setOnClickListener {
                 val isSelected = binding.ivCheckBox.isSelected
                 binding.ivCheckBox.isSelected = !isSelected
-                onClickIcon(adapterPosition)
+                onClickIcon(absoluteAdapterPosition)
             }
         }
     }
