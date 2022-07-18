@@ -72,7 +72,7 @@ data class TestUiState(
             question = "",
             questionType = "",
             answers = listOf("test1", "test2", "test3"),
-            questionImg = ""
+            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
         ),
         TypeTest(
             _id = "",
@@ -80,7 +80,7 @@ data class TestUiState(
             question = "",
             questionType = "",
             answers = listOf("test1", "test2", "test3"),
-            questionImg = ""
+            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
         ),
         TypeTest(
             _id = "",
@@ -88,7 +88,7 @@ data class TestUiState(
             question = "",
             questionType = "",
             answers = listOf("test1", "test2", "test3"),
-            questionImg = ""
+            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
         ),
         TypeTest(
             _id = "",
@@ -96,7 +96,7 @@ data class TestUiState(
             question = "",
             questionType = "",
             answers = listOf("test1", "test2", "test3"),
-            questionImg = ""
+            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
         ),
         TypeTest(
             _id = "",
@@ -104,7 +104,7 @@ data class TestUiState(
             question = "",
             questionType = "",
             answers = listOf("test1", "test2", "test3"),
-            questionImg = ""
+            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
         ),
         TypeTest(
             _id = "",
@@ -112,7 +112,7 @@ data class TestUiState(
             question = "",
             questionType = "",
             answers = listOf("test1", "test2", "test3"),
-            questionImg = ""
+            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
         ),
         TypeTest(
             _id = "",
@@ -120,7 +120,7 @@ data class TestUiState(
             question = "",
             questionType = "",
             answers = listOf("test1", "test2", "test3"),
-            questionImg = ""
+            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
         ),
         TypeTest(
             _id = "",
@@ -128,7 +128,7 @@ data class TestUiState(
             question = "",
             questionType = "",
             answers = listOf("test1", "test2", "test3"),
-            questionImg = ""
+            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
         ),
         TypeTest(
             _id = "",
@@ -136,7 +136,7 @@ data class TestUiState(
             question = "",
             questionType = "",
             answers = listOf("test1", "test2", "test3"),
-            questionImg = ""
+            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
         ),
         TypeTest(
             _id = "",
@@ -144,7 +144,7 @@ data class TestUiState(
             question = "",
             questionType = "",
             answers = listOf("test1", "test2", "test3"),
-            questionImg = ""
+            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
         ),
         TypeTest(
             _id = "",
@@ -152,7 +152,7 @@ data class TestUiState(
             question = "",
             questionType = "",
             answers = listOf("test1", "test2", "test3"),
-            questionImg = ""
+            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
         ),
         TypeTest(
             _id = "",
@@ -160,7 +160,7 @@ data class TestUiState(
             question = "",
             questionType = "",
             answers = listOf("test1", "test2", "test3"),
-            questionImg = ""
+            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
         ),
         TypeTest(
             _id = "",
@@ -168,7 +168,7 @@ data class TestUiState(
             question = "",
             questionType = "",
             answers = listOf("test1", "test2", "test3"),
-            questionImg = ""
+            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
         ),
         TypeTest(
             _id = "",
@@ -176,7 +176,7 @@ data class TestUiState(
             question = "",
             questionType = "",
             answers = listOf("test1", "test2", "test3"),
-            questionImg = ""
+            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
         ),
         TypeTest(
             _id = "",
@@ -184,7 +184,7 @@ data class TestUiState(
             question = "",
             questionType = "",
             answers = listOf("test1", "test2", "test3"),
-            questionImg = ""
+            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
         )
     ),
     val answerHolder: List<Int> = listOf(0, 0, 0, 0, 0)
