@@ -1,5 +1,6 @@
 package com.hous.hous_aos.ui.rules.rules_table
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.ConcatAdapter
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentRulesTableBinding
+import com.hous.hous_aos.ui.newrules.NewRuleActivity
 import com.hous.hous_aos.ui.rules.RulesViewModel
-import com.hous.hous_aos.util.showToast
 
 class RulesTableFragment : Fragment() {
 
@@ -59,10 +60,10 @@ class RulesTableFragment : Fragment() {
         }
     }
 
-    //TODO +버튼 클릭시 새로운 규칙 추가로 이동??
     private fun clickPlusButton() {
         binding.ivPlusRules.setOnClickListener {
-            requireActivity().showToast("새로운 규칙 추가로 이동!!")
+            val intent = Intent(activity, NewRuleActivity::class.java)
+            startActivity(intent)
         }
     }
 
