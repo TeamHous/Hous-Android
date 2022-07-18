@@ -12,5 +12,12 @@ class TendencyResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_tendency_result)
         setContentView(binding.root)
+        init()
+    }
+
+    private fun init() {
+        binding.vm = viewModel
+        binding.lifecycleOwner = this
+
     }
 }
