@@ -1,5 +1,6 @@
 package com.hous.hous_aos.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
         initAdapter()
         initInfo()
+        init()
         return binding.root
     }
 
@@ -27,6 +29,15 @@ class ProfileFragment : Fragment() {
         super.onDestroyView()
         _binding = null
         tagAdapter = null
+    }
+
+    private fun init() {
+        binding.btnTendency.setOnClickListener {
+            activity?.let {
+                val intent = Intent(context, TestInfoActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun initInfo() {
