@@ -40,7 +40,6 @@ class GeneralRulesAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: GeneralRulesData) {
             binding.data = data
-            binding.membersCount = data.membersCnt
             val memberCnt = if (data.membersCnt >= 4) 3 else data.membersCnt
             Log.d(
                 "GeneralAdapter",

@@ -18,10 +18,6 @@
             type="com.hous.hous_aos.ui.rules.IconColor" />
 
         <variable
-            name="membersCount"
-            type="Integer" />
-
-        <variable
             name="data"
             type="com.hous.hous_aos.data.entity.rules.GeneralRulesData" />
     </data>
@@ -75,12 +71,12 @@
                     android:layout_marginEnd="11dp"
                     app:cardCornerRadius="50dp"
                     app:cardPreventCornerOverlap="false"
-                    app:colorRes="@{membersCount >=2 ? iconColorTwo.colorRes : -1}"
+                    app:colorRes="@{data.membersCnt >=2 ? iconColorTwo.colorRes : -1}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:visibility="@{membersCount>=2 ? true : false}"
+                    app:visibility="@{data.membersCnt>=2 ? true : false}"
                     tools:backgroundTint="@color/hous_yellow" />
 
                 <com.google.android.material.card.MaterialCardView
@@ -90,12 +86,12 @@
                     android:layout_marginEnd="19dp"
                     app:cardCornerRadius="50dp"
                     app:cardPreventCornerOverlap="false"
-                    app:colorRes="@{membersCount >=3 ? iconColorThree.colorRes : -1}"
+                    app:colorRes="@{data.membersCnt >=3 ? iconColorThree.colorRes : -1}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:visibility="@{membersCount>=3 ? true : false}"
+                    app:visibility="@{data.membersCnt>=3 ? true : false}"
                     tools:backgroundTint="@color/hous_red" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -109,7 +105,7 @@
                 android:layout_marginBottom="5dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:lineSpacingExtra="6.5sp"
-                android:text="@{membersCount.toString()}"
+                android:text="@{Integer.toString(data.membersCnt)}"
                 android:textColor="@color/hous_blue"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
