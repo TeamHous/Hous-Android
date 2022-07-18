@@ -6,3 +6,5 @@ import com.hous.hous_aos.R
 
 class ResultViewModel : ViewModel() {
     private val _resultData = MutableLiveData(
+    val resultData get() = _resultData
+}
