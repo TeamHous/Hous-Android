@@ -15,6 +15,7 @@ import com.hous.hous_aos.ui.rules.RulesViewModel
 import com.hous.hous_aos.ui.rules.ToDoViewType
 import com.hous.hous_aos.ui.rules.adapter.TodayTodoAdapter
 import com.hous.hous_aos.ui.rules.my_to_do.MyToDoFragment
+import com.hous.hous_aos.ui.rules.today_to_do.tem_dialog.TempManagerFragment
 
 class TodayToDoFragment : Fragment() {
 
@@ -36,6 +37,7 @@ class TodayToDoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initFetchToTodayToDoList()
         initAdapter()
         observeCategory()
         setOnClickMyToDO()
@@ -47,8 +49,17 @@ class TodayToDoFragment : Fragment() {
         todayTodDoAdapter = null
     }
 
+    private fun initFetchToTodayToDoList() {
+        viewModel.fetchToTodayToDoList()
+    }
+
+    private fun onClickTmpManagerDialog() {
+        val dialog = TempManagerFragment()
+        dialog.show(childFragmentManager, TEMP_MANAGER_DIALOG_TAG)
+    }
+
     private fun initAdapter() {
-        todayTodDoAdapter = TodayTodoAdapter()
+        todayTodDoAdapter = TodayTodoAdapter(::onClickTmpManagerDialog)
         binding.rvToDo.adapter = todayTodDoAdapter
     }
 
@@ -66,5 +77,9 @@ class TodayToDoFragment : Fragment() {
                 replace<MyToDoFragment>(R.id.frg_bottom)
             }
         }
+    }
+
+    companion object {
+        private const val TEMP_MANAGER_DIALOG_TAG = "MyCustomFragment"
     }
 }
