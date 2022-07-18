@@ -33,10 +33,61 @@ class RulesViewModel : ViewModel() {
         MutableLiveData<List<GeneralRulesData>>()
     val generalRulesTableList get() = _generalRulesTableList
 
-    init {
-        fetchToTodayToDoList()
-        fetchToMyTodayToDoList()
-        fetchToCategoryOfRuleList()
+    private var _tmpManagerList = MutableLiveData<List<HomieData>>()
+    val tmpManagerList get() = _tmpManagerList
+
+    /**
+     * 임시 담당자 checked 바꾸기
+     * */
+    fun setSelectedTmpManager(position: Int) {
+        val flag = requireNotNull(_tmpManagerList.value)[position].isChecked
+        requireNotNull(_tmpManagerList.value)[position].isChecked = !flag
+    }
+
+    /**
+     * 임시 담당자 save버튼 누르면 서버로 보내기
+     * */
+    fun putToTmpManagerList(): List<String> {
+        val clickedTmpManagerList: MutableList<String> = mutableListOf()
+        _tmpManagerList.value?.forEach {
+            if (it.isChecked) clickedTmpManagerList.add(it.id)
+        }
+        return clickedTmpManagerList.toList()
+    }
+
+    fun fetchToTmpManagerList() {
+        _tmpManagerList.value = listOf(
+            HomieData(
+                id = "62cc7409csdsd06c46adf652f",
+                userName = "이준원",
+                isChecked = true,
+                typeColor = "GRAY"
+            ),
+            HomieData(
+                id = "6dasdasdasdsadsad52f",
+                userName = "이영주",
+                isChecked = false,
+                typeColor = "RED"
+            ),
+            HomieData(
+                id = "62cc740asdsadsadf652f",
+                userName = "강워어뇽",
+                isChecked = true,
+                typeColor = "BLUE"
+            ),
+            HomieData(
+                id = "62cc7409csasdsadsa52f",
+                userName = "꾸우웅",
+                isChecked = false,
+                typeColor = "GREEN"
+            ),
+            HomieData(
+                id = "62cc7409csasdsadsa52f",
+                userName = "꾸우우웅",
+                isChecked = false,
+                typeColor = "GRAY"
+            )
+        )
     }
 
     fun fetchToGeneralRulesTableList() {
@@ -91,7 +142,7 @@ class RulesViewModel : ViewModel() {
         )
     }
 
-    private fun fetchToCategoryOfRuleList() {
+    fun fetchToCategoryOfRuleList() {
 
         _categoryOfRuleList.value = mutableListOf(
             CategoryOfRuleResponse(
@@ -127,8 +178,8 @@ class RulesViewModel : ViewModel() {
         )
     }
 
-    private fun fetchToTodayToDoList() {
-        _todayTodoList.value = mutableListOf<TodayTodoResponse>(
+    fun fetchToTodayToDoList() {
+        val tmpTodayToDoList = mutableListOf<TodayTodoResponse>(
             TodayTodoResponse(
                 id = "sd;jnv;aovknkv;lsnm",
                 number = 0,
@@ -189,10 +240,13 @@ class RulesViewModel : ViewModel() {
                 iconList = listOf("green", "gray")
             )
         )
+        _todayTodoList.value = tmpTodayToDoList.map { data ->
+            data.copy()
+        }
     }
 
-    private fun fetchToMyTodayToDoList() {
-        _myTodoList.value = mutableListOf(
+    fun fetchToMyTodayToDoList() {
+        val tmpMyTodoList = mutableListOf(
             MyToDoResponse(
                 id = "sjodFdsfdsfdsflc",
                 categoryIcon = "CLEAN",
@@ -224,6 +278,9 @@ class RulesViewModel : ViewModel() {
                 isChecked = true
             )
         )
+        _myTodoList.value = tmpMyTodoList.map { data ->
+            data.copy()
+        }
     }
 
     fun setToDoViewType(toDoViewType: ToDoViewType) {
@@ -238,7 +295,7 @@ class RulesViewModel : ViewModel() {
         val tmpCategoryOfRuleList = requireNotNull(_categoryOfRuleList.value).map { data ->
             data.copy().apply { isSelected = false }
         }
-        _categoryOfRuleList.value = tmpCategoryOfRuleList.toList()
+        _categoryOfRuleList.value = tmpCategoryOfRuleList
     }
 
     fun setMyToDoCheckBoxSelected(position: Int) {
