@@ -27,5 +27,26 @@ class TendencyResultActivity : AppCompatActivity() {
         binding.tvEnd.setOnClickListener {
             finish()
         }
+
+        viewModel.resultData.observe(this) { data ->
+            if (data.good.typeName == "동글이") {
+                binding.tvGoodName.text = "행복한 동글이"
+                binding.clGood.backgroundTintList = this.getColorStateList(R.color.hous_yellow_bg)
+            }
+            if (data.bad.typeName == "사각이") {
+                binding.tvBadName.text = "불행한 사각이"
+                binding.clBad.backgroundTintList = this.getColorStateList(R.color.hous_blue_bg)
+            }
+            if (data.typeColor == "GREEN") {
+                binding.tvComment.setTextColor(ContextCompat.getColor(this, R.color.hous_green))
+                binding.tvRulesTitle.setTextColor(ContextCompat.getColor(this, R.color.hous_green))
+                binding.tvRulesTitle.backgroundTintList =
+                    this.getColorStateList(R.color.hous_green_bg)
+                binding.clComment.backgroundTintList = this.getColorStateList(R.color.hous_green_bg)
+                binding.clRules.backgroundTintList = this.getColorStateList(R.color.hous_green_bg)
+                binding.ivShape1.setDrawable(R.drawable.ic_hexagon)
+                binding.ivShape2.setDrawable(R.drawable.ic_hexagon)
+            }
+        }
     }
 }
