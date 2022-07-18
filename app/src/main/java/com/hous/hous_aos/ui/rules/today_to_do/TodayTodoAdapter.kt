@@ -11,6 +11,8 @@ import com.hous.hous_aos.data.entity.rules.TodayTodoResponse
 import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemMultiBinding
 import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemNoneBinding
 import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemOneBinding
+import com.hous.hous_aos.ui.rules.IconColor
+import com.hous.hous_aos.ui.rules.today_to_do.ItemToDoViewType
 
 class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>(
     TodayTodoDiffUtilCallback
@@ -186,21 +188,4 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
         private const val YELLOW = "yellow"
         private const val GREEN = "green"
     }
-}
-
-/**
- * 뷰타입 이넘*/
-enum class ItemToDoViewType(val index: Int) {
-    NONE_MANAGER_VIEW_TYPE(0), ONE_MANAGER_VIEW_TYPE(1), MUTI_MANAGER_VIEW_TYPE(2)
-}
-
-/**
- * Icon 색 이넘*/
-enum class IconColor(val colorRes: Int) {
-    BLUE(R.color.hous_blue),
-    RED(R.color.hous_red),
-    GREEN(R.color.hous_green),
-    YELLOW(R.color.hous_yellow),
-    GRAY(R.color.g_3),
-    PURPLE(R.color.hous_purple)
 }

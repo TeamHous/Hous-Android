@@ -7,19 +7,19 @@
 
         <variable
             name="iconColorOne"
-            type="com.hous.hous_aos.ui.rules.adapter.IconColor" />
+            type="com.hous.hous_aos.ui.rules.IconColor" />
 
         <variable
             name="iconColorTwo"
-            type="com.hous.hous_aos.ui.rules.adapter.IconColor" />
+            type="com.hous.hous_aos.ui.rules.IconColor" />
 
         <variable
             name="iconColorThree"
-            type="com.hous.hous_aos.ui.rules.adapter.IconColor" />
+            type="com.hous.hous_aos.ui.rules.IconColor" />
 
         <variable
             name="iconColorFour"
-            type="com.hous.hous_aos.ui.rules.adapter.IconColor" />
+            type="com.hous.hous_aos.ui.rules.IconColor" />
 
         <variable
             name="data"
