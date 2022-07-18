@@ -24,5 +24,8 @@ class TendencyResultActivity : AppCompatActivity() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
 
+        binding.tvEnd.setOnClickListener {
+            finish()
+        }
     }
 }
