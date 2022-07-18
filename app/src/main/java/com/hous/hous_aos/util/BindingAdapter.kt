@@ -9,7 +9,6 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import coil.load
-import coil.transform.CircleCropTransformation
 import com.bumptech.glide.Glide
 
 @BindingAdapter("app:visibility")
