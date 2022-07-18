@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hous.hous_aos.data.entity.rules.MyToDoResponse
-import com.hous.hous_aos.databinding.ItemRulesMyToDoItemBinding
+import com.hous.hous_aos.databinding.ItemRulesMyToDoBinding
 
 class MyToDoAdapter(private val onClickIcon: (Int) -> Unit) :
     ListAdapter<MyToDoResponse, MyToDoAdapter.MyToDoViewHolder>(
@@ -24,7 +24,7 @@ class MyToDoAdapter(private val onClickIcon: (Int) -> Unit) :
     )
 
     class MyToDoViewHolder(
-        private val binding: ItemRulesMyToDoItemBinding,
+        private val binding: ItemRulesMyToDoBinding,
         private val iconTypeHashMap: HashMap<String, IconType>,
         private val onClickIcon: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -41,7 +41,7 @@ class MyToDoAdapter(private val onClickIcon: (Int) -> Unit) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyToDoViewHolder {
 
-        val binding = ItemRulesMyToDoItemBinding.inflate(
+        val binding = ItemRulesMyToDoBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
