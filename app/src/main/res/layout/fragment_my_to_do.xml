@@ -99,7 +99,7 @@
             app:layout_constraintEnd_toEndOf="@id/cl_my_to_do"
             app:layout_constraintStart_toStartOf="@id/cl_today_to_do"
             app:layout_constraintTop_toBottomOf="@id/cl_today_to_do"
-            tools:listitem="@layout/item_rules_my_to_do_item">
+            tools:listitem="@layout/item_rules_my_to_do">
 
         </androidx.recyclerview.widget.RecyclerView>
 
