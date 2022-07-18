@@ -5,6 +5,25 @@
 
     <data>
 
+        <variable
+            name="iconColorOne"
+            type="com.hous.hous_aos.ui.rules.IconColor" />
+
+        <variable
+            name="iconColorTwo"
+            type="com.hous.hous_aos.ui.rules.IconColor" />
+
+        <variable
+            name="iconColorThree"
+            type="com.hous.hous_aos.ui.rules.IconColor" />
+
+        <variable
+            name="membersCount"
+            type="Integer" />
+
+        <variable
+            name="data"
+            type="com.hous.hous_aos.data.entity.rules.GeneralRulesData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,9 +48,9 @@
                 android:id="@+id/cl_manager_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginEnd="3dp"
                 android:layout_marginVertical="7dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginEnd="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -41,37 +60,43 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginEnd="3dp"
-                    android:backgroundTint="@color/hous_purple"
                     app:cardCornerRadius="50dp"
+                    app:colorRes="@{iconColorOne.colorRes}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:backgroundTint="@color/hous_purple" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cd_icon_two"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginEnd="11dp"
-                    android:backgroundTint="@color/hous_yellow"
                     app:cardCornerRadius="50dp"
                     app:cardPreventCornerOverlap="false"
+                    app:colorRes="@{membersCount >=2 ? iconColorTwo.colorRes : -1}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:visibility="@{membersCount>=2 ? true : false}"
+                    tools:backgroundTint="@color/hous_yellow" />
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cd_icon_three"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginEnd="19dp"
-                    android:backgroundTint="@color/hous_red"
                     app:cardCornerRadius="50dp"
                     app:cardPreventCornerOverlap="false"
+                    app:colorRes="@{membersCount >=3 ? iconColorThree.colorRes : -1}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:visibility="@{membersCount>=3 ? true : false}"
+                    tools:backgroundTint="@color/hous_red" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -84,6 +109,7 @@
                 android:layout_marginBottom="5dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:lineSpacingExtra="6.5sp"
+                android:text="@{membersCount.toString()}"
                 android:textColor="@color/hous_blue"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -99,6 +125,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="13dp"
             android:layout_marginBottom="12dp"
+            android:text="@{data.ruleName}"
             android:textAppearance="@style/B2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/cl_managers"

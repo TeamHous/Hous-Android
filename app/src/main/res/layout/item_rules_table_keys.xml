@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="data"
+            type="com.hous.hous_aos.data.entity.rules.KeyRulesData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,6 +24,7 @@
             android:layout_marginTop="13dp"
             android:layout_marginBottom="12dp"
             android:textAppearance="@style/B2"
+            android:text="@{data.ruleName}"
             android:textColor="@color/hous_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
