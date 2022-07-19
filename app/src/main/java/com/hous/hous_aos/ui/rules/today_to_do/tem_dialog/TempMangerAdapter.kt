@@ -9,7 +9,7 @@ import com.hous.hous_aos.data.entity.rules.HomieData
 import com.hous.hous_aos.databinding.ItemRulesTmpManagersBinding
 import com.hous.hous_aos.ui.rules.HomieIconType
 
-class TempMangerAdapter(val setSelectedTmpManager: (Int) -> Unit) :
+class TempMangerAdapter(private val setSelectedTmpManager: (Int) -> Unit) :
     ListAdapter<HomieData, TempMangerAdapter.TmpManagerViewHolder>(tempManagerDiffUtil) {
     private val homieIconHashMap: HashMap<String, HomieIconType> = hashMapOf(
         "RED" to HomieIconType.RED,
