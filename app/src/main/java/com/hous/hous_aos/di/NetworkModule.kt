@@ -2,6 +2,7 @@ package com.hous.hous_aos.di
 
 import com.hous.hous_aos.BuildConfig
 import com.hous.hous_aos.data.api.HomeApi
+import com.hous.hous_aos.data.api.NewRulesApi
 import com.hous.hous_aos.data.api.ProfileApi
 import com.hous.hous_aos.data.api.RulesApi
 import com.hous.hous_aos.data.source.local.LocalDataSource
@@ -75,4 +76,8 @@ object NetworkModule {
     @Provides
     fun provideProfileService(retrofit: Retrofit): ProfileApi =
         retrofit.create(ProfileApi::class.java)
+
+    @Provides
+    fun provideNewRulesApi(retrofit: Retrofit): NewRulesApi =
+        retrofit.create(NewRulesApi::class.java)
 }
