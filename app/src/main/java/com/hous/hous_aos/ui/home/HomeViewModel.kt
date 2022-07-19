@@ -3,6 +3,7 @@ package com.hous.hous_aos.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hous.hous_aos.data.entity.Event
+import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.entity.Rule
 
 class HomeViewModel : ViewModel() {
@@ -73,35 +74,41 @@ class HomeViewModel : ViewModel() {
     )
     val todoList get() = _todoList
 
-    private val _homieList = MutableLiveData<List<HomieData>>(
+    private val _homieList = MutableLiveData<List<Homie>>(
         listOf(
-            HomieData(
-                _id = "",
+            Homie(
+                id = "",
                 userName = "이영주",
-                typeName = "임시 디폴트",
-                typeColor = "GRAY"
-            ),
-            HomieData(
-                _id = "62cc7420d7868591384e4eb0",
-                userName = "강원용",
                 typeName = "임시 디폴트",
                 typeColor = "YELLOW"
             ),
-            HomieData(
-                _id = "62cc7420d7868591384e4eb0",
-                userName = "이준원",
+            Homie(
+                id = "",
+                userName = "김지현",
                 typeName = "임시 디폴트",
-                typeColor = "GREEN"
+                typeColor = "RED"
             ),
-            HomieData(
-                _id = "62cc7420d7868591384e4eb0",
-                userName = "김소현",
+            Homie(
+                id = "",
+                userName = "김민재",
                 typeName = "임시 디폴트",
                 typeColor = "BLUE"
             ),
+            Homie(
+                id = "",
+                userName = "이준원",
+                typeName = "임시 디폴트",
+                typeColor = ""
+            ),
+            Homie(
+                id = "",
+                userName = "강원용",
+                typeName = "임시 디폴트",
+                typeColor = "GREEN"
+            ),
             //copy room code 더미데이터
-            HomieData(
-                _id = "",
+            Homie(
+                id = "",
                 userName = "",
                 typeName = "",
                 typeColor = ""
@@ -120,6 +127,6 @@ class HomeViewModel : ViewModel() {
 }
 
 data class HomieProfileList(
-    val homie: List<HomieData>,
+    val homie: List<Homie>,
     val roomCode: String
 )
