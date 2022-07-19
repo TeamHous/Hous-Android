@@ -34,7 +34,8 @@
                 android:backgroundTint="@color/g_6"
                 android:src="@drawable/ic_dialog_close"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibility="@{viewModel.eventIconPosition != 0}" />
 
             <TextView
                 android:id="@+id/tv_dialog"
@@ -236,6 +237,7 @@
                     android:lineSpacingExtra="7.5sp"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="7dp"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="normal"
@@ -268,6 +270,7 @@
                     android:lineSpacingExtra="7.5sp"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="7dp"
+                    android:text=""
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="15sp"
@@ -300,6 +303,7 @@
                     android:lineSpacingExtra="7.5sp"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="7dp"
+                    android:text=""
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="15sp"
@@ -356,12 +360,13 @@
                 android:layout_marginEnd="14dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/shape_red_line_10_rect"
-                android:text="@string/home_event_delete"
+                android:text="@{viewModel.eventIconPosition == 0 ? @string/home_event_cancel: @string/home_event_delete}"
                 android:textColor="@color/hous_red"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_save"
-                app:layout_constraintStart_toStartOf="@id/rv_participant" />
+                app:layout_constraintStart_toStartOf="@id/rv_participant"
+                tools:text="삭제" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_save"

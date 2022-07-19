@@ -10,14 +10,14 @@ import com.hous.hous_aos.databinding.ItemHomeEventBinding
 import com.hous.hous_aos.ui.home.EventData
 
 class EventAdapter(
-    private val onClickListener: () -> Unit
+    private val onClickEventIcon: (Int) -> Unit
 ) :
     ListAdapter<EventData, EventAdapter.EventViewHolder>(eventDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val binding =
             ItemHomeEventBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return EventViewHolder(binding,onClickListener)
+        return EventViewHolder(binding, onClickEventIcon)
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
@@ -26,11 +26,13 @@ class EventAdapter(
 
     class EventViewHolder(
         val binding: ItemHomeEventBinding,
-        private val onClickListener: () -> Unit
+        private val onClickEventIcon: (Int) -> Unit,
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: EventData) {
-            when(data.eventIcon) {
+            binding.event = data
+            binding.position = absoluteAdapterPosition
+            when (data.eventIcon) {
                 "NONE" -> {
                     binding.ivEvent.setImageResource(R.drawable.ic_plus)
                     binding.ivEventBg.setBackgroundResource(R.drawable.shape_yellow_bg_fill_16_rect)
@@ -52,9 +54,9 @@ class EventAdapter(
                     binding.clEvent.setBackgroundResource(R.drawable.shape_yellow_home_fill_16_rect)
                 }
             }
-            binding.event = data
-            binding.position = adapterPosition
-            onClickListener
+            binding.clEvent.setOnClickListener {
+                onClickEventIcon(absoluteAdapterPosition)
+            }
         }
     }
 

@@ -34,8 +34,7 @@ class EventDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.setParticipantList()
-        viewModel.setEventName()
+        fetchToViewModel()
         initAdapter()
         initDialog()
         observeParticipateList()
@@ -50,11 +49,23 @@ class EventDialogFragment : DialogFragment() {
         eventParticipantAdapter = null
     }
 
+    private fun fetchToViewModel() {
+        if (viewModel.eventIconPosition.value == 0) {
+            viewModel.fetchToAddEventData()
+            viewModel.setParticipantList()
+        } else {
+            viewModel.fetchToResponseEventData()
+            viewModel.setParticipantList()
+            viewModel.setEventName()
+        }
+    }
+
     private fun initAdapter() {
         eventParticipantAdapter = EventParticipantAdapter(viewModel::setSelectedEventParticipant)
         binding.rvParticipant.adapter = eventParticipantAdapter
     }
 
+    // TODO 데이트피커 구현
     private fun clickDatePicker() {
     }
 
@@ -80,7 +91,8 @@ class EventDialogFragment : DialogFragment() {
     private fun deleteDialog() {
         binding.btnDelete.setOnClickListener {
             Log.d(TAG, "EventDialogFragment - deleteDialog() called")
-//            requireContext().showToast("${viewModel.putToTmpManagerList().size}명 서버로 put해버리기~")
+            // 삭제로직 추가 viewModel.deleteEventData??
+            viewModel.fetchToResponseEventData()
             dialog?.dismiss()
         }
     }
@@ -88,7 +100,8 @@ class EventDialogFragment : DialogFragment() {
     private fun saveDialog() {
         binding.btnSave.setOnClickListener {
             Log.d(TAG, "EventDialogFragment - saveDialog() called")
-//            requireContext().showToast("${viewModel.putToTmpManagerList().size}명 서버로 put해버리기~")
+            // viewModel.putEventData??
+            viewModel.fetchToResponseEventData()
             dialog?.dismiss()
         }
     }

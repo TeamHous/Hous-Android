@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hous.hous_aos.databinding.FragmentHomeBinding
-import com.hous.hous_aos.ui.home.adapter.*
+import com.hous.hous_aos.ui.home.adapter.EventAdapter
+import com.hous.hous_aos.ui.home.adapter.HomieAdapter
+import com.hous.hous_aos.ui.home.adapter.RulesAdapter
+import com.hous.hous_aos.ui.home.adapter.ToDoAdapter
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -17,7 +20,7 @@ class HomeFragment : Fragment() {
     private var rulesAdapter: RulesAdapter? = null
     private var todoAdapter: ToDoAdapter? = null
     private var homieAdapter: HomieAdapter? = null
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: EventViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,13 +40,6 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.apply {
-
-        }
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -55,12 +51,20 @@ class HomeFragment : Fragment() {
 
     private fun initEventAdapter() {
         viewModel.eventList.observe(viewLifecycleOwner) {
-            eventAdapter = EventAdapter(onClickListener = ::onClickListener)
+            eventAdapter = EventAdapter(
+                onClickEventIcon = ::onClickEventIcon
+            )
             binding.rvEvent.adapter = eventAdapter
             requireNotNull(eventAdapter).submitList(
                 it
             )
         }
+    }
+
+    private fun onClickEventIcon(position: Int) {
+        val dialog = EventDialogFragment()
+        dialog.show(childFragmentManager, HOME_FRAGMENT)
+        viewModel.setEventIconPosition(position)
     }
 
     private fun initRulesAdapter() {
@@ -89,21 +93,17 @@ class HomeFragment : Fragment() {
         viewModel.homieList.observe(viewLifecycleOwner) {
             homieAdapter = HomieAdapter(showToast = ::showToast)
             binding.rvProfile.adapter = homieAdapter
-            requireNotNull(homieAdapter).submitList(
-                it
-            )
+            requireNotNull(homieAdapter).submitList(it.toList())
         }
     }
 
-    private fun onClickListener() {
-        // 다이얼로그 띄우기
-    }
-
     private fun roomCode() {
-
     }
 
     private fun showToast() {
+    }
 
+    companion object {
+        const val HOME_FRAGMENT = "HOME_FRAGMENT"
     }
 }
