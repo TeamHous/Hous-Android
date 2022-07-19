@@ -7,7 +7,7 @@
 
         <variable
             name="todo"
-            type="com.hous.hous_aos.ui.home.ToDoData" />
+            type="com.hous.hous_aos.data.entity.Rule" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,7 +37,7 @@
             android:ellipsize="end"
             android:maxEms="7"
             android:maxLines="1"
-            android:text="@{todo.todoName}"
+            android:text="@{todo.ruleName}"
             android:textAppearance="@style/B3"
             android:textColor="@color/hous_black"
             app:layout_constraintStart_toEndOf="@id/cb_to_do"
