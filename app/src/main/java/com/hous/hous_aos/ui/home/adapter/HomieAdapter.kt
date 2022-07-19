@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hous.hous_aos.R
+import com.hous.hous_aos.data.entity.rules.HomieData
 import com.hous.hous_aos.databinding.ItemHomeHomieBinding
 import com.hous.hous_aos.databinding.ItemHomeHomieCopyBinding
-import com.hous.hous_aos.ui.home.HomieData
 
 class HomieAdapter(
     private val showToast: () -> Unit
