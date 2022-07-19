@@ -114,3 +114,10 @@ data class HomieProfileList(
     val homie: List<HomieData>,
     val roomCode: String
 )
+
+data class HomieData(
+    val _id: String,
+    val userName: String,
+    val typeName: String,
+    val typeColor: String
+)
