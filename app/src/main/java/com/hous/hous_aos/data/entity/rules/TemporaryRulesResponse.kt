@@ -12,7 +12,8 @@ data class HomieData(
     @SerializedName("_id")
     val id: String,
     val userName: String,
-    var isChecked: Boolean,
+    val typeName: String = "",
+    var isChecked: Boolean = false,
     val typeColor: String
 )
 // "_id": "62cc7409c7db06c46adf652f",
