@@ -24,8 +24,6 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
         binding.vm = viewModel
         binding.lifecycleOwner = this
-
-        initAdapter()
         initInfo()
         init()
         return binding.root
