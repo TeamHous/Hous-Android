@@ -216,9 +216,20 @@
                 tools:text="부엉이" />
 
             <TextView
-                android:id="@+id/tv_lock_2"
+                android:id="@+id/tv_hashtag2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/shape_red_bg2_fill_8_rect"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="1dp"
+                android:textAppearance="@style/B3"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@id/tv_hashtag1"
+                app:layout_constraintTop_toBottomOf="@id/tv_introduce"
+                tools:backgroundTint="@color/hous_red_bg"
+                tools:text="부엉이" />
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="24dp"
                 android:text="@string/profile_rules"
