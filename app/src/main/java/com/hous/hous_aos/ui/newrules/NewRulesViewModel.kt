@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.hous.hous_aos.data.model.response.NewRulesResponse
 import com.hous.hous_aos.data.repository.NewRulesRepository
 import com.hous.hous_aos.ui.newrules.component.State
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -15,6 +16,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class NewRulesViewModel @Inject constructor(
     private val newRulesRepository: NewRulesRepository
 ) : ViewModel() {
@@ -160,7 +162,11 @@ class NewRulesViewModel @Inject constructor(
     }
 
     fun addNewRule() {
-        viewModelScope.launch { newRulesRepository.addNewRule(uiState.value) }
+        viewModelScope.launch {
+            newRulesRepository.addNewRule(uiState.value)
+                .onSuccess { Log.d("NewRulesViewModel", "success : ${it.message}") }
+                .onFailure { Log.d("NewRulesViewModel", "fail : ${it.message}") }
+        }
     }
 
     private fun nextManager(): NewRulesResponse.Homie {

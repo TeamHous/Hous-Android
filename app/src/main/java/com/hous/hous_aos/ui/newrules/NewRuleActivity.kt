@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.hous.hous_aos.databinding.ActivityNewRuleBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NewRuleActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewRuleBinding
     private val viewModel: NewRulesViewModel by viewModels()
