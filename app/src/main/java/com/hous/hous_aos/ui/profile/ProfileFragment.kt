@@ -34,7 +34,6 @@ class ProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        tagAdapter = null
     }
 
     private fun init() {
@@ -47,8 +46,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initInfo() {
-        binding.profileData = ProfileData("이영주", "대학생", "개발이 가장 쉬웠어요")
-    }
+        viewModel.profileData.observe(viewLifecycleOwner) {
             when (it.hashTag.size) {
                 0 -> {
                     binding.tvHashtag1.visibility = View.INVISIBLE
@@ -70,17 +68,8 @@ class ProfileFragment : Fragment() {
                     binding.tvHashtag2.text = it.hashTag[1]
                     binding.tvHashtag3.text = it.hashTag[2]
                 }
+            }
 
-    private fun initAdapter() {
-        tagAdapter = TagAdapter()
-        binding.rvTag.adapter = tagAdapter
-        requireNotNull(tagAdapter).submitList(
-            listOf<TagData>(
-                TagData("이빵주"),
-                TagData("팬더"),
-                TagData("안드로이드"),
-            )
-        )
             when (it.typeColor) {
                 "RED" -> {
                     binding.ivProfile.setDrawable(R.drawable.ic_profile_red)
@@ -119,5 +108,6 @@ class ProfileFragment : Fragment() {
                     binding.tvHashtag3.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
                 }
             }
+        }
     }
 }
