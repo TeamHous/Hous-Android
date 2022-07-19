@@ -133,7 +133,10 @@ fun NewRulesScreen(
                 )
             }
         }
-        NewRulesAddRuleButton(buttonState)
+        NewRulesAddRuleButton(
+            isAddButton = buttonState,
+            addNewRule = viewModel::addNewRule
+        )
     }
 }
 

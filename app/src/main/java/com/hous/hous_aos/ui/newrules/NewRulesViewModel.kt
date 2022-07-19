@@ -4,10 +4,20 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hous.hous_aos.data.model.response.NewRulesResponse
+import com.hous.hous_aos.data.repository.NewRulesRepository
 import com.hous.hous_aos.ui.newrules.component.State
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NewRulesViewModel : ViewModel() {
+class NewRulesViewModel @Inject constructor(
+    private val newRulesRepository: NewRulesRepository
+) : ViewModel() {
     private val _uiState = MutableStateFlow(NewRulesUiState())
     val uiState = _uiState.asStateFlow()
     val buttonState: StateFlow<Boolean> = uiState.map {
@@ -147,6 +157,10 @@ class NewRulesViewModel : ViewModel() {
         uiState.value.ManagerList.forEach { manager -> tempManagerList.add(manager) }
         tempManagerList.add(nextManager)
         _uiState.value = _uiState.value.copy(ManagerList = tempManagerList)
+    }
+
+    fun addNewRule() {
+        viewModelScope.launch { newRulesRepository.addNewRule(uiState.value) }
     }
 
     private fun nextManager(): NewRulesResponse.Homie {

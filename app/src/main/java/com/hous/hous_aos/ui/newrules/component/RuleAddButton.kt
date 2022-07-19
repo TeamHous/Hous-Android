@@ -20,7 +20,8 @@ import com.hous.hous_aos.R
 
 @Composable
 fun NewRulesAddRuleButton(
-    isAddButton: Boolean
+    isAddButton: Boolean,
+    addNewRule: () -> Unit
 ) {
     val color =
         if (isAddButton) colorResource(id = R.color.hous_blue) else colorResource(id = R.color.g_3)
@@ -31,7 +32,7 @@ fun NewRulesAddRuleButton(
             .clip(shape = RoundedCornerShape(15.dp))
             .background(color)
             .padding(vertical = 12.dp)
-            .clickable { /* 서버 통신 */ },
+            .clickable { addNewRule() },
         contentAlignment = Alignment.BottomCenter
     ) {
         Box(
