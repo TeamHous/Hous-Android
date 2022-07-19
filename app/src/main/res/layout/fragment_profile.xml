@@ -6,242 +6,275 @@
     <data>
 
         <variable
-            name="profileData"
-            type="com.hous.hous_aos.ui.profile.ProfileData" />
+            name="vm"
+            type="com.hous.hous_aos.ui.profile.ProfileViewModel" />
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/iv_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/ic_profile_default"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="10dp"
-            android:text="@{profileData.name}"
-            android:textAppearance="@style/B1"
-            android:textColor="@color/g_7"
-            app:layout_constraintStart_toEndOf="@id/iv_profile"
-            app:layout_constraintTop_toTopOf="@id/iv_profile"
-            tools:text="이영주" />
-
-        <TextView
-            android:id="@+id/tv_job"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="10dp"
-            android:text="@{profileData.job}"
-            android:textAppearance="@style/B3"
-            android:textColor="@color/hous_red"
-            app:layout_constraintBottom_toBottomOf="@id/tv_name"
-            app:layout_constraintStart_toEndOf="@id/tv_name"
-            tools:text="대학생" />
-
-        <TextView
-            android:id="@+id/tv_introduce"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="@{profileData.introduce}"
-            android:textAppearance="@style/B3"
-            android:textColor="@color/g_6"
-            app:layout_constraintStart_toStartOf="@id/tv_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_name"
-            tools:text="낮에 자고 밤에 일하는 부엉.." />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_tag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:orientation="horizontal"
-            android:overScrollMode="never"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="@id/tv_introduce"
-            app:layout_constraintTop_toBottomOf="@id/tv_introduce"
-            tools:listitem="@layout/item_profile_tag" />
-
-        <TextView
-            android:id="@+id/tv_tendency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="36dp"
-            android:text="@string/profile_my_tendency"
-            android:textAppearance="@style/B1"
-            android:textColor="@color/g_7"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_profile" />
-
-        <View
-            android:id="@+id/iv_tendency_bg"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="37dp"
-            android:background="@drawable/shape_red_bg_fill_15_rect"
-            app:layout_constraintBottom_toTopOf="@id/tv_badge"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_tendency" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_tendency"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="88dp"
-            android:layout_marginVertical="30dp"
-            android:background="@drawable/shape_red_fill_15_rect"
-            android:stateListAnimator="@null"
-            android:text="@string/profile_test"
-            android:textAppearance="@style/B1"
-            android:textColor="@color/test_color"
-            app:layout_constraintBottom_toBottomOf="@id/iv_tendency_bg"
-            app:layout_constraintEnd_toEndOf="@id/iv_tendency_bg"
-            app:layout_constraintStart_toStartOf="@id/iv_tendency_bg"
-            app:layout_constraintTop_toTopOf="@id/iv_tendency_bg" />
-
-        <TextView
-            android:id="@+id/tv_badge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="161dp"
-            android:text="@string/profile_my_badge"
-            android:textAppearance="@style/B1"
-            android:textColor="@color/g_7"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_tendency" />
-
-        <ImageView
-            android:id="@+id/iv_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_profile_next"
-            app:layout_constraintBottom_toBottomOf="@id/tv_detail"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_detail" />
-
-        <TextView
-            android:id="@+id/tv_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingVertical="12dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="4dp"
-            android:text="@string/profile_detail"
-            android:textAppearance="@style/B3"
-            android:textColor="@color/g_3"
-            app:layout_constraintBottom_toTopOf="@id/cl_badge"
-            app:layout_constraintEnd_toStartOf="@id/iv_next" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_badge"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/shape_red_bg_fill_15_rect"
-            android:paddingVertical="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_badge">
+            android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/iv_lock_1"
+                android:id="@+id/iv_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:background="@drawable/shape_red_bg2_fill_circle"
-                android:padding="23dp"
-                android:src="@drawable/ic_profile_lock"
-                app:layout_constraintEnd_toStartOf="@id/iv_lock_2"
-                app:layout_constraintHorizontal_chainStyle="spread"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_profile_default"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_lock_1"
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="24dp"
-                android:text="@string/profile_rules_1"
-                android:textAppearance="@style/Description"
-                android:textColor="@color/hous_black"
-                app:layout_constraintEnd_toEndOf="@id/iv_lock_1"
-                app:layout_constraintStart_toStartOf="@id/iv_lock_1"
-                app:layout_constraintTop_toBottomOf="@id/iv_lock_1" />
-
-            <ImageView
-                android:id="@+id/iv_lock_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:background="@drawable/shape_red_bg2_fill_circle"
-                android:padding="23dp"
-                android:src="@drawable/ic_profile_lock"
-                app:layout_constraintEnd_toStartOf="@id/iv_lock_3"
-                app:layout_constraintStart_toEndOf="@id/iv_lock_1"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="10dp"
+                android:text="@{vm.profileData.userName}"
+                android:textAppearance="@style/B1"
+                android:textColor="@color/g_7"
+                app:layout_constraintStart_toEndOf="@id/iv_profile"
+                app:layout_constraintTop_toTopOf="@id/iv_profile"
+                tools:text="이영주" />
 
             <TextView
-                android:id="@+id/tv_lock_2"
+                android:id="@+id/tv_job"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="24dp"
-                android:text="@string/profile_rules_2"
-                android:textAppearance="@style/Description"
-                android:textColor="@color/hous_black"
-                app:layout_constraintEnd_toEndOf="@id/iv_lock_2"
-                app:layout_constraintStart_toStartOf="@id/iv_lock_2"
-                app:layout_constraintTop_toBottomOf="@id/iv_lock_2" />
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                android:text="@{vm.profileData.job}"
+                android:textAppearance="@style/B3"
+                android:textColor="@color/hous_red"
+                app:layout_constraintBottom_toBottomOf="@id/tv_name"
+                app:layout_constraintStart_toEndOf="@id/tv_name"
+                tools:text="대학생" />
 
-            <ImageView
-                android:id="@+id/iv_lock_3"
+            <TextView
+                android:id="@+id/tv_introduce"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:background="@drawable/shape_red_bg2_fill_circle"
-                android:padding="23dp"
-                android:src="@drawable/ic_profile_lock"
+                android:layout_marginTop="6dp"
+                android:text="@{vm.profileData.introduction}"
+                android:textAppearance="@style/B3"
+                android:textColor="@color/g_6"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_name"
+                tools:text="낮에 자고 밤에 일하는 부엉.." />
+
+            <TextView
+                android:id="@+id/tv_hashtag1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/shape_red_bg2_fill_8_rect"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="1dp"
+                android:textAppearance="@style/B3"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@id/tv_introduce"
+                app:layout_constraintTop_toBottomOf="@id/tv_introduce"
+                tools:backgroundTint="@color/hous_red_bg"
+                tools:text="부엉이" />
+
+            <TextView
+                android:id="@+id/tv_hashtag2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/shape_red_bg2_fill_8_rect"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="1dp"
+                android:textAppearance="@style/B3"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@id/tv_hashtag1"
+                app:layout_constraintTop_toBottomOf="@id/tv_introduce"
+                tools:backgroundTint="@color/hous_red_bg"
+                tools:text="부엉이" />
+
+            <TextView
+                android:id="@+id/tv_hashtag3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/shape_red_bg2_fill_8_rect"
+                android:paddingHorizontal="6dp"
+                android:paddingVertical="1dp"
+                android:textAppearance="@style/B3"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@id/tv_hashtag2"
+                app:layout_constraintTop_toBottomOf="@id/tv_introduce"
+                tools:backgroundTint="@color/hous_red_bg"
+                tools:text="부엉이" />
+
+            <TextView
+                android:id="@+id/tv_tendency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="36dp"
+                android:text="@string/profile_my_tendency"
+                android:textAppearance="@style/B1"
+                android:textColor="@color/g_7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_profile" />
+
+            <View
+                android:id="@+id/iv_tendency_bg"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="37dp"
+                android:background="@drawable/shape_red_bg_fill_15_rect"
+                app:layout_constraintBottom_toTopOf="@id/tv_badge"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/iv_lock_2"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_tendency" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_tendency"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="88dp"
+                android:layout_marginVertical="30dp"
+                android:background="@drawable/shape_red_fill_15_rect"
+                android:stateListAnimator="@null"
+                android:text="@string/profile_test"
+                android:textAppearance="@style/B1"
+                android:textColor="@color/test_color"
+                app:layout_constraintBottom_toBottomOf="@id/iv_tendency_bg"
+                app:layout_constraintEnd_toEndOf="@id/iv_tendency_bg"
+                app:layout_constraintStart_toStartOf="@id/iv_tendency_bg"
+                app:layout_constraintTop_toTopOf="@id/iv_tendency_bg" />
 
             <TextView
-                android:id="@+id/tv_lock_3"
+                android:id="@+id/tv_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="161dp"
+                android:text="@string/profile_my_badge"
+                android:textAppearance="@style/B1"
+                android:textColor="@color/g_7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_tendency" />
+
+            <ImageView
+                android:id="@+id/iv_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_profile_next"
+                app:layout_constraintBottom_toBottomOf="@id/tv_detail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_detail" />
+
+            <TextView
+                android:id="@+id/tv_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/profile_detail"
+                android:textAppearance="@style/B3"
+                android:textColor="@color/g_3"
+                app:layout_constraintBottom_toBottomOf="@id/tv_badge"
+                app:layout_constraintEnd_toStartOf="@id/iv_next" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="12dp"
-                android:layout_marginBottom="24dp"
-                android:text="@string/profile_rules_3"
-                android:textAppearance="@style/Description"
-                android:textColor="@color/hous_black"
-                app:layout_constraintEnd_toEndOf="@id/iv_lock_3"
-                app:layout_constraintStart_toStartOf="@id/iv_lock_3"
-                app:layout_constraintTop_toBottomOf="@id/iv_lock_3" />
+                android:background="@drawable/shape_red_bg_fill_15_rect"
+                android:paddingVertical="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_badge">
 
+                <ImageView
+                    android:id="@+id/iv_lock_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@drawable/shape_red_bg2_fill_circle"
+                    android:padding="23dp"
+                    android:src="@drawable/ic_profile_lock"
+                    app:layout_constraintEnd_toStartOf="@id/iv_lock_2"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/tv_lock_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="@string/profile_rules"
+                    android:textAppearance="@style/Description"
+                    android:textColor="@color/hous_black"
+                    app:layout_constraintEnd_toEndOf="@id/iv_lock_1"
+                    app:layout_constraintStart_toStartOf="@id/iv_lock_1"
+                    app:layout_constraintTop_toBottomOf="@id/iv_lock_1" />
+
+                <ImageView
+                    android:id="@+id/iv_lock_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@drawable/shape_red_bg2_fill_circle"
+                    android:padding="23dp"
+                    android:src="@drawable/ic_profile_lock"
+                    app:layout_constraintEnd_toStartOf="@id/iv_lock_3"
+                    app:layout_constraintStart_toEndOf="@id/iv_lock_1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_lock_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="@string/profile_rules"
+                    android:textAppearance="@style/Description"
+                    android:textColor="@color/hous_black"
+                    app:layout_constraintEnd_toEndOf="@id/iv_lock_2"
+                    app:layout_constraintStart_toStartOf="@id/iv_lock_2"
+                    app:layout_constraintTop_toBottomOf="@id/iv_lock_2" />
+
+                <ImageView
+                    android:id="@+id/iv_lock_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@drawable/shape_red_bg2_fill_circle"
+                    android:padding="23dp"
+                    android:src="@drawable/ic_profile_lock"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_lock_2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_lock_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="@string/profile_rules"
+                    android:textAppearance="@style/Description"
+                    android:textColor="@color/hous_black"
+                    app:layout_constraintEnd_toEndOf="@id/iv_lock_3"
+                    app:layout_constraintStart_toStartOf="@id/iv_lock_3"
+                    app:layout_constraintTop_toBottomOf="@id/iv_lock_3" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
