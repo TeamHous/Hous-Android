@@ -56,7 +56,7 @@ class RulesViewModel : ViewModel() {
     }
 
     fun fetchToTmpManagerList() {
-        _tmpManagerList.value = listOf(
+        val tmp = listOf(
             HomieData(
                 id = "62cc7409csdsd06c46adf652f",
                 userName = "이준원",
@@ -88,10 +88,11 @@ class RulesViewModel : ViewModel() {
                 typeColor = "GRAY"
             )
         )
+        _tmpManagerList.value = tmp.map { it.copy() }
     }
 
     fun fetchToGeneralRulesTableList() {
-        _generalRulesTableList.value = listOf(
+        val tmp = listOf(
             GeneralRulesData(
                 id = "62cc74e8dasdasd591384e4ecd",
                 ruleName = "설거지하기",
@@ -131,19 +132,20 @@ class RulesViewModel : ViewModel() {
                 typeColors = listOf()
             )
         )
+        _generalRulesTableList.value = tmp.map { it.copy() }
     }
 
     fun fetchToKeyRulesTableList() {
-        _keyRulesTableList.value = listOf(
+        val tmp = listOf(
             KeyRulesData(
                 id = "62cc81ac1a034f0287c5c6ec",
                 ruleName = "상단규칙"
             )
         )
+        _keyRulesTableList.value = tmp.map { it.copy() }
     }
 
     fun fetchToCategoryOfRuleList() {
-
         _categoryOfRuleList.value = mutableListOf(
             CategoryOfRuleResponse(
                 name = "라면을",
