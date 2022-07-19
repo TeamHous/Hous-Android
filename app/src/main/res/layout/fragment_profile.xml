@@ -8,6 +8,8 @@
         <variable
             name="profileData"
             type="com.hous.hous_aos.ui.profile.ProfileData" />
+            name="vm"
+            type="com.hous.hous_aos.ui.profile.ProfileViewModel" />
 
     </data>
 
