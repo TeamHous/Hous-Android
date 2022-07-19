@@ -3,6 +3,7 @@ package com.hous.hous_aos.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hous.hous_aos.data.entity.Event
+import com.hous.hous_aos.data.entity.Rule
 
 class HomeViewModel : ViewModel() {
     private val _eventList = MutableLiveData<List<Event>>(
@@ -54,22 +55,19 @@ class HomeViewModel : ViewModel() {
     )
     val keyRulesList get() = _keyRulesList
 
-    private val _todoList = MutableLiveData<List<ToDoData>>(
-        listOf(
-            ToDoData(
-                isCheck = false,
-                todoName = "빨래를돌려야하는데언제돌리지젠장",
-                createdAt = "2022-07-11T20:00:10.985Z"
+    private val _todoList = MutableLiveData<List<Rule>>(
+         listOf(
+            Rule(
+                isChecked = true,
+                ruleName = "빨래를돌려야하는데언제돌리지젠장",
             ),
-            ToDoData(
-                isCheck = true,
-                todoName = "청소기도돌려야하는데언제하지젠장",
-                createdAt = "2022-07-11T20:00:10.985Z"
+            Rule(
+                isChecked = false,
+                ruleName = "청소기도돌려야하는데언제하지젠장",
             ),
-            ToDoData(
-                isCheck = true,
-                todoName = "커미사마셔야하는데배가아프네젠장",
-                createdAt = "2022-07-11T20:00:10.985Z"
+            Rule(
+                isChecked = false,
+                ruleName = "커미사마셔야하는데배가아프네젠장",
             )
         )
     )
