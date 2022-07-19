@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="profileData"
-            type="com.hous.hous_aos.ui.home.ProfileData" />
+            name="homie"
+            type="com.hous.hous_aos.ui.home.HomieData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

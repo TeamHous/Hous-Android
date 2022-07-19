@@ -23,14 +23,15 @@ class ToDoAdapter : ListAdapter<ToDoData, ToDoAdapter.ToDoViewHolder>(toDoDiffUt
     class ToDoViewHolder(val binding: ItemHomeToDoBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: ToDoData) {
-            binding.toDoData = data
+            binding.cbToDo.isChecked = data.isCheck != false
+            binding.todo = data
         }
     }
 
     companion object {
         private val toDoDiffUtil = object : DiffUtil.ItemCallback<ToDoData>() {
             override fun areItemsTheSame(oldItem: ToDoData, newItem: ToDoData): Boolean =
-                oldItem.rules == newItem.rules
+                oldItem.todoName == newItem.todoName
 
             override fun areContentsTheSame(oldItem: ToDoData, newItem: ToDoData): Boolean =
                 oldItem == newItem

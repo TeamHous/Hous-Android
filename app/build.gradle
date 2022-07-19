@@ -38,6 +38,7 @@ android {
         versionName "1.0"
         buildConfigField "String", "HOUS_URL", properties["HOUS_URL"]
         buildConfigField "String", "DUMMY_ACCESS_TOKEN", properties["DUMMY_ACCESS_TOKEN"]
+        buildConfigField "String", "ROOM_ID", properties["ROOM_ID"]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -57,6 +58,9 @@ android {
 }
 
 dependencies {
+    // Coil
+    implementation "io.coil-kt:coil:2.1.0"
+
     // compose
     implementation 'androidx.activity:activity-compose:1.5.0'
     implementation 'androidx.compose.material:material:1.1.1'
