@@ -8,7 +8,7 @@ data class NewRulesRequest(
     val ruleMember: List<Member> = emptyList(),
 ) {
     data class Member(
-        val userId: String,
-        val day: List<Int>
+        val userId: String? = null,
+        val day: List<Int> = emptyList()
     )
 }
