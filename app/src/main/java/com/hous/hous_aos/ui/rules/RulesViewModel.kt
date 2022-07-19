@@ -240,6 +240,30 @@ class RulesViewModel : ViewModel() {
                     ManagerData(id = "sdklsadsdasd", name = "김혜정"),
                 ),
                 iconList = listOf("green", "gray")
+            ),
+            TodayTodoResponse(
+                id = "sdssdmkvalmdasld,kassnm",
+                number = 2,
+                isAllChecked = false,
+                isTemporaryManager = true,
+                ruleName = "냉장고 정리하기",
+                managerDataList = listOf(
+                    ManagerData(id = "sdklmsdbasdfkvnds", name = "공혁준"),
+                    ManagerData(id = "sdklsadsdasd", name = "김혜정"),
+                ),
+                iconList = listOf("green", "gray")
+            ),
+            TodayTodoResponse(
+                id = "sdssdmkvalmdasld,kassnm",
+                number = 2,
+                isAllChecked = false,
+                isTemporaryManager = true,
+                ruleName = "냉장고 정리하기",
+                managerDataList = listOf(
+                    ManagerData(id = "sdklmsdbasdfkvnds", name = "공혁준"),
+                    ManagerData(id = "sdklsadsdasd", name = "김혜정"),
+                ),
+                iconList = listOf("green", "gray")
             )
         )
         _todayTodoList.value = tmpTodayToDoList.map { data ->
