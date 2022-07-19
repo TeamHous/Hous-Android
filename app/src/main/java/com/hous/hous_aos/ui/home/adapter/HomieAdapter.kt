@@ -66,27 +66,27 @@ class HomieAdapter(
             when (data.typeColor) {
                 "YELLOW" -> {
                     binding.clHomie.setBackgroundResource(R.drawable.shape_yellow_bg_fill_10_rect)
-                    binding.ivHomie.setImageResource(R.drawable.ic_profile_yellow)
+                    binding.ivHomie.setImageResource(R.drawable.ic_s_yellow)
                 }
                 "GREEN" -> {
                     binding.clHomie.setBackgroundResource(R.drawable.shape_green_bg_fill_10_rect)
-                    binding.ivHomie.setImageResource(R.drawable.ic_profile_green)
+                    binding.ivHomie.setImageResource(R.drawable.ic_s_green)
                 }
                 "RED" -> {
                     binding.clHomie.setBackgroundResource(R.drawable.shape_red_bg_fill_10_rect)
-                    binding.ivHomie.setImageResource(R.drawable.ic_profile_red)
+                    binding.ivHomie.setImageResource(R.drawable.ic_s_red)
                 }
                 "BLUE" -> {
                     binding.clHomie.setBackgroundResource(R.drawable.shape_blue_bg_fill_10_rect)
-                    binding.ivHomie.setImageResource(R.drawable.ic_profile_blue)
+                    binding.ivHomie.setImageResource(R.drawable.ic_s_blue)
                 }
                 "PURPLE" -> {
                     binding.clHomie.setBackgroundResource(R.drawable.shape_purple_bg_fill_10_rect)
-                    binding.ivHomie.setImageResource(R.drawable.ic_profile_purple)
+                    binding.ivHomie.setImageResource(R.drawable.ic_s_purple)
                 }
                 else -> {
                     binding.clHomie.setBackgroundResource(R.drawable.shape_g2_fill_10_rect)
-                    binding.ivHomie.setImageResource(R.drawable.ic_profile_gray)
+                    binding.ivHomie.setImageResource(R.drawable.ic_s_gray)
                 }
             }
         }
