@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
-import com.hous.hous_aos.data.model.response.NewRulesResponse
+import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.ui.newrules.Manager
 
 @Composable
@@ -27,10 +27,10 @@ fun ManagerBox(
     radius: Dp,
     managerIndex: Int,
     manager: Manager,
-    homies: List<NewRulesResponse.Homie>,
+    homies: List<Homie>,
     homieState: HashMap<String, Boolean>,
     checkBoxState: State,
-    choiceManager: (Int, NewRulesResponse.Homie) -> Unit
+    choiceManager: (Int, Homie) -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -63,7 +63,7 @@ fun ManagerBox(
                 Spacer(modifier = Modifier.size(6.dp))
             }
             Text(
-                text = manager.managerHomie.name,
+                text = manager.managerHomie.userName,
                 fontStyle = FontStyle(R.style.B2),
                 color = colorResource(id = R.color.black)
             )

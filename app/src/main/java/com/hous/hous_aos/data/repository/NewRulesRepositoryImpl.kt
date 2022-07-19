@@ -15,7 +15,7 @@ class NewRulesRepositoryImpl @Inject constructor(
         val ruleMember = newRulesUiState.ManagerList.map {
             val dayList = dayToInt(it.dayDataList)
             NewRulesRequest.Member(
-                userId = it.managerHomie._id,
+                userId = it.managerHomie.id,
                 day = dayList
             )
         }

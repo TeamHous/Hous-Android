@@ -2,12 +2,16 @@ package com.hous.hous_aos.ui.newrules
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -19,8 +23,14 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
-import com.hous.hous_aos.data.model.response.NewRulesResponse
-import com.hous.hous_aos.ui.newrules.component.*
+import com.hous.hous_aos.data.entity.Homie
+import com.hous.hous_aos.ui.newrules.component.CategoryItem
+import com.hous.hous_aos.ui.newrules.component.ManagerItem
+import com.hous.hous_aos.ui.newrules.component.NewRulesAddMangerButton
+import com.hous.hous_aos.ui.newrules.component.NewRulesAddRuleButton
+import com.hous.hous_aos.ui.newrules.component.NewRulesCheckBox
+import com.hous.hous_aos.ui.newrules.component.NewRulesTextField
+import com.hous.hous_aos.ui.newrules.component.NewRulesToolbar
 
 @Composable
 fun NewRulesScreen(
@@ -140,33 +150,13 @@ fun NewRulesScreen(
     }
 }
 
-fun IsAdd(
-    test: MutableState<List<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>>
-): Boolean {
-    var isAdd = true
-    for (dayList in test.value) {
-        var temp = false
-        for (dayState in dayList.second) {
-            if (dayState.second.value == State.SELECT) {
-                temp = true
-                break
-            }
-        }
-        if (!temp) {
-            isAdd = false
-            break
-        }
-    }
-    return isAdd
-}
-
 fun isAddDay(
-    homies: List<NewRulesResponse.Homie>,
+    homies: List<Homie>,
     homieState: HashMap<String, Boolean>
 ): Boolean {
     var temp = false
     homies.forEach { h ->
-        if (homieState[h.name]!!) temp = true
+        if (homieState[h.userName]!!) temp = true
     }
     return temp
 }
