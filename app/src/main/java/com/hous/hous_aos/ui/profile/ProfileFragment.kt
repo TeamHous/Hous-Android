@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentProfileBinding
+import com.hous.hous_aos.util.setDrawable
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    private var tagAdapter: TagAdapter? = null
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,6 +22,9 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
+        binding.vm = viewModel
+        binding.lifecycleOwner = this
+
         initAdapter()
         initInfo()
         init()
