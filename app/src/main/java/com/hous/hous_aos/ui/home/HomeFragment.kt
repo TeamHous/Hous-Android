@@ -8,7 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hous.hous_aos.databinding.FragmentHomeBinding
-import com.hous.hous_aos.ui.home.adapter.*
+import com.hous.hous_aos.ui.home.adapter.EventAdapter
+import com.hous.hous_aos.ui.home.adapter.HomieAdapter
+import com.hous.hous_aos.ui.home.adapter.RulesAdapter
+import com.hous.hous_aos.ui.home.adapter.ToDoAdapter
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -35,13 +38,6 @@ class HomeFragment : Fragment() {
         initToDoAdapter()
         initHomieAdapter()
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.apply {
-
-        }
     }
 
     override fun onDestroyView() {
