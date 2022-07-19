@@ -2,34 +2,45 @@ package com.hous.hous_aos.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.hous.hous_aos.data.entity.Event
 
 class HomeViewModel : ViewModel() {
-    private val _eventList = MutableLiveData<List<EventData>>(
+    private val _eventList = MutableLiveData<List<Event>>(
         listOf(
-            EventData(
-                _id = "",
-                eventIcon = "NONE",
+            Event(
+                id = "",
+                eventIcon = "",
                 dDay = ""
             ),
-            EventData(
-                _id = "62cdab999b7fca5900cff7df",
+            Event(
+                id = "",
                 eventIcon = "PARTY",
-                dDay = "1"
+                dDay = "12"
             ),
-            EventData(
-                _id = "62cdab999b7fca5900cff7df",
+            Event(
+                id = "",
+                eventIcon = "BEER",
+                dDay = "8"
+            ),
+            Event(
+                id = "",
+                eventIcon = "COFFEE",
+                dDay = "5"
+            ),
+            Event(
+                id = "",
+                eventIcon = "CAKE",
+                dDay = "3"
+            ),
+            Event(
+                id = "",
                 eventIcon = "COFFEE",
                 dDay = "2"
             ),
-            EventData(
-                _id = "62cdab999b7fca5900cff7df",
-                eventIcon = "BEER",
-                dDay = "3"
-            ),
-            EventData(
-                _id = "62cdab999b7fca5900cff7df",
+            Event(
+                id = "",
                 eventIcon = "PARTY",
-                dDay = "4"
+                dDay = "1"
             ),
         )
     )
