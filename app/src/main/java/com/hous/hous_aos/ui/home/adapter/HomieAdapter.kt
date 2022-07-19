@@ -63,6 +63,32 @@ class HomieAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: HomieData) {
             binding.homie = data
+            when (data.typeColor) {
+                "YELLOW" -> {
+                    binding.clHomie.setBackgroundResource(R.drawable.shape_yellow_bg_fill_10_rect)
+                    binding.ivHomie.setImageResource(R.drawable.ic_profile_yellow)
+                }
+                "GREEN" -> {
+                    binding.clHomie.setBackgroundResource(R.drawable.shape_green_bg_fill_10_rect)
+                    binding.ivHomie.setImageResource(R.drawable.ic_profile_green)
+                }
+                "RED" -> {
+                    binding.clHomie.setBackgroundResource(R.drawable.shape_red_bg_fill_10_rect)
+                    binding.ivHomie.setImageResource(R.drawable.ic_profile_red)
+                }
+                "BLUE" -> {
+                    binding.clHomie.setBackgroundResource(R.drawable.shape_blue_bg_fill_10_rect)
+                    binding.ivHomie.setImageResource(R.drawable.ic_profile_blue)
+                }
+                "PURPLE" -> {
+                    binding.clHomie.setBackgroundResource(R.drawable.shape_purple_bg_fill_10_rect)
+                    binding.ivHomie.setImageResource(R.drawable.ic_profile_purple)
+                }
+                else -> {
+                    binding.clHomie.setBackgroundResource(R.drawable.shape_g2_fill_10_rect)
+                    binding.ivHomie.setImageResource(R.drawable.ic_profile_gray)
+                }
+            }
         }
     }
 
