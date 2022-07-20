@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hous.hous_aos.R
-import com.hous.hous_aos.data.entity.rules.HomieData
+import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.databinding.ItemHomeHomieBinding
 import com.hous.hous_aos.databinding.ItemHomeHomieCopyBinding
 
 class HomieAdapter(
     private val showToast: () -> Unit
 ) :
-    ListAdapter<HomieData, RecyclerView.ViewHolder>(homieDiffUtil) {
+    ListAdapter<Homie, RecyclerView.ViewHolder>(homieDiffUtil) {
 
     private lateinit var itemHomeHomieBinding: ItemHomeHomieBinding
     private lateinit var itemHomeHomieCopyBinding: ItemHomeHomieCopyBinding
@@ -61,32 +61,32 @@ class HomieAdapter(
 
     class HomieViewHolder(val binding: ItemHomeHomieBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: HomieData) {
+        fun onBind(data: Homie) {
             binding.homie = data
             when (data.typeColor) {
                 "YELLOW" -> {
                     binding.clHomie.setBackgroundResource(R.drawable.shape_yellow_bg_fill_10_rect)
-                    binding.ivHomie.setImageResource(R.drawable.ic_profile_yellow)
+                    binding.ivHomie.setImageResource(R.drawable.ic_s_yellow)
                 }
                 "GREEN" -> {
                     binding.clHomie.setBackgroundResource(R.drawable.shape_green_bg_fill_10_rect)
-                    binding.ivHomie.setImageResource(R.drawable.ic_profile_green)
+                    binding.ivHomie.setImageResource(R.drawable.ic_s_green)
                 }
                 "RED" -> {
                     binding.clHomie.setBackgroundResource(R.drawable.shape_red_bg_fill_10_rect)
-                    binding.ivHomie.setImageResource(R.drawable.ic_profile_red)
+                    binding.ivHomie.setImageResource(R.drawable.ic_s_red)
                 }
                 "BLUE" -> {
                     binding.clHomie.setBackgroundResource(R.drawable.shape_blue_bg_fill_10_rect)
-                    binding.ivHomie.setImageResource(R.drawable.ic_profile_blue)
+                    binding.ivHomie.setImageResource(R.drawable.ic_s_blue)
                 }
                 "PURPLE" -> {
                     binding.clHomie.setBackgroundResource(R.drawable.shape_purple_bg_fill_10_rect)
-                    binding.ivHomie.setImageResource(R.drawable.ic_profile_purple)
+                    binding.ivHomie.setImageResource(R.drawable.ic_s_purple)
                 }
                 else -> {
                     binding.clHomie.setBackgroundResource(R.drawable.shape_g2_fill_10_rect)
-                    binding.ivHomie.setImageResource(R.drawable.ic_profile_gray)
+                    binding.ivHomie.setImageResource(R.drawable.ic_s_gray)
                 }
             }
         }
@@ -103,11 +103,11 @@ class HomieAdapter(
     }
 
     companion object {
-        private val homieDiffUtil = object : DiffUtil.ItemCallback<HomieData>() {
-            override fun areItemsTheSame(oldItem: HomieData, newItem: HomieData): Boolean =
-                oldItem.userName == newItem.userName
+        private val homieDiffUtil = object : DiffUtil.ItemCallback<Homie>() {
+            override fun areItemsTheSame(oldItem: Homie, newItem: Homie): Boolean =
+                oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: HomieData, newItem: HomieData): Boolean =
+            override fun areContentsTheSame(oldItem: Homie, newItem: Homie): Boolean =
                 oldItem == newItem
         }
 
