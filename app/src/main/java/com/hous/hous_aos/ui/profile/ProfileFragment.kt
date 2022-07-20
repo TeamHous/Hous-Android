@@ -47,19 +47,19 @@ class ProfileFragment : Fragment() {
         viewModel.profileData.observe(viewLifecycleOwner) {
             when (it.hashTag.size) {
                 0 -> {
-                    binding.tvHashtag1.visibility = View.INVISIBLE
-                    binding.tvHashtag2.visibility = View.INVISIBLE
-                    binding.tvHashtag3.visibility = View.INVISIBLE
+                    binding.tvHashtag1.visibility = View.GONE
+                    binding.tvHashtag2.visibility = View.GONE
+                    binding.tvHashtag3.visibility = View.GONE
                 }
                 1 -> {
                     binding.tvHashtag1.text = it.hashTag[0]
-                    binding.tvHashtag2.visibility = View.INVISIBLE
-                    binding.tvHashtag3.visibility = View.INVISIBLE
+                    binding.tvHashtag2.visibility = View.GONE
+                    binding.tvHashtag3.visibility = View.GONE
                 }
                 2 -> {
                     binding.tvHashtag1.text = it.hashTag[0]
                     binding.tvHashtag2.text = it.hashTag[1]
-                    binding.tvHashtag3.visibility = View.INVISIBLE
+                    binding.tvHashtag3.visibility = View.GONE
                 }
                 3 -> {
                     binding.tvHashtag1.text = it.hashTag[0]
