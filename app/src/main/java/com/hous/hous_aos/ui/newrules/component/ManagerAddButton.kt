@@ -17,12 +17,12 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
-import com.hous.hous_aos.data.model.response.NewRulesResponse
+import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.ui.newrules.isAddDay
 
 @Composable
 fun NewRulesAddMangerButton(
-    homies: List<NewRulesResponse.Homie>,
+    homies: List<Homie>,
     homieState: HashMap<String, Boolean>,
     isShowAddButton: () -> Boolean,
     addManager: () -> Unit

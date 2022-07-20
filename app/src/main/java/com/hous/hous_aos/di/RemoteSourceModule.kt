@@ -2,6 +2,8 @@ package com.hous.hous_aos.di
 
 import com.hous.hous_aos.data.source.remote.RemoteHomeDataSource
 import com.hous.hous_aos.data.source.remote.RemoteHomeDataSourceImpl
+import com.hous.hous_aos.data.source.remote.RemoteNewRulesDataSource
+import com.hous.hous_aos.data.source.remote.RemoteNewRulesDataSourceImpl
 import com.hous.hous_aos.data.source.remote.RemoteProfileDataSource
 import com.hous.hous_aos.data.source.remote.RemoteProfileDataSourceImpl
 import com.hous.hous_aos.data.source.remote.RemoteRulesDataSource
@@ -32,4 +34,10 @@ object RemoteSourceModule {
     fun providesRemoteProfileSource(
         impl: RemoteProfileDataSourceImpl
     ): RemoteProfileDataSource = impl
+
+    @Provides
+    @Singleton
+    fun providesRemoteNewRulesSource(
+        impl: RemoteNewRulesDataSourceImpl
+    ): RemoteNewRulesDataSource = impl
 }

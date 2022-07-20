@@ -3,7 +3,7 @@ package com.hous.hous_aos.data.entity
 import com.google.gson.annotations.SerializedName
 
 data class Homie(
-    @SerializedName("_id") val id: String = "",
+    @SerializedName("_id") val id: String? = null,
     val userName: String = "",
     val typeName: String = "",
     val typeColor: String = "",

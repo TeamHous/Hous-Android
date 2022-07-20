@@ -108,6 +108,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun replace(Position: Int){
+        when(Position){
+            HOME-> binding.botNavMain.selectedItemId = R.id.ic_bot_nav_home
+            RULES-> binding.botNavMain.selectedItemId = R.id.ic_bot_nav_rules
+            PROFILE-> binding.botNavMain.selectedItemId = R.id.ic_bot_nav_profile
+        }
+
+    }
+
     companion object {
         val HOME = 0
         val RULES = 1
