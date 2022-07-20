@@ -1,17 +1,22 @@
 package com.hous.hous_aos.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentHomeBinding
 import com.hous.hous_aos.ui.home.adapter.EventAdapter
 import com.hous.hous_aos.ui.home.adapter.HomieAdapter
 import com.hous.hous_aos.ui.home.adapter.RulesAdapter
 import com.hous.hous_aos.ui.home.adapter.ToDoAdapter
+import com.hous.hous_aos.ui.main.MainActivity
+import com.hous.hous_aos.util.showToast
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -91,7 +96,11 @@ class HomeFragment : Fragment() {
 
     private fun initHomieAdapter() {
         viewModel.homieList.observe(viewLifecycleOwner) {
-            homieAdapter = HomieAdapter(showToast = ::showToast)
+            homieAdapter = HomieAdapter(
+                showToast = ::showToast,
+                onClickMe = ::onClickMe,
+                onClickHomie = ::onClickHomie
+            )
             binding.rvProfile.adapter = homieAdapter
             requireNotNull(homieAdapter).submitList(it.toList())
         }
@@ -101,9 +110,19 @@ class HomeFragment : Fragment() {
     }
 
     private fun showToast() {
+        requireActivity().showToast(getString(R.string.copy_code))
     }
 
-    companion object {
+    private fun onClickMe() {
+        val profile = 2
+        (activity as MainActivity).replace(profile)
+    }
+
+    private fun onClickHomie() {
+        val intent = Intent(context, RoommateCardActivity::class.java)
+        startActivity(intent)
+    }
+companion object {
         const val HOME_FRAGMENT = "HOME_FRAGMENT"
     }
 }

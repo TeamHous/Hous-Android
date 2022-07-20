@@ -108,6 +108,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_yellow_fill_20_rect"
+            android:paddingTop="10dp"
+            android:paddingBottom="2dp"
             app:itemIconTint="@color/sel_bot_navi_home_color"
             app:itemTextColor="@color/sel_bot_navi_home_color"
             app:labelVisibilityMode="labeled"
