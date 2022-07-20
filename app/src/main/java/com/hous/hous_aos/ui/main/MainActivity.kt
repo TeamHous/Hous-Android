@@ -12,7 +12,9 @@ import com.hous.hous_aos.databinding.ActivityMainBinding
 import com.hous.hous_aos.ui.home.HomeFragment
 import com.hous.hous_aos.ui.profile.ProfileFragment
 import com.hous.hous_aos.ui.rules.RulesFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
