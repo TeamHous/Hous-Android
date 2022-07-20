@@ -21,7 +21,12 @@ class RoommateCardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_roommate_card)
         setContentView(binding.root)
+        init()
+    }
+
+    private fun init() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
+        }
     }
 }
