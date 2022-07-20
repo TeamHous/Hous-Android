@@ -16,8 +16,9 @@ import com.hous.hous_aos.ui.rules.my_to_do.MyToDoFragment
 import com.hous.hous_aos.ui.rules.new_category.NewCategoryFragment
 import com.hous.hous_aos.ui.rules.rules_table.RulesTableFragment
 import com.hous.hous_aos.ui.rules.today_to_do.TodayToDoFragment
-import com.hous.hous_aos.util.showToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RulesFragment : Fragment() {
     private var _binding: FragmentRulesBinding? = null
     private val binding get() = _binding ?: error("null값 들어감")
@@ -37,7 +38,7 @@ class RulesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchToCategoryOfRuleList()
+
         initTransaction()
         initAdapter()
         observeCategory()
@@ -95,6 +96,7 @@ class RulesFragment : Fragment() {
             }
         }
     }
+
     /** RulesTableFragment로 이동 */
     private fun onClickCategoryIcon() {
         viewModel.setSmileSelected(false)

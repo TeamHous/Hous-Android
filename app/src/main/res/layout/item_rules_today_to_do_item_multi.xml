@@ -70,6 +70,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginTop="1dp"
+                    android:layout_marginStart="1dp"
                     android:layout_marginEnd="1dp"
                     app:cardCornerRadius="50dp"
                     app:colorRes="@{count>=3 ? iconColorThree.colorRes : -1}"
