@@ -16,7 +16,9 @@ import com.hous.hous_aos.ui.home.adapter.RulesAdapter
 import com.hous.hous_aos.ui.home.adapter.ToDoAdapter
 import com.hous.hous_aos.ui.main.MainActivity
 import com.hous.hous_aos.util.showToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -105,9 +107,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun roomCode() {
-    }
-
     private fun showToast() {
         requireActivity().showToast(getString(R.string.copy_code))
     }
@@ -118,7 +117,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun onClickHomie() {
-        val intent = Intent(context, RoommateCardActivity::class.java)
+        val intent = Intent(requireActivity(), RoommateCardActivity::class.java)
         startActivity(intent)
     }
 

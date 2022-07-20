@@ -1,14 +1,23 @@
 package com.hous.hous_aos.ui.home
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.hous.hous_aos.data.entity.Event
 import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.entity.Rule
+import com.hous.hous_aos.data.repository.HomeRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import javax.inject.Inject
 
-class EventViewModel : ViewModel() {
+@HiltViewModel
+class EventViewModel @Inject constructor(
+    private val homeRepository: HomeRepository
+) : ViewModel() {
     private var _eventDate = MutableLiveData<String>("")
     val eventDate get() = _eventDate
 
@@ -148,107 +157,40 @@ class EventViewModel : ViewModel() {
     /**************************************************************************************************
      *  영주 코드
      */
-    private val _eventList = MutableLiveData<List<Event>>(
-        listOf(
-            Event(
-                id = "",
-                eventIcon = "NONE",
-                dDay = ""
-            ),
-            Event(
-                id = "62cdab999b7fca5900cff7df",
-                eventIcon = "PARTY",
-                dDay = "1"
-            ),
-            Event(
-                id = "62cdab999b7fca5900cff7df",
-                eventIcon = "COFFEE",
-                dDay = "2"
-            ),
-            Event(
-                id = "62cdab999b7fca5900cff7df",
-                eventIcon = "BEER",
-                dDay = "3"
-            ),
-            Event(
-                id = "62cdab999b7fca5900cff7df",
-                eventIcon = "PARTY",
-                dDay = "4"
-            ),
-        )
-    )
-
+    private val _eventList = MutableLiveData<List<Event>>()
     val eventList get() = _eventList
 
-    private val _keyRulesList = MutableLiveData<List<String>>(
-        listOf(
-//            "상단규칙",
-//            "하단규칙"
-        )
-    )
+    private val _keyRulesList = MutableLiveData<List<String>>()
     val keyRulesList get() = _keyRulesList
 
-    private val _todoList = MutableLiveData<List<Rule>>(
-        listOf(
-            Rule(
-                isChecked = false,
-                ruleName = "빨래를돌려야하는데언제돌리지젠장",
-            ),
-            Rule(
-                isChecked = true,
-                ruleName = "청소기도돌려야하는데언제하지젠장",
-            ),
-            Rule(
-                isChecked = true,
-                ruleName = "커미사마셔야하는데배가아프네젠장",
-            )
-        )
-    )
+    private val _todoList = MutableLiveData<List<Rule>>()
     val todoList get() = _todoList
 
-    private val _homieList = MutableLiveData<List<Homie>>(
-        listOf(
-            Homie(
-                id = "",
-                userName = "이영주",
-                typeName = "임시 디폴트",
-                typeColor = "GRAY"
-            ),
-            Homie(
-                id = "62cc7420d7868591384e4eb0",
-                userName = "강원용",
-                typeName = "임시 디폴트",
-                typeColor = "YELLOW"
-            ),
-            Homie(
-                id = "62cc7420d7868591384e4eb0",
-                userName = "이준원",
-                typeName = "임시 디폴트",
-                typeColor = "GREEN"
-            ),
-            Homie(
-                id = "62cc7420d7868591384e4eb0",
-                userName = "김소현",
-                typeName = "임시 디폴트",
-                typeColor = "BLUE"
-            ),
-            // copy room code 더미데이터
-            Homie(
-                id = "",
-                userName = "",
-                typeName = "",
-                typeColor = ""
-            )
-        )
-    )
+    private val _homieList = MutableLiveData<List<Homie>>()
     val homieList get() = _homieList
 
-    private val _roomCode = MutableLiveData<String>(
-        "85UHIKZB"
-    )
+    private val _roomCode = MutableLiveData<String>()
+    val roomCode get() = _roomCode
 
-    fun RoomCode(): String? {
-        return _roomCode.value
+    init {
+        viewModelScope.launch {
+            homeRepository.getHomeList("")
+                .onSuccess { result ->
+                    Log.d("asdf", "success ${result.message}")
+                    val tempEventList = mutableListOf(Event())
+                    result.data!!.eventList.forEach { tempEventList.add(it) }
+                    _eventList.value = tempEventList
+                    _roomCode.value = result.data!!.roomCode
+                    _todoList.value = result.data!!.todoList
+                    _keyRulesList.value = result.data!!.keyRulesList
+                    _homieList.value = result.data!!.homieProfileList
+                    val tempHomieList = mutableListOf(Homie())
+                    _homieList.value = _homieList.value?.plus(tempHomieList)
+                }
+                .onFailure { result ->
+                    Log.d("asdf", "fail ${result.message}")
+                }
+        }
     }
 
     companion object {
