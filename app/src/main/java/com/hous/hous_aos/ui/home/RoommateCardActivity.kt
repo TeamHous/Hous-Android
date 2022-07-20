@@ -1,65 +1,59 @@
-package com.hous.hous_aos.ui.profile
+package com.hous.hous_aos.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.provider.ContactsContract
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hous.hous_aos.R
-import com.hous.hous_aos.databinding.FragmentProfileBinding
+import com.hous.hous_aos.databinding.ActivityRoommateCardBinding
+import com.hous.hous_aos.ui.profile.ProfileViewModel
+import com.hous.hous_aos.ui.profile.TendencyResultActivity
 import com.hous.hous_aos.util.setDrawable
 
-class ProfileFragment : Fragment() {
-    private var _binding: FragmentProfileBinding? = null
-    private val binding get() = _binding!!
-    private val viewModel: ProfileViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
-        binding.vm = viewModel
-        binding.lifecycleOwner = this
-        initInfo()
+class RoommateCardActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityRoommateCardBinding
+    val viewModel: ProfileViewModel by viewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_roommate_card)
+        setContentView(binding.root)
         init()
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun init() {
-        binding.btnTendency.setOnClickListener {
-            activity?.let {
-                val intent = Intent(context, TestInfoActivity::class.java)
-                startActivity(intent)
-            }
-        }
-    }
+        binding.vm = viewModel
+        binding.lifecycleOwner = this
 
-    private fun initInfo() {
-        viewModel.profileData.observe(viewLifecycleOwner) {
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
+
+        binding.tvDetailTendency.setOnClickListener {
+            val intent = Intent(this, TendencyResultActivity::class.java)
+            intent.putExtra("data", "back") // "back"면 백버튼, "end"면 완료버튼
+            startActivity(intent)
+        }
+
+        viewModel.profileData.observe(this) {
             when (it.hashTag.size) {
                 0 -> {
-                    binding.tvHashtag1.visibility = View.GONE
-                    binding.tvHashtag2.visibility = View.GONE
-                    binding.tvHashtag3.visibility = View.GONE
+                    binding.tvHashtag1.visibility = View.INVISIBLE
+                    binding.tvHashtag2.visibility = View.INVISIBLE
+                    binding.tvHashtag3.visibility = View.INVISIBLE
                 }
                 1 -> {
                     binding.tvHashtag1.text = it.hashTag[0]
-                    binding.tvHashtag2.visibility = View.GONE
-                    binding.tvHashtag3.visibility = View.GONE
+                    binding.tvHashtag2.visibility = View.INVISIBLE
+                    binding.tvHashtag3.visibility = View.INVISIBLE
                 }
                 2 -> {
                     binding.tvHashtag1.text = it.hashTag[0]
                     binding.tvHashtag2.text = it.hashTag[1]
-                    binding.tvHashtag3.visibility = View.GONE
+                    binding.tvHashtag3.visibility = View.INVISIBLE
                 }
                 3 -> {
                     binding.tvHashtag1.text = it.hashTag[0]
@@ -104,7 +98,6 @@ class ProfileFragment : Fragment() {
                     binding.tvHashtag1.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
                     binding.tvHashtag2.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
                     binding.tvHashtag3.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
-                    binding.tvDetailTendency.visibility = View.INVISIBLE
                 }
             }
         }
