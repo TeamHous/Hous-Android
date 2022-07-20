@@ -23,7 +23,7 @@
 
         <variable
             name="data"
-            type="com.hous.hous_aos.data.entity.rules.TodayTodoResponse" />
+            type="com.hous.hous_aos.data.entity.Rule" />
 
         <variable
             name="count"
@@ -150,7 +150,7 @@
                 app:cardCornerRadius="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:visibility="@{data.isTemporaryManager}" />
+                app:visibility="@{data.isTmpMember}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

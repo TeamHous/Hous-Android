@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Rule(
     @SerializedName("_id") val id: String = "",
-    val isChecked: Boolean = false,
+    var isChecked: Boolean = false,
     val ruleName: String = "",
     val todayMembersWithTypeColor: List<Homie> = emptyList(),
     val isTmpMember: Boolean = false,

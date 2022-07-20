@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hous.hous_aos.R
+import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.entity.Rule
 import com.hous.hous_aos.data.entity.rules.*
-
 
 class RulesViewModel : ViewModel() {
     private var _toDoViewType = MutableLiveData(ToDoViewType.TODAY_TO_DO)
@@ -20,7 +20,7 @@ class RulesViewModel : ViewModel() {
     val categoryOfRuleList get() = _categoryOfRuleList
 
     private var _todayTodoList =
-        MutableLiveData<List<TodayTodoResponse>>()
+        MutableLiveData<List<Rule>>()
     val todayTodoList get() = _todayTodoList
 
     private var _myTodoList =
@@ -183,89 +183,68 @@ class RulesViewModel : ViewModel() {
     }
 
     fun fetchToTodayToDoList() {
-        val tmpTodayToDoList = mutableListOf<TodayTodoResponse>(
-            TodayTodoResponse(
+        val tmpTodayToDoList = mutableListOf<Rule>(
+            Rule(
                 id = "sd;jnv;aovknkv;lsnm",
-                number = 0,
                 isAllChecked = false,
-                isTemporaryManager = false,
+                isTmpMember = false,
                 ruleName = "화장실 청소",
-                managerDataList = listOf<ManagerData>(),
-                iconList = listOf<String>()
+                todayMembersWithTypeColor = listOf(
+                    Homie(id = "sdasddvnds", typeColor = "GRAY", userName = "이준원"),
+                    Homie(id = "sdksasdsdvnds", typeColor = "BLUE", userName = "이준원"),
+                )
             ),
-            TodayTodoResponse(
+            Rule(
                 id = "sd;jnvvsdnojkcz;lsnm",
-                number = 4,
                 isAllChecked = false,
-                isTemporaryManager = false,
+                isTmpMember = false,
                 ruleName = "거실 청소기 돌리기",
-                managerDataList = listOf(
-                    ManagerData(id = "sdklasdfdasfdslkvnds", name = "이준원"),
-                    ManagerData(id = "sdkladsfdasfsd", name = "강원용"),
-                    ManagerData(id = "adsfsfdasfsaf", name = "이영주"),
-                    ManagerData(id = "s2asdfadsfxasslkvnds", name = "안드로이드킹")
-                ),
-                iconList = listOf("purple", "yellow", "red", "blue")
+                todayMembersWithTypeColor = listOf(
+                    Homie(id = "sdasddvnds", typeColor = "PURPLE", userName = "이준원"),
+                    Homie(id = "sdksasdsdvnds", typeColor = "BLUE", userName = "이준원"),
+                    Homie(id = "sdksaasdadsdvnds", typeColor = "YELLOW", userName = "이준원"),
+                    Homie(id = "sdksasdsdvnds", typeColor = "BLUE", userName = "이준원"),
+                )
             ),
-            TodayTodoResponse(
+            Rule(
                 id = "sd;jnvamfokassnm",
-                number = 3,
                 isAllChecked = false,
-                isTemporaryManager = false,
+                isTmpMember = false,
                 ruleName = "냉장고 정리하기",
-                managerDataList = listOf(
-                    ManagerData(id = "sdkldasfvdslkvnds", name = "최인영"),
-                    ManagerData(id = "sdklmnsdafvsdasd", name = "이다영"),
-                    ManagerData(id = "sdadsfsdasdsads", name = "최소현"),
-                ),
-                iconList = listOf("yellow", "red", "blue")
+                todayMembersWithTypeColor = listOf(
+                    Homie(id = "sdksadvasdvnds", typeColor = "PURPLE", userName = "이준원"),
+                    Homie(id = "sdksadvasdvnds", typeColor = "BLUE", userName = "이준원"),
+                    Homie(id = "sdksadvasdvnds", typeColor = "YELLOW", userName = "이준원"),
+                )
             ),
-            TodayTodoResponse(
+            Rule(
                 id = "sd;jnsad,;lsadokassnm",
-                number = 1,
                 isAllChecked = true,
-                isTemporaryManager = false,
+                isTmpMember = false,
                 ruleName = "냉장고 정리하기",
-                managerDataList = listOf(
-                    ManagerData(id = "sdksadvasdvnds", name = "이준원"),
-                ),
-                iconList = listOf("purple")
+                todayMembersWithTypeColor = listOf(
+                    Homie(id = "sdksadvasdvnds", typeColor = "PURPLE", userName = "이준원"),
+                )
             ),
-            TodayTodoResponse(
+            Rule(
                 id = "sdssdmkvalmdasld,kassnm",
-                number = 2,
                 isAllChecked = false,
-                isTemporaryManager = true,
+                isTmpMember = true,
                 ruleName = "냉장고 정리하기",
-                managerDataList = listOf(
-                    ManagerData(id = "sdklmsdbasdfkvnds", name = "공혁준"),
-                    ManagerData(id = "sdklsadsdasd", name = "김혜정"),
-                ),
-                iconList = listOf("green", "gray")
+                todayMembersWithTypeColor = listOf(
+                    Homie(id = "sdksadvasdvnds", typeColor = "PURPLE", userName = "이준원"),
+                    Homie(id = "sdksadvasdvnds", typeColor = "GREEN", userName = "이준원"),
+                )
             ),
-            TodayTodoResponse(
+            Rule(
                 id = "sdssdmkvalmdasld,kassnm",
-                number = 2,
                 isAllChecked = false,
-                isTemporaryManager = true,
+                isTmpMember = true,
                 ruleName = "냉장고 정리하기",
-                managerDataList = listOf(
-                    ManagerData(id = "sdklmsdbasdfkvnds", name = "공혁준"),
-                    ManagerData(id = "sdklsadsdasd", name = "김혜정"),
-                ),
-                iconList = listOf("green", "gray")
-            ),
-            TodayTodoResponse(
-                id = "sdssdmkvalmdasld,kassnm",
-                number = 2,
-                isAllChecked = false,
-                isTemporaryManager = true,
-                ruleName = "냉장고 정리하기",
-                managerDataList = listOf(
-                    ManagerData(id = "sdklmsdbasdfkvnds", name = "공혁준"),
-                    ManagerData(id = "sdklsadsdasd", name = "김혜정"),
-                ),
-                iconList = listOf("green", "gray")
+                todayMembersWithTypeColor = listOf(
+                    Homie(id = "sdksadvasdvnds", typeColor = "PURPLE", userName = "이준원"),
+                    Homie(id = "sdksadvasdvnds", typeColor = "GRAY", userName = "이준원"),
+                )
             )
         )
         _todayTodoList.value = tmpTodayToDoList.map { data ->
