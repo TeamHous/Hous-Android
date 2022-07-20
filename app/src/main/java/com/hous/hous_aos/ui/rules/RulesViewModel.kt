@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.hous.hous_aos.data.entity.Category
 import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.entity.Rule
-import com.hous.hous_aos.data.entity.rules.HomieData
+
 
 class RulesViewModel : ViewModel() {
     private var _toDoViewType = MutableLiveData(ToDoViewType.TODAY_TO_DO)
@@ -35,7 +35,7 @@ class RulesViewModel : ViewModel() {
         MutableLiveData<List<Rule>>()
     val generalRulesTableList get() = _generalRulesTableList
 
-    private var _tmpManagerList = MutableLiveData<List<HomieData>>()
+    private var _tmpManagerList = MutableLiveData<List<Homie>>()
     val tmpManagerList get() = _tmpManagerList
 
     /**
@@ -59,31 +59,31 @@ class RulesViewModel : ViewModel() {
 
     fun fetchToTmpManagerList() {
         val tmp = listOf(
-            HomieData(
+            Homie(
                 id = "62cc7409csdsd06c46adf652f",
                 userName = "이준원",
                 isChecked = true,
                 typeColor = "GRAY"
             ),
-            HomieData(
+            Homie(
                 id = "6dasdasdasdsadsad52f",
                 userName = "이영주",
                 isChecked = false,
                 typeColor = "RED"
             ),
-            HomieData(
+            Homie(
                 id = "62cc740asdsadsadf652f",
                 userName = "강워어뇽",
                 isChecked = true,
                 typeColor = "BLUE"
             ),
-            HomieData(
+            Homie(
                 id = "62cc7409csasdsadsa52f",
                 userName = "꾸우웅",
                 isChecked = false,
                 typeColor = "GREEN"
             ),
-            HomieData(
+            Homie(
                 id = "62cc7409csasdsadsa52f",
                 userName = "꾸우우웅",
                 isChecked = false,
