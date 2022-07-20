@@ -177,11 +177,6 @@ class EventViewModel @Inject constructor(
             homeRepository.getHomeList("")
                 .onSuccess { result ->
                     Log.d("asdf", "success ${result.message}")
-                    _roomCode.value = result.data?.roomCode
-                    _eventList.value = result.data?.eventList
-                    _todoList.value = result.data?.todoList
-                    _keyRulesList.value = result.data?.keyRulesList
-                    _homieList.value = result.data?.homieProfileList
                     val tempEventList = mutableListOf(Event())
                     result.data!!.eventList.forEach { tempEventList.add(it) }
                     _eventList.value = tempEventList
@@ -197,6 +192,7 @@ class EventViewModel @Inject constructor(
                 }
         }
     }
+
     companion object {
         const val START_POSITION = 100
     }
