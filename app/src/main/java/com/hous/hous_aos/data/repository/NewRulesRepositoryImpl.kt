@@ -2,6 +2,7 @@ package com.hous.hous_aos.data.repository
 
 import com.hous.hous_aos.data.model.WrapperClass
 import com.hous.hous_aos.data.model.request.NewRulesRequest
+import com.hous.hous_aos.data.model.response.NewRulesListResponse
 import com.hous.hous_aos.data.source.remote.RemoteNewRulesDataSource
 import com.hous.hous_aos.ui.newrules.DayData
 import com.hous.hous_aos.ui.newrules.NewRulesUiState
@@ -28,6 +29,14 @@ class NewRulesRepositoryImpl @Inject constructor(
         )
         return runCatching { remoteNewRulesDataSource.addNewRule(newRulesRequest) }
     }
+
+    override suspend fun getNewRuleList(roomId: String): Result<WrapperClass<NewRulesListResponse>> =
+        runCatching { remoteNewRulesDataSource.getNewRuleList(roomId) }.fold({
+            Result.success(it)
+        }, {
+            it.printStackTrace()
+            Result.failure(it.fillInStackTrace())
+        })
 
     private fun dayToInt(dayDataList: List<DayData>): List<Int> {
         val tempList = mutableListOf<Int>()

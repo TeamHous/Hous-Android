@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -37,6 +38,7 @@ object NetworkModule {
                             "Authorization",
                             DUMMY_ACCESS_TOKEN
                         )
+                        .addHeader("Content-Type", "Application/json")
                         .build()
                 )
             }
@@ -52,6 +54,9 @@ object NetworkModule {
             .writeTimeout(20, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .addInterceptor(interceptor)
+            .addInterceptor(
+                HttpLoggingInterceptor().also { it.level = HttpLoggingInterceptor.Level.BODY }
+            )
             .build()
 
     @Provides
@@ -66,18 +71,22 @@ object NetworkModule {
             .build()
 
     @Provides
+    @Singleton
     fun provideHomeService(retrofit: Retrofit): HomeApi =
         retrofit.create(HomeApi::class.java)
 
     @Provides
+    @Singleton
     fun provideRulesService(retrofit: Retrofit): RulesApi =
         retrofit.create(RulesApi::class.java)
 
     @Provides
+    @Singleton
     fun provideProfileService(retrofit: Retrofit): ProfileApi =
         retrofit.create(ProfileApi::class.java)
 
     @Provides
+    @Singleton
     fun provideNewRulesApi(retrofit: Retrofit): NewRulesApi =
         retrofit.create(NewRulesApi::class.java)
 }
