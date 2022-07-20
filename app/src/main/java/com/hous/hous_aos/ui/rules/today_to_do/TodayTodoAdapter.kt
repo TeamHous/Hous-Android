@@ -13,7 +13,10 @@ import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemOneBinding
 import com.hous.hous_aos.ui.rules.IconColor
 import com.hous.hous_aos.ui.rules.today_to_do.ItemToDoViewType
 
-class TodayTodoAdapter(private val onClickIcon: () -> Unit) :
+class TodayTodoAdapter(
+    private val onClickIcon: () -> Unit,
+    private val fetchToTmpManagerList: (Int) -> Unit
+) :
     ListAdapter<Rule, RecyclerView.ViewHolder>(
         TodayTodoDiffUtilCallback
     ) {
@@ -33,6 +36,7 @@ class TodayTodoAdapter(private val onClickIcon: () -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ItemToDoViewType.NONE_MANAGER_VIEW_TYPE.index -> NoneManagerViewHolder(
+                fetchToTmpManagerList,
                 onClickIcon,
                 ItemRulesTodayToDoItemNoneBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -41,6 +45,7 @@ class TodayTodoAdapter(private val onClickIcon: () -> Unit) :
                 )
             )
             ItemToDoViewType.ONE_MANAGER_VIEW_TYPE.index -> OneManagerViewHolder(
+                fetchToTmpManagerList,
                 onClickIcon,
                 ItemRulesTodayToDoItemOneBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -49,6 +54,7 @@ class TodayTodoAdapter(private val onClickIcon: () -> Unit) :
                 )
             )
             ItemToDoViewType.MUTI_MANAGER_VIEW_TYPE.index -> MultiManagerViewHolder(
+                fetchToTmpManagerList,
                 onClickIcon,
                 ItemRulesTodayToDoItemMultiBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -70,18 +76,21 @@ class TodayTodoAdapter(private val onClickIcon: () -> Unit) :
     }
 
     class NoneManagerViewHolder(
+        private val fetchToTmpManagerList: (Int) -> Unit,
         private val onClickIcon: () -> Unit,
         private val binding: ItemRulesTodayToDoItemNoneBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: Rule) {
             binding.data = data
             binding.ivManagerEmpty.setOnClickListener {
+                fetchToTmpManagerList(absoluteAdapterPosition)
                 onClickIcon()
             }
         }
     }
 
     class OneManagerViewHolder(
+        private val fetchToTmpManagerList: (Int) -> Unit,
         private val onClickIcon: () -> Unit,
         private val binding: ItemRulesTodayToDoItemOneBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -91,6 +100,7 @@ class TodayTodoAdapter(private val onClickIcon: () -> Unit) :
                 changeListToString(requireNotNull(data.todayMembersWithTypeColor))
             binding.iconColor = getIconColor(data.todayMembersWithTypeColor[0].typeColor)
             binding.ivManager.setOnClickListener {
+                fetchToTmpManagerList(absoluteAdapterPosition)
                 onClickIcon()
             }
         }
@@ -114,6 +124,7 @@ class TodayTodoAdapter(private val onClickIcon: () -> Unit) :
     }
 
     class MultiManagerViewHolder(
+        private val fetchToTmpManagerList: (Int) -> Unit,
         private val onClickIcon: () -> Unit,
         private val binding: ItemRulesTodayToDoItemMultiBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -122,6 +133,7 @@ class TodayTodoAdapter(private val onClickIcon: () -> Unit) :
             binding.tvManager.text =
                 changeListToString(requireNotNull(data.todayMembersWithTypeColor))
             binding.clManagerIcon.setOnClickListener {
+                fetchToTmpManagerList(absoluteAdapterPosition)
                 onClickIcon()
             }
             val memberCnt = data.todayMembersWithTypeColor.size
@@ -135,14 +147,17 @@ class TodayTodoAdapter(private val onClickIcon: () -> Unit) :
                     binding.count = 3
                     binding.iconColorOne = getIconColor(data.todayMembersWithTypeColor[0].typeColor)
                     binding.iconColorTwo = getIconColor(data.todayMembersWithTypeColor[1].typeColor)
-                    binding.iconColorThree = getIconColor(data.todayMembersWithTypeColor[2].typeColor)
+                    binding.iconColorThree =
+                        getIconColor(data.todayMembersWithTypeColor[2].typeColor)
                 }
                 4 -> {
                     binding.count = 4
                     binding.iconColorOne = getIconColor(data.todayMembersWithTypeColor[0].typeColor)
                     binding.iconColorTwo = getIconColor(data.todayMembersWithTypeColor[1].typeColor)
-                    binding.iconColorThree = getIconColor(data.todayMembersWithTypeColor[2].typeColor)
-                    binding.iconColorFour = getIconColor(data.todayMembersWithTypeColor[3].typeColor)
+                    binding.iconColorThree =
+                        getIconColor(data.todayMembersWithTypeColor[2].typeColor)
+                    binding.iconColorFour =
+                        getIconColor(data.todayMembersWithTypeColor[3].typeColor)
                 }
                 else -> throw IllegalArgumentException("잘못된 data.iconList.size 값 : ${memberCnt}이 들어왔습니다.")
             }

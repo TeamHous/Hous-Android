@@ -36,7 +36,6 @@ class TempManagerFragment : DialogFragment() {
         initDialog()
         clickCloseIcon()
         clickSaveButton()
-        viewModel.fetchToTmpManagerList()
         observeHomieList()
     }
 

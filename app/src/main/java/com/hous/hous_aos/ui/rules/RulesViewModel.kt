@@ -45,11 +45,11 @@ class RulesViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            rulesTodayRepository.getTodayTodayInfoList("").onSuccess {
-                val responseData = it.data
-                fetchToCategoryOfRuleList(responseData?.homeRuleCategories)
-                fetchToTodayToDoList(responseData?.todayTodoRules)
-            }
+            rulesTodayRepository.getTodayTodayInfoList("")
+                .onSuccess {
+                    _todayTodoList.value = it.data!!.todayTodoRules
+                    _categoryOfRuleList.value = it.data.homeRuleCategories
+                }
                 .onFailure {
                     Log.d(TAG, "RulesViewModel - init - getRulesTodayList fail : ${it.message}")
                 }
@@ -75,41 +75,18 @@ class RulesViewModel @Inject constructor(
         return clickedTmpManagerList.toList()
     }
 
-    /** 임시 담당자 다이얼로그*/
-    fun fetchToTmpManagerList() {
-        val tmp = listOf(
-            Homie(
-                id = "62cc7409csdsd06c46adf652f",
-                userName = "이준원",
-                isChecked = true,
-                typeColor = "GRAY"
-            ),
-            Homie(
-                id = "6dasdasdasdsadsad52f",
-                userName = "이영주",
-                isChecked = false,
-                typeColor = "RED"
-            ),
-            Homie(
-                id = "62cc740asdsadsadf652f",
-                userName = "강워어뇽",
-                isChecked = true,
-                typeColor = "BLUE"
-            ),
-            Homie(
-                id = "62cc7409csasdsadsa52f",
-                userName = "꾸우웅",
-                isChecked = false,
-                typeColor = "GREEN"
-            ),
-            Homie(
-                id = "62cc7409csasdsadsa52f",
-                userName = "꾸우우웅",
-                isChecked = false,
-                typeColor = "GRAY"
-            )
-        )
-        _tmpManagerList.value = tmp.map { it.copy() }
+    /** 임시 담당자 다이얼로그*/ // cl_image ->
+    fun fetchToTmpManagerList(position: Int) {
+        Log.d(TAG, "RulesViewModel - fetchToTmpManagerList() _todayTodoList.value!![position].id: ${_todayTodoList.value!![position].id}")
+        viewModelScope.launch {
+            rulesTodayRepository.getTempManagerInfoList("", _todayTodoList.value!![position].id)
+                .onSuccess {
+                    _tmpManagerList.value = it.data!!.homies
+                }
+                .onFailure {
+                    Log.d(TAG, "RulesViewModel - fetchToTmpManagerList() - ${it.message}")
+                }
+        }
     }
 
     /** Rules Table 일반 rules*/
@@ -168,42 +145,16 @@ class RulesViewModel @Inject constructor(
         _keyRulesTableList.value = tmp.map { it.copy() }
     }
 
-    /** 했음!!*/
-    /** HomeRules 카테고리 리사이클러뷰*/
-    fun fetchToCategoryOfRuleList(categoryOfRuleList: List<Category>?) {
-        Log.d(
-            TAG,
-            "RulesViewModel - fetchToCategoryOfRuleList() - categoryOfRuleList : $categoryOfRuleList"
-        )
-        _categoryOfRuleList.value = categoryOfRuleList?.map { data ->
-            data.copy()
-        }
-    }
-
-    /** HomeRules 오늘의 todo 리사이클러뷰 */
-    fun fetchToTodayToDoList(todayTodoList: List<Rule>?) {
-        Log.d(
-            TAG,
-            "RulesViewModel - fetchToCategoryOfRuleList() - todayTodoList : $todayTodoList"
-        )
-        _todayTodoList.value = todayTodoList?.map { data -> data.copy() }
-    }
-
     fun fetchToTodayToDoList() {
-        Log.d(
-            TAG,
-            "RulesViewModel - fetchToCategoryOfRuleList() - todayTodoList : $todayTodoList"
-        )
         viewModelScope.launch {
-            rulesTodayRepository.getTodayTodayInfoList("").onSuccess {
-                val responseData = it.data
-                fetchToTodayToDoList(responseData?.todayTodoRules)
-            }
+            rulesTodayRepository.getTodayTodayInfoList("")
+                .onSuccess {
+                    _todayTodoList.value = it.data!!.todayTodoRules
+                }
                 .onFailure {
                     Log.d(TAG, "RulesViewModel - init - getRulesTodayList fail : ${it.message}")
                 }
         }
-        _todayTodoList.value = todayTodoList.value?.map { data -> data.copy() }
     }
 
     fun fetchToMyTodayToDoList() {
