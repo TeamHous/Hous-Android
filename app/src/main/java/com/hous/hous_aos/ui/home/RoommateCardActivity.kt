@@ -39,6 +39,28 @@ class RoommateCardActivity : AppCompatActivity() {
         }
 
         viewModel.profileData.observe(this) {
+            when (it.hashTag.size) {
+                0 -> {
+                    binding.tvHashtag1.visibility = View.INVISIBLE
+                    binding.tvHashtag2.visibility = View.INVISIBLE
+                    binding.tvHashtag3.visibility = View.INVISIBLE
+                }
+                1 -> {
+                    binding.tvHashtag1.text = it.hashTag[0]
+                    binding.tvHashtag2.visibility = View.INVISIBLE
+                    binding.tvHashtag3.visibility = View.INVISIBLE
+                }
+                2 -> {
+                    binding.tvHashtag1.text = it.hashTag[0]
+                    binding.tvHashtag2.text = it.hashTag[1]
+                    binding.tvHashtag3.visibility = View.INVISIBLE
+                }
+                3 -> {
+                    binding.tvHashtag1.text = it.hashTag[0]
+                    binding.tvHashtag2.text = it.hashTag[1]
+                    binding.tvHashtag3.text = it.hashTag[2]
+                }
+            }
             }
         }
     }
