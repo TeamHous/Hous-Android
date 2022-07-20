@@ -26,6 +26,9 @@ object RepositoryModule {
     fun providesProfileRepository(
         impl: ProfileRepositoryImpl
     ): ProfileRepository = impl
+
+    @Provides
+    @Singleton
     fun providesHomeRepository(
         impl: HomeRepositoryImpl
     ): HomeRepository = impl
