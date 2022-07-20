@@ -16,9 +16,12 @@ import com.hous.hous_aos.util.setDrawable
 
 class RoommateCardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRoommateCardBinding
+    val viewModel: ProfileViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_roommate_card)
         setContentView(binding.root)
+        binding.vm = viewModel
+        binding.lifecycleOwner = this
     }
 }
