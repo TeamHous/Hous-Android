@@ -15,7 +15,10 @@ class NewRuleActivity : AppCompatActivity() {
         binding = ActivityNewRuleBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.cvNewRuleScreen.setContent {
-            NewRulesScreen(viewModel)
+            NewRulesScreen(
+                viewModel,
+                this::finish
+            )
         }
     }
 }

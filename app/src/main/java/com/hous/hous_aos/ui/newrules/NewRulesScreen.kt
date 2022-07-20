@@ -34,7 +34,8 @@ import com.hous.hous_aos.ui.newrules.component.NewRulesToolbar
 
 @Composable
 fun NewRulesScreen(
-    viewModel: NewRulesViewModel
+    viewModel: NewRulesViewModel,
+    finish: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val buttonState by viewModel.buttonState.collectAsState()
@@ -145,7 +146,8 @@ fun NewRulesScreen(
         }
         NewRulesAddRuleButton(
             isAddButton = buttonState,
-            addNewRule = viewModel::addNewRule
+            addNewRule = viewModel::addNewRule,
+            finish = finish
         )
     }
 }

@@ -8,7 +8,6 @@ import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.repository.NewRulesRepository
 import com.hous.hous_aos.ui.newrules.component.State
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -16,10 +15,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class NewRulesViewModel @Inject constructor(
-    private val newRulesRepository: NewRulesRepository
+    private val newRulesRepository: NewRulesRepository,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(NewRulesUiState())
     val uiState = _uiState.asStateFlow()
@@ -266,7 +266,7 @@ data class NewRulesUiState(
 )
 
 data class Manager(
-    val managerHomie: Homie = Homie("", "담당자 없음", typeColor = "NULL"),
+    val managerHomie: Homie = Homie(userName = "담당자 없음", typeColor = "NULL"),
     val dayDataList: List<DayData> = listOf(
         DayData("월", State.UNSELECT),
         DayData("화", State.UNSELECT),
