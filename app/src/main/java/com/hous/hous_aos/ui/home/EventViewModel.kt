@@ -170,6 +170,7 @@ class EventViewModel @Inject constructor(
     val homieList get() = _homieList
 
     private val _roomCode = MutableLiveData<String>()
+    val roomCode get() = _roomCode
 
     init {
         viewModelScope.launch {
