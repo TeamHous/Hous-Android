@@ -33,7 +33,7 @@ class HomeViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             homeRepository.getHomeList("")
-                .onSuccess { result->
+                .onSuccess { result ->
                     Log.d("asdf", "success ${result.message}")
                     _roomCode.value = result.data?.roomCode
                     _eventList.value = result.data?.eventList
@@ -48,13 +48,4 @@ class HomeViewModel @Inject constructor(
                 }
         }
     }
-
-    fun roomCode(): String? {
-        return _roomCode.value
-    }
 }
-
-data class HomieProfileList(
-    val homie: List<Homie>,
-    val roomCode: String
-)
