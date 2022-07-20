@@ -61,6 +61,44 @@ class RoommateCardActivity : AppCompatActivity() {
                     binding.tvHashtag3.text = it.hashTag[2]
                 }
             }
+
+            when (it.typeColor) {
+                "RED" -> {
+                    binding.ivProfile.setDrawable(R.drawable.ic_profile_red)
+                    binding.tvHashtag1.setBackgroundResource(R.drawable.shape_red_fill_8_rect)
+                    binding.tvHashtag2.setBackgroundResource(R.drawable.shape_red_fill_8_rect)
+                    binding.tvHashtag3.setBackgroundResource(R.drawable.shape_red_fill_8_rect)
+                }
+                "GREEN" -> {
+                    binding.ivProfile.setDrawable(R.drawable.ic_profile_green)
+                    binding.tvHashtag1.setBackgroundResource(R.drawable.shape_green_fill_8_rect)
+                    binding.tvHashtag2.setBackgroundResource(R.drawable.shape_green_fill_8_rect)
+                    binding.tvHashtag3.setBackgroundResource(R.drawable.shape_green_fill_8_rect)
+                }
+                "BLUE" -> {
+                    binding.ivProfile.setDrawable(R.drawable.ic_profile_blue)
+                    binding.tvHashtag1.setBackgroundResource(R.drawable.shape_blue_fill_8_rect)
+                    binding.tvHashtag2.setBackgroundResource(R.drawable.shape_blue_fill_8_rect)
+                    binding.tvHashtag3.setBackgroundResource(R.drawable.shape_blue_fill_8_rect)
+                }
+                "PURPLE" -> {
+                    binding.ivProfile.setDrawable(R.drawable.ic_profile_purple)
+                    binding.tvHashtag1.setBackgroundResource(R.drawable.shape_purple_fill_8_rect)
+                    binding.tvHashtag2.setBackgroundResource(R.drawable.shape_purple_fill_8_rect)
+                    binding.tvHashtag3.setBackgroundResource(R.drawable.shape_purple_fill_8_rect)
+                }
+                "YELLOW" -> {
+                    binding.ivProfile.setDrawable(R.drawable.ic_profile_yellow)
+                    binding.tvHashtag1.setBackgroundResource(R.drawable.shape_yellow_fill_8_rect)
+                    binding.tvHashtag2.setBackgroundResource(R.drawable.shape_yellow_fill_8_rect)
+                    binding.tvHashtag3.setBackgroundResource(R.drawable.shape_yellow_fill_8_rect)
+                }
+                else -> {
+                    binding.ivProfile.setDrawable(R.drawable.ic_profile_default)
+                    binding.tvHashtag1.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
+                    binding.tvHashtag2.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
+                    binding.tvHashtag3.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
+                }
             }
         }
     }
