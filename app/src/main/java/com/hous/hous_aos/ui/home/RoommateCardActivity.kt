@@ -13,7 +13,9 @@ import com.hous.hous_aos.databinding.ActivityRoommateCardBinding
 import com.hous.hous_aos.ui.profile.ProfileViewModel
 import com.hous.hous_aos.ui.profile.TendencyResultActivity
 import com.hous.hous_aos.util.setDrawable
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RoommateCardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRoommateCardBinding
     val viewModel: ProfileViewModel by viewModels()
