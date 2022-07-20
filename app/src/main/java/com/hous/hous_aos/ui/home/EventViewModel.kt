@@ -180,8 +180,6 @@ class EventViewModel @Inject constructor(
                     _eventList.value = result.data?.eventList
                     _todoList.value = result.data?.todoList
                     _keyRulesList.value = result.data?.keyRulesList
-
-
                     _homieList.value = result.data?.homieProfileList
                 }
                 .onFailure { result ->
