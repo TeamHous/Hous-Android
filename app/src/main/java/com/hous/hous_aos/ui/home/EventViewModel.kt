@@ -2,11 +2,11 @@ package com.hous.hous_aos.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hous.hous_aos.data.entity.rules.HomieData
-import com.hous.hous_aos.data.entity.rules.ResponseEventData
+import com.hous.hous_aos.data.entity.Event
+import com.hous.hous_aos.data.entity.Homie
+import com.hous.hous_aos.data.entity.Rule
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 class EventViewModel : ViewModel() {
     private var _eventDate = MutableLiveData<String>("")
@@ -15,7 +15,7 @@ class EventViewModel : ViewModel() {
     private var _eventIconPosition = MutableLiveData<Int>(START_POSITION)
     val eventIconPosition get() = _eventIconPosition
 
-    private val _responseEventData = MutableLiveData<ResponseEventData>()
+    private val _responseEventData = MutableLiveData<Event>()
     val responseEventData get() = _responseEventData
 
     private val _eventName = MutableLiveData<String>()
@@ -24,7 +24,7 @@ class EventViewModel : ViewModel() {
     private val _selectedEvent = MutableLiveData<EventIcon>(EventIcon.FIRST)
     val selectedEvent get() = _selectedEvent
 
-    private var _eventParticipantList = MutableLiveData<List<HomieData>>()
+    private var _eventParticipantList = MutableLiveData<List<Homie>>()
     val eventParticipantList get() = _eventParticipantList
 
     // 받아올 때
@@ -64,37 +64,37 @@ class EventViewModel : ViewModel() {
     }
 
     fun fetchToResponseEventData() {
-        _responseEventData.value = ResponseEventData(
+        _responseEventData.value = Event(
             id = "62d4335e17e70062873f3d28",
             eventName = "파티 파티",
             eventIcon = "PARTY",
             date = "2022-07-28",
-            participants = listOf<HomieData>(
-                HomieData(
+            participants = listOf<Homie>(
+                Homie(
                     id = "62cc7409csdsd06c46adf652f",
                     userName = "이준원",
                     isChecked = true,
                     typeColor = "GRAY"
                 ),
-                HomieData(
+                Homie(
                     id = "6dasdasdasdsadsad52f",
                     userName = "이영주",
                     isChecked = false,
                     typeColor = "RED"
                 ),
-                HomieData(
+                Homie(
                     id = "62cc740asdsadsadf652f",
                     userName = "강워어뇽",
                     isChecked = true,
                     typeColor = "BLUE"
                 ),
-                HomieData(
+                Homie(
                     id = "62cc7409csasdsadsa52f",
                     userName = "꾸우웅",
                     isChecked = false,
                     typeColor = "GREEN"
                 ),
-                HomieData(
+                Homie(
                     id = "62cc7409csasdsadsa52f",
                     userName = "꾸우우웅",
                     isChecked = false,
@@ -148,30 +148,30 @@ class EventViewModel : ViewModel() {
     /**************************************************************************************************
      *  영주 코드
      */
-    private val _eventList = MutableLiveData<List<EventData>>(
+    private val _eventList = MutableLiveData<List<Event>>(
         listOf(
-            EventData(
-                _id = "",
+            Event(
+                id = "",
                 eventIcon = "NONE",
                 dDay = ""
             ),
-            EventData(
-                _id = "62cdab999b7fca5900cff7df",
+            Event(
+                id = "62cdab999b7fca5900cff7df",
                 eventIcon = "PARTY",
                 dDay = "1"
             ),
-            EventData(
-                _id = "62cdab999b7fca5900cff7df",
+            Event(
+                id = "62cdab999b7fca5900cff7df",
                 eventIcon = "COFFEE",
                 dDay = "2"
             ),
-            EventData(
-                _id = "62cdab999b7fca5900cff7df",
+            Event(
+                id = "62cdab999b7fca5900cff7df",
                 eventIcon = "BEER",
                 dDay = "3"
             ),
-            EventData(
-                _id = "62cdab999b7fca5900cff7df",
+            Event(
+                id = "62cdab999b7fca5900cff7df",
                 eventIcon = "PARTY",
                 dDay = "4"
             ),
@@ -188,55 +188,52 @@ class EventViewModel : ViewModel() {
     )
     val keyRulesList get() = _keyRulesList
 
-    private val _todoList = MutableLiveData<List<ToDoData>>(
+    private val _todoList = MutableLiveData<List<Rule>>(
         listOf(
-            ToDoData(
-                isCheck = false,
-                todoName = "빨래를돌려야하는데언제돌리지젠장",
-                createdAt = "2022-07-11T20:00:10.985Z"
+            Rule(
+                isChecked = false,
+                ruleName = "빨래를돌려야하는데언제돌리지젠장",
             ),
-            ToDoData(
-                isCheck = true,
-                todoName = "청소기도돌려야하는데언제하지젠장",
-                createdAt = "2022-07-11T20:00:10.985Z"
+            Rule(
+                isChecked = true,
+                ruleName = "청소기도돌려야하는데언제하지젠장",
             ),
-            ToDoData(
-                isCheck = true,
-                todoName = "커미사마셔야하는데배가아프네젠장",
-                createdAt = "2022-07-11T20:00:10.985Z"
+            Rule(
+                isChecked = true,
+                ruleName = "커미사마셔야하는데배가아프네젠장",
             )
         )
     )
     val todoList get() = _todoList
 
-    private val _homieList = MutableLiveData<List<HomieData>>(
+    private val _homieList = MutableLiveData<List<Homie>>(
         listOf(
-            HomieData(
+            Homie(
                 id = "",
                 userName = "이영주",
                 typeName = "임시 디폴트",
                 typeColor = "GRAY"
             ),
-            HomieData(
+            Homie(
                 id = "62cc7420d7868591384e4eb0",
                 userName = "강원용",
                 typeName = "임시 디폴트",
                 typeColor = "YELLOW"
             ),
-            HomieData(
+            Homie(
                 id = "62cc7420d7868591384e4eb0",
                 userName = "이준원",
                 typeName = "임시 디폴트",
                 typeColor = "GREEN"
             ),
-            HomieData(
+            Homie(
                 id = "62cc7420d7868591384e4eb0",
                 userName = "김소현",
                 typeName = "임시 디폴트",
                 typeColor = "BLUE"
             ),
             // copy room code 더미데이터
-            HomieData(
+            Homie(
                 id = "",
                 userName = "",
                 typeName = "",

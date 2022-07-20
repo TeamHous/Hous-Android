@@ -11,6 +11,6 @@ data class Homie(
     val introduction: String = "",
     val hashTag: List<String> = emptyList(),
     val typeScore: List<Int> = emptyList(),
-    val isChecked: Boolean = false,
+    var isChecked: Boolean = false,
     val notificationState: Boolean = false
 )
