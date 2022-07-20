@@ -16,7 +16,9 @@ import com.hous.hous_aos.ui.rules.ToDoViewType
 import com.hous.hous_aos.ui.rules.adapter.TodayTodoAdapter
 import com.hous.hous_aos.ui.rules.my_to_do.MyToDoFragment
 import com.hous.hous_aos.ui.rules.today_to_do.tem_dialog.TempManagerFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TodayToDoFragment : Fragment() {
 
     private var _binding: FragmentTodayToDoBinding? = null
@@ -37,7 +39,6 @@ class TodayToDoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initFetchToTodayToDoList()
         initAdapter()
         observeCategory()
         setOnClickMyToDO()
@@ -47,10 +48,6 @@ class TodayToDoFragment : Fragment() {
         super.onDestroyView()
         _binding = null
         todayTodDoAdapter = null
-    }
-
-    private fun initFetchToTodayToDoList() {
-        viewModel.fetchToTodayToDoList()
     }
 
     private fun onClickTmpManagerDialog() {

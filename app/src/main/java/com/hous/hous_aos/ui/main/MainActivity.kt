@@ -15,7 +15,9 @@ import com.hous.hous_aos.ui.profile.ProfileFragment
 import com.hous.hous_aos.ui.rules.RulesFragment
 import com.hous.hous_aos.ui.rules.RulesViewModel
 import com.hous.hous_aos.ui.rules.ToDoViewType
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: RulesViewModel by viewModels()
