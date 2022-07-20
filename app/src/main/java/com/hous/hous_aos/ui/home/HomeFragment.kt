@@ -109,6 +109,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun showToast() {
+        requireActivity().showToast("초대코드가 복사되었습니다.")
+    }
 
+    private fun onClickMe() {
+        (activity as MainActivity).replace(0)
+    }
+
+    private fun onClickHomie() {
+        val intent = Intent(context, RoommateCardActivity::class.java)
+        startActivity(intent)
     }
 }
