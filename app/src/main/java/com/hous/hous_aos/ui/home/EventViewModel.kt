@@ -187,6 +187,9 @@ class EventViewModel @Inject constructor(
                     _roomCode.value = result.data!!.roomCode
                     _todoList.value = result.data!!.todoList
                     _keyRulesList.value = result.data!!.keyRulesList
+                    _homieList.value = result.data!!.homieProfileList
+                    val tempHomieList = mutableListOf(Homie())
+                    _homieList.value = _homieList.value?.plus(tempHomieList)
                 }
                 .onFailure { result ->
                     Log.d("asdf", "fail ${result.message}")
