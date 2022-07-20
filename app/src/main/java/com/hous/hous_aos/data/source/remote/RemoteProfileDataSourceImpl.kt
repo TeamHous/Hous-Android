@@ -4,6 +4,7 @@ import com.hous.hous_aos.BuildConfig
 import com.hous.hous_aos.data.api.ProfileApi
 import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.model.WrapperClass
+import com.hous.hous_aos.ui.profile.TypeTest
 import javax.inject.Inject
 
 class RemoteProfileDataSourceImpl @Inject constructor(
@@ -14,4 +15,7 @@ class RemoteProfileDataSourceImpl @Inject constructor(
 
     override suspend fun putTestResult(typeScore: List<Int>): WrapperClass<Any> =
         profileApi.putTestResult(typeScore)
+
+    override suspend fun getTypeTestList(): WrapperClass<List<TypeTest>> =
+        profileApi.getTypeTestList()
 }
