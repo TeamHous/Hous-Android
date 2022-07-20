@@ -12,7 +12,9 @@ import com.hous.hous_aos.databinding.FragmentProfileBinding
 import com.hous.hous_aos.ui.newrules.component.TendencyBox
 import com.hous.hous_aos.ui.pentagon.PentagonBox
 import com.hous.hous_aos.util.setDrawable
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
