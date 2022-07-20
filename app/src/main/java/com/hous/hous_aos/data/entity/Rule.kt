@@ -10,5 +10,6 @@ data class Rule(
     val isTmpMember: Boolean = false,
     val isAllChecked: Boolean = false,
     val membersCnt: Int = 0,
-    val typeColors: List<String> = emptyList()
+    val typeColors: List<String> = emptyList(),
+    val categoryIcon: String = "",
 )
