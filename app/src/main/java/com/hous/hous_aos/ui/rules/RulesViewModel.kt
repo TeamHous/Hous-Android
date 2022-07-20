@@ -1,14 +1,19 @@
 package com.hous.hous_aos.ui.rules
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.util.Log
+import androidx.lifecycle.*
 import com.hous.hous_aos.data.entity.Category
 import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.entity.Rule
+import com.hous.hous_aos.data.repository.RulesTodayRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class RulesViewModel : ViewModel() {
+@HiltViewModel
+class RulesViewModel @Inject constructor(
+    private val rulesTodayRepository: RulesTodayRepository
+) : ViewModel() {
     private var _toDoViewType = MutableLiveData(ToDoViewType.TODAY_TO_DO)
     val toDoViewType: LiveData<ToDoViewType> get() = _toDoViewType
 
@@ -38,6 +43,19 @@ class RulesViewModel : ViewModel() {
     private var _tmpManagerList = MutableLiveData<List<Homie>>()
     val tmpManagerList get() = _tmpManagerList
 
+    init {
+        viewModelScope.launch {
+            rulesTodayRepository.getTodayTodayInfoList("").onSuccess {
+                val responseData = it.data
+                fetchToCategoryOfRuleList(responseData?.homeRuleCategories)
+                fetchToTodayToDoList(responseData?.todayTodoRules)
+            }
+                .onFailure {
+                    Log.d(TAG, "RulesViewModel - init - getRulesTodayList fail : ${it.message}")
+                }
+        }
+    }
+
     /**
      * 임시 담당자 checked 바꾸기
      * */
@@ -57,6 +75,7 @@ class RulesViewModel : ViewModel() {
         return clickedTmpManagerList.toList()
     }
 
+    /** 임시 담당자 다이얼로그*/
     fun fetchToTmpManagerList() {
         val tmp = listOf(
             Homie(
@@ -93,6 +112,7 @@ class RulesViewModel : ViewModel() {
         _tmpManagerList.value = tmp.map { it.copy() }
     }
 
+    /** Rules Table 일반 rules*/
     fun fetchToGeneralRulesTableList() {
         val tmp = listOf(
             Rule(
@@ -137,6 +157,7 @@ class RulesViewModel : ViewModel() {
         _generalRulesTableList.value = tmp.map { it.copy() }
     }
 
+    /** Rules Table key rules*/
     fun fetchToKeyRulesTableList() {
         val tmp = listOf(
             Rule(
@@ -147,99 +168,42 @@ class RulesViewModel : ViewModel() {
         _keyRulesTableList.value = tmp.map { it.copy() }
     }
 
-    fun fetchToCategoryOfRuleList() {
-        _categoryOfRuleList.value = mutableListOf(
-            Category(
-                id = "62d6b94e0e9be86f165d48db",
-                categoryName = "청소",
-                categoryIcon = "CLEAN"
-            ),
-            Category(
-                id = "62d6asdasdasdd48db",
-                categoryName = "하트",
-                categoryIcon = "HEART"
-            ),
-            Category(
-                id = "62d6b94asdsadasd8db",
-                categoryName = "불빛",
-                categoryIcon = "LIGHT",
-            ),
-            Category(
-                id = "dasdadasdasdsad",
-                categoryIcon = "세탁",
-                categoryName = "LAUNDRY"
-            )
+    /** 했음!!*/
+    /** HomeRules 카테고리 리사이클러뷰*/
+    fun fetchToCategoryOfRuleList(categoryOfRuleList: List<Category>?) {
+        Log.d(
+            TAG,
+            "RulesViewModel - fetchToCategoryOfRuleList() - categoryOfRuleList : $categoryOfRuleList"
         )
+        _categoryOfRuleList.value = categoryOfRuleList?.map { data ->
+            data.copy()
+        }
+    }
+
+    /** HomeRules 오늘의 todo 리사이클러뷰 */
+    fun fetchToTodayToDoList(todayTodoList: List<Rule>?) {
+        Log.d(
+            TAG,
+            "RulesViewModel - fetchToCategoryOfRuleList() - todayTodoList : $todayTodoList"
+        )
+        _todayTodoList.value = todayTodoList?.map { data -> data.copy() }
     }
 
     fun fetchToTodayToDoList() {
-        val tmpTodayToDoList = mutableListOf<Rule>(
-            Rule(
-                id = "sd;jnv;aovknkv;lsnm",
-                isAllChecked = false,
-                isTmpMember = false,
-                ruleName = "화장실 청소",
-                todayMembersWithTypeColor = listOf(
-                    Homie(id = "sdasddvnds", typeColor = "GRAY", userName = "이준원"),
-                    Homie(id = "sdksasdsdvnds", typeColor = "BLUE", userName = "이준원"),
-                )
-            ),
-            Rule(
-                id = "sd;jnvvsdnojkcz;lsnm",
-                isAllChecked = false,
-                isTmpMember = false,
-                ruleName = "거실 청소기 돌리기",
-                todayMembersWithTypeColor = listOf(
-                    Homie(id = "sdasddvnds", typeColor = "PURPLE", userName = "이준원"),
-                    Homie(id = "sdksasdsdvnds", typeColor = "BLUE", userName = "이준원"),
-                    Homie(id = "sdksaasdadsdvnds", typeColor = "YELLOW", userName = "이준원"),
-                    Homie(id = "sdksasdsdvnds", typeColor = "BLUE", userName = "이준원"),
-                )
-            ),
-            Rule(
-                id = "sd;jnvamfokassnm",
-                isAllChecked = false,
-                isTmpMember = false,
-                ruleName = "냉장고 정리하기",
-                todayMembersWithTypeColor = listOf(
-                    Homie(id = "sdksadvasdvnds", typeColor = "PURPLE", userName = "이준원"),
-                    Homie(id = "sdksadvasdvnds", typeColor = "BLUE", userName = "이준원"),
-                    Homie(id = "sdksadvasdvnds", typeColor = "YELLOW", userName = "이준원"),
-                )
-            ),
-            Rule(
-                id = "sd;jnsad,;lsadokassnm",
-                isAllChecked = true,
-                isTmpMember = false,
-                ruleName = "냉장고 정리하기",
-                todayMembersWithTypeColor = listOf(
-                    Homie(id = "sdksadvasdvnds", typeColor = "PURPLE", userName = "이준원"),
-                )
-            ),
-            Rule(
-                id = "sdssdmkvalmdasld,kassnm",
-                isAllChecked = false,
-                isTmpMember = true,
-                ruleName = "냉장고 정리하기",
-                todayMembersWithTypeColor = listOf(
-                    Homie(id = "sdksadvasdvnds", typeColor = "PURPLE", userName = "이준원"),
-                    Homie(id = "sdksadvasdvnds", typeColor = "GREEN", userName = "이준원"),
-                )
-            ),
-            Rule(
-                id = "sdssdmkvalmdasld,kassnm",
-                isAllChecked = false,
-                isTmpMember = true,
-                ruleName = "냉장고 정리하기",
-                todayMembersWithTypeColor = listOf(
-                    Homie(id = "sdksadvasdvnds", typeColor = "PURPLE", userName = "이준원"),
-                    Homie(id = "sdksadvasdvnds", typeColor = "GRAY", userName = "이준원"),
-                )
-            )
+        Log.d(
+            TAG,
+            "RulesViewModel - fetchToCategoryOfRuleList() - todayTodoList : $todayTodoList"
         )
-        _todayTodoList.value = tmpTodayToDoList.map { data ->
-            data.copy()
+        viewModelScope.launch {
+            rulesTodayRepository.getTodayTodayInfoList("").onSuccess {
+                val responseData = it.data
+                fetchToTodayToDoList(responseData?.todayTodoRules)
+            }
+                .onFailure {
+                    Log.d(TAG, "RulesViewModel - init - getRulesTodayList fail : ${it.message}")
+                }
         }
+        _todayTodoList.value = todayTodoList.value?.map { data -> data.copy() }
     }
 
     fun fetchToMyTodayToDoList() {
@@ -292,7 +256,17 @@ class RulesViewModel : ViewModel() {
         val tmpCategoryOfRuleList = requireNotNull(_categoryOfRuleList.value).map { data ->
             data.copy().apply { isChecked = false }
         }
-        _categoryOfRuleList.value = tmpCategoryOfRuleList
+        tmpCategoryOfRuleList.toMutableList().apply {
+            add(
+                Category(
+                    id = "62d6b94e0e9be86f165d48db",
+                    categoryName = "청소",
+                    categoryIcon = "CLEAN"
+                )
+            )
+        }
+
+        _categoryOfRuleList.value = tmpCategoryOfRuleList.toList()
     }
 
     fun setMyToDoCheckBoxSelected(position: Int) {
@@ -314,6 +288,6 @@ class RulesViewModel : ViewModel() {
     }
 
     companion object {
-        private const val TAG = "viewmodel"
+        private const val TAG = "rulesViewmodel"
     }
 }
