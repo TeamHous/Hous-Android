@@ -107,9 +107,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun roomCode() {
-    }
-
     private fun showToast() {
         requireActivity().showToast(getString(R.string.copy_code))
     }
