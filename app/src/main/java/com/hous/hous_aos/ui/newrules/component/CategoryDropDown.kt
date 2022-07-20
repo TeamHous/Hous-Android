@@ -7,17 +7,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.hous.hous_aos.R
-import com.hous.hous_aos.data.model.response.NewRulesResponse
+import com.hous.hous_aos.data.entity.Category
 
 @Composable
 fun CategoryDropDownMenu(
-    ruleCategoryList: List<NewRulesResponse.Category>,
+    ruleCategoryList: List<Category>,
     setCategory: (String, String) -> Unit
 ) {
     var isExpanded by remember { mutableStateOf(false) }
@@ -39,7 +43,7 @@ fun CategoryDropDownMenu(
         ruleCategoryList.forEach { category ->
             DropdownMenuItem(
                 onClick = {
-                    setCategory(category._id, category.categoryName)
+                    setCategory(category.id, category.categoryName)
                     isExpanded = false
                 }
             ) {

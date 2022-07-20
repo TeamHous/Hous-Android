@@ -22,7 +22,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.newrules.NewRuleActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".ui.profile.TendencyTestActivity"
             android:exported="false" />
