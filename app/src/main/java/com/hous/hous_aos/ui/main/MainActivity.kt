@@ -1,6 +1,7 @@
 package com.hous.hous_aos.ui.main
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.annotation.Dimension
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -12,9 +13,12 @@ import com.hous.hous_aos.databinding.ActivityMainBinding
 import com.hous.hous_aos.ui.home.HomeFragment
 import com.hous.hous_aos.ui.profile.ProfileFragment
 import com.hous.hous_aos.ui.rules.RulesFragment
+import com.hous.hous_aos.ui.rules.RulesViewModel
+import com.hous.hous_aos.ui.rules.ToDoViewType
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: RulesViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -69,8 +73,11 @@ class MainActivity : AppCompatActivity() {
                         binding.tvMainTitle.text = getString(R.string.home_title)
                         binding.tvMainTitle.setTextSize(Dimension.SP, 20F)
                         supportFragmentManager.commit {
-                            replace<RulesFragment>(R.id.fcv_main)
+                            viewModel.setSmileSelected(true)
+                            viewModel.setToDoViewType(ToDoViewType.TODAY_TO_DO)
                             setReorderingAllowed(true)
+                            replace<RulesFragment>(R.id.fcv_main)
+                            //
                         }
                         true
                     }
