@@ -17,7 +17,7 @@ class ProfileViewModel : ViewModel() {
             ),
             typeName = "늘 행복한 동글이",
             typeColor = "PURPLE",
-            typeScore = listOf(0, 1, 2, 3),
+            typeScore = listOf(6, 6, 6, 6, 6),
             notificationState = true
         )
     )
