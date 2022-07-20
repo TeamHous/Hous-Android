@@ -71,10 +71,11 @@ class HomieAdapter(
             itemView.setOnClickListener {
                 when (adapterPosition) {
                     0 -> {
-                        onClickMe()
+                        if(data.typeColor == "GRAY") return@setOnClickListener
+                        else onClickMe()
                     }
                     else -> {
-                        if(data.typeColor == "") return@setOnClickListener
+                        if(data.typeColor == "GRAY") return@setOnClickListener
                         else onClickHomie()
                     }
                 }
