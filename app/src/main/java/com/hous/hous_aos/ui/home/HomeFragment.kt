@@ -1,17 +1,22 @@
 package com.hous.hous_aos.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.*
 import androidx.recyclerview.widget.GridLayoutManager
+import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentHomeBinding
 import com.hous.hous_aos.ui.home.adapter.EventAdapter
 import com.hous.hous_aos.ui.home.adapter.HomieAdapter
 import com.hous.hous_aos.ui.home.adapter.RulesAdapter
 import com.hous.hous_aos.ui.home.adapter.ToDoAdapter
+import com.hous.hous_aos.ui.main.MainActivity
+import com.hous.hous_aos.ui.profile.ProfileFragment
+import com.hous.hous_aos.ui.profile.TestInfoActivity
+import com.hous.hous_aos.util.showToast
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
