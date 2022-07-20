@@ -31,6 +31,12 @@ class RoommateCardActivity : AppCompatActivity() {
         binding.ivBack.setOnClickListener {
             finish()
         }
+
+        binding.tvDetailTendency.setOnClickListener {
+            val intent = Intent(this, TendencyResultActivity::class.java)
+            intent.putExtra("data", "back") // "back"면 백버튼, "end"면 완료버튼
+            startActivity(intent)
+        }
         }
     }
 }
