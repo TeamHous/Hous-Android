@@ -3,10 +3,10 @@ package com.hous.hous_aos.ui.rules
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hous.hous_aos.R
+import com.hous.hous_aos.data.entity.Category
 import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.entity.Rule
-import com.hous.hous_aos.data.entity.rules.*
+import com.hous.hous_aos.data.entity.rules.HomieData
 
 class RulesViewModel : ViewModel() {
     private var _toDoViewType = MutableLiveData(ToDoViewType.TODAY_TO_DO)
@@ -16,7 +16,7 @@ class RulesViewModel : ViewModel() {
     val isSelectedCategorySmile: LiveData<Boolean> get() = _isSelectedCategorySmile
 
     private var _categoryOfRuleList =
-        MutableLiveData<List<CategoryOfRuleResponse>>()
+        MutableLiveData<List<Category>>()
     val categoryOfRuleList get() = _categoryOfRuleList
 
     private var _todayTodoList =
@@ -149,35 +149,25 @@ class RulesViewModel : ViewModel() {
 
     fun fetchToCategoryOfRuleList() {
         _categoryOfRuleList.value = mutableListOf(
-            CategoryOfRuleResponse(
-                name = "라면을",
-                icon = R.drawable.ic_rules_heart_s,
-                backGround = R.drawable.ic_rules_category_red_bg_m
+            Category(
+                id = "62d6b94e0e9be86f165d48db",
+                categoryName = "청소",
+                categoryIcon = "CLEAN"
             ),
-            CategoryOfRuleResponse(
-                name = "너무",
-                icon = R.drawable.ic_rules_heart_s,
-                backGround = R.drawable.ic_rules_category_red_bg_m
+            Category(
+                id = "62d6asdasdasdd48db",
+                categoryName = "하트",
+                categoryIcon = "HEART"
             ),
-            CategoryOfRuleResponse(
-                name = "많이",
-                icon = R.drawable.ic_rules_broom_s,
-                backGround = R.drawable.ic_rules_category_blue_bg_m
+            Category(
+                id = "62d6b94asdsadasd8db",
+                categoryName = "불빛",
+                categoryIcon = "LIGHT",
             ),
-            CategoryOfRuleResponse(
-                name = "먹었더니",
-                icon = R.drawable.ic_rules_heart_s,
-                backGround = R.drawable.ic_rules_category_red_bg_m
-            ),
-            CategoryOfRuleResponse(
-                name = "배불러",
-                icon = R.drawable.ic_rules_heart_s,
-                backGround = R.drawable.ic_rules_category_red_bg_m
-            ),
-            CategoryOfRuleResponse(
-                name = "",
-                icon = R.drawable.ic_rules_heart_s,
-                backGround = R.drawable.ic_rules_todo_plus
+            Category(
+                id = "dasdadasdasdsad",
+                categoryIcon = "세탁",
+                categoryName = "LAUNDRY"
             )
         )
     }
@@ -300,7 +290,7 @@ class RulesViewModel : ViewModel() {
 
     fun initCategorySelected() {
         val tmpCategoryOfRuleList = requireNotNull(_categoryOfRuleList.value).map { data ->
-            data.copy().apply { isSelected = false }
+            data.copy().apply { isChecked = false }
         }
         _categoryOfRuleList.value = tmpCategoryOfRuleList
     }
@@ -317,9 +307,9 @@ class RulesViewModel : ViewModel() {
 
     fun setCategorySelected(position: Int) {
         val tmpCategoryOfRuleList = requireNotNull(_categoryOfRuleList.value).map { data ->
-            data.copy().apply { isSelected = false }
+            data.copy().apply { isChecked = false }
         }
-        tmpCategoryOfRuleList[position].isSelected = true
+        tmpCategoryOfRuleList[position].isChecked = true
         _categoryOfRuleList.value = tmpCategoryOfRuleList.toList()
     }
 
