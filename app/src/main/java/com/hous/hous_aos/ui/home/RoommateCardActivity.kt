@@ -27,6 +27,10 @@ class RoommateCardActivity : AppCompatActivity() {
     private fun init() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
+
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
         }
     }
 }
