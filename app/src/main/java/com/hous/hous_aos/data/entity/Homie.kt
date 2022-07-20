@@ -10,7 +10,7 @@ data class Homie(
     val job: String = "",
     val introduction: String = "",
     val hashTag: List<String> = emptyList(),
-    val typeScore: List<Int> = listOf(6, 6, 6, 6, 6),
-    val isChecked: Boolean = false,
+    val typeScore: List<Int> = emptyList(),
+    var isChecked: Boolean = false,
     val notificationState: Boolean = false
 )

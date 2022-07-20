@@ -30,6 +30,7 @@
             tools:listitem="@layout/item_rules_table_general" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_plus_rules"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_purple_fill_10_rect"

@@ -3,8 +3,10 @@ package com.hous.hous_aos.ui.rules
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hous.hous_aos.R
-import com.hous.hous_aos.data.entity.rules.*
+import com.hous.hous_aos.data.entity.Category
+import com.hous.hous_aos.data.entity.Homie
+import com.hous.hous_aos.data.entity.Rule
+
 
 class RulesViewModel : ViewModel() {
     private var _toDoViewType = MutableLiveData(ToDoViewType.TODAY_TO_DO)
@@ -14,40 +16,92 @@ class RulesViewModel : ViewModel() {
     val isSelectedCategorySmile: LiveData<Boolean> get() = _isSelectedCategorySmile
 
     private var _categoryOfRuleList =
-        MutableLiveData<List<CategoryOfRuleResponse>>()
+        MutableLiveData<List<Category>>()
     val categoryOfRuleList get() = _categoryOfRuleList
 
     private var _todayTodoList =
-        MutableLiveData<List<TodayTodoResponse>>()
+        MutableLiveData<List<Rule>>()
     val todayTodoList get() = _todayTodoList
 
     private var _myTodoList =
-        MutableLiveData<List<MyToDoResponse>>()
+        MutableLiveData<List<Rule>>()
     val myTodoList get() = _myTodoList
 
     private var _keyRulesTableList =
-        MutableLiveData<List<KeyRulesData>>()
+        MutableLiveData<List<Rule>>()
     val keyRulesTableList get() = _keyRulesTableList
 
     private var _generalRulesTableList =
-        MutableLiveData<List<GeneralRulesData>>()
+        MutableLiveData<List<Rule>>()
     val generalRulesTableList get() = _generalRulesTableList
 
-    init {
-        fetchToTodayToDoList()
-        fetchToMyTodayToDoList()
-        fetchToCategoryOfRuleList()
+    private var _tmpManagerList = MutableLiveData<List<Homie>>()
+    val tmpManagerList get() = _tmpManagerList
+
+    /**
+     * 임시 담당자 checked 바꾸기
+     * */
+    fun setSelectedTmpManager(position: Int) {
+        requireNotNull(_tmpManagerList.value)[position].isChecked =
+            !requireNotNull(_tmpManagerList.value)[position].isChecked
+    }
+
+    /**
+     * 임시 담당자 save버튼 누르면 서버로 보내기
+     * */
+    fun putToTmpManagerList(): List<String> {
+        val clickedTmpManagerList: MutableList<String> = mutableListOf()
+        _tmpManagerList.value?.forEach {
+            if (it.isChecked) clickedTmpManagerList.add(it.id!!)
+        }
+        return clickedTmpManagerList.toList()
+    }
+
+    fun fetchToTmpManagerList() {
+        val tmp = listOf(
+            Homie(
+                id = "62cc7409csdsd06c46adf652f",
+                userName = "이준원",
+                isChecked = true,
+                typeColor = "GRAY"
+            ),
+            Homie(
+                id = "6dasdasdasdsadsad52f",
+                userName = "이영주",
+                isChecked = false,
+                typeColor = "RED"
+            ),
+            Homie(
+                id = "62cc740asdsadsadf652f",
+                userName = "강워어뇽",
+                isChecked = true,
+                typeColor = "BLUE"
+            ),
+            Homie(
+                id = "62cc7409csasdsadsa52f",
+                userName = "꾸우웅",
+                isChecked = false,
+                typeColor = "GREEN"
+            ),
+            Homie(
+                id = "62cc7409csasdsadsa52f",
+                userName = "꾸우우웅",
+                isChecked = false,
+                typeColor = "GRAY"
+            )
+        )
+        _tmpManagerList.value = tmp.map { it.copy() }
     }
 
     fun fetchToGeneralRulesTableList() {
-        _generalRulesTableList.value = listOf(
-            GeneralRulesData(
+        val tmp = listOf(
+            Rule(
                 id = "62cc74e8dasdasd591384e4ecd",
                 ruleName = "설거지하기",
                 membersCnt = 2,
                 typeColors = listOf("GRAY", "RED")
             ),
-            GeneralRulesData(
+            Rule(
                 id = "62ccsad209asdasd00f",
                 ruleName = "청소하기",
                 membersCnt = 4,
@@ -57,7 +111,7 @@ class RulesViewModel : ViewModel() {
                     "RED"
                 )
             ),
-            GeneralRulesData(
+            Rule(
                 id = "62ccasdsadsasd00f",
                 ruleName = "바퀴벌레 잡기",
                 membersCnt = 3,
@@ -67,163 +121,163 @@ class RulesViewModel : ViewModel() {
                     "RED"
                 )
             ),
-            GeneralRulesData(
+            Rule(
                 id = "62ccsasdasdcdcfa7asdsad0f",
                 ruleName = "쓰레기 구분",
                 membersCnt = 1,
                 typeColors = listOf("PURPLE")
             ),
-            GeneralRulesData(
+            Rule(
                 id = "62cd4easdsaee723123dawsd",
                 ruleName = "임시 담당자 규칙",
                 membersCnt = 0,
                 typeColors = listOf()
             )
         )
+        _generalRulesTableList.value = tmp.map { it.copy() }
     }
 
     fun fetchToKeyRulesTableList() {
-        _keyRulesTableList.value = listOf(
-            KeyRulesData(
+        val tmp = listOf(
+            Rule(
                 id = "62cc81ac1a034f0287c5c6ec",
                 ruleName = "상단규칙"
             )
         )
+        _keyRulesTableList.value = tmp.map { it.copy() }
     }
 
-    private fun fetchToCategoryOfRuleList() {
-
+    fun fetchToCategoryOfRuleList() {
         _categoryOfRuleList.value = mutableListOf(
-            CategoryOfRuleResponse(
-                name = "라면을",
-                icon = R.drawable.ic_rules_heart_s,
-                backGround = R.drawable.ic_rules_category_red_bg_m
+            Category(
+                id = "62d6b94e0e9be86f165d48db",
+                categoryName = "청소",
+                categoryIcon = "CLEAN"
             ),
-            CategoryOfRuleResponse(
-                name = "너무",
-                icon = R.drawable.ic_rules_heart_s,
-                backGround = R.drawable.ic_rules_category_red_bg_m
+            Category(
+                id = "62d6asdasdasdd48db",
+                categoryName = "하트",
+                categoryIcon = "HEART"
             ),
-            CategoryOfRuleResponse(
-                name = "많이",
-                icon = R.drawable.ic_rules_broom_s,
-                backGround = R.drawable.ic_rules_category_blue_bg_m
+            Category(
+                id = "62d6b94asdsadasd8db",
+                categoryName = "불빛",
+                categoryIcon = "LIGHT",
             ),
-            CategoryOfRuleResponse(
-                name = "먹었더니",
-                icon = R.drawable.ic_rules_heart_s,
-                backGround = R.drawable.ic_rules_category_red_bg_m
-            ),
-            CategoryOfRuleResponse(
-                name = "배불러",
-                icon = R.drawable.ic_rules_heart_s,
-                backGround = R.drawable.ic_rules_category_red_bg_m
-            ),
-            CategoryOfRuleResponse(
-                name = "",
-                icon = R.drawable.ic_rules_heart_s,
-                backGround = R.drawable.ic_rules_todo_plus
+            Category(
+                id = "dasdadasdasdsad",
+                categoryIcon = "세탁",
+                categoryName = "LAUNDRY"
             )
         )
     }
 
-    private fun fetchToTodayToDoList() {
-        _todayTodoList.value = mutableListOf<TodayTodoResponse>(
-            TodayTodoResponse(
+    fun fetchToTodayToDoList() {
+        val tmpTodayToDoList = mutableListOf<Rule>(
+            Rule(
                 id = "sd;jnv;aovknkv;lsnm",
-                number = 0,
                 isAllChecked = false,
-                isTemporaryManager = false,
+                isTmpMember = false,
                 ruleName = "화장실 청소",
-                managerDataList = listOf<ManagerData>(),
-                iconList = listOf<String>()
+                todayMembersWithTypeColor = listOf(
+                    Homie(id = "sdasddvnds", typeColor = "GRAY", userName = "이준원"),
+                    Homie(id = "sdksasdsdvnds", typeColor = "BLUE", userName = "이준원"),
+                )
             ),
-            TodayTodoResponse(
+            Rule(
                 id = "sd;jnvvsdnojkcz;lsnm",
-                number = 4,
                 isAllChecked = false,
-                isTemporaryManager = false,
+                isTmpMember = false,
                 ruleName = "거실 청소기 돌리기",
-                managerDataList = listOf(
-                    ManagerData(id = "sdklasdfdasfdslkvnds", name = "이준원"),
-                    ManagerData(id = "sdkladsfdasfsd", name = "강원용"),
-                    ManagerData(id = "adsfsfdasfsaf", name = "이영주"),
-                    ManagerData(id = "s2asdfadsfxasslkvnds", name = "안드로이드킹")
-                ),
-                iconList = listOf("purple", "yellow", "red", "blue")
+                todayMembersWithTypeColor = listOf(
+                    Homie(id = "sdasddvnds", typeColor = "PURPLE", userName = "이준원"),
+                    Homie(id = "sdksasdsdvnds", typeColor = "BLUE", userName = "이준원"),
+                    Homie(id = "sdksaasdadsdvnds", typeColor = "YELLOW", userName = "이준원"),
+                    Homie(id = "sdksasdsdvnds", typeColor = "BLUE", userName = "이준원"),
+                )
             ),
-            TodayTodoResponse(
+            Rule(
                 id = "sd;jnvamfokassnm",
-                number = 3,
                 isAllChecked = false,
-                isTemporaryManager = false,
+                isTmpMember = false,
                 ruleName = "냉장고 정리하기",
-                managerDataList = listOf(
-                    ManagerData(id = "sdkldasfvdslkvnds", name = "최인영"),
-                    ManagerData(id = "sdklmnsdafvsdasd", name = "이다영"),
-                    ManagerData(id = "sdadsfsdasdsads", name = "최소현"),
-                ),
-                iconList = listOf("yellow", "red", "blue")
+                todayMembersWithTypeColor = listOf(
+                    Homie(id = "sdksadvasdvnds", typeColor = "PURPLE", userName = "이준원"),
+                    Homie(id = "sdksadvasdvnds", typeColor = "BLUE", userName = "이준원"),
+                    Homie(id = "sdksadvasdvnds", typeColor = "YELLOW", userName = "이준원"),
+                )
             ),
-            TodayTodoResponse(
+            Rule(
                 id = "sd;jnsad,;lsadokassnm",
-                number = 1,
                 isAllChecked = true,
-                isTemporaryManager = false,
+                isTmpMember = false,
                 ruleName = "냉장고 정리하기",
-                managerDataList = listOf(
-                    ManagerData(id = "sdksadvasdvnds", name = "이준원"),
-                ),
-                iconList = listOf("purple")
+                todayMembersWithTypeColor = listOf(
+                    Homie(id = "sdksadvasdvnds", typeColor = "PURPLE", userName = "이준원"),
+                )
             ),
-            TodayTodoResponse(
+            Rule(
                 id = "sdssdmkvalmdasld,kassnm",
-                number = 2,
                 isAllChecked = false,
-                isTemporaryManager = true,
+                isTmpMember = true,
                 ruleName = "냉장고 정리하기",
-                managerDataList = listOf(
-                    ManagerData(id = "sdklmsdbasdfkvnds", name = "공혁준"),
-                    ManagerData(id = "sdklsadsdasd", name = "김혜정"),
-                ),
-                iconList = listOf("green", "gray")
+                todayMembersWithTypeColor = listOf(
+                    Homie(id = "sdksadvasdvnds", typeColor = "PURPLE", userName = "이준원"),
+                    Homie(id = "sdksadvasdvnds", typeColor = "GREEN", userName = "이준원"),
+                )
+            ),
+            Rule(
+                id = "sdssdmkvalmdasld,kassnm",
+                isAllChecked = false,
+                isTmpMember = true,
+                ruleName = "냉장고 정리하기",
+                todayMembersWithTypeColor = listOf(
+                    Homie(id = "sdksadvasdvnds", typeColor = "PURPLE", userName = "이준원"),
+                    Homie(id = "sdksadvasdvnds", typeColor = "GRAY", userName = "이준원"),
+                )
             )
         )
+        _todayTodoList.value = tmpTodayToDoList.map { data ->
+            data.copy()
+        }
     }
 
-    private fun fetchToMyTodayToDoList() {
-        _myTodoList.value = mutableListOf(
-            MyToDoResponse(
+    fun fetchToMyTodayToDoList() {
+        val tmpMyTodoList = mutableListOf(
+            Rule(
                 id = "sjodFdsfdsfdsflc",
                 categoryIcon = "CLEAN",
                 ruleName = "거실 청소기 돌리기",
                 isChecked = false
             ),
-            MyToDoResponse(
+            Rule(
                 id = "sjklsdfdsfsmvklc",
                 categoryIcon = "BEER",
                 ruleName = "맥주 마시기",
                 isChecked = true
             ),
-            MyToDoResponse(
+            Rule(
                 id = "sjodkajofsdfdsfdmaklc",
                 categoryIcon = "LAUNDRY",
                 ruleName = "세탁기 돌리기",
                 isChecked = false
             ),
-            MyToDoResponse(
+            Rule(
                 id = "sjdsfsdfkmcsaklc",
                 categoryIcon = "LIGHT",
                 ruleName = "전구 갈기",
                 isChecked = true
             ),
-            MyToDoResponse(
+            Rule(
                 id = "sjklfansdjkdsfdsdsmvklc",
                 categoryIcon = "BEER",
                 ruleName = "맥주 마시기",
                 isChecked = true
             )
         )
+        _myTodoList.value = tmpMyTodoList.map { data ->
+            data.copy()
+        }
     }
 
     fun setToDoViewType(toDoViewType: ToDoViewType) {
@@ -236,9 +290,9 @@ class RulesViewModel : ViewModel() {
 
     fun initCategorySelected() {
         val tmpCategoryOfRuleList = requireNotNull(_categoryOfRuleList.value).map { data ->
-            data.copy().apply { isSelected = false }
+            data.copy().apply { isChecked = false }
         }
-        _categoryOfRuleList.value = tmpCategoryOfRuleList.toList()
+        _categoryOfRuleList.value = tmpCategoryOfRuleList
     }
 
     fun setMyToDoCheckBoxSelected(position: Int) {
@@ -253,9 +307,9 @@ class RulesViewModel : ViewModel() {
 
     fun setCategorySelected(position: Int) {
         val tmpCategoryOfRuleList = requireNotNull(_categoryOfRuleList.value).map { data ->
-            data.copy().apply { isSelected = false }
+            data.copy().apply { isChecked = false }
         }
-        tmpCategoryOfRuleList[position].isSelected = true
+        tmpCategoryOfRuleList[position].isChecked = true
         _categoryOfRuleList.value = tmpCategoryOfRuleList.toList()
     }
 

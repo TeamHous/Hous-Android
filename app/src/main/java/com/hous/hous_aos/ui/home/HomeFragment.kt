@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentHomeBinding
@@ -25,7 +24,7 @@ class HomeFragment : Fragment() {
     private var rulesAdapter: RulesAdapter? = null
     private var todoAdapter: ToDoAdapter? = null
     private var homieAdapter: HomieAdapter? = null
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: EventViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,12 +55,20 @@ class HomeFragment : Fragment() {
 
     private fun initEventAdapter() {
         viewModel.eventList.observe(viewLifecycleOwner) {
-            eventAdapter = EventAdapter(onClickListener = ::onClickListener)
+            eventAdapter = EventAdapter(
+                onClickEventIcon = ::onClickEventIcon
+            )
             binding.rvEvent.adapter = eventAdapter
             requireNotNull(eventAdapter).submitList(
                 it
             )
         }
+    }
+
+    private fun onClickEventIcon(position: Int) {
+        val dialog = EventDialogFragment()
+        dialog.show(childFragmentManager, HOME_FRAGMENT)
+        viewModel.setEventIconPosition(position)
     }
 
     private fun initRulesAdapter() {
@@ -94,18 +101,11 @@ class HomeFragment : Fragment() {
                 onClickHomie = ::onClickHomie
             )
             binding.rvProfile.adapter = homieAdapter
-            requireNotNull(homieAdapter).submitList(
-                it
-            )
+            requireNotNull(homieAdapter).submitList(it.toList())
         }
     }
 
-    private fun onClickListener() {
-        // 다이얼로그 띄우기
-    }
-
     private fun roomCode() {
-
     }
 
     private fun showToast() {
@@ -120,5 +120,9 @@ class HomeFragment : Fragment() {
     private fun onClickHomie() {
         val intent = Intent(context, RoommateCardActivity::class.java)
         startActivity(intent)
+    }
+
+    companion object {
+        const val HOME_FRAGMENT = "HOME_FRAGMENT"
     }
 }

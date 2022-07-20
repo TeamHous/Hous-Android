@@ -1,13 +1,16 @@
 package com.hous.hous_aos.ui.rules
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.hous_aos.data.entity.rules.CategoryOfRuleResponse
+import com.hous.hous_aos.R
+import com.hous.hous_aos.data.entity.Category
 import com.hous.hous_aos.databinding.ItemRulesRuleBinding
+import com.hous.hous_aos.util.setDrawable
 
 class HomeRulesCategoryAdapter(
     private val onLongClick: () -> Unit,
@@ -15,9 +18,19 @@ class HomeRulesCategoryAdapter(
     private val onPlusClick: () -> Unit,
     private val onChangeIsSelected: (Int) -> Unit,
 ) :
-    ListAdapter<CategoryOfRuleResponse, RecyclerView.ViewHolder>(
+    ListAdapter<Category, RecyclerView.ViewHolder>(
         CategoryOfRuleDiffUtilCallback
     ) {
+    private val iconTypeHashMap: HashMap<String, CategoryIconType> = hashMapOf(
+        "CLEAN" to CategoryIconType.CLEAN,
+        "TRASH" to CategoryIconType.TRASH,
+        "HEART" to CategoryIconType.HEART,
+        "LIGHT" to CategoryIconType.LIGHT,
+        "BEER" to CategoryIconType.BEER,
+        "CAKE" to CategoryIconType.CAKE,
+        "LAUNDRY" to CategoryIconType.LAUNDRY,
+        "COFFEE" to CategoryIconType.COFFEE
+    )
 
     override fun getItemViewType(position: Int): Int {
         return if (position == currentList.size - 1) {
@@ -39,6 +52,7 @@ class HomeRulesCategoryAdapter(
                     )
                 )
             else -> CategoryOfRuleViewHolder(
+                iconTypeHashMap,
                 onLongClick,
                 onCategoryClick,
                 onChangeIsSelected,
@@ -58,14 +72,16 @@ class HomeRulesCategoryAdapter(
     }
 
     class CategoryOfRuleViewHolder(
+        private val iconTypeHashMap: HashMap<String, CategoryIconType>,
         private val onLongClick: () -> Unit,
         private val onCategoryClick: () -> Unit,
         private val onChangeIsSelected: (Int) -> Unit,
         private val binding: ItemRulesRuleBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind(data: CategoryOfRuleResponse) {
+        fun onBind(data: Category) {
             binding.data = data
+            binding.iconType = iconTypeHashMap[data.categoryIcon]
             binding.clRuleItem.setOnLongClickListener {
                 onLongClick()
                 onChangeIsSelected(absoluteAdapterPosition)
@@ -83,9 +99,9 @@ class HomeRulesCategoryAdapter(
         private val binding: ItemRulesRuleBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind(data: CategoryOfRuleResponse) {
+        fun onBind(data: Category) {
             binding.data = data
-            binding.ivRuleIcon.visibility = View.INVISIBLE
+            binding.iconType =CategoryIconType.NONE
             binding.clRuleItem.setOnClickListener {
                 onPlusClick()
             }
@@ -94,20 +110,32 @@ class HomeRulesCategoryAdapter(
 
     companion object {
         private val CategoryOfRuleDiffUtilCallback =
-            object : DiffUtil.ItemCallback<CategoryOfRuleResponse>() {
+            object : DiffUtil.ItemCallback<Category>() {
                 override fun areItemsTheSame(
-                    oldItem: CategoryOfRuleResponse,
-                    newItem: CategoryOfRuleResponse
+                    oldItem: Category,
+                    newItem: Category
                 ): Boolean {
-                    return oldItem.name == newItem.name
+                    return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: CategoryOfRuleResponse,
-                    newItem: CategoryOfRuleResponse
+                    oldItem: Category,
+                    newItem: Category
                 ): Boolean {
                     return oldItem == newItem
                 }
             }
     }
+}
+
+enum class CategoryIconType(@DrawableRes val background: Int, @DrawableRes val drawableRes: Int) {
+    CLEAN(R.drawable.ic_rules_category_blue_bg_2, R.drawable.ic_rules_broom_s),
+    TRASH(R.drawable.ic_rules_category_blue_bg_2, R.drawable.ic_rules_trash_s),
+    LIGHT(R.drawable.ic_rules_category_red_bg_m, R.drawable.ic_rules_bulb_s),
+    HEART(R.drawable.ic_rules_category_red_bg_m, R.drawable.ic_rules_heart_s),
+    BEER(R.drawable.ic_rules_category_yellow_bg_m, R.drawable.ic_rules_beer_s),
+    CAKE(R.drawable.ic_rules_category_yellow_bg_m, R.drawable.ic_rules_pancake_s),
+    LAUNDRY(R.drawable.ic_rules_category_purple_bg_m, R.drawable.ic_rules_laundry_s),
+    COFFEE(R.drawable.ic_rules_category_purple_bg_m, R.drawable.ic_rules_coffee_s),
+    NONE(R.drawable.ic_rules_category_transparent_bg_m, R.drawable.ic_rules_todo_plus)
 }
