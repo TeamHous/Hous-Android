@@ -2,34 +2,47 @@ package com.hous.hous_aos.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.hous.hous_aos.data.entity.Event
+import com.hous.hous_aos.data.entity.Homie
+import com.hous.hous_aos.data.entity.Rule
 
 class HomeViewModel : ViewModel() {
-    private val _eventList = MutableLiveData<List<EventData>>(
+    private val _eventList = MutableLiveData<List<Event>>(
         listOf(
-            EventData(
-                _id = "",
-                eventIcon = "NONE",
+            Event(
+                id = "",
+                eventIcon = "",
                 dDay = ""
             ),
-            EventData(
-                _id = "62cdab999b7fca5900cff7df",
+            Event(
+                id = "",
                 eventIcon = "PARTY",
-                dDay = "1"
+                dDay = "12"
             ),
-            EventData(
-                _id = "62cdab999b7fca5900cff7df",
+            Event(
+                id = "",
+                eventIcon = "BEER",
+                dDay = "8"
+            ),
+            Event(
+                id = "",
+                eventIcon = "COFFEE",
+                dDay = "5"
+            ),
+            Event(
+                id = "",
+                eventIcon = "CAKE",
+                dDay = "3"
+            ),
+            Event(
+                id = "",
                 eventIcon = "COFFEE",
                 dDay = "2"
             ),
-            EventData(
-                _id = "62cdab999b7fca5900cff7df",
-                eventIcon = "BEER",
-                dDay = "3"
-            ),
-            EventData(
-                _id = "62cdab999b7fca5900cff7df",
+            Event(
+                id = "",
                 eventIcon = "PARTY",
-                dDay = "4"
+                dDay = "1"
             ),
         )
     )
@@ -43,56 +56,59 @@ class HomeViewModel : ViewModel() {
     )
     val keyRulesList get() = _keyRulesList
 
-    private val _todoList = MutableLiveData<List<ToDoData>>(
-        listOf(
-            ToDoData(
-                isCheck = false,
-                todoName = "빨래를돌려야하는데언제돌리지젠장",
-                createdAt = "2022-07-11T20:00:10.985Z"
+    private val _todoList = MutableLiveData<List<Rule>>(
+         listOf(
+            Rule(
+                isChecked = true,
+                ruleName = "빨래를돌려야하는데언제돌리지젠장",
             ),
-            ToDoData(
-                isCheck = true,
-                todoName = "청소기도돌려야하는데언제하지젠장",
-                createdAt = "2022-07-11T20:00:10.985Z"
+            Rule(
+                isChecked = false,
+                ruleName = "청소기도돌려야하는데언제하지젠장",
             ),
-            ToDoData(
-                isCheck = true,
-                todoName = "커미사마셔야하는데배가아프네젠장",
-                createdAt = "2022-07-11T20:00:10.985Z"
+            Rule(
+                isChecked = false,
+                ruleName = "커미사마셔야하는데배가아프네젠장",
             )
         )
     )
     val todoList get() = _todoList
 
-    private val _homieList = MutableLiveData<List<HomieData>>(
+    private val _homieList = MutableLiveData<List<Homie>>(
         listOf(
-            HomieData(
-                _id = "",
+            Homie(
+                id = "",
                 userName = "이영주",
-                typeName = "임시 디폴트",
-                typeColor = "GRAY"
-            ),
-            HomieData(
-                _id = "62cc7420d7868591384e4eb0",
-                userName = "강원용",
                 typeName = "임시 디폴트",
                 typeColor = "YELLOW"
             ),
-            HomieData(
-                _id = "62cc7420d7868591384e4eb0",
-                userName = "이준원",
+            Homie(
+                id = "",
+                userName = "김지현",
                 typeName = "임시 디폴트",
-                typeColor = "GREEN"
+                typeColor = "RED"
             ),
-            HomieData(
-                _id = "62cc7420d7868591384e4eb0",
-                userName = "김소현",
+            Homie(
+                id = "",
+                userName = "김민재",
                 typeName = "임시 디폴트",
                 typeColor = "BLUE"
             ),
+            Homie(
+                id = "",
+                userName = "이준원",
+                typeName = "임시 디폴트",
+                typeColor = ""
+            ),
+            Homie(
+                id = "",
+                userName = "강원용",
+                typeName = "임시 디폴트",
+                typeColor = "GREEN"
+            ),
             //copy room code 더미데이터
-            HomieData(
-                _id = "",
+            Homie(
+                id = "",
                 userName = "",
                 typeName = "",
                 typeColor = ""
@@ -111,6 +127,6 @@ class HomeViewModel : ViewModel() {
 }
 
 data class HomieProfileList(
-    val homie: List<HomieData>,
+    val homie: List<Homie>,
     val roomCode: String
 )

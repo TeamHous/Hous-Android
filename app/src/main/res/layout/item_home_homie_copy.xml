@@ -6,7 +6,7 @@
 
         <variable
             name="homie"
-            type="com.hous.hous_aos.ui.home.HomieData" />
+            type="com.hous.hous_aos.data.entity.Homie" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
