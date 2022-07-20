@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hous.hous_aos.R
+import com.hous.hous_aos.data.entity.Rule
 import com.hous.hous_aos.data.entity.rules.*
+
 
 class RulesViewModel : ViewModel() {
     private var _toDoViewType = MutableLiveData(ToDoViewType.TODAY_TO_DO)
@@ -26,11 +28,11 @@ class RulesViewModel : ViewModel() {
     val myTodoList get() = _myTodoList
 
     private var _keyRulesTableList =
-        MutableLiveData<List<KeyRulesData>>()
+        MutableLiveData<List<Rule>>()
     val keyRulesTableList get() = _keyRulesTableList
 
     private var _generalRulesTableList =
-        MutableLiveData<List<GeneralRulesData>>()
+        MutableLiveData<List<Rule>>()
     val generalRulesTableList get() = _generalRulesTableList
 
     private var _tmpManagerList = MutableLiveData<List<HomieData>>()
@@ -93,13 +95,13 @@ class RulesViewModel : ViewModel() {
 
     fun fetchToGeneralRulesTableList() {
         val tmp = listOf(
-            GeneralRulesData(
+            Rule(
                 id = "62cc74e8dasdasd591384e4ecd",
                 ruleName = "설거지하기",
                 membersCnt = 2,
                 typeColors = listOf("GRAY", "RED")
             ),
-            GeneralRulesData(
+            Rule(
                 id = "62ccsad209asdasd00f",
                 ruleName = "청소하기",
                 membersCnt = 4,
@@ -109,7 +111,7 @@ class RulesViewModel : ViewModel() {
                     "RED"
                 )
             ),
-            GeneralRulesData(
+            Rule(
                 id = "62ccasdsadsasd00f",
                 ruleName = "바퀴벌레 잡기",
                 membersCnt = 3,
@@ -119,13 +121,13 @@ class RulesViewModel : ViewModel() {
                     "RED"
                 )
             ),
-            GeneralRulesData(
+            Rule(
                 id = "62ccsasdasdcdcfa7asdsad0f",
                 ruleName = "쓰레기 구분",
                 membersCnt = 1,
                 typeColors = listOf("PURPLE")
             ),
-            GeneralRulesData(
+            Rule(
                 id = "62cd4easdsaee723123dawsd",
                 ruleName = "임시 담당자 규칙",
                 membersCnt = 0,
@@ -137,7 +139,7 @@ class RulesViewModel : ViewModel() {
 
     fun fetchToKeyRulesTableList() {
         val tmp = listOf(
-            KeyRulesData(
+            Rule(
                 id = "62cc81ac1a034f0287c5c6ec",
                 ruleName = "상단규칙"
             )
