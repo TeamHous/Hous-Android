@@ -88,7 +88,11 @@ class HomeFragment : Fragment() {
 
     private fun initHomieAdapter() {
         viewModel.homieList.observe(viewLifecycleOwner) {
-            homieAdapter = HomieAdapter(showToast = ::showToast)
+            homieAdapter = HomieAdapter(
+                showToast = ::showToast,
+                onClickMe = ::onClickMe,
+                onClickHomie = ::onClickHomie
+            )
             binding.rvProfile.adapter = homieAdapter
             requireNotNull(homieAdapter).submitList(
                 it
