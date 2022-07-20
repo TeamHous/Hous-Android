@@ -1,15 +1,22 @@
 package com.hous.hous_aos.ui.profile
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hous.hous_aos.data.repository.ProfileRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TendencyViewModel : ViewModel() {
+@HiltViewModel
+class TendencyViewModel @Inject constructor(
+    private val profileRepository: ProfileRepository
+) : ViewModel() {
     private val _move = MutableLiveData<Boolean>()
     val move: LiveData<Boolean> = _move
     private val _uiState = MutableStateFlow(TestUiState())
@@ -44,8 +51,11 @@ class TendencyViewModel : ViewModel() {
     }
 
     fun sendData() {
-        sumScore()
-        /* 서버 통신 작업 */
+        viewModelScope.launch {
+            sumScore()
+            Log.d("TendencyViewModel", "result : ${uiState.value.answerHolder}")
+            profileRepository.putTestResult(uiState.value.answerHolder)
+        }
     }
 
     private fun sumScore() {

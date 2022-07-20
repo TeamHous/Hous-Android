@@ -10,4 +10,7 @@ class ProfileRepositoryImpl @Inject constructor(
 ) : ProfileRepository {
     override suspend fun getUserProfile(): Result<WrapperClass<Homie>> =
         runCatching { profileDataSource.getUserProfile() }
+
+    override suspend fun putTestResult(typeScore: List<Int>): Result<WrapperClass<Any>> =
+        runCatching { profileDataSource.putTestResult(typeScore) }
 }
