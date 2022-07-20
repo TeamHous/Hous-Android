@@ -130,7 +130,24 @@ class HomeViewModel @Inject constructor(
         "85UHIKZB"
     )
 
-    fun RoomCode(): String? {
+    init {
+        viewModelScope.launch {
+            homeRepository.getHomeList("")
+                .onSuccess { result->
+                    Log.d("asdf", "success ${result.message}")
+                    _roomCode.value = result.data?.roomCode
+                    _eventList.value = result.data?.eventList
+                    _todoList.value = result.data?.todoList
+                    _keyRulesList.value = result.data?.keyRulesList
+                    _homieList.value = result.data?.homieProfileList
+                }
+                .onFailure { result ->
+                    Log.d("asdf", "fail ${result.message}")
+                }
+        }
+    }
+
+    fun roomCode(): String? {
         return _roomCode.value
     }
 }
