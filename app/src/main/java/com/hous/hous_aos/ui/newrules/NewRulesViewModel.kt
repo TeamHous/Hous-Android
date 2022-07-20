@@ -29,6 +29,23 @@ class NewRulesViewModel @Inject constructor(
             (uiState.value.checkBoxState == State.SELECT || isDayCheck())
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(3000L), false)
 
+    init {
+        viewModelScope.launch {
+            newRulesRepository.getNewRuleList("")
+                .onSuccess {
+                    Log.d("NewRulesViewModel", "getNewRuleList success : ${it.message}")
+                    _uiState.value = _uiState.value.copy(
+                        ruleCategory = it.data!!.ruleCategories,
+                        homies = it.data.homies
+                    )
+                    setUserMapping()
+                }
+                .onFailure {
+                    Log.d("NewRulesViewModel", "getNewRuleList fail : ${it.message}")
+                }
+        }
+    }
+
     private fun isDayCheck(): Boolean {
         var isDay = true
         for (manager in uiState.value.ManagerList) {
@@ -45,6 +62,14 @@ class NewRulesViewModel @Inject constructor(
             }
         }
         return isDay
+    }
+
+    private fun setUserMapping() {
+        val tempHomieState = hashMapOf<String, Boolean>()
+        uiState.value.homies.forEach {
+            tempHomieState[it.userName] = true
+        }
+        _uiState.value = _uiState.value.copy(homieState = tempHomieState)
     }
 
     fun setRuleName(rule: String) {
@@ -165,8 +190,8 @@ class NewRulesViewModel @Inject constructor(
     fun addNewRule() {
         viewModelScope.launch {
             newRulesRepository.addNewRule(uiState.value)
-                .onSuccess { Log.d("NewRulesViewModel", "success : ${it.message}") }
-                .onFailure { Log.d("NewRulesViewModel", "fail : ${it.message}") }
+                .onSuccess { Log.d("NewRulesViewModel", "addNewRule success : ${it.message}") }
+                .onFailure { Log.d("NewRulesViewModel", "addNewRule fail : ${it.message}") }
         }
     }
 
