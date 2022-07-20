@@ -117,7 +117,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun onClickHomie() {
-        val intent = Intent(context, RoommateCardActivity::class.java)
+        val intent = Intent(requireActivity(), RoommateCardActivity::class.java)
         startActivity(intent)
     }
 
