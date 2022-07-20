@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentHomeBinding
 import com.hous.hous_aos.ui.home.adapter.EventAdapter
 import com.hous.hous_aos.ui.home.adapter.HomieAdapter
@@ -107,11 +109,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun showToast() {
-        requireActivity().showToast("초대코드가 복사되었습니다.")
+        requireActivity().showToast(getString(R.string.copy_code))
     }
 
     private fun onClickMe() {
-        (activity as MainActivity).replace(2)
+        val profile = 2
+        (activity as MainActivity).replace(profile)
     }
 
     private fun onClickHomie() {
