@@ -1,3 +1,8 @@
 package com.hous.hous_aos.data.source.remote
 
-interface RemoteProfileDataSource
+import com.hous.hous_aos.data.entity.Homie
+import com.hous.hous_aos.data.model.WrapperClass
+
+interface RemoteProfileDataSource {
+    suspend fun getUserProfile(): WrapperClass<Homie>
+}

@@ -15,7 +15,9 @@ import com.hous.hous_aos.ui.profile.ProfileFragment
 import com.hous.hous_aos.ui.rules.RulesFragment
 import com.hous.hous_aos.ui.rules.RulesViewModel
 import com.hous.hous_aos.ui.rules.ToDoViewType
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: RulesViewModel by viewModels()
@@ -108,13 +110,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun replace(Position: Int){
-        when(Position){
-            HOME-> binding.botNavMain.selectedItemId = R.id.ic_bot_nav_home
-            RULES-> binding.botNavMain.selectedItemId = R.id.ic_bot_nav_rules
-            PROFILE-> binding.botNavMain.selectedItemId = R.id.ic_bot_nav_profile
+    fun replace(Position: Int) {
+        when (Position) {
+            HOME -> binding.botNavMain.selectedItemId = R.id.ic_bot_nav_home
+            RULES -> binding.botNavMain.selectedItemId = R.id.ic_bot_nav_rules
+            PROFILE -> binding.botNavMain.selectedItemId = R.id.ic_bot_nav_profile
         }
-
     }
 
     companion object {
