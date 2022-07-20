@@ -101,6 +101,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun replace(){
+        binding.botNavMain.selectedItemId = R.id.ic_bot_nav_profile
+    }
+
     companion object {
         val HOME = 0
         val RULES = 1
