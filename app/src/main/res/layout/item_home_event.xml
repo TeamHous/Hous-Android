@@ -9,7 +9,7 @@
 
         <variable
             name="event"
-            type="com.hous.hous_aos.ui.home.EventData" />
+            type="com.hous.hous_aos.data.entity.Event" />
 
         <variable
             name="position"
