@@ -111,7 +111,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun onClickMe() {
-        (activity as MainActivity).replace(2)
+        val profile = 2
+        (activity as MainActivity).replace(profile)
     }
 
     private fun onClickHomie() {
