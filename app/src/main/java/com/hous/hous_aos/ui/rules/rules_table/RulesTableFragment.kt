@@ -61,7 +61,7 @@ class RulesTableFragment : Fragment() {
     }
 
     private fun clickPlusButton() {
-        binding.ivPlusRules.setOnClickListener {
+        binding.clPlusRules.setOnClickListener {
             val intent = Intent(activity, NewRuleActivity::class.java)
             startActivity(intent)
         }

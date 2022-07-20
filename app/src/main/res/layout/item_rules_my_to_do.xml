@@ -11,10 +11,11 @@
 
         <variable
             name="data"
-            type="com.hous.hous_aos.data.entity.rules.MyToDoResponse" />
+            type="com.hous.hous_aos.data.entity.Rule" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_my_to_do"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"

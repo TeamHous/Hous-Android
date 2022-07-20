@@ -5,25 +5,27 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.hous_aos.R
-import com.hous.hous_aos.data.entity.rules.ManagerData
-import com.hous.hous_aos.data.entity.rules.TodayTodoResponse
+import com.hous.hous_aos.data.entity.Homie
+import com.hous.hous_aos.data.entity.Rule
 import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemMultiBinding
 import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemNoneBinding
 import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemOneBinding
 import com.hous.hous_aos.ui.rules.IconColor
 import com.hous.hous_aos.ui.rules.today_to_do.ItemToDoViewType
 
-class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>(
-    TodayTodoDiffUtilCallback
-) {
+class TodayTodoAdapter(private val onClickIcon: () -> Unit) :
+    ListAdapter<Rule, RecyclerView.ViewHolder>(
+        TodayTodoDiffUtilCallback
+    ) {
 
     override fun getItemViewType(position: Int): Int {
-        return if (currentList[position].number == MANAGER_NUMBER_ZERO) {
+        val data = currentList[position]
+        val managerCnt = data.todayMembersWithTypeColor.size
+        return if (managerCnt == MANAGER_NUMBER_ZERO) {
             ItemToDoViewType.NONE_MANAGER_VIEW_TYPE.index
-        } else if (currentList[position].number == MANAGER_NUMBER_ONE) {
+        } else if (managerCnt == MANAGER_NUMBER_ONE) {
             ItemToDoViewType.ONE_MANAGER_VIEW_TYPE.index
-        } else if (currentList[position].number >= MANAGER_NUMBER_TWO) {
+        } else if (managerCnt >= MANAGER_NUMBER_TWO) {
             ItemToDoViewType.MUTI_MANAGER_VIEW_TYPE.index
         } else throw IllegalArgumentException("잘못된 position:$position 이 들어왔습니다.")
     }
@@ -31,6 +33,7 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ItemToDoViewType.NONE_MANAGER_VIEW_TYPE.index -> NoneManagerViewHolder(
+                onClickIcon,
                 ItemRulesTodayToDoItemNoneBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -38,6 +41,7 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
                 )
             )
             ItemToDoViewType.ONE_MANAGER_VIEW_TYPE.index -> OneManagerViewHolder(
+                onClickIcon,
                 ItemRulesTodayToDoItemOneBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -45,6 +49,7 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
                 )
             )
             ItemToDoViewType.MUTI_MANAGER_VIEW_TYPE.index -> MultiManagerViewHolder(
+                onClickIcon,
                 ItemRulesTodayToDoItemMultiBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -65,24 +70,33 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
     }
 
     class NoneManagerViewHolder(
+        private val onClickIcon: () -> Unit,
         private val binding: ItemRulesTodayToDoItemNoneBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: TodayTodoResponse) {
+        fun onBind(data: Rule) {
             binding.data = data
+            binding.ivManagerEmpty.setOnClickListener {
+                onClickIcon()
+            }
         }
     }
 
     class OneManagerViewHolder(
+        private val onClickIcon: () -> Unit,
         private val binding: ItemRulesTodayToDoItemOneBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: TodayTodoResponse) {
+        fun onBind(data: Rule) {
             binding.data = data
-            binding.tvManager.text = changeListToString(requireNotNull(data.managerDataList))
-            binding.iconColor = getIconColor(data.iconList[0])
+            binding.tvManager.text =
+                changeListToString(requireNotNull(data.todayMembersWithTypeColor))
+            binding.iconColor = getIconColor(data.todayMembersWithTypeColor[0].typeColor)
+            binding.ivManager.setOnClickListener {
+                onClickIcon()
+            }
         }
 
-        private fun changeListToString(managerDataList: List<ManagerData>): String {
-            val textList = managerDataList.map { it.name }
+        private fun changeListToString(managerDataList: List<Homie>): String {
+            val textList = managerDataList.map { it.userName }
             return textList[0]
         }
 
@@ -100,39 +114,45 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
     }
 
     class MultiManagerViewHolder(
+        private val onClickIcon: () -> Unit,
         private val binding: ItemRulesTodayToDoItemMultiBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: TodayTodoResponse) {
+        fun onBind(data: Rule) {
             binding.data = data
-            binding.tvManager.text = changeListToString(requireNotNull(data.managerDataList))
-            when (data.iconList.size) {
-                ICON_LIST_SIZE_TWO -> {
-                    binding.count = ICON_LIST_SIZE_TWO
-                    binding.iconColorOne = getIconColor(data.iconList[0])
-                    binding.iconColorTwo = getIconColor(data.iconList[1])
+            binding.tvManager.text =
+                changeListToString(requireNotNull(data.todayMembersWithTypeColor))
+            binding.clManagerIcon.setOnClickListener {
+                onClickIcon()
+            }
+            val memberCnt = data.todayMembersWithTypeColor.size
+            when (memberCnt) {
+                2 -> {
+                    binding.count = 2
+                    binding.iconColorOne = getIconColor(data.todayMembersWithTypeColor[0].typeColor)
+                    binding.iconColorTwo = getIconColor(data.todayMembersWithTypeColor[1].typeColor)
                 }
-                ICON_LIST_SIZE_THREE -> {
-                    binding.count = ICON_LIST_SIZE_THREE
-                    binding.iconColorOne = getIconColor(data.iconList[0])
-                    binding.iconColorTwo = getIconColor(data.iconList[1])
-                    binding.iconColorThree = getIconColor(data.iconList[2])
+                3 -> {
+                    binding.count = 3
+                    binding.iconColorOne = getIconColor(data.todayMembersWithTypeColor[0].typeColor)
+                    binding.iconColorTwo = getIconColor(data.todayMembersWithTypeColor[1].typeColor)
+                    binding.iconColorThree = getIconColor(data.todayMembersWithTypeColor[2].typeColor)
                 }
-                ICON_LIST_SIZE_OVER_FOUR -> {
-                    binding.count = ICON_LIST_SIZE_OVER_FOUR
-                    binding.iconColorOne = getIconColor(data.iconList[0])
-                    binding.iconColorTwo = getIconColor(data.iconList[1])
-                    binding.iconColorThree = getIconColor(data.iconList[2])
-                    binding.iconColorFour = getIconColor(data.iconList[3])
+                4 -> {
+                    binding.count = 4
+                    binding.iconColorOne = getIconColor(data.todayMembersWithTypeColor[0].typeColor)
+                    binding.iconColorTwo = getIconColor(data.todayMembersWithTypeColor[1].typeColor)
+                    binding.iconColorThree = getIconColor(data.todayMembersWithTypeColor[2].typeColor)
+                    binding.iconColorFour = getIconColor(data.todayMembersWithTypeColor[3].typeColor)
                 }
-                else -> throw IllegalArgumentException("잘못된 data.iconList.size 값 : ${data.iconList.size}이 들어왔습니다.")
+                else -> throw IllegalArgumentException("잘못된 data.iconList.size 값 : ${memberCnt}이 들어왔습니다.")
             }
         }
 
-        private fun changeListToString(managerDataList: List<ManagerData>): String {
-            val textList = managerDataList.map { it.name }
+        private fun changeListToString(managerDataList: List<Homie>): String {
+            val textList = managerDataList.map { it.userName }
             val sizeOfTextList = textList.size
             return if (sizeOfTextList in 2..3) {
-                val text = textList.joinToString(separator = ",")
+                val text = textList.joinToString(separator = ", ")
                 text
             } else if (sizeOfTextList >= 4) {
                 val restOfthePeopleCount = sizeOfTextList - 3
@@ -159,18 +179,18 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
 
     companion object {
         private val TodayTodoDiffUtilCallback =
-            object : DiffUtil.ItemCallback<TodayTodoResponse>() {
+            object : DiffUtil.ItemCallback<Rule>() {
                 override fun areItemsTheSame(
-                    oldItem: TodayTodoResponse,
-                    newItem: TodayTodoResponse
+                    oldItem: Rule,
+                    newItem: Rule
 
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: TodayTodoResponse,
-                    newItem: TodayTodoResponse
+                    oldItem: Rule,
+                    newItem: Rule
                 ): Boolean {
                     return oldItem == newItem
                 }
@@ -178,14 +198,11 @@ class TodayTodoAdapter : ListAdapter<TodayTodoResponse, RecyclerView.ViewHolder>
         private const val MANAGER_NUMBER_ZERO = 0
         private const val MANAGER_NUMBER_ONE = 1
         private const val MANAGER_NUMBER_TWO = 2
-        private const val ICON_LIST_SIZE_TWO = 2
-        private const val ICON_LIST_SIZE_THREE = 3
-        private const val ICON_LIST_SIZE_OVER_FOUR = 4
-        private const val BLUE = "blue"
-        private const val RED = "red"
-        private const val PURPLE = "purple"
-        private const val GRAY = "gray"
-        private const val YELLOW = "yellow"
-        private const val GREEN = "green"
+        private const val BLUE = "BLUE"
+        private const val RED = "RED"
+        private const val PURPLE = "PURPLE"
+        private const val GRAY = "GRAY"
+        private const val YELLOW = "YELLOW"
+        private const val GREEN = "GREEN"
     }
 }
