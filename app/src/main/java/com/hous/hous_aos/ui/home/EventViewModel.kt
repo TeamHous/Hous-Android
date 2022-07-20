@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class EventViewModel @Inject constructor(
     private val homeRepository: HomeRepository
-) : ViewModel()  {
+) : ViewModel() {
     private var _eventDate = MutableLiveData<String>("")
     val eventDate get() = _eventDate
 
