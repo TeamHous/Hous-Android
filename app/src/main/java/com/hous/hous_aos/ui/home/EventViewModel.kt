@@ -4,8 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hous.hous_aos.data.entity.rules.HomieData
 import com.hous.hous_aos.data.entity.rules.ResponseEventData
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class EventViewModel : ViewModel() {
+    private var _eventDate = MutableLiveData<String>("")
+    val eventDate get() = _eventDate
+
     private var _eventIconPosition = MutableLiveData<Int>(START_POSITION)
     val eventIconPosition get() = _eventIconPosition
 
@@ -21,7 +27,17 @@ class EventViewModel : ViewModel() {
     private var _eventParticipantList = MutableLiveData<List<HomieData>>()
     val eventParticipantList get() = _eventParticipantList
 
-    // TODO 리사이클러뷰에 postion 넘겨주기
+    // 받아올 때
+    // 2022-07-28
+    fun setEventData(date: String) {
+        _eventDate.value = date
+    }
+
+    fun setEventData() {
+        _eventDate.value = responseEventData.value?.date
+    }
+
+    /** 리사이클러뷰에 postion 받아오기*/
     fun setEventIconPosition(position: Int) {
         _eventIconPosition.value = position
     }
@@ -36,7 +52,15 @@ class EventViewModel : ViewModel() {
 
     fun fetchToAddEventData() {
         _eventName.value = ""
-        // TODO default 호미들 넣어주기
+        setParticipantList()
+        setCurrentTimeToEventDate()
+    }
+
+    /** 현재 시간으로 세팅*/
+    fun setCurrentTimeToEventDate() {
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ISO_DATE
+        _eventDate.value = current.format(formatter)
     }
 
     fun fetchToResponseEventData() {
@@ -78,12 +102,15 @@ class EventViewModel : ViewModel() {
                 )
             )
         )
-        when (requireNotNull(_responseEventData.value).eventIcon) {
+        when (requireNotNull(responseEventData.value).eventIcon) {
             "PARTY" -> setSelectedEvent(EventIcon.FIRST)
             "CAKE" -> setSelectedEvent(EventIcon.SECOND)
             "BEER" -> setSelectedEvent(EventIcon.THIRD)
             "COFFEE" -> setSelectedEvent(EventIcon.FOURTH)
         }
+        setParticipantList()
+        setEventName()
+        setEventData()
     }
 
     /**
@@ -91,10 +118,10 @@ class EventViewModel : ViewModel() {
      */
     fun setParticipantList() {
         if (eventIconPosition.value != 0) {
-            val tmp = _responseEventData.value?.participants
+            val tmp = responseEventData.value?.participants
             _eventParticipantList.value = tmp?.map { it.copy() }
         } else {
-            val tmp = _homieList.value
+            val tmp = homieList.value
             _eventParticipantList.value = tmp?.map { it.copy() }
         }
     }
@@ -112,7 +139,7 @@ class EventViewModel : ViewModel() {
      * */
     fun putToEventParticipant(): List<String> {
         val clickedTmpManagerList: MutableList<String> = mutableListOf()
-        _eventParticipantList.value?.forEach {
+        eventParticipantList.value?.forEach {
             if (it.isChecked) clickedTmpManagerList.add(it.id)
         }
         return clickedTmpManagerList.toList()

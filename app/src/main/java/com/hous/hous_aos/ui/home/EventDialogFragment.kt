@@ -1,5 +1,6 @@
 package com.hous.hous_aos.ui.home
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentEventDialogBinding
 import com.hous.hous_aos.ui.home.adapter.EventParticipantAdapter
+import java.util.*
 
 class EventDialogFragment : DialogFragment() {
 
@@ -41,6 +43,7 @@ class EventDialogFragment : DialogFragment() {
         closeDialog()
         deleteDialog()
         saveDialog()
+        clickDatePicker()
     }
 
     override fun onDestroyView() {
@@ -52,11 +55,8 @@ class EventDialogFragment : DialogFragment() {
     private fun fetchToViewModel() {
         if (viewModel.eventIconPosition.value == 0) {
             viewModel.fetchToAddEventData()
-            viewModel.setParticipantList()
         } else {
             viewModel.fetchToResponseEventData()
-            viewModel.setParticipantList()
-            viewModel.setEventName()
         }
     }
 
@@ -67,7 +67,29 @@ class EventDialogFragment : DialogFragment() {
 
     // TODO 데이트피커 구현
     private fun clickDatePicker() {
+        binding.clDates.setOnClickListener {
+            val cal = Calendar.getInstance() // 캘린더뷰 만들기
+            val dateSetListener =
+                DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    val year = year.toString()
+                    val month = if (month < 9) "0${month + 1}" else month.toString()
+                    val dayOfMonth = if (dayOfMonth < 10) "0$dayOfMonth" else dayOfMonth.toString()
+                    val date = "$year-$month-$dayOfMonth"
+                    viewModel.setEventData(date)
+                }
+
+            val datePickerDialog = DatePickerDialog(
+                requireContext(),
+                R.style.MyDatePickerDialogTheme_Spinner,
+                dateSetListener,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+            )
+            datePickerDialog.show()
+        }
     }
+
 
     private fun initDialog() {
         isCancelable = false
@@ -98,11 +120,13 @@ class EventDialogFragment : DialogFragment() {
     }
 
     private fun saveDialog() {
-        binding.btnSave.setOnClickListener {
+        binding.clSave.setOnClickListener {
             Log.d(TAG, "EventDialogFragment - saveDialog() called")
             // viewModel.putEventData??
-            viewModel.fetchToResponseEventData()
-            dialog?.dismiss()
+            if (binding.edtEventName.text.isNotEmpty()) {
+                dialog?.dismiss()
+                viewModel.fetchToResponseEventData()
+            }
         }
     }
 

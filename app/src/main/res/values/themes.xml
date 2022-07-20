@@ -13,4 +13,19 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="MyDatePickerDialogTheme.Spinner"  parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="android:datePickerStyle">@style/SpinnerDatePickerStyle</item>
+    </style>
+
+    <style name="SpinnerDatePickerStyle" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="android:datePickerMode">spinner</item>
+    </style>
 </resources>
+
+<!-- <style name="MyDatePickerDialogTheme.Spinner"  parent="android:Theme.DeviceDefault.Light.Dialog.NoActionBar">-->
+<!--<item name="android:datePickerStyle">@style/SpinnerDatePickerStyle</item>-->
+<!--</style>-->
+
+<!--<style name="SpinnerDatePickerStyle" parent="android:Theme.DeviceDefault.Light.Dialog.NoActionBar">-->
+<!--<item name="android:datePickerMode">spinner</item>-->
+<!--</style>-->

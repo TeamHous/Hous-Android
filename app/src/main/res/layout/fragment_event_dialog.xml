@@ -227,7 +227,7 @@
 
                 <TextView
                     android:id="@+id/tv_num_year"
-                    android:layout_width="62dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:background="@drawable/shape_red_fill_10_rect"
@@ -235,15 +235,16 @@
                     android:fontFamily="@font/montserrat_medium"
                     android:letterSpacing="-0.02"
                     android:lineSpacingExtra="7.5sp"
+                    android:maxLines="1"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="7dp"
-                    android:text=""
+                    android:text="2022"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="2022" />
+                    tools:text="@{viewModel.eventDate.substring(0,4)}" />
 
                 <TextView
                     android:id="@+id/tv_year"
@@ -260,7 +261,7 @@
 
                 <TextView
                     android:id="@+id/tv_num_month"
-                    android:layout_width="44dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/shape_red_fill_10_rect"
@@ -268,16 +269,17 @@
                     android:fontFamily="@font/montserrat_medium"
                     android:letterSpacing="-0.02"
                     android:lineSpacingExtra="7.5sp"
+                    android:maxLines="1"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="7dp"
-                    android:text=""
+                    android:text="05"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toEndOf="@id/tv_year"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="05" />
+                    tools:text="@{viewModel.eventDate.substring(5,7)}" />
 
                 <TextView
                     android:id="@+id/tv_month"
@@ -293,7 +295,7 @@
 
                 <TextView
                     android:id="@+id/tv_num_date"
-                    android:layout_width="44dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/shape_red_fill_10_rect"
@@ -301,16 +303,17 @@
                     android:fontFamily="@font/montserrat_medium"
                     android:letterSpacing="-0.02"
                     android:lineSpacingExtra="7.5sp"
+                    android:maxLines="1"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="7dp"
-                    android:text=""
+                    android:text="18"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toEndOf="@id/tv_month"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="18" />
+                    tools:text="@{viewModel.eventDate.substring(8,10)}" />
 
                 <TextView
                     android:id="@+id/tv_date"
@@ -364,24 +367,31 @@
                 android:textColor="@color/hous_red"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_save"
+                app:layout_constraintEnd_toStartOf="@+id/cl_save"
                 app:layout_constraintStart_toStartOf="@id/rv_participant"
                 tools:text="삭제" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_save"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_save"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/shape_purple_fill_10_rect"
                 android:backgroundTint="@color/hous_yellow"
-                android:text="@string/home_event_save"
-                android:textColor="@color/white"
-                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/btn_delete"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/btn_delete"
-                app:layout_constraintTop_toTopOf="@id/btn_delete" />
+                app:layout_constraintTop_toTopOf="@id/btn_delete">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/home_event_save"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
