@@ -52,7 +52,7 @@ class RulesViewModel : ViewModel() {
     fun putToTmpManagerList(): List<String> {
         val clickedTmpManagerList: MutableList<String> = mutableListOf()
         _tmpManagerList.value?.forEach {
-            if (it.isChecked) clickedTmpManagerList.add(it.id)
+            if (it.isChecked) clickedTmpManagerList.add(it.id!!)
         }
         return clickedTmpManagerList.toList()
     }

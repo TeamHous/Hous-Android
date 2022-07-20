@@ -140,7 +140,7 @@ class EventViewModel : ViewModel() {
     fun putToEventParticipant(): List<String> {
         val clickedTmpManagerList: MutableList<String> = mutableListOf()
         eventParticipantList.value?.forEach {
-            if (it.isChecked) clickedTmpManagerList.add(it.id)
+            if (it.isChecked) clickedTmpManagerList.add(it.id!!)
         }
         return clickedTmpManagerList.toList()
     }
