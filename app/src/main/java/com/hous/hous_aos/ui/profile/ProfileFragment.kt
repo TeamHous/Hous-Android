@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentProfileBinding
+import com.hous.hous_aos.ui.newrules.component.TendencyBox
+import com.hous.hous_aos.ui.pentagon.PentagonBox
 import com.hous.hous_aos.util.setDrawable
 
 class ProfileFragment : Fragment() {
@@ -35,10 +37,15 @@ class ProfileFragment : Fragment() {
     }
 
     private fun init() {
-        binding.btnTendency.setOnClickListener {
-            activity?.let {
-                val intent = Intent(context, TestInfoActivity::class.java)
-                startActivity(intent)
+        binding.cvProfilePentagon.setContent {
+            if (viewModel.profileData.value!!.typeColor == "GRAY") {
+                TendencyBox { startActivity(Intent(context, TestInfoActivity::class.java)) }
+            } else {
+                PentagonBox(
+                    typeName = viewModel.profileData.value!!.typeName,
+                    typeColor = viewModel.profileData.value!!.typeColor,
+                    typeScore = viewModel.profileData.value!!.typeScore
+                )
             }
         }
     }

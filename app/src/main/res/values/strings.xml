@@ -60,6 +60,7 @@
     <string name="home_rules_tmp_manager_save">저장</string>
 
     <string name="type_test_dialog_content">테스트를 완료하지 않았어요.\n여기서 그만두면 내용이 삭제됩니다.</string>
+    <string name="type_go_test">테스트 하러 가기</string>
     <string name="type_test_dialog_title">테스트 중단</string>
     <string name="home_event_event">이벤트</string>
     <string name="home_event_save">저장</string>
@@ -69,4 +70,11 @@
     <string name="home_event_year">년</string>
     <string name="home_event_month">월</string>
     <string name="home_event_date">일</string>
+    <string-array name="pentagon_text">
+        <item>빛</item>
+        <item>정리\n정돈</item>
+        <item>내향</item>
+        <item>냄새</item>
+        <item>소음</item>
+    </string-array>
 </resources>
