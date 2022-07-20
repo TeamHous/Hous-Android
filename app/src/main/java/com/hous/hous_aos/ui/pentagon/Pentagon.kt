@@ -12,17 +12,16 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.hous.hous_aos.R
 import kotlin.math.cos
 import kotlin.math.sin
 
 @Composable
 fun Pentagon(
     colorRes: Int,
-    radiusList: List<Float>
+    changeUserRadius: List<Int>
 ) {
+    val radiusList = changeList(changeUserRadius)
     val colorResource = colorResource(id = colorRes)
     Canvas(modifier = Modifier.fillMaxSize()) {
         val size = this.size.center
@@ -78,21 +77,4 @@ private fun mapper(radius: Int): Float {
         7 -> 260.0f
         else -> 300.0f
     }
-}
-
-@Composable
-@Preview
-fun PentagonPreview() {
-    val backRadius = listOf(8, 8, 8, 8, 8)
-    val userRadius = listOf(7, 6, 3, 5, 7)
-    val changeBackRadius = changeList(backRadius)
-    val changeUserRadius = changeList(userRadius)
-    Pentagon(
-        colorRes = R.color.hous_yellow,
-        radiusList = changeBackRadius
-    )
-    Pentagon(
-        colorRes = R.color.hous_yellow_bg_2,
-        radiusList = changeUserRadius
-    )
 }

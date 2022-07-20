@@ -4,6 +4,9 @@ import com.hous.hous_aos.data.repository.NewRulesRepository
 import com.hous.hous_aos.data.repository.NewRulesRepositoryImpl
 import com.hous.hous_aos.data.repository.RulesTodayRepository
 import com.hous.hous_aos.data.repository.RulesTodayRepositoryImpl
+import com.hous.hous_aos.data.repository.ProfileRepository
+import com.hous.hous_aos.data.repository.ProfileRepositoryImpl
+
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,4 +27,11 @@ object RepositoryModule {
     fun providesRulesTodayRepository(
         impl: RulesTodayRepositoryImpl
     ): RulesTodayRepository = impl
+    
+    @Provides
+    @Singleton
+    fun providesProfileRepository(
+        impl: ProfileRepositoryImpl
+    ): ProfileRepository = impl
+
 }

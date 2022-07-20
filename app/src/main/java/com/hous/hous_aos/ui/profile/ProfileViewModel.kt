@@ -1,10 +1,19 @@
 package com.hous.hous_aos.ui.profile
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.hous.hous_aos.data.entity.Homie
+import com.hous.hous_aos.data.repository.ProfileRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import kotlinx.coroutines.launch
 
-class ProfileViewModel : ViewModel() {
+@HiltViewModel
+class ProfileViewModel @Inject constructor(
+    private val profileRepository: ProfileRepository
+) : ViewModel() {
     private val _profileData = MutableLiveData<Homie>(
         Homie(
             userName = "이영주",
@@ -16,10 +25,23 @@ class ProfileViewModel : ViewModel() {
                 "안녕"
             ),
             typeName = "늘 행복한 동글이",
-            typeColor = "PURPLE",
-            typeScore = listOf(0, 1, 2, 3),
+            typeColor = "GRAY",
+            typeScore = listOf(6, 6, 6, 6, 6),
             notificationState = true
         )
     )
     val profileData get() = _profileData
+
+    init {
+        viewModelScope.launch {
+            profileRepository.getUserProfile()
+                .onSuccess {
+                    Log.d("ProfileViewModel", "data : ${it.data}")
+                    _profileData.value = it.data!!
+                }
+                .onFailure {
+                    Log.d("ProfileViewModel", "data : ${it.message}")
+                }
+        }
+    }
 }
