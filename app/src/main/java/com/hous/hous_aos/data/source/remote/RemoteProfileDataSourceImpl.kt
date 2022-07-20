@@ -11,4 +11,7 @@ class RemoteProfileDataSourceImpl @Inject constructor(
 ) : RemoteProfileDataSource {
     private val ROOM_ID = BuildConfig.ROOM_ID
     override suspend fun getUserProfile(): WrapperClass<Homie> = profileApi.getUserProfile()
+
+    override suspend fun putTestResult(typeScore: List<Int>): WrapperClass<Any> =
+        profileApi.putTestResult(typeScore)
 }
