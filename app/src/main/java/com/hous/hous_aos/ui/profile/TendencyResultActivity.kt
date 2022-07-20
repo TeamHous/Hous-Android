@@ -42,6 +42,10 @@ class TendencyResultActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
+
         viewModel.resultData.observe(this) { data ->
             if (data.good.typeName == "동글이") {
                 binding.tvGoodName.text = "행복한 동글이"
