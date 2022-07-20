@@ -13,9 +13,11 @@ import androidx.viewpager2.widget.ViewPager2
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.ActivityTendencyTestBinding
 import com.hous.hous_aos.databinding.DialogTypeTestStopBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
+@AndroidEntryPoint
 class TendencyTestActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTendencyTestBinding
     private lateinit var tendencyAdapter: TendencyAdapter

@@ -1,16 +1,17 @@
 package com.hous.hous_aos.ui.profile
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hous.hous_aos.data.repository.ProfileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class TendencyViewModel @Inject constructor(
@@ -52,6 +53,7 @@ class TendencyViewModel @Inject constructor(
     fun sendData() {
         viewModelScope.launch {
             sumScore()
+            Log.d("TendencyViewModel", "result : ${uiState.value.answerHolder}")
             profileRepository.putTestResult(uiState.value.answerHolder)
         }
     }
