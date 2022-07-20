@@ -1,6 +1,7 @@
 package com.hous.hous_aos.ui.profile
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -23,6 +24,19 @@ class TendencyResultActivity : AppCompatActivity() {
     private fun init() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
+
+        var data = intent.getStringExtra("data")
+
+        when(data){
+            "end" -> {
+                binding.ivBack.visibility = View.INVISIBLE
+                binding.tvEnd.visibility = View.VISIBLE
+            }
+            "back" -> {
+                binding.ivBack.visibility = View.VISIBLE
+                binding.tvEnd.visibility = View.INVISIBLE
+            }
+        }
 
         binding.tvEnd.setOnClickListener {
             finish()
