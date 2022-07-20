@@ -1,5 +1,6 @@
 package com.hous.hous_aos.ui.home.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -69,7 +70,7 @@ class HomieAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: Homie) {
             itemView.setOnClickListener {
-                when (adapterPosition) {
+                when (absoluteAdapterPosition) {
                     0 -> {
                         if(data.typeColor == "GRAY") return@setOnClickListener
                         else onClickMe()
