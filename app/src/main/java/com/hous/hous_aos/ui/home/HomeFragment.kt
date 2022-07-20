@@ -113,7 +113,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun onClickMe() {
-        (activity as MainActivity).replace(0)
+        (activity as MainActivity).replace(2)
     }
 
     private fun onClickHomie() {
