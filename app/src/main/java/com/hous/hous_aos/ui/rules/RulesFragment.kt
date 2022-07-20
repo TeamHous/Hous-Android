@@ -39,7 +39,6 @@ class RulesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.fetchToCategoryOfRuleList()
         initTransaction()
-        changeTransaction()
         initAdapter()
         observeCategory()
         onClickSmileIcon()
@@ -77,10 +76,6 @@ class RulesFragment : Fragment() {
             }
             else -> IllegalArgumentException("viewModel.toDoViewType.value: ${viewModel.toDoViewType.value}")
         }
-    }
-
-    private fun changeTransaction() {
-        // TODO Category <-> ToDoFragment transaction 로직
     }
 
     /** to-do로 돌아가기*/
