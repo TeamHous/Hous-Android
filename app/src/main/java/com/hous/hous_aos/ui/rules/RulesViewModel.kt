@@ -42,8 +42,8 @@ class RulesViewModel : ViewModel() {
      * 임시 담당자 checked 바꾸기
      * */
     fun setSelectedTmpManager(position: Int) {
-        val flag = requireNotNull(_tmpManagerList.value)[position].isChecked
-        requireNotNull(_tmpManagerList.value)[position].isChecked = !flag
+        requireNotNull(_tmpManagerList.value)[position].isChecked =
+            !requireNotNull(_tmpManagerList.value)[position].isChecked
     }
 
     /**

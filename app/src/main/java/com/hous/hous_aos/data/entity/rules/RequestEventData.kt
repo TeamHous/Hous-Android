@@ -12,12 +12,3 @@ data class RequestEventData(
     val date: String,
     val participants: List<String>
 )
-
-// 이벤트 추가 put
-// "eventName": "혜정이 생파",
-//    "eventIcon": "PARTY",
-//    "date": "2023-03-04",
-//    "participants": [ put할 때
-// 			"62c871289bfca489f95f6a0a",
-// 			"62c8712b9bfca489f95f6a0d"
-// 		],

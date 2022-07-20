@@ -71,15 +71,11 @@ k
 ;app/src/main/java/com/hous/hous_aos/ui/home/HomeFragment.kt,3/9/39d6c0c76e591eac5ee36e8b973da5f4b4465d61
 ‚
 Rapp/src/main/java/com/hous/hous_aos/ui/rules/edit_category/EditCategoryFragment.kt,e/4/e4f18ad4f4b33c832a974cb407aae5017b90b7f5
-r
-Bapp/src/main/java/com/hous/hous_aos/ui/home/EventDialogFragment.kt,0/3/03d4c39e55320ba045082a68584e03881f8b8181
 ~
 Napp/src/main/java/com/hous/hous_aos/ui/home/adapter/EventParticipantAdapter.kt,5/d/5d02844d2d743f76fe60e88b7f76c3d20d0b5697
 {
 Kapp/src/main/java/com/hous/hous_aos/data/entity/rules/ResponseRulesTable.kt,6/8/685c5d6f773f8acfa46288955b1441dec2fc5ea5
 m
 =app/src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt,7/8/785acd60510d7fdb2333d19e116febe3217fb980
-y
-Iapp/src/main/java/com/hous/hous_aos/data/entity/rules/RequestEventData.kt,7/1/71901ec4384bbabdac42389e09b776eba5d5f38c
 t
 Dapp/src/main/java/com/hous/hous_aos/data/entity/rules/ManagerData.kt,2/7/273747faa7f9366b55af48def17d70b2936989ff

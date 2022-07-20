@@ -71,6 +71,7 @@ class EventDialogFragment : DialogFragment() {
             val cal = Calendar.getInstance() // 캘린더뷰 만들기
             val dateSetListener =
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    cal.set(year, month, dayOfMonth)
                     val year = year.toString()
                     val month = if (month < 9) "0${month + 1}" else month.toString()
                     val dayOfMonth = if (dayOfMonth < 10) "0$dayOfMonth" else dayOfMonth.toString()
@@ -86,6 +87,7 @@ class EventDialogFragment : DialogFragment() {
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH)
             )
+            datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
             datePickerDialog.show()
         }
     }

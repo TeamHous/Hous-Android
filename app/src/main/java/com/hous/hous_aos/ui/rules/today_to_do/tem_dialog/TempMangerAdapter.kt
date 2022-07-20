@@ -42,8 +42,7 @@ class TempMangerAdapter(private val setSelectedTmpManager: (Int) -> Unit) :
             binding.homieIconType = homieIconHashMap[data.typeColor]
             binding.ivManagerIcon.setOnClickListener {
                 setSelectedTmpManager(absoluteAdapterPosition)
-                val flag = binding.ivManagerIcon.isSelected
-                binding.ivManagerIcon.isSelected = !flag
+                binding.ivManagerIcon.isSelected = !binding.ivManagerIcon.isSelected
             }
         }
     }
