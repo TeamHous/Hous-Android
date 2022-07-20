@@ -6,7 +6,7 @@
     <data>
         <variable
             name="data"
-            type="com.hous.hous_aos.data.entity.rules.KeyRulesData" />
+            type="com.hous.hous_aos.data.entity.Rule" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

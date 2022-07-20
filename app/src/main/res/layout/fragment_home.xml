@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="com.hous.hous_aos.ui.home.HomeViewModel" />
+            type="com.hous.hous_aos.ui.home.EventViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
