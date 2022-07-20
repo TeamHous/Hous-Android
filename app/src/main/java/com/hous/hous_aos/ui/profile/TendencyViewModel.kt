@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hous.hous_aos.data.model.request.PutTestResultRequest
 import com.hous.hous_aos.data.repository.ProfileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -26,8 +27,8 @@ class TendencyViewModel @Inject constructor(
         viewModelScope.launch {
             profileRepository.getTypeTestList()
                 .onSuccess {
-                    Log.d("TendencyViewModel", "success ${it.data}")
-                    _uiState.value = _uiState.value.copy(typeTests = it.data!!)
+                    Log.d("TendencyViewModel", "success ${it.data!!.typeTests}")
+                    _uiState.value = _uiState.value.copy(typeTests = it.data.typeTests)
                 }
                 .onFailure {
                     Log.d("TendencyViewModel", "fail ${it.message}")
@@ -66,8 +67,9 @@ class TendencyViewModel @Inject constructor(
     fun sendData() {
         viewModelScope.launch {
             sumScore()
-            Log.d("TendencyViewModel", "result : ${uiState.value.answerHolder}")
-            profileRepository.putTestResult(uiState.value.answerHolder)
+            profileRepository.putTestResult(PutTestResultRequest(uiState.value.answerHolder))
+                .onSuccess { Log.d("TendencyViewModel", "result success : ${it.message}") }
+                .onFailure { Log.d("TendencyViewModel", "fail : ${it.message}") }
         }
     }
 
