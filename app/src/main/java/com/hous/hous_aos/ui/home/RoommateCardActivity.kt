@@ -37,6 +37,9 @@ class RoommateCardActivity : AppCompatActivity() {
             intent.putExtra("data", "back") // "back"면 백버튼, "end"면 완료버튼
             startActivity(intent)
         }
+
+        viewModel.profileData.observe(this) {
+            }
         }
     }
 }
