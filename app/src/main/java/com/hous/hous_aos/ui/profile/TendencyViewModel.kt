@@ -28,7 +28,18 @@ class TendencyViewModel @Inject constructor(
             profileRepository.getTypeTestList()
                 .onSuccess {
                     Log.d("TendencyViewModel", "success ${it.data!!.typeTests}")
-                    _uiState.value = _uiState.value.copy(typeTests = it.data.typeTests)
+                    val tempList = it.data.typeTests.map { typeTest ->
+                        TypeTest(
+                            id = typeTest.id,
+                            testNum = typeTest.testNum,
+                            question = typeTest.question,
+                            questionType = typeTest.questionType,
+                            answers = typeTest.answers,
+                            questionImg = typeTest.questionImg,
+                            type = TypeState.NONE
+                        )
+                    }
+                    _uiState.value = _uiState.value.copy(typeTests = tempList)
                 }
                 .onFailure {
                     Log.d("TendencyViewModel", "fail ${it.message}")
