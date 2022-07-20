@@ -104,6 +104,7 @@ class ProfileFragment : Fragment() {
                     binding.tvHashtag1.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
                     binding.tvHashtag2.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
                     binding.tvHashtag3.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
+                    binding.tvDetailTendency.visibility = View.INVISIBLE
                 }
             }
         }
