@@ -128,6 +128,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_profile" />
 
+            <ImageView
+                android:id="@+id/iv_next_tendency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_profile_next"
+                app:layout_constraintBottom_toBottomOf="@id/tv_detail_tendency"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_detail_tendency" />
+
+            <TextView
+                android:id="@+id/tv_detail_tendency"
+                android:paddingVertical="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="4dp"
+                android:paddingStart="14dp"
+                android:text="@string/profile_detail"
+                android:textAppearance="@style/B3"
+                android:textColor="@color/g_3"
+                app:layout_constraintBottom_toBottomOf="@id/tv_tendency"
+                app:layout_constraintEnd_toStartOf="@id/iv_next_tendency"
+                app:layout_constraintTop_toTopOf="@+id/tv_tendency" />
+
             <View
                 android:id="@+id/iv_tendency_bg"
                 android:layout_width="0dp"
@@ -170,25 +194,28 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_tendency" />
 
             <ImageView
-                android:id="@+id/iv_next"
+                android:id="@+id/iv_next_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:src="@drawable/ic_profile_next"
-                app:layout_constraintBottom_toBottomOf="@id/tv_detail"
+                app:layout_constraintBottom_toBottomOf="@id/tv_detail_badge"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_detail" />
+                app:layout_constraintTop_toTopOf="@id/tv_detail_badge" />
 
             <TextView
-                android:id="@+id/tv_detail"
+                android:id="@+id/tv_detail_badge"
+                android:paddingVertical="14dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
+                android:paddingEnd="4dp"
+                android:paddingStart="14dp"
                 android:text="@string/profile_detail"
                 android:textAppearance="@style/B3"
                 android:textColor="@color/g_3"
                 app:layout_constraintBottom_toBottomOf="@id/tv_badge"
-                app:layout_constraintEnd_toStartOf="@id/iv_next" />
+                app:layout_constraintEnd_toStartOf="@id/iv_next_badge"
+                app:layout_constraintTop_toTopOf="@+id/tv_badge" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -220,7 +247,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="24dp"
-                    android:text="@string/profile_rules"
+                    android:text="@string/profile_rules_1"
                     android:textAppearance="@style/Description"
                     android:textColor="@color/hous_black"
                     app:layout_constraintEnd_toEndOf="@id/iv_lock_1"
@@ -245,7 +272,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="24dp"
-                    android:text="@string/profile_rules"
+                    android:text="@string/profile_rules_2"
                     android:textAppearance="@style/Description"
                     android:textColor="@color/hous_black"
                     app:layout_constraintEnd_toEndOf="@id/iv_lock_2"
@@ -270,7 +297,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="24dp"
-                    android:text="@string/profile_rules"
+                    android:text="@string/profile_rules_3"
                     android:textAppearance="@style/Description"
                     android:textColor="@color/hous_black"
                     app:layout_constraintEnd_toEndOf="@id/iv_lock_3"
