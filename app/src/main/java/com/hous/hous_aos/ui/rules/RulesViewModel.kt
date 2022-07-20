@@ -24,7 +24,7 @@ class RulesViewModel : ViewModel() {
     val todayTodoList get() = _todayTodoList
 
     private var _myTodoList =
-        MutableLiveData<List<MyToDoResponse>>()
+        MutableLiveData<List<Rule>>()
     val myTodoList get() = _myTodoList
 
     private var _keyRulesTableList =
@@ -254,31 +254,31 @@ class RulesViewModel : ViewModel() {
 
     fun fetchToMyTodayToDoList() {
         val tmpMyTodoList = mutableListOf(
-            MyToDoResponse(
+            Rule(
                 id = "sjodFdsfdsfdsflc",
                 categoryIcon = "CLEAN",
                 ruleName = "거실 청소기 돌리기",
                 isChecked = false
             ),
-            MyToDoResponse(
+            Rule(
                 id = "sjklsdfdsfsmvklc",
                 categoryIcon = "BEER",
                 ruleName = "맥주 마시기",
                 isChecked = true
             ),
-            MyToDoResponse(
+            Rule(
                 id = "sjodkajofsdfdsfdmaklc",
                 categoryIcon = "LAUNDRY",
                 ruleName = "세탁기 돌리기",
                 isChecked = false
             ),
-            MyToDoResponse(
+            Rule(
                 id = "sjdsfsdfkmcsaklc",
                 categoryIcon = "LIGHT",
                 ruleName = "전구 갈기",
                 isChecked = true
             ),
-            MyToDoResponse(
+            Rule(
                 id = "sjklfansdjkdsfdsdsmvklc",
                 categoryIcon = "BEER",
                 ruleName = "맥주 마시기",
