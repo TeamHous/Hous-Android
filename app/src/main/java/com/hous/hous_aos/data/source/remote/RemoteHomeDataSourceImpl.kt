@@ -2,6 +2,7 @@ package com.hous.hous_aos.data.source.remote
 
 import com.hous.hous_aos.BuildConfig
 import com.hous.hous_aos.data.api.HomeApi
+import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.model.WrapperClass
 import com.hous.hous_aos.data.model.request.EventListRequest
 import com.hous.hous_aos.data.model.response.EventResponse
@@ -31,4 +32,7 @@ class RemoteHomeDataSourceImpl @Inject constructor(
 
     override suspend fun deleteEvent(roomId: String, eventId: String): WrapperClass<Any> =
         homeApi.deleteEvent(ROOM_ID, eventId)
+
+    override suspend fun getHomieList(homieId: String): WrapperClass<Homie> =
+        homeApi.getHomieList(homieId)
 }

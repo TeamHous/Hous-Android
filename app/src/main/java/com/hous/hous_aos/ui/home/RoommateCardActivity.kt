@@ -2,15 +2,12 @@ package com.hous.hous_aos.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.ActivityRoommateCardBinding
-import com.hous.hous_aos.ui.profile.ProfileViewModel
 import com.hous.hous_aos.ui.profile.TendencyResultActivity
 import com.hous.hous_aos.util.setDrawable
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RoommateCardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRoommateCardBinding
-    val viewModel: ProfileViewModel by viewModels()
+    val viewModel: RommateViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_roommate_card)
@@ -30,6 +27,10 @@ class RoommateCardActivity : AppCompatActivity() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
 
+        viewModel.homieId.value = intent.getStringExtra("position")
+
+        viewModel.getHomieList()
+
         binding.ivBack.setOnClickListener {
             finish()
         }
@@ -40,7 +41,7 @@ class RoommateCardActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        viewModel.profileData.observe(this) {
+        viewModel.homieData.observe(this) {
             when (it.hashTag.size) {
                 0 -> {
                     binding.tvHashtag1.visibility = View.INVISIBLE

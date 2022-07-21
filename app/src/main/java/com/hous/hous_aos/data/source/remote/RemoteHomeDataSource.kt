@@ -1,5 +1,6 @@
 package com.hous.hous_aos.data.source.remote
 
+import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.model.WrapperClass
 import com.hous.hous_aos.data.model.response.EventResponse
 import com.hous.hous_aos.data.model.request.EventListRequest
@@ -15,4 +16,5 @@ interface RemoteHomeDataSource {
     ): WrapperClass<Any>
     suspend fun addEvent(roomId: String, body: EventListRequest): WrapperClass<Any>
     suspend fun deleteEvent(roomId: String, eventId: String): WrapperClass<Any>
+    suspend fun getHomieList(homieId: String): WrapperClass<Homie>
 }

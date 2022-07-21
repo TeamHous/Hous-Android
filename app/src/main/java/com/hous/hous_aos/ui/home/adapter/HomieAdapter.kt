@@ -14,7 +14,7 @@ import com.hous.hous_aos.databinding.ItemHomeHomieCopyBinding
 class HomieAdapter(
     private val showToast: () -> Unit,
     private val onClickMe: () -> Unit,
-    private val onClickHomie: () -> Unit,
+    private val onClickHomie: (Int) -> Unit,
 ) :
     ListAdapter<Homie, RecyclerView.ViewHolder>(homieDiffUtil) {
 
@@ -65,7 +65,7 @@ class HomieAdapter(
     class HomieViewHolder(
         val binding: ItemHomeHomieBinding,
         private val onClickMe: () -> Unit,
-        private val onClickHomie: () -> Unit
+        private val onClickHomie: (Int) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: Homie) {
@@ -77,7 +77,7 @@ class HomieAdapter(
                     }
                     else -> {
                         if(data.typeColor == "GRAY") return@setOnClickListener
-                        else onClickHomie()
+                        else onClickHomie(absoluteAdapterPosition)
                     }
                 }
             }
