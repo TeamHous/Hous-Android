@@ -37,8 +37,8 @@ class EventDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchToViewModel()
         initAdapter()
+        fetchToViewModel()
         initDialog()
         observeParticipateList()
         closeDialog()
@@ -53,11 +53,11 @@ class EventDialogFragment : DialogFragment() {
         eventParticipantAdapter = null
     }
 
+    /**
+     * 0번째 아이디는 추가 다이얼로그 띄우게 하기*/
     private fun fetchToViewModel() {
         if (viewModel.eventIconPosition.value == 0) {
             viewModel.fetchToAddEventData()
-        } else {
-            viewModel.fetchToResponseEventData()
         }
     }
 

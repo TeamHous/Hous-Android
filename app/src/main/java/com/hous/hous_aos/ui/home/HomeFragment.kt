@@ -69,7 +69,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun onClickEventIcon(position: Int) {
-
         val dialog = EventDialogFragment()
         dialog.show(childFragmentManager, HOME_FRAGMENT)
         viewModel.getEventDetail(position)

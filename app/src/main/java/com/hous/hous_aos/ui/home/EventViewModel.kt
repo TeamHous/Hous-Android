@@ -103,56 +103,6 @@ class EventViewModel @Inject constructor(
         _eventDate.value = current.format(formatter)
     }
 
-    fun fetchToResponseEventData() {
-        _responseEventData.value = Event(
-            id = "62d4335e17e70062873f3d28",
-            eventName = "파티 파티",
-            eventIcon = "PARTY",
-            date = "2022-07-28",
-            participants = listOf<Homie>(
-                Homie(
-                    id = "62cc7409csdsd06c46adf652f",
-                    userName = "이준원",
-                    isChecked = true,
-                    typeColor = "GRAY"
-                ),
-                Homie(
-                    id = "6dasdasdasdsadsad52f",
-                    userName = "이영주",
-                    isChecked = false,
-                    typeColor = "RED"
-                ),
-                Homie(
-                    id = "62cc740asdsadsadf652f",
-                    userName = "강워어뇽",
-                    isChecked = true,
-                    typeColor = "BLUE"
-                ),
-                Homie(
-                    id = "62cc7409csasdsadsa52f",
-                    userName = "꾸우웅",
-                    isChecked = false,
-                    typeColor = "GREEN"
-                ),
-                Homie(
-                    id = "62cc7409csasdsadsa52f",
-                    userName = "꾸우우웅",
-                    isChecked = false,
-                    typeColor = "GRAY"
-                )
-            )
-        )
-        when (requireNotNull(responseEventData.value).eventIcon) {
-            "PARTY" -> setSelectedEvent(EventIcon.FIRST)
-            "CAKE" -> setSelectedEvent(EventIcon.SECOND)
-            "BEER" -> setSelectedEvent(EventIcon.THIRD)
-            "COFFEE" -> setSelectedEvent(EventIcon.FOURTH)
-        }
-        setParticipantList()
-        setEventName()
-        setEventData()
-    }
-
     /**
      * 이벤트 조회하기
      */
