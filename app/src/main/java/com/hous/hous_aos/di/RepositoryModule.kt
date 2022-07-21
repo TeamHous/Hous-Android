@@ -1,5 +1,7 @@
 package com.hous.hous_aos.di
 
+import com.hous.hous_aos.data.repository.HomeRepository
+import com.hous.hous_aos.data.repository.HomeRepositoryImpl
 import com.hous.hous_aos.data.repository.NewRulesRepository
 import com.hous.hous_aos.data.repository.NewRulesRepositoryImpl
 import com.hous.hous_aos.data.repository.RulesTodayRepository
@@ -34,4 +36,9 @@ object RepositoryModule {
         impl: ProfileRepositoryImpl
     ): ProfileRepository = impl
 
+    @Provides
+    @Singleton
+    fun providesHomeRepository(
+        impl: HomeRepositoryImpl
+    ): HomeRepository = impl
 }

@@ -72,7 +72,7 @@ class TendencyAdapter(
     companion object {
         private val tendencyDiffUtil = object : DiffUtil.ItemCallback<TypeTest>() {
             override fun areItemsTheSame(oldItem: TypeTest, newItem: TypeTest): Boolean =
-                oldItem._id == newItem._id
+                oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: TypeTest, newItem: TypeTest): Boolean =
                 oldItem == newItem
