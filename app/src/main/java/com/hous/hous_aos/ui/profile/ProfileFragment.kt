@@ -29,12 +29,19 @@ class ProfileFragment : Fragment() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
         initInfo()
+        initButtonClickListener()
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun initButtonClickListener() {
+        binding.clTypeDetail.setOnClickListener {
+            startActivity(Intent(context, TendencyResultActivity::class.java))
+        }
     }
 
     private fun initInfo() {
@@ -110,6 +117,7 @@ class ProfileFragment : Fragment() {
                     binding.tvHashtag1.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
                     binding.tvHashtag2.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
                     binding.tvHashtag3.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
+                    binding.clTypeDetail.visibility = View.GONE
                 }
             }
         }
