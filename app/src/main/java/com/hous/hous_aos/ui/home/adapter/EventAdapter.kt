@@ -33,10 +33,6 @@ class EventAdapter(
             binding.event = data
             binding.position = absoluteAdapterPosition
             when (data.eventIcon) {
-                "NONE" -> {
-                    binding.ivEvent.setImageResource(R.drawable.ic_plus)
-                    binding.ivEventBg.setBackgroundResource(R.drawable.shape_yellow_bg_fill_16_rect)
-                }
                 "PARTY" -> {
                     binding.ivEvent.setImageResource(R.drawable.ic_party)
                     binding.clEvent.setBackgroundResource(R.drawable.shape_yellow_home_fill_16_rect)
