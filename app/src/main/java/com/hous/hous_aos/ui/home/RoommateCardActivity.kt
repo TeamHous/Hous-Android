@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.ActivityRoommateCardBinding
+import com.hous.hous_aos.ui.pentagon.PentagonBox
 import com.hous.hous_aos.ui.profile.TendencyResultActivity
 import com.hous.hous_aos.util.setDrawable
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +22,21 @@ class RoommateCardActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_roommate_card)
         setContentView(binding.root)
         init()
+        observePentagon()
+    }
+
+    private fun observePentagon() {
+        viewModel.homieData.observe(this) {
+            binding.cvProfilePentagon.setContent {
+                with(viewModel.homieData.value!!) {
+                    PentagonBox(
+                        typeName = typeName,
+                        typeColor = typeColor,
+                        typeScore = typeScore
+                    )
+                }
+            }
+        }
     }
 
     private fun init() {
@@ -35,7 +51,7 @@ class RoommateCardActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.tvDetailTendency.setOnClickListener {
+        binding.clTypeDetail.setOnClickListener {
             val intent = Intent(this, TendencyResultActivity::class.java)
             intent.putExtra("data", "back") // "back"면 백버튼, "end"면 완료버튼
             intent.putExtra("userId", viewModel.homieId.value)
