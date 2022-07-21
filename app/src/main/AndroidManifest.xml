@@ -18,11 +18,20 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.splash.IntroActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ui.home.RoommateCardActivity"
             android:exported="false" />
         <activity
             android:name=".ui.newrules.NewRuleActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.profile.TendencyTestActivity"
             android:exported="false" />
@@ -34,13 +43,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>
