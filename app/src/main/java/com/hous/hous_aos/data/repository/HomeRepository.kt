@@ -1,8 +1,8 @@
 package com.hous.hous_aos.data.repository
 
 import com.hous.hous_aos.data.model.WrapperClass
-import com.hous.hous_aos.data.model.response.EventResponse
 import com.hous.hous_aos.data.model.request.EventListRequest
+import com.hous.hous_aos.data.model.response.EventResponse
 import com.hous.hous_aos.data.model.response.HomeResponse
 
 interface HomeRepository {
@@ -13,7 +13,6 @@ interface HomeRepository {
         eventId: String,
         body: EventListRequest
     ): Result<WrapperClass<Any>>
-}
+
     suspend fun addEvent(roomId: String, body: EventListRequest): Result<WrapperClass<Any>>
-}
 }
