@@ -7,8 +7,11 @@ import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
     private val homeDataSource: RemoteHomeDataSource
-) :HomeRepository {
+) : HomeRepository {
     override suspend fun getHomeList(roomId: String): Result<WrapperClass<HomeResponse>> {
         return runCatching { homeDataSource.getHomeList(roomId) }
     }
+
+    override suspend fun deleteEvent(roomId: String, eventId: String): Result<WrapperClass<Any>> =
+        runCatching { homeDataSource.deleteEvent(roomId, eventId) }
 }

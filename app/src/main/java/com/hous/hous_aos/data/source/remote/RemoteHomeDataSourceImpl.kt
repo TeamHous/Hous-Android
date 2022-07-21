@@ -12,4 +12,7 @@ class RemoteHomeDataSourceImpl @Inject constructor(
     private val ROOM_ID = BuildConfig.ROOM_ID
     override suspend fun getHomeList(roomId: String): WrapperClass<HomeResponse> =
         homeApi.getHomeList(ROOM_ID)
+
+    override suspend fun deleteEvent(roomId: String, eventId: String): WrapperClass<Any> =
+        homeApi.deleteEvent(ROOM_ID, eventId)
 }
