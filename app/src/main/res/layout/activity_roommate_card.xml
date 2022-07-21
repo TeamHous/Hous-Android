@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.hous.hous_aos.ui.profile.ProfileViewModel" />
+            type="com.hous.hous_aos.ui.home.RommateViewModel" />
 
     </data>
 
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
-            android:text="@{vm.profileData.userName}"
+            android:text="@{vm.homieData.userName}"
             android:textAppearance="@style/B1"
             android:textColor="@color/g_7"
             app:layout_constraintStart_toEndOf="@id/iv_profile"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="10dp"
-            android:text="@{vm.profileData.job}"
+            android:text="@{vm.homieData.job}"
             android:textAppearance="@style/B3"
             android:textColor="@color/hous_red"
             app:layout_constraintBottom_toBottomOf="@id/tv_name"
@@ -80,7 +80,7 @@
             android:layout_marginTop="6dp"
             android:maxEms="20"
             android:maxLines="1"
-            android:text="@{vm.profileData.introduction}"
+            android:text="@{vm.homieData.introduction}"
             android:textAppearance="@style/B3"
             android:textColor="@color/g_6"
             app:layout_constraintStart_toStartOf="@id/tv_name"
@@ -169,9 +169,6 @@
             app:layout_constraintBottom_toBottomOf="@id/tv_tendency"
             app:layout_constraintEnd_toStartOf="@id/iv_next_tendency"
             app:layout_constraintTop_toTopOf="@+id/tv_tendency" />
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
