@@ -1,4 +1,4 @@
-package com.hous.hous_aos.ui.profile
+package com.hous.hous_aos.data.entity
 
 data class ResultData(
     val userName: String,
@@ -9,10 +9,10 @@ data class ResultData(
     val typeDesc: String,
     val typeRulesTitle: String,
     val typeRules: List<String>,
-    val good: Homie,
-    val bad: Homie
+    val good: HomieInfo,
+    val bad: HomieInfo
 ) {
-    data class Homie(
+    data class HomieInfo(
         val typeName: String,
         val typeImg: String
     )

@@ -1,6 +1,7 @@
 package com.hous.hous_aos.data.repository
 
 import com.hous.hous_aos.data.entity.Homie
+import com.hous.hous_aos.data.entity.ResultData
 import com.hous.hous_aos.data.model.WrapperClass
 import com.hous.hous_aos.data.model.request.EventListRequest
 import com.hous.hous_aos.data.model.response.EventResponse
@@ -38,5 +39,9 @@ class HomeRepositoryImpl @Inject constructor(
 
     override suspend fun getHomieList(homieId: String): Result<WrapperClass<Homie>> {
         return runCatching { homeDataSource.getHomieList(homieId) }
+    }
+
+    override suspend fun getHomieResult(userId: String): Result<WrapperClass<ResultData>> {
+        return runCatching { homeDataSource.getHomieResult(userId) }
     }
 }
