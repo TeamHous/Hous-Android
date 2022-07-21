@@ -56,7 +56,7 @@ class TodayToDoFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        todayTodDoAdapter = TodayTodoAdapter(::onClickTmpManagerDialog)
+        todayTodDoAdapter = TodayTodoAdapter(::onClickTmpManagerDialog, viewModel::fetchToTmpManagerList)
         binding.rvToDo.adapter = todayTodDoAdapter
     }
 
