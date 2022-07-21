@@ -10,5 +10,5 @@ interface ProfileRepository {
     suspend fun getUserProfile(): Result<WrapperClass<Homie>>
     suspend fun putTestResult(typeScore: PutTestResultRequest): Result<WrapperClass<Any>>
     suspend fun getTypeTestList(): Result<WrapperClass<TypeTestResponse>>
-    suspend fun getMyResult(typeId: String): Result<WrapperClass<ResultData>>
+    suspend fun getMyResult(): Result<WrapperClass<ResultData>>
 }
