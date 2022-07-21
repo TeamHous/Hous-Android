@@ -33,7 +33,7 @@ fun NewRulesAddRuleButton(
             .clip(shape = RoundedCornerShape(15.dp))
             .background(color)
             .padding(vertical = 12.dp)
-            .clickable {
+            .clickable(isAddButton) {
                 addNewRule()
                 finish()
             },

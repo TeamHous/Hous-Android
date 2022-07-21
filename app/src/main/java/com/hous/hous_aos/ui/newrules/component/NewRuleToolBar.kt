@@ -17,7 +17,8 @@ import com.hous.hous_aos.R
 fun NewRulesToolbar(
     notificationState: Boolean,
     checkBoxState: State,
-    toggleState: (Boolean) -> Unit
+    toggleState: (Boolean) -> Unit,
+    finish: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -26,7 +27,8 @@ fun NewRulesToolbar(
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_back),
-            contentDescription = ""
+            contentDescription = "",
+            modifier = Modifier.clickable { finish() }
         )
         Text(
             text = stringResource(id = R.string.new_rules_title),

@@ -57,10 +57,6 @@ class RulesViewModel @Inject constructor(
                 .onSuccess {
                     _todayTodoList.value = it.data!!.todayTodoRules
                     _categoryOfRuleList.value = it.data.homeRuleCategories
-                    Log.d(
-                        "리스트리스트",
-                        "통신 시작 -- ${_todayTodoList?.value!![0].todayMembersWithTypeColor.size}"
-                    )
                 }
                 .onFailure {
                     Log.d(TAG, "RulesViewModel - init - getRulesTodayList fail : ${it.message}")
