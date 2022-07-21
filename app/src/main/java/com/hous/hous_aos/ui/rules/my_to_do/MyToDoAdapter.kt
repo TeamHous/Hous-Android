@@ -32,8 +32,7 @@ class MyToDoAdapter(private val onClickIcon: (Int) -> Unit) :
             binding.data = data
             binding.iconType = iconTypeHashMap[data.categoryIcon]
             binding.clMyToDo.setOnClickListener {
-                val isSelected = binding.ivCheckBox.isSelected
-                binding.ivCheckBox.isSelected = !isSelected
+                binding.ivCheckBox.isSelected = !binding.ivCheckBox.isSelected
                 onClickIcon(absoluteAdapterPosition)
             }
         }
