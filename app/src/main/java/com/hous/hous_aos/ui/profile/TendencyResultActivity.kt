@@ -27,8 +27,10 @@ class TendencyResultActivity : AppCompatActivity() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
 
-        val data = intent.getStringExtra("data")
+        val userId = intent.getStringExtra("userId")
+        viewModel.userId.value = userId
 
+        val data = intent.getStringExtra("data")
         when (data) {
             "end" -> {
                 binding.ivBack.visibility = View.INVISIBLE
