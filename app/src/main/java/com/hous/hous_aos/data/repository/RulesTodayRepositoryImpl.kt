@@ -28,7 +28,7 @@ class RulesTodayRepositoryImpl @Inject constructor(
         roomId: String,
         ruleId: String,
         tmpRuleMembers: TempManagerRequest
-    ): Result<TempManagerRequest> {
+    ): Result<WrapperClass<Any>> {
         return runCatching {
             remoteRulesTodayDataSource.putTempManagerInfoList(
                 roomId,
@@ -48,7 +48,7 @@ class RulesTodayRepositoryImpl @Inject constructor(
         roomId: String,
         ruleId: String,
         isCheck: MyToDoCheckRequest
-    ): Result<MyToDoCheckRequest> {
+    ): Result<WrapperClass<MyToDoCheckRequest>> {
         return runCatching {
             remoteRulesTodayDataSource.putMyToDoCheckLust(roomId, ruleId, isCheck)
         }

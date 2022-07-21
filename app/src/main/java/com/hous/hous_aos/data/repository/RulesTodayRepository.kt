@@ -19,7 +19,7 @@ interface RulesTodayRepository {
         roomId: String,
         ruleId: String,
         tmpRuleMembers: TempManagerRequest
-    ): Result<TempManagerRequest>
+    ): Result<WrapperClass<Any>>
 
     suspend fun getMyTodoInfoList(roomId: String): Result<WrapperClass<List<Rule>>>
 
@@ -27,5 +27,5 @@ interface RulesTodayRepository {
         roomId: String,
         ruleId: String,
         isCheck: MyToDoCheckRequest
-    ): Result<MyToDoCheckRequest>
+    ): Result<WrapperClass<MyToDoCheckRequest>>
 }

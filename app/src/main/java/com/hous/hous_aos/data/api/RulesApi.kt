@@ -28,7 +28,7 @@ interface RulesApi {
         @Path("roomId") roomId: String,
         @Path("ruleId") ruleId: String,
         @Body tmpRuleMembers: TempManagerRequest
-    ): TempManagerRequest
+    ): WrapperClass<Any>
 
     @GET("/room/{roomId}/rules/me")
     suspend fun getMyTodoInfoList(
@@ -40,5 +40,5 @@ interface RulesApi {
         @Path("roomId") roomId: String,
         @Path("ruleId") ruleId: String,
         @Body isCheck: MyToDoCheckRequest
-    ): MyToDoCheckRequest
+    ): WrapperClass<MyToDoCheckRequest>
 }

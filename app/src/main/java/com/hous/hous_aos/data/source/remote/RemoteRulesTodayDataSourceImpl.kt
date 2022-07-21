@@ -31,7 +31,7 @@ class RemoteRulesTodayDataSourceImpl @Inject constructor(
         roomId: String,
         ruleId: String,
         tmpRuleMembers: TempManagerRequest
-    ): TempManagerRequest {
+    ): WrapperClass<Any> {
         return rulesApi.putTempManagerInfoList(ROOM_ID, ruleId, tmpRuleMembers)
     }
 
@@ -39,7 +39,7 @@ class RemoteRulesTodayDataSourceImpl @Inject constructor(
         return rulesApi.getMyTodoInfoList(ROOM_ID)
     }
 
-    override suspend fun putMyToDoCheckLust(roomId: String, ruleId: String, isCheck: MyToDoCheckRequest): MyToDoCheckRequest {
+    override suspend fun putMyToDoCheckLust(roomId: String, ruleId: String, isCheck: MyToDoCheckRequest): WrapperClass<MyToDoCheckRequest> {
         return rulesApi.putMyToDoCheckLust(ROOM_ID, ruleId, isCheck)
     }
 }

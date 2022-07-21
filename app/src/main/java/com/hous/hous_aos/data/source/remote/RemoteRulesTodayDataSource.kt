@@ -19,7 +19,7 @@ interface RemoteRulesTodayDataSource {
         roomId: String,
         ruleId: String,
         tmpRuleMembers: TempManagerRequest
-    ): TempManagerRequest
+    ): WrapperClass<Any>
 
     suspend fun getMyToDoInfoList(roomId: String): WrapperClass<List<Rule>>
 
@@ -27,5 +27,5 @@ interface RemoteRulesTodayDataSource {
         roomId: String,
         ruleId: String,
         isCheck: MyToDoCheckRequest
-    ): MyToDoCheckRequest
+    ): WrapperClass<MyToDoCheckRequest>
 }
