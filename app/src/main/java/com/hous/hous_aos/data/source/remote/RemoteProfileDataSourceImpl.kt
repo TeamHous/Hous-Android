@@ -3,6 +3,7 @@ package com.hous.hous_aos.data.source.remote
 import com.hous.hous_aos.BuildConfig
 import com.hous.hous_aos.data.api.ProfileApi
 import com.hous.hous_aos.data.entity.Homie
+import com.hous.hous_aos.data.entity.ResultData
 import com.hous.hous_aos.data.model.WrapperClass
 import com.hous.hous_aos.data.model.request.PutTestResultRequest
 import com.hous.hous_aos.data.model.response.TypeTestResponse
@@ -19,4 +20,7 @@ class RemoteProfileDataSourceImpl @Inject constructor(
 
     override suspend fun getTypeTestList(): WrapperClass<TypeTestResponse> =
         profileApi.getTypeTestList()
+
+    override suspend fun getMyResult(typeId: String): WrapperClass<ResultData> =
+        profileApi.getMyResult(typeId)
 }
