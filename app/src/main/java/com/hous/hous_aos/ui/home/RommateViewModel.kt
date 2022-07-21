@@ -12,3 +12,5 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RommateViewModel @Inject constructor(
+    private val homeRepository: HomeRepository
+) : ViewModel() {
