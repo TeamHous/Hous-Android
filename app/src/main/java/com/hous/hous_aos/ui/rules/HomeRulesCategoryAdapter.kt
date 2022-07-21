@@ -2,7 +2,6 @@ package com.hous.hous_aos.ui.rules
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,11 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hous.hous_aos.R
 import com.hous.hous_aos.data.entity.Category
 import com.hous.hous_aos.databinding.ItemRulesRuleBinding
-import com.hous.hous_aos.util.setDrawable
 
 class HomeRulesCategoryAdapter(
     private val onLongClick: () -> Unit,
-    private val onCategoryClick: () -> Unit,
+    private val onCategoryClick: (Int) -> Unit,
     private val onPlusClick: () -> Unit,
     private val onChangeIsSelected: (Int) -> Unit,
 ) :
@@ -74,7 +72,7 @@ class HomeRulesCategoryAdapter(
     class CategoryOfRuleViewHolder(
         private val iconTypeHashMap: HashMap<String, CategoryIconType>,
         private val onLongClick: () -> Unit,
-        private val onCategoryClick: () -> Unit,
+        private val onCategoryClick: (Int) -> Unit,
         private val onChangeIsSelected: (Int) -> Unit,
         private val binding: ItemRulesRuleBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -88,7 +86,7 @@ class HomeRulesCategoryAdapter(
                 return@setOnLongClickListener true
             }
             binding.clRuleItem.setOnClickListener {
-                onCategoryClick()
+                onCategoryClick(absoluteAdapterPosition)
                 onChangeIsSelected(absoluteAdapterPosition)
             }
         }
@@ -101,7 +99,7 @@ class HomeRulesCategoryAdapter(
 
         fun onBind(data: Category) {
             binding.data = data
-            binding.iconType =CategoryIconType.NONE
+            binding.iconType = CategoryIconType.NONE
             binding.clRuleItem.setOnClickListener {
                 onPlusClick()
             }

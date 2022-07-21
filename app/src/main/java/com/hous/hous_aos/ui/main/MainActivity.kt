@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity() {
                         supportFragmentManager.commit {
                             viewModel.setSmileSelected(true)
                             viewModel.setToDoViewType(ToDoViewType.TODAY_TO_DO)
+                            viewModel.initCategorySelected()
                             setReorderingAllowed(true)
                             replace<RulesFragment>(R.id.fcv_main)
                             //
