@@ -65,7 +65,7 @@ class EventDialogFragment : DialogFragment() {
         binding.rvParticipant.adapter = eventParticipantAdapter
     }
 
-    // TODO 데이트피커 구현
+
     private fun clickDatePicker() {
         binding.clDates.setOnClickListener {
             val cal = Calendar.getInstance() // 캘린더뷰 만들기

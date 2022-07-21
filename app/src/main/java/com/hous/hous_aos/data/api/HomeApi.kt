@@ -1,17 +1,12 @@
 package com.hous.hous_aos.data.api
 
+import com.hous.hous_aos.data.entity.Event
 import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.entity.ResultData
 import com.hous.hous_aos.data.model.WrapperClass
 import com.hous.hous_aos.data.model.request.EventListRequest
-import com.hous.hous_aos.data.model.response.EventResponse
 import com.hous.hous_aos.data.model.response.HomeResponse
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.PUT
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface HomeApi {
     @GET("room/{roomId}/home")
@@ -29,7 +24,7 @@ interface HomeApi {
     suspend fun getEventList(
         @Path("roomId") roomId: String,
         @Path("eventId") eventId: String
-    ): WrapperClass<EventResponse>
+    ): WrapperClass<Event>
 
     @PUT("room/{roomId}/event/{eventId}")
     suspend fun putEventList(

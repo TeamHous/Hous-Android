@@ -1,10 +1,10 @@
 package com.hous.hous_aos.data.repository
 
+import com.hous.hous_aos.data.entity.Event
 import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.entity.ResultData
 import com.hous.hous_aos.data.model.WrapperClass
 import com.hous.hous_aos.data.model.request.EventListRequest
-import com.hous.hous_aos.data.model.response.EventResponse
 import com.hous.hous_aos.data.model.response.HomeResponse
 import com.hous.hous_aos.data.source.remote.RemoteHomeDataSource
 import javax.inject.Inject
@@ -19,7 +19,7 @@ class HomeRepositoryImpl @Inject constructor(
     override suspend fun getEventList(
         roomId: String,
         eventId: String
-    ): Result<WrapperClass<EventResponse>> =
+    ): Result<WrapperClass<Event>> =
         runCatching { homeDataSource.getEventList(roomId, eventId) }
 
     override suspend fun putEventList(
