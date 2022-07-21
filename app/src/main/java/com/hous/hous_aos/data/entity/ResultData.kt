@@ -1,4 +1,4 @@
-package com.hous.hous_aos.ui.profile
+package com.hous.hous_aos.data.entity
 
 data class ResultData(
     val userName: String,
