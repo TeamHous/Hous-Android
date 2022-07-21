@@ -72,7 +72,7 @@ class HomeFragment : Fragment() {
 
         val dialog = EventDialogFragment()
         dialog.show(childFragmentManager, HOME_FRAGMENT)
-        viewModel.setEventIconPosition(position)
+        viewModel.getEventDetail(position)
     }
 
     private fun initRulesAdapter() {

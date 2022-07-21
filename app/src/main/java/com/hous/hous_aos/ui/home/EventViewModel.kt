@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.hous.hous_aos.data.entity.Event
 import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.entity.Rule
+import com.hous.hous_aos.data.model.request.EventListRequest
 import com.hous.hous_aos.data.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,6 +19,9 @@ import javax.inject.Inject
 class EventViewModel @Inject constructor(
     private val homeRepository: HomeRepository
 ) : ViewModel() {
+    private var _tmpEventId = MutableLiveData<String>("")
+    val tmpEventId get() = _tmpEventId
+
     private var _eventDate = MutableLiveData<String>("")
     val eventDate get() = _eventDate
 
@@ -49,14 +53,15 @@ class EventViewModel @Inject constructor(
     /** get
      * Event 조회
      * 리사이클러뷰에 postion 받아오기*/
-    fun setEventIconPosition(position: Int) {
+    fun getEventDetail(position: Int) {
         _eventIconPosition.value = position
-        val eventid = eventList.value!![position].id
+        _tmpEventId.value = eventList.value!![position].id
+
         viewModelScope.launch {
-            homeRepository.getEventList("", eventid)
+            homeRepository.getEventList("", tmpEventId.value!!)
                 .onSuccess {
-                    Log.d(TAG, "onSuccess - eventId: $eventid, 성공메세지: ${it.message}")
-                    Log.d(TAG, "onSuccess - eventId: $eventid, 성공메세지: ${it.message}")
+                    Log.d(TAG, "onSuccess - eventId: $tmpEventId.value!!, 성공메세지: ${it.message}")
+                    Log.d(TAG, "onSuccess - eventId: $tmpEventId.value!!, 성공메세지: ${it.message}")
                     _responseEventData.value = it.data!!
                     when (requireNotNull(responseEventData.value).eventIcon) {
                         "PARTY" -> setSelectedEvent(EventIcon.FIRST)
@@ -68,7 +73,12 @@ class EventViewModel @Inject constructor(
                     setEventName()
                     setEventData()
                 }
-                .onFailure { Log.d(TAG, "onFail - eventId: $eventid, 오류메세지: ${it.message}") }
+                .onFailure {
+                    Log.d(
+                        TAG,
+                        "onFail - eventId: $tmpEventId.value!!, 오류메세지: ${it.message}"
+                    )
+                }
         }
     }
 
@@ -167,12 +177,31 @@ class EventViewModel @Inject constructor(
     /**
      *  save버튼 누르면 파티 참여자 서버로 보내기
      * */
-    fun putToEventParticipant(): List<String> {
+    /** put
+     *  save버튼 누르면 파티 참여자 서버로 보내기
+     * */
+    fun putToEventParticipant() {
+        // 이벤트 put Body 값
         val clickedTmpManagerList: MutableList<String> = mutableListOf()
         eventParticipantList.value?.forEach {
             if (it.isChecked) clickedTmpManagerList.add(it.id!!)
         }
-        return clickedTmpManagerList.toList()
+        viewModelScope.launch {
+            homeRepository.putEventList(
+                "", _tmpEventId.value!!,
+                EventListRequest(
+                    eventName = eventName.value!!,
+                    date = eventDate.value!!,
+                    participants = clickedTmpManagerList,
+                    eventIcon = selectedEvent.value!!.IconName
+                )
+            ).onSuccess {
+                getEventList()
+                Log.d(TAG, "이벤트 수정 Success - ${it.message}")
+            }.onFailure {
+                Log.d(TAG, "이벤트 수정 Fail - ${it.message}")
+            }
+        }
     }
 
     /**************************************************************************************************
@@ -211,6 +240,19 @@ class EventViewModel @Inject constructor(
                 .onFailure { result ->
                     Log.d("asdf", "fail ${result.message}")
                 }
+        }
+    }
+
+    private suspend fun getEventList() {
+        homeRepository.getHomeList("").onSuccess { result ->
+            Log.d("asdf", "success ${result.message}")
+            val tempEventList = mutableListOf(Event())
+            result.data!!.eventList.forEach { tempEventList.add(it) }
+            _eventList.value = tempEventList
+            val tempHomieList = mutableListOf(Homie())
+            _homieList.value = _homieList.value?.plus(tempHomieList)
+        }.onFailure { result ->
+            Log.d("asdf", "fail ${result.message}")
         }
     }
 
