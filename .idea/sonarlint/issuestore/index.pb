@@ -33,8 +33,6 @@ v
 Fapp/src/main/java/com/hous/hous_aos/ui/profile/TendencyTestActivity.kt,5/1/51623d3e44e35fe823e9531f871a63482ab5613f
 A
 gradle.properties,2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4
-s
-Capp/src/main/java/com/hous/hous_aos/ui/home/adapter/EventAdapter.kt,e/9/e98602bd100b022ec9e3d498a0a0a80214201e5f
 q
 Aapp/src/main/java/com/hous/hous_aos/ui/profile/ProfileFragment.kt,5/5/55649260a196f1ceaab3fe4bfdbe68184c1efff0
 r
@@ -47,8 +45,6 @@ Bapp/src/main/java/com/hous/hous_aos/ui/home/adapter/ToDoAdapter.kt,7/4/746432e
 Rapp/src/main/java/com/hous/hous_aos/ui/rules/edit_category/EditCategoryFragment.kt,e/4/e4f18ad4f4b33c832a974cb407aae5017b90b7f5
 ~
 Napp/src/main/java/com/hous/hous_aos/ui/home/adapter/EventParticipantAdapter.kt,5/d/5d02844d2d743f76fe60e88b7f76c3d20d0b5697
-h
-8app/src/main/java/com/hous/hous_aos/data/entity/Event.kt,f/a/faa6b94530686894e93d8c0bbe412e01a2699798
 v
 Fapp/src/main/java/com/hous/hous_aos/ui/rules/my_to_do/MyToDoAdapter.kt,5/0/504e51a1f622a3dea8d33cb7b54131cf4cd905fc
 {
@@ -59,8 +55,6 @@ q
 Aapp/src/main/java/com/hous/hous_aos/ui/rules/my_to_do/IconType.kt,c/8/c8b852f746f4284b67be58f2274f60a7631cada8
 i
 9app/src/main/java/com/hous/hous_aos/ui/rules/HomieIcon.kt,d/8/d8714d56c431862d5000e3af7f542dc2c160d330
-r
-Bapp/src/main/java/com/hous/hous_aos/ui/home/EventDialogFragment.kt,0/3/03d4c39e55320ba045082a68584e03881f8b8181
 ˆ
 Xapp/src/main/java/com/hous/hous_aos/ui/rules/today_to_do/tem_dialog/TempMangerAdapter.kt,2/a/2a6d7758c8b1e5fb438585595cd5548380607966
 y
@@ -77,14 +71,6 @@ q
 Aapp/src/main/java/com/hous/hous_aos/ui/newrules/NewRulesScreen.kt,3/c/3c0606852dfabb407d6f65ecfd7d0a3ff676a8f9
 x
 Happ/src/main/java/com/hous/hous_aos/ui/profile/TendencyResultActivity.kt,6/7/67b703ff5f8b24978b379d2fec4c1c0de67d5e46
-k
-;app/src/main/java/com/hous/hous_aos/ui/home/HomeFragment.kt,3/9/39d6c0c76e591eac5ee36e8b973da5f4b4465d61
-m
-=app/src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt,7/8/785acd60510d7fdb2333d19e116febe3217fb980
-g
-7app/src/main/java/com/hous/hous_aos/data/api/HomeApi.kt,5/e/5e504d6523f743654dea0d5c0c0e8ab67c5e617c
-~
-Napp/src/main/java/com/hous/hous_aos/data/source/remote/RemoteHomeDataSource.kt,d/0/d0c6a9cd927bc40634d68f3ec553c28180165621
 @
 app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
 €
@@ -103,8 +89,6 @@ j
 :app/src/main/java/com/hous/hous_aos/data/api/ProfileApi.kt,e/7/e70e0e98f03e9f43000a49dec1f5f69e825da15e
 P
  app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
-‚
-Rapp/src/main/java/com/hous/hous_aos/data/source/remote/RemoteHomeDataSourceImpl.kt,b/2/b26721b771070630419f1a8e4bad81ce5ee1095d
 y
 Iapp/src/main/java/com/hous/hous_aos/data/repository/NewRulesRepository.kt,4/1/419ad5ff44f73e68aa086de9916047a99aa3b532
 }
@@ -129,8 +113,6 @@ Gapp/src/main/java/com/hous/hous_aos/ui/rules/my_to_do/MyToDoFragment.kt,c/1/c1
 Mapp/src/main/java/com/hous/hous_aos/data/model/response/TempManagerRequest.kt,6/d/6d07aaecb0185338eeb33a3ec563249ff259cf19
 |
 Lapp/src/main/java/com/hous/hous_aos/data/model/request/MyToDoCheckRequest.kt,2/5/259c7402a236aee2000c9e21c635ca2548a8785a
-y
-Iapp/src/main/java/com/hous/hous_aos/data/repository/HomeRepositoryImpl.kt,1/0/10b76ee27b4add8d39dc615f6462c1d8b5f7b6d3
 ˆ
 Xapp/src/main/java/com/hous/hous_aos/data/source/remote/RemoteRulesTodayDataSourceImpl.kt,3/7/374ba366d33f2cfd79d2990856c015aae6a360f8
 „
@@ -139,8 +121,6 @@ Tapp/src/main/java/com/hous/hous_aos/data/source/remote/RemoteRulesTodayDataSour
 Oapp/src/main/java/com/hous/hous_aos/data/repository/RulesTodayRepositoryImpl.kt,8/a/8a2b3911a9c8b63cb82d6fa60ef892b6410bc555
 k
 ;app/src/main/java/com/hous/hous_aos/data/entity/Category.kt,a/1/a137dc7e3b6db3ad5653d6e6374fce58e8b75f95
-n
->app/src/main/java/com/hous/hous_aos/data/model/WrapperClass.kt,0/f/0f6672634b815f76cbfee6b0253fba0710960e01
 h
 8app/src/main/java/com/hous/hous_aos/data/entity/Homie.kt,4/a/4a12867d7a96d49397a9580cbe970a3bfee6a285
 {

@@ -46,9 +46,30 @@ class EventViewModel @Inject constructor(
         _eventDate.value = responseEventData.value?.date
     }
 
-    /** 리사이클러뷰에 postion 받아오기*/
+    /** get
+     * Event 조회
+     * 리사이클러뷰에 postion 받아오기*/
     fun setEventIconPosition(position: Int) {
         _eventIconPosition.value = position
+        val eventid = eventList.value!![position].id
+        viewModelScope.launch {
+            homeRepository.getEventList("", eventid)
+                .onSuccess {
+                    Log.d(TAG, "onSuccess - eventId: $eventid, 성공메세지: ${it.message}")
+                    Log.d(TAG, "onSuccess - eventId: $eventid, 성공메세지: ${it.message}")
+                    _responseEventData.value = it.data!!
+                    when (requireNotNull(responseEventData.value).eventIcon) {
+                        "PARTY" -> setSelectedEvent(EventIcon.FIRST)
+                        "CAKE" -> setSelectedEvent(EventIcon.SECOND)
+                        "BEER" -> setSelectedEvent(EventIcon.THIRD)
+                        "COFFEE" -> setSelectedEvent(EventIcon.FOURTH)
+                    }
+                    setParticipantList()
+                    setEventName()
+                    setEventData()
+                }
+                .onFailure { Log.d(TAG, "onFail - eventId: $eventid, 오류메세지: ${it.message}") }
+        }
     }
 
     fun setSelectedEvent(event: EventIcon) {
@@ -194,6 +215,7 @@ class EventViewModel @Inject constructor(
     }
 
     companion object {
-        const val START_POSITION = 100
+        private const val TAG = "eventViewModel"
+        val START_POSITION = 100
     }
 }
