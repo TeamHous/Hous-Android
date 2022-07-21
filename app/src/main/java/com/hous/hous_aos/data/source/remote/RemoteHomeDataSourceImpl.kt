@@ -18,5 +18,5 @@ class RemoteHomeDataSourceImpl @Inject constructor(
         roomId: String,
         eventId: String,
         body: EventListRequest
-    ): WrapperClass<Any> = homeApi.putEventList(roomId, eventId, body)
+    ): WrapperClass<Any> = homeApi.putEventList(ROOM_ID, eventId, body)
 }
