@@ -1,10 +1,14 @@
 package com.hous.hous_aos.ui.rules
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.hous.hous_aos.data.entity.Category
 import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.entity.Rule
+import com.hous.hous_aos.data.model.response.TempManagerRequest
 import com.hous.hous_aos.data.repository.RulesTodayRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -43,15 +47,49 @@ class RulesViewModel @Inject constructor(
     private var _tmpManagerList = MutableLiveData<List<Homie>>()
     val tmpManagerList get() = _tmpManagerList
 
+    private var _tmpTodayToDoPosition = MutableLiveData<Int>(0)
+    val tmpTodayToDoPosition get() = _tmpTodayToDoPosition
+
     init {
         viewModelScope.launch {
-            rulesTodayRepository.getTodayTodayInfoList("").onSuccess {
-                val responseData = it.data
-                fetchToCategoryOfRuleList(responseData?.homeRuleCategories)
-                fetchToTodayToDoList(responseData?.todayTodoRules)
-            }
+            rulesTodayRepository.getTodayTodayInfoList("")
+                .onSuccess {
+                    _todayTodoList.value = it.data!!.todayTodoRules
+                    _categoryOfRuleList.value = it.data.homeRuleCategories
+                    Log.d("리스트리스트", "통신 시작 -- ${_todayTodoList?.value!![0].todayMembersWithTypeColor.size}")
+                }
                 .onFailure {
                     Log.d(TAG, "RulesViewModel - init - getRulesTodayList fail : ${it.message}")
+                }
+        }
+    }
+
+    /**
+     * Put
+     * 임시 담당자 save버튼 누르면 서버로 보내기
+     * */
+    fun putToTmpManagerList() {
+        val clickedTmpManagerList: MutableList<String> = mutableListOf()
+        _tmpManagerList.value?.forEach {
+            if (it.isChecked) clickedTmpManagerList.add(it.id!!)
+        }
+        val tmp = TempManagerRequest(clickedTmpManagerList)
+        Log.d(
+            "리스트리스트",
+            "Put -- tmp.tmpRuleMembers: ${tmp.tmpRuleMembers} tmp.size : ${tmp.tmpRuleMembers.size}"
+        )
+        viewModelScope.launch {
+            rulesTodayRepository.putTempManagerInfoList(
+                "",
+                _todayTodoList.value!![tmpTodayToDoPosition.value!!].id,
+                tmp
+            )
+                .onSuccess {
+                    fetchToTodayToDoList()
+                }
+                .onFailure {
+                    Log.d(TAG, " result fail : ${tmp}")
+                    Log.d(TAG, " result fail : ${it.message}")
                 }
         }
     }
@@ -64,52 +102,37 @@ class RulesViewModel @Inject constructor(
             !requireNotNull(_tmpManagerList.value)[position].isChecked
     }
 
-    /**
-     * 임시 담당자 save버튼 누르면 서버로 보내기
-     * */
-    fun putToTmpManagerList(): List<String> {
-        val clickedTmpManagerList: MutableList<String> = mutableListOf()
-        _tmpManagerList.value?.forEach {
-            if (it.isChecked) clickedTmpManagerList.add(it.id!!)
+    /** get
+     * 임시 담당자 다이얼로그 조회 */
+    fun fetchToTmpManagerList(position: Int) {
+        Log.d(
+            TAG,
+            "RulesViewModel - fetchToTmpManagerList() _todayTodoList.value!![position].id: ${_todayTodoList.value!![position].id}"
+        )
+        viewModelScope.launch {
+            rulesTodayRepository.getTempManagerInfoList("", _todayTodoList.value!![position].id)
+                .onSuccess {
+                    _tmpManagerList.value = it.data!!.homies
+                    _tmpTodayToDoPosition.postValue(position)
+                }
+                .onFailure {
+                    Log.d(TAG, "RulesViewModel - fetchToTmpManagerList() - ${it.message}")
+                }
         }
-        return clickedTmpManagerList.toList()
     }
 
-    /** 임시 담당자 다이얼로그*/
-    fun fetchToTmpManagerList() {
-        val tmp = listOf(
-            Homie(
-                id = "62cc7409csdsd06c46adf652f",
-                userName = "이준원",
-                isChecked = true,
-                typeColor = "GRAY"
-            ),
-            Homie(
-                id = "6dasdasdasdsadsad52f",
-                userName = "이영주",
-                isChecked = false,
-                typeColor = "RED"
-            ),
-            Homie(
-                id = "62cc740asdsadsadf652f",
-                userName = "강워어뇽",
-                isChecked = true,
-                typeColor = "BLUE"
-            ),
-            Homie(
-                id = "62cc7409csasdsadsa52f",
-                userName = "꾸우웅",
-                isChecked = false,
-                typeColor = "GREEN"
-            ),
-            Homie(
-                id = "62cc7409csasdsadsa52f",
-                userName = "꾸우우웅",
-                isChecked = false,
-                typeColor = "GRAY"
-            )
-        )
-        _tmpManagerList.value = tmp.map { it.copy() }
+    fun fetchToTodayToDoList() {
+        viewModelScope.launch {
+            rulesTodayRepository.getTodayTodayInfoList("")
+                .onSuccess {
+                    _todayTodoList.value = it.data!!.todayTodoRules
+                    Log.d("리스트리스트", "다시서버통신 -- Size: ${_todayTodoList?.value!![0].todayMembersWithTypeColor.size}")
+
+                }
+                .onFailure {
+                    Log.d(TAG, "RulesViewModel - init - getRulesTodayList fail : ${it.message}")
+                }
+        }
     }
 
     /** Rules Table 일반 rules*/
@@ -168,44 +191,6 @@ class RulesViewModel @Inject constructor(
         _keyRulesTableList.value = tmp.map { it.copy() }
     }
 
-    /** 했음!!*/
-    /** HomeRules 카테고리 리사이클러뷰*/
-    fun fetchToCategoryOfRuleList(categoryOfRuleList: List<Category>?) {
-        Log.d(
-            TAG,
-            "RulesViewModel - fetchToCategoryOfRuleList() - categoryOfRuleList : $categoryOfRuleList"
-        )
-        _categoryOfRuleList.value = categoryOfRuleList?.map { data ->
-            data.copy()
-        }
-    }
-
-    /** HomeRules 오늘의 todo 리사이클러뷰 */
-    fun fetchToTodayToDoList(todayTodoList: List<Rule>?) {
-        Log.d(
-            TAG,
-            "RulesViewModel - fetchToCategoryOfRuleList() - todayTodoList : $todayTodoList"
-        )
-        _todayTodoList.value = todayTodoList?.map { data -> data.copy() }
-    }
-
-    fun fetchToTodayToDoList() {
-        Log.d(
-            TAG,
-            "RulesViewModel - fetchToCategoryOfRuleList() - todayTodoList : $todayTodoList"
-        )
-        viewModelScope.launch {
-            rulesTodayRepository.getTodayTodayInfoList("").onSuccess {
-                val responseData = it.data
-                fetchToTodayToDoList(responseData?.todayTodoRules)
-            }
-                .onFailure {
-                    Log.d(TAG, "RulesViewModel - init - getRulesTodayList fail : ${it.message}")
-                }
-        }
-        _todayTodoList.value = todayTodoList.value?.map { data -> data.copy() }
-    }
-
     fun fetchToMyTodayToDoList() {
         val tmpMyTodoList = mutableListOf(
             Rule(
@@ -256,6 +241,7 @@ class RulesViewModel @Inject constructor(
         val tmpCategoryOfRuleList = requireNotNull(_categoryOfRuleList.value).map { data ->
             data.copy().apply { isChecked = false }
         }
+        Log.d(TAG, "RulesViewModel - initCategorySelected() called")
         tmpCategoryOfRuleList.toMutableList().apply {
             add(
                 Category(
