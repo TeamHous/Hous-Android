@@ -47,7 +47,7 @@ fun Pentagon(
                 outline = Outline.Generic(path),
                 paint = Paint().apply {
                     color = colorResource
-                    pathEffect = PathEffect.cornerPathEffect(30.0.dp.toPx())
+                    pathEffect = PathEffect.cornerPathEffect(15.0.dp.toPx())
                 }
             )
         }
@@ -66,15 +66,5 @@ private fun changeList(radiusList: List<Int>): List<Float> {
 }
 
 private fun mapper(radius: Int): Float {
-    return when (radius) {
-        0 -> 50.0f
-        1 -> 80.0f
-        2 -> 110.0f
-        3 -> 140.0f
-        4 -> 170.0f
-        5 -> 200.0f
-        6 -> 230.0f
-        7 -> 260.0f
-        else -> 300.0f
-    }
+    return (radius * 22 + 36).toFloat()
 }
