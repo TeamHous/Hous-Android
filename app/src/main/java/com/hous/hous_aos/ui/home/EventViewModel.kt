@@ -243,14 +243,46 @@ class EventViewModel @Inject constructor(
         }
     }
 
+    fun addToEventParticipant() {
+        val clickedTmpManagerList: MutableList<String> = mutableListOf()
+        eventParticipantList.value?.forEach {
+            if (it.isChecked) clickedTmpManagerList.add(it.id!!)
+        }
+        viewModelScope.launch {
+            homeRepository.addEvent(
+                "",
+                EventListRequest(
+                    eventName = eventName.value!!,
+                    date = eventDate.value!!,
+                    participants = clickedTmpManagerList,
+                    eventIcon = selectedEvent.value!!.IconName
+                )
+            )
+                .onSuccess {
+                    Log.d("EventViewModel", "이벤트 삭제 성공 : ${it.message}")
+                    getEventList()
+                }
+                .onFailure { Log.d("EventViewModel", "이벤트 삭제 실패 : ${it.message}") }
+        }
+    }
+
+    fun deleteEventItem() {
+        viewModelScope.launch {
+            homeRepository.deleteEvent("", _tmpEventId.value!!)
+                .onSuccess {
+                    Log.d("EventViewModel", "이벤트 삭제 성공 : ${it.message}")
+                    getEventList()
+                }
+                .onFailure { Log.d("EventViewModel", "이벤트 삭제 실패 : ${it.message}") }
+        }
+    }
+
     private suspend fun getEventList() {
         homeRepository.getHomeList("").onSuccess { result ->
             Log.d("asdf", "success ${result.message}")
             val tempEventList = mutableListOf(Event())
             result.data!!.eventList.forEach { tempEventList.add(it) }
             _eventList.value = tempEventList
-            val tempHomieList = mutableListOf(Homie())
-            _homieList.value = _homieList.value?.plus(tempHomieList)
         }.onFailure { result ->
             Log.d("asdf", "fail ${result.message}")
         }

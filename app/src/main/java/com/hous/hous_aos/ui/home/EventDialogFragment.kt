@@ -126,19 +126,29 @@ class EventDialogFragment : DialogFragment() {
 
     private fun deleteDialog() {
         binding.btnDelete.setOnClickListener {
-            Log.d(TAG, "EventDialogFragment - deleteDialog() called")
-            // 삭제로직 추가 viewModel.deleteEventData??
-            viewModel.fetchToResponseEventData()
+            if (binding.btnDelete.text.equals("삭제")) {
+                Log.d(TAG, "EventDialogFragment - deleteDialog() called")
+                viewModel.deleteEventItem()
+            }
             dialog?.dismiss()
         }
     }
 
     private fun saveDialog() {
         binding.clSave.setOnClickListener {
-            Log.d(TAG, "EventDialogFragment - saveDialog() called")
-            if (binding.edtEventName.text.isNotEmpty()) {
-                viewModel.putToEventParticipant()
-                dialog?.dismiss()
+            when (binding.tvSave.text) {
+                "저장" -> {
+                    if (binding.edtEventName.text.isNotEmpty()) {
+                        viewModel.putToEventParticipant()
+                        dialog?.dismiss()
+                    }
+                }
+                "추가" -> {
+                    if (binding.edtEventName.text.isNotEmpty()) {
+                        viewModel.addToEventParticipant()
+                        dialog?.dismiss()
+                    }
+                }
             }
         }
     }

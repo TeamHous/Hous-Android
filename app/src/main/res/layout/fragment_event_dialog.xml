@@ -384,12 +384,14 @@
                 app:layout_constraintTop_toTopOf="@id/btn_delete">
 
                 <TextView
+                    android:id="@+id/tv_save"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="@string/home_event_save"
+                    android:text="@{viewModel.eventIconPosition == 0 ? @string/home_event_add: @string/home_event_save}"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:text="저장" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
