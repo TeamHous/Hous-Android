@@ -9,10 +9,10 @@ data class TestResultResponse(
     val typeDesc: String,
     val typeRulesTitle: String,
     val typeRules: List<String>,
-    val good: Homie,
-    val bad: Homie
+    val good: HomieTendency,
+    val bad: HomieTendency
 ) {
-    data class Homie(
+    data class HomieTendency(
         val typeName: String,
         val typeImg: String
     )
