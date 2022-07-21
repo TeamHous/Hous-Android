@@ -62,7 +62,8 @@ fun NewRulesScreen(
                 NewRulesToolbar(
                     notificationState = uiState.notificationState,
                     checkBoxState = uiState.checkBoxState,
-                    toggleState = viewModel::toggleNotificationState
+                    toggleState = viewModel::toggleNotificationState,
+                    finish = finish
                 )
                 Spacer(modifier = Modifier.size(27.dp))
 

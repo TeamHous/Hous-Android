@@ -8,6 +8,7 @@ import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.repository.NewRulesRepository
 import com.hous.hous_aos.ui.newrules.component.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +16,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class NewRulesViewModel @Inject constructor(
@@ -188,6 +188,7 @@ class NewRulesViewModel @Inject constructor(
     }
 
     fun addNewRule() {
+        Log.d("NewRulesViewModel", "data : ${uiState.value}")
         viewModelScope.launch {
             newRulesRepository.addNewRule(uiState.value)
                 .onSuccess { Log.d("NewRulesViewModel", "addNewRule success : ${it.message}") }
@@ -224,7 +225,8 @@ class NewRulesViewModel @Inject constructor(
                                 if (dayData.dayState == State.SELECT) isCheck = true
                             }
                             if (isCheck && uiState.value.ManagerList[0].managerHomie.userName == "담당자 없음")
-                                _uiState.value = _uiState.value.copy(checkBoxState = State.UNSELECT)
+                                _uiState.value =
+                                    _uiState.value.copy(checkBoxState = State.UNSELECT)
                         }
                     }
                 }

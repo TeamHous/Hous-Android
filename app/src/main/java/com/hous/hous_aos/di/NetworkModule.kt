@@ -1,5 +1,6 @@
 package com.hous.hous_aos.di
 
+import com.google.gson.GsonBuilder
 import com.hous.hous_aos.BuildConfig
 import com.hous.hous_aos.data.api.HomeApi
 import com.hous.hous_aos.data.api.NewRulesApi
@@ -10,13 +11,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -59,6 +60,7 @@ object NetworkModule {
             )
             .build()
 
+    /* GsonBuilder().serializeNulls().create() (prod by 빛.혁.준) : 서버에 null을 보낼 때 사용 */
     @Provides
     @Singleton
     fun providesHousRetrofit(
@@ -67,7 +69,11 @@ object NetworkModule {
         Retrofit.Builder()
             .baseUrl(HOUS_URL)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(
+                GsonConverterFactory.create(
+                    GsonBuilder().serializeNulls().create()
+                )
+            )
             .build()
 
     @Provides
