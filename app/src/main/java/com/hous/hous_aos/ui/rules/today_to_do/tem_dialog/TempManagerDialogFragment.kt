@@ -36,7 +36,6 @@ class TempManagerFragment : DialogFragment() {
         initDialog()
         clickCloseIcon()
         clickSaveButton()
-        viewModel.fetchToTmpManagerList()
         observeHomieList()
     }
 
@@ -65,8 +64,7 @@ class TempManagerFragment : DialogFragment() {
 
     private fun clickSaveButton() {
         binding.ivSaveTmpManager.setOnClickListener {
-            requireContext().showToast("${viewModel.putToTmpManagerList().size}명 서버로 put해버리기~")
-            viewModel.fetchToTodayToDoList()
+            viewModel.putToTmpManagerList()
             dismiss()
         }
     }
