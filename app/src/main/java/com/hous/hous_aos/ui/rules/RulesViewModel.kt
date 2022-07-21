@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.hous.hous_aos.data.entity.Category
 import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.entity.Rule
+import com.hous.hous_aos.data.model.request.MyToDoCheckRequest
 import com.hous.hous_aos.data.model.response.TempManagerRequest
 import com.hous.hous_aos.data.repository.RulesTodayRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -159,6 +160,28 @@ class RulesViewModel @Inject constructor(
         }
     }
 
+    /** put
+     * 나의 to-do check한 거 보내기
+     * */
+    fun setMyToDoCheckBoxSelected(position: Int) {
+        val isSelected = myTodoList.value!![position].isChecked
+        myTodoList.value!![position].isChecked = !isSelected
+        val checked = myTodoList.value!![position].isChecked
+        val id = myTodoList.value!![position].id
+        viewModelScope.launch {
+            rulesTodayRepository.putMyToDoCheckLust("", id, MyToDoCheckRequest(checked))
+                .onSuccess {
+                    Log.d("MYTODO", "Success - id: $id, checked: $checked ")
+                }
+                .onFailure {
+                    Log.d(
+                        "MYTODO",
+                        "fail - $id, checked: $checked -  :${it.message}"
+                    )
+                }
+        }
+    }
+
     /** Rules Table 일반 rules*/
     fun fetchToGeneralRulesTableList() {
         val tmp = listOf(
@@ -239,16 +262,6 @@ class RulesViewModel @Inject constructor(
         }
 
         _categoryOfRuleList.value = tmpCategoryOfRuleList.toList()
-    }
-
-    fun setMyToDoCheckBoxSelected(position: Int) {
-        val tmpMyToDoList = requireNotNull(_myTodoList.value).map { data ->
-            data.copy()
-        }
-        val isSelected = tmpMyToDoList[position].isChecked
-        tmpMyToDoList[position].isChecked = !isSelected
-        _myTodoList.value = tmpMyToDoList.toList()
-        // TODO 서버로 id, boolean
     }
 
     fun setCategorySelected(position: Int) {

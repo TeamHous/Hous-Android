@@ -2,6 +2,7 @@ package com.hous.hous_aos.data.source.remote
 
 import com.hous.hous_aos.data.entity.Rule
 import com.hous.hous_aos.data.model.WrapperClass
+import com.hous.hous_aos.data.model.request.MyToDoCheckRequest
 import com.hous.hous_aos.data.model.response.RulesTodayInfoListResponse
 import com.hous.hous_aos.data.model.response.TempManagerRequest
 import com.hous.hous_aos.data.model.response.TempManagerResponse
@@ -21,4 +22,10 @@ interface RemoteRulesTodayDataSource {
     ): TempManagerRequest
 
     suspend fun getMyToDoInfoList(roomId: String): WrapperClass<List<Rule>>
+
+    suspend fun putMyToDoCheckLust(
+        roomId: String,
+        ruleId: String,
+        isCheck: MyToDoCheckRequest
+    ): MyToDoCheckRequest
 }
