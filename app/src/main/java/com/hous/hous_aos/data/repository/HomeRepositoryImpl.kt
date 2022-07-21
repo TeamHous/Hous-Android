@@ -35,9 +35,8 @@ class HomeRepositoryImpl @Inject constructor(
 
     override suspend fun deleteEvent(roomId: String, eventId: String): Result<WrapperClass<Any>> =
         runCatching { homeDataSource.deleteEvent(roomId, eventId) }
-}
+
     override suspend fun getHomieList(homieId: String): Result<WrapperClass<Homie>> {
         return runCatching { homeDataSource.getHomieList(homieId) }
     }
-}
 }
