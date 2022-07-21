@@ -27,7 +27,7 @@ class TendencyResultActivity : AppCompatActivity() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
 
-        var data = intent.getStringExtra("data")
+        val data = intent.getStringExtra("data")
 
         when(data){
             "end" -> {
