@@ -2,6 +2,7 @@ package com.hous.hous_aos.data.repository
 
 import com.hous.hous_aos.data.model.WrapperClass
 import com.hous.hous_aos.data.model.response.RulesTodayInfoListResponse
+import com.hous.hous_aos.data.model.response.TempManagerRequest
 import com.hous.hous_aos.data.model.response.TempManagerResponse
 
 interface RulesTodayRepository {
@@ -11,4 +12,10 @@ interface RulesTodayRepository {
         roomId: String,
         rulesId: String
     ): Result<WrapperClass<TempManagerResponse>>
+
+    suspend fun putTempManagerInfoList(
+        roomId: String,
+        ruleId: String,
+        tmpRuleMembers: TempManagerRequest
+    ): Result<TempManagerRequest>
 }

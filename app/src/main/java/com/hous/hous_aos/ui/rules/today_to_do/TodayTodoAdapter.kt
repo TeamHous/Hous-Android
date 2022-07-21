@@ -1,5 +1,6 @@
 package com.hous.hous_aos.ui.rules.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -24,7 +25,7 @@ class TodayTodoAdapter(
     override fun getItemViewType(position: Int): Int {
         val data = currentList[position]
         val managerCnt = data.todayMembersWithTypeColor.size
-        return if (managerCnt == MANAGER_NUMBER_ZERO) {
+        return if (data.todayMembersWithTypeColor.isEmpty()) {
             ItemToDoViewType.NONE_MANAGER_VIEW_TYPE.index
         } else if (managerCnt == MANAGER_NUMBER_ONE) {
             ItemToDoViewType.ONE_MANAGER_VIEW_TYPE.index
@@ -81,6 +82,7 @@ class TodayTodoAdapter(
         private val binding: ItemRulesTodayToDoItemNoneBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: Rule) {
+            Log.d(TAG, "NONE : ,  data: $data")
             binding.data = data
             binding.ivManagerEmpty.setOnClickListener {
                 fetchToTmpManagerList(absoluteAdapterPosition)
@@ -95,6 +97,7 @@ class TodayTodoAdapter(
         private val binding: ItemRulesTodayToDoItemOneBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: Rule) {
+            Log.d(TAG, "One : ,  data: $data")
             binding.data = data
             binding.tvManager.text =
                 changeListToString(requireNotNull(data.todayMembersWithTypeColor))
@@ -129,6 +132,7 @@ class TodayTodoAdapter(
         private val binding: ItemRulesTodayToDoItemMultiBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: Rule) {
+            Log.d(TAG, "MULTI : ,  data: $data")
             binding.data = data
             binding.tvManager.text =
                 changeListToString(requireNotNull(data.todayMembersWithTypeColor))
@@ -210,6 +214,7 @@ class TodayTodoAdapter(
                     return oldItem == newItem
                 }
             }
+        const val TAG = "로그"
         private const val MANAGER_NUMBER_ZERO = 0
         private const val MANAGER_NUMBER_ONE = 1
         private const val MANAGER_NUMBER_TWO = 2

@@ -4,6 +4,7 @@ import com.hous.hous_aos.BuildConfig
 import com.hous.hous_aos.data.api.RulesApi
 import com.hous.hous_aos.data.model.WrapperClass
 import com.hous.hous_aos.data.model.response.RulesTodayInfoListResponse
+import com.hous.hous_aos.data.model.response.TempManagerRequest
 import com.hous.hous_aos.data.model.response.TempManagerResponse
 import javax.inject.Inject
 
@@ -22,5 +23,13 @@ class RemoteRulesTodayDataSourceImpl @Inject constructor(
         ruleId: String
     ): WrapperClass<TempManagerResponse> {
         return rulesApi.getTempManagerInfoList(ROOM_ID, ruleId)
+    }
+
+    override suspend fun putTempManagerInfoList(
+        roomId: String,
+        ruleId: String,
+        tmpRuleMembers: TempManagerRequest
+    ): TempManagerRequest {
+        return rulesApi.putTempManagerInfoList(ROOM_ID, ruleId, tmpRuleMembers)
     }
 }
