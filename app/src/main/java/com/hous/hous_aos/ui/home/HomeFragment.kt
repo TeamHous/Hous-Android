@@ -116,8 +116,11 @@ class HomeFragment : Fragment() {
         (activity as MainActivity).replace(profile)
     }
 
-    private fun onClickHomie() {
+    private fun onClickHomie(position: Int) {
+        val currentId = viewModel.homieList.value!![position].id
+        Log.d("bbbb", "${currentId}")
         val intent = Intent(requireActivity(), RoommateCardActivity::class.java)
+        intent.putExtra("position", currentId)
         startActivity(intent)
     }
 
