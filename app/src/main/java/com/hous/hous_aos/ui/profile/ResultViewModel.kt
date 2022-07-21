@@ -17,15 +17,15 @@ class ResultViewModel @Inject constructor(
     private val _resultData = MutableLiveData<ResultData>()
     val resultData get() = _resultData
 
-    fun getResult() {
+    init {
         viewModelScope.launch {
             profileRepository.getMyResult()
-                .onSuccess {
-                    Log.d("ResultViewModel", "data : ${it.data}")
-                    _resultData.value = it.data!!
+                .onSuccess { result ->
+                    Log.d("ResultViewModel", "data : ${result.data}")
+                    _resultData.value = result.data!!
                 }
-                .onFailure {
-                    Log.d("ResultViewModel", "data : ${it.message}")
+                .onFailure { result ->
+                    Log.d("ResultViewModel", "data : ${result.message}")
                 }
         }
     }
