@@ -29,7 +29,7 @@ class ProfileFragment : Fragment() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
         initInfo()
-        init()
+        initButtonClickListener()
         return binding.root
     }
 
@@ -38,22 +38,26 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 
-    private fun init() {
-        binding.cvProfilePentagon.setContent {
-            if (viewModel.profileData.value!!.typeColor == "GRAY") {
-                TendencyBox { startActivity(Intent(context, TestInfoActivity::class.java)) }
-            } else {
-                PentagonBox(
-                    typeName = viewModel.profileData.value!!.typeName,
-                    typeColor = viewModel.profileData.value!!.typeColor,
-                    typeScore = viewModel.profileData.value!!.typeScore
-                )
-            }
+    private fun initButtonClickListener() {
+        binding.clTypeDetail.setOnClickListener {
+            startActivity(Intent(context, TendencyResultActivity::class.java))
         }
     }
 
     private fun initInfo() {
         viewModel.profileData.observe(viewLifecycleOwner) {
+            binding.cvProfilePentagon.setContent {
+                if (it.typeColor == "GRAY") {
+                    TendencyBox { startActivity(Intent(context, TestInfoActivity::class.java)) }
+                } else {
+                    PentagonBox(
+                        typeName = it.typeName,
+                        typeColor = it.typeColor,
+                        typeScore = it.typeScore
+                    )
+                }
+            }
+
             when (it.hashTag.size) {
                 0 -> {
                     binding.tvHashtag1.visibility = View.GONE
@@ -113,8 +117,7 @@ class ProfileFragment : Fragment() {
                     binding.tvHashtag1.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
                     binding.tvHashtag2.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
                     binding.tvHashtag3.setBackgroundResource(R.drawable.shape_red_bg2_fill_8_rect)
-                    binding.tvDetailTendency.visibility = View.INVISIBLE
-                    binding.ivNextTendency.visibility = View.INVISIBLE
+                    binding.clTypeDetail.visibility = View.GONE
                 }
             }
         }
