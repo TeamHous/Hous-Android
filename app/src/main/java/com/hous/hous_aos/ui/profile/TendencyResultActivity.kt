@@ -29,7 +29,7 @@ class TendencyResultActivity : AppCompatActivity() {
 
         val data = intent.getStringExtra("data")
 
-        when(data){
+        when (data) {
             "end" -> {
                 binding.ivBack.visibility = View.INVISIBLE
                 binding.tvEnd.visibility = View.VISIBLE
@@ -49,23 +49,145 @@ class TendencyResultActivity : AppCompatActivity() {
         }
 
         viewModel.resultData.observe(this) { data ->
-            if (data.good.typeName == "동글이") {
-                binding.tvGoodName.text = "행복한 동글이"
-                binding.clGood.backgroundTintList = this.getColorStateList(R.color.hous_yellow_bg)
+            when (data.typeColor) {
+                "GREEN" -> {
+                    binding.clComment.backgroundTintList =
+                        this.getColorStateList(R.color.hous_green_bg)
+                    binding.clRules.backgroundTintList =
+                        this.getColorStateList(R.color.hous_green_bg)
+                    binding.tvComment.setTextColor(ContextCompat.getColor(this, R.color.hous_green))
+                    binding.tvRulesTitle.setTextColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.hous_green
+                        )
+                    )
+                    binding.tvRulesTitle.backgroundTintList =
+                        this.getColorStateList(R.color.hous_green_bg)
+                    binding.ivShape1.setDrawable(R.drawable.ic_hexagon)
+                    binding.ivShape2.setDrawable(R.drawable.ic_hexagon)
+                }
+                "PURPLE" -> {
+                    binding.clComment.backgroundTintList =
+                        this.getColorStateList(R.color.hous_purple_bg)
+                    binding.clRules.backgroundTintList =
+                        this.getColorStateList(R.color.hous_purple_bg)
+                    binding.tvComment.setTextColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.hous_purple
+                        )
+                    )
+                    binding.tvRulesTitle.setTextColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.hous_purple
+                        )
+                    )
+                    binding.tvRulesTitle.backgroundTintList =
+                        this.getColorStateList(R.color.hous_purple_bg)
+                    binding.ivShape1.setDrawable(R.drawable.ic_pentagon)
+                    binding.ivShape2.setDrawable(R.drawable.ic_pentagon)
+                }
+                "BLUE" -> {
+                    binding.clComment.backgroundTintList =
+                        this.getColorStateList(R.color.hous_blue_bg)
+                    binding.clRules.backgroundTintList =
+                        this.getColorStateList(R.color.hous_blue_bg)
+                    binding.tvComment.setTextColor(ContextCompat.getColor(this, R.color.hous_blue))
+                    binding.tvRulesTitle.setTextColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.hous_blue
+                        )
+                    )
+                    binding.tvRulesTitle.backgroundTintList =
+                        this.getColorStateList(R.color.hous_blue_bg)
+                    binding.ivShape1.setDrawable(R.drawable.ic_square)
+                    binding.ivShape2.setDrawable(R.drawable.ic_square)
+                }
+                "RED" -> {
+                    binding.clComment.backgroundTintList =
+                        this.getColorStateList(R.color.hous_red_bg)
+                    binding.clRules.backgroundTintList = this.getColorStateList(R.color.hous_red_bg)
+                    binding.tvComment.setTextColor(ContextCompat.getColor(this, R.color.hous_red))
+                    binding.tvRulesTitle.setTextColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.hous_red
+                        )
+                    )
+                    binding.tvRulesTitle.backgroundTintList =
+                        this.getColorStateList(R.color.hous_red_bg)
+                    binding.ivShape1.setDrawable(R.drawable.ic_triangle)
+                    binding.ivShape2.setDrawable(R.drawable.ic_triangle)
+                }
+                "YELLOW" -> {
+                    binding.clComment.backgroundTintList =
+                        this.getColorStateList(R.color.hous_yellow_bg)
+                    binding.clRules.backgroundTintList =
+                        this.getColorStateList(R.color.hous_yellow_bg)
+                    binding.tvComment.setTextColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.hous_yellow
+                        )
+                    )
+                    binding.tvRulesTitle.setTextColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.hous_yellow
+                        )
+                    )
+                    binding.tvRulesTitle.backgroundTintList =
+                        this.getColorStateList(R.color.hous_yellow_bg)
+                    binding.ivShape1.setDrawable(R.drawable.ic_circle)
+                    binding.ivShape2.setDrawable(R.drawable.ic_circle)
+                }
             }
-            if (data.bad.typeName == "사각이") {
-                binding.tvBadName.text = "불행한 사각이"
-                binding.clBad.backgroundTintList = this.getColorStateList(R.color.hous_blue_bg)
+            when (data.bad.typeName) {
+                "슈퍼 팔로워 셋돌이" -> {
+                    binding.clBad.backgroundTintList = this.getColorStateList(R.color.hous_red_bg)
+                    binding.tvBad.setTextColor(ContextCompat.getColor(this, R.color.hous_red))
+                }
+                "늘 행복한 동글이" -> {
+                    binding.clBad.backgroundTintList = this.getColorStateList(R.color.hous_yellow_bg)
+                    binding.tvBad.setTextColor(ContextCompat.getColor(this, R.color.hous_yellow))
+                }
+                "룸메 맞춤형 네각이" -> {
+                    binding.clBad.backgroundTintList = this.getColorStateList(R.color.hous_blue_bg)
+                    binding.tvBad.setTextColor(ContextCompat.getColor(this, R.color.hous_blue))
+                }
+                "하이레벨 오돌이" -> {
+                    binding.clBad.backgroundTintList = this.getColorStateList(R.color.hous_purple_bg)
+                    binding.tvBad.setTextColor(ContextCompat.getColor(this, R.color.hous_purple))
+                }
+                "룰 세터 육각이" -> {
+                    binding.clBad.backgroundTintList = this.getColorStateList(R.color.hous_green_bg)
+                    binding.tvBad.setTextColor(ContextCompat.getColor(this, R.color.hous_green))
+                }
             }
-            if (data.typeColor == "GREEN") {
-                binding.tvComment.setTextColor(ContextCompat.getColor(this, R.color.hous_green))
-                binding.tvRulesTitle.setTextColor(ContextCompat.getColor(this, R.color.hous_green))
-                binding.tvRulesTitle.backgroundTintList =
-                    this.getColorStateList(R.color.hous_green_bg)
-                binding.clComment.backgroundTintList = this.getColorStateList(R.color.hous_green_bg)
-                binding.clRules.backgroundTintList = this.getColorStateList(R.color.hous_green_bg)
-                binding.ivShape1.setDrawable(R.drawable.ic_hexagon)
-                binding.ivShape2.setDrawable(R.drawable.ic_hexagon)
+            when (data.good.typeName) {
+                "슈퍼 팔로워 셋돌이" -> {
+                    binding.clGood.backgroundTintList = this.getColorStateList(R.color.hous_red_bg)
+                    binding.tvGood.setTextColor(ContextCompat.getColor(this, R.color.hous_red))
+                }
+                "늘 행복한 동글이" -> {
+                    binding.clGood.backgroundTintList = this.getColorStateList(R.color.hous_yellow_bg)
+                    binding.tvGood.setTextColor(ContextCompat.getColor(this, R.color.hous_yellow))
+                }
+                "룸메 맞춤형 네각이" -> {
+                    binding.clGood.backgroundTintList = this.getColorStateList(R.color.hous_blue_bg)
+                    binding.tvGood.setTextColor(ContextCompat.getColor(this, R.color.hous_blue))
+                }
+                "하이레벨 오돌이" -> {
+                    binding.clGood.backgroundTintList = this.getColorStateList(R.color.hous_purple_bg)
+                    binding.tvGood.setTextColor(ContextCompat.getColor(this, R.color.hous_purple))
+                }
+                "룰 세터 육각이" -> {
+                    binding.clGood.backgroundTintList = this.getColorStateList(R.color.hous_green_bg)
+                    binding.tvGood.setTextColor(ContextCompat.getColor(this, R.color.hous_green))
+                }
             }
         }
     }
