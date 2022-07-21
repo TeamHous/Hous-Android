@@ -43,7 +43,6 @@ class ProfileFragment : Fragment() {
             val intent = Intent(context, TendencyResultActivity::class.java)
             intent.putExtra("data", "end") // "back"면 백버튼, "end"면 완료버튼
             startActivity(intent)
-
         }
     }
 
