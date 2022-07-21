@@ -4,7 +4,6 @@ import android.view.View
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import androidx.annotation.Nullable
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
