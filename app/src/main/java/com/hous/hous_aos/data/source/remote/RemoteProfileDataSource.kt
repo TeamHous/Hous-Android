@@ -10,5 +10,5 @@ interface RemoteProfileDataSource {
     suspend fun getUserProfile(): WrapperClass<Homie>
     suspend fun putTestResult(typeScore: PutTestResultRequest): WrapperClass<Any>
     suspend fun getTypeTestList(): WrapperClass<TypeTestResponse>
-    suspend fun getMyResult(typeId: String): WrapperClass<ResultData>
+    suspend fun getMyResult(): WrapperClass<ResultData>
 }
