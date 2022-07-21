@@ -23,7 +23,5 @@ interface ProfileApi {
     suspend fun getTypeTestList(): WrapperClass<TypeTestResponse>
 
     @GET("user/me/type")
-    suspend fun getMyResult(
-        @Path("typeId") typeId: String
-    ): WrapperClass<ResultData>
+    suspend fun getMyResult(): WrapperClass<ResultData>
 }
