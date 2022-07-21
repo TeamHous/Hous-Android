@@ -29,6 +29,8 @@ class RoommateCardActivity : AppCompatActivity() {
 
         viewModel.homieId.value = intent.getStringExtra("position")
 
+        viewModel.viewModelScope()
+
         binding.ivBack.setOnClickListener {
             finish()
         }
