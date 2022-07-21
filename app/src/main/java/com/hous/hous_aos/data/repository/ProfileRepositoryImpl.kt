@@ -21,5 +21,5 @@ class ProfileRepositoryImpl @Inject constructor(
         runCatching { profileDataSource.getTypeTestList() }
 
     override suspend fun getMyResult(typeId: String): Result<WrapperClass<ResultData>> =
-        runCatching { profileDataSource.getMyResult(typeId) }
+        runCatching { profileDataSource.getMyResult() }
 }
