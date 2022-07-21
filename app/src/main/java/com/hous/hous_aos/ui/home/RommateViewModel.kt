@@ -20,3 +20,16 @@ class RommateViewModel @Inject constructor(
     private val _homieId = MutableLiveData<String>()
     val homieId get() = _homieId
 
+    fun viewModelScope() {
+        viewModelScope.launch {
+            homeRepository.getHomieList(homieId = homieId.value!!)
+                .onSuccess { result ->
+                    Log.d("Homie", "data : ${result.data}")
+                    _homieData.value = result.data!!
+                }
+                .onFailure { result ->
+                    Log.d("Homie", "data : ${result.message}")
+                }
+        }
+    }
+}
