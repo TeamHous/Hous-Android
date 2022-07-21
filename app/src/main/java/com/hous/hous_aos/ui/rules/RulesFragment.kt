@@ -125,6 +125,7 @@ class RulesFragment : Fragment() {
 
     private fun setCategoryIsSelected(position: Int) {
         viewModel.setCategorySelected(position)
+        viewModel.fetchToRulesTableList(position)
     }
 
     override fun onDestroyView() {

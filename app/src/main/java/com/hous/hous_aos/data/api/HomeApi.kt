@@ -1,6 +1,7 @@
 package com.hous.hous_aos.data.api
 
 import com.hous.hous_aos.data.entity.Homie
+import com.hous.hous_aos.data.entity.ResultData
 import com.hous.hous_aos.data.model.WrapperClass
 import com.hous.hous_aos.data.model.request.EventListRequest
 import com.hous.hous_aos.data.model.response.EventResponse
@@ -47,4 +48,9 @@ interface HomeApi {
     suspend fun getHomieList(
         @Path("homieId") homieId: String
     ): WrapperClass<Homie>
+
+    @GET("user/{userId}/type")
+    suspend fun getHomieResult(
+        @Path("userId") userId: String
+    ): WrapperClass<ResultData>
 }

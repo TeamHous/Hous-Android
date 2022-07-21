@@ -38,13 +38,10 @@ class RulesTableFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchToKeyRulesTableList()
-        viewModel.fetchToGeneralRulesTableList()
         initConcatAdapter()
         observeRulesTable()
         clickPlusButton()
     }
-
     private fun initConcatAdapter() {
         conCatAdapter = ConcatAdapter(keyRulesAdapter, generalRulesAdapter)
         binding.rvRulesTable.adapter = conCatAdapter
