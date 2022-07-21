@@ -25,4 +25,8 @@ class HomeRepositoryImpl @Inject constructor(
         body: EventListRequest
     ): Result<WrapperClass<Any>> =
         runCatching { homeDataSource.putEventList(roomId, eventId, body) }
+    override suspend fun addEvent(
+        roomId: String,
+        body: EventListRequest
+    ): Result<WrapperClass<Any>> = runCatching { homeDataSource.addEvent(roomId, body) }
 }
