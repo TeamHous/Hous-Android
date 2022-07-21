@@ -33,10 +33,12 @@ class TendencyResultActivity : AppCompatActivity() {
         val data = intent.getStringExtra("data")
         when (data) {
             "end" -> {
+                viewModel.myResult()
                 binding.ivBack.visibility = View.INVISIBLE
                 binding.tvEnd.visibility = View.VISIBLE
             }
             "back" -> {
+                viewModel.homieResult()
                 binding.ivBack.visibility = View.VISIBLE
                 binding.tvEnd.visibility = View.INVISIBLE
             }
