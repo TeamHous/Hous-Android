@@ -4,8 +4,8 @@ import com.hous.hous_aos.data.model.WrapperClass
 import com.hous.hous_aos.data.model.request.EventListRequest
 import com.hous.hous_aos.data.model.response.EventResponse
 import com.hous.hous_aos.data.model.response.HomeResponse
-import retrofit2.http.DELETE
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -21,6 +21,8 @@ interface HomeApi {
     suspend fun deleteEvent(
         @Path("roomId") roomId: String,
         @Path("eventId") eventId: String
+    ): WrapperClass<Any>
+
     @GET("room/{roomId}/event/{eventId}")
     suspend fun getEventList(
         @Path("roomId") roomId: String,
