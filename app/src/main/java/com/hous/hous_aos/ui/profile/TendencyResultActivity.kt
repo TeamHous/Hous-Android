@@ -9,7 +9,9 @@ import androidx.databinding.DataBindingUtil
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.ActivityTendencyResultBinding
 import com.hous.hous_aos.util.setDrawable
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TendencyResultActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTendencyResultBinding
     val viewModel: ResultViewModel by viewModels()
