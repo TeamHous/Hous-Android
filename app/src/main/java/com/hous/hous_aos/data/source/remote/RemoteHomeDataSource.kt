@@ -14,4 +14,5 @@ interface RemoteHomeDataSource {
         body: EventListRequest
     ): WrapperClass<Any>
     suspend fun addEvent(roomId: String, body: EventListRequest): WrapperClass<Any>
+    suspend fun deleteEvent(roomId: String, eventId: String): WrapperClass<Any>
 }

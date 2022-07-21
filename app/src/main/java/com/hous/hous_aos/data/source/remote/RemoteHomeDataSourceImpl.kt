@@ -28,4 +28,7 @@ class RemoteHomeDataSourceImpl @Inject constructor(
 
     override suspend fun addEvent(roomId: String, body: EventListRequest): WrapperClass<Any> =
         homeApi.addEvent(ROOM_ID, body)
+
+    override suspend fun deleteEvent(roomId: String, eventId: String): WrapperClass<Any> =
+        homeApi.deleteEvent(ROOM_ID, eventId)
 }

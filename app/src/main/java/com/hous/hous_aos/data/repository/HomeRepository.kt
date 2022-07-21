@@ -15,4 +15,5 @@ interface HomeRepository {
     ): Result<WrapperClass<Any>>
 
     suspend fun addEvent(roomId: String, body: EventListRequest): Result<WrapperClass<Any>>
+    suspend fun deleteEvent(roomId: String, eventId: String): Result<WrapperClass<Any>>
 }
