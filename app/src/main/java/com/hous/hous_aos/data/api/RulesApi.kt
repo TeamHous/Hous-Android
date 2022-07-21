@@ -2,6 +2,7 @@ package com.hous.hous_aos.data.api
 
 import com.hous.hous_aos.data.entity.Rule
 import com.hous.hous_aos.data.model.WrapperClass
+import com.hous.hous_aos.data.model.request.MyToDoCheckRequest
 import com.hous.hous_aos.data.model.response.RulesTodayInfoListResponse
 import com.hous.hous_aos.data.model.response.TempManagerRequest
 import com.hous.hous_aos.data.model.response.TempManagerResponse
@@ -27,11 +28,17 @@ interface RulesApi {
         @Path("roomId") roomId: String,
         @Path("ruleId") ruleId: String,
         @Body tmpRuleMembers: TempManagerRequest
-    ): TempManagerRequest
+    ): WrapperClass<Any>
 
     @GET("/room/{roomId}/rules/me")
     suspend fun getMyTodoInfoList(
         @Path("roomId") roomId: String
     ): WrapperClass<List<Rule>>
 
+    @PUT("room/{roomId}/rule/{ruleId}/check")
+    suspend fun putMyToDoCheckLust(
+        @Path("roomId") roomId: String,
+        @Path("ruleId") ruleId: String,
+        @Body isCheck: MyToDoCheckRequest
+    ): WrapperClass<MyToDoCheckRequest>
 }
