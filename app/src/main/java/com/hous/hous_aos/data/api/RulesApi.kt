@@ -1,5 +1,6 @@
 package com.hous.hous_aos.data.api
 
+import com.hous.hous_aos.data.entity.Rule
 import com.hous.hous_aos.data.model.WrapperClass
 import com.hous.hous_aos.data.model.response.RulesTodayInfoListResponse
 import com.hous.hous_aos.data.model.response.TempManagerRequest
@@ -27,4 +28,10 @@ interface RulesApi {
         @Path("ruleId") ruleId: String,
         @Body tmpRuleMembers: TempManagerRequest
     ): TempManagerRequest
+
+    @GET("/room/{roomId}/rules/me")
+    suspend fun getMyTodoInfoList(
+        @Path("roomId") roomId: String
+    ): WrapperClass<List<Rule>>
+
 }

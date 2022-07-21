@@ -97,8 +97,6 @@ g
 7app/src/main/java/com/hous/hous_aos/data/api/HomeApi.kt,5/e/5e504d6523f743654dea0d5c0c0e8ab67c5e617c
 ~
 Napp/src/main/java/com/hous/hous_aos/data/source/remote/RemoteHomeDataSource.kt,d/0/d0c6a9cd927bc40634d68f3ec553c28180165621
-
-Qapp/src/main/java/com/hous/hous_aos/data/source/remote/RemoteProfileDataSource.kt,0/3/0326fed0523344bc30e41296d5e533b0aa99d6c2
 @
 app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
 €
@@ -107,8 +105,6 @@ r
 Bapp/src/main/java/com/hous/hous_aos/ui/newrules/NewRuleActivity.kt,c/0/c0d98d6db88da4caa3ccd455bdfea86e9f86a407
 n
 >app/src/main/java/com/hous/hous_aos/data/model/WrapperClass.kt,0/f/0f6672634b815f76cbfee6b0253fba0710960e01
-‚
-Rapp/src/main/java/com/hous/hous_aos/data/source/remote/RemoteNewRulesDataSource.kt,7/5/75e155fc2aefcf6b5351727f7462d4f5d347652d
 
 Oapp/src/main/java/com/hous/hous_aos/data/model/response/NewRulesListResponse.kt,e/7/e76cdd780563c2092f0b9ef45725c0e4b445df7d
 y
@@ -131,14 +127,10 @@ g
 7app/src/main/java/com/hous/hous_aos/data/entity/Rule.kt,2/1/21fc7f9b693802c7c00b7a621dcbbf0602d5b82e
 }
 Mapp/src/main/java/com/hous/hous_aos/ui/rules/today_to_do/TodayToDoFragment.kt,4/7/47d4431864d6380b67b652e42563df5c84084282
-h
-8app/src/main/java/com/hous/hous_aos/data/api/RulesApi.kt,d/c/dc71a61714a9de9ff2b7f0065e18576d8c97e1e0
 ƒ
 Sapp/src/main/java/com/hous/hous_aos/data/source/remote/RemoteRulesDataSourceImpl.kt,9/9/9917b4385085dfcc1dfe2a8162426ade1adcbd96
 ‚
 Rapp/src/main/java/com/hous/hous_aos/data/source/remote/RemoteHomeDataSourceImpl.kt,b/2/b26721b771070630419f1a8e4bad81ce5ee1095d
-†
-Vapp/src/main/java/com/hous/hous_aos/data/source/remote/RemoteNewRulesDataSourceImpl.kt,5/0/508840e4b121194a4440bf205ef838dd3901c192
 y
 Iapp/src/main/java/com/hous/hous_aos/data/repository/NewRulesRepository.kt,4/1/419ad5ff44f73e68aa086de9916047a99aa3b532
 }
