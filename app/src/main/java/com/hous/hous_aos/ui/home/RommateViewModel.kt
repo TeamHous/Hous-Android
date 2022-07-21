@@ -14,3 +14,6 @@ import javax.inject.Inject
 class RommateViewModel @Inject constructor(
     private val homeRepository: HomeRepository
 ) : ViewModel() {
+    private val _homieData = MutableLiveData<Homie>()
+    val homieData get() = _homieData
+
