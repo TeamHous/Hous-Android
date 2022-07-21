@@ -56,7 +56,10 @@ class RulesViewModel @Inject constructor(
                 .onSuccess {
                     _todayTodoList.value = it.data!!.todayTodoRules
                     _categoryOfRuleList.value = it.data.homeRuleCategories
-                    Log.d("리스트리스트", "통신 시작 -- ${_todayTodoList?.value!![0].todayMembersWithTypeColor.size}")
+                    Log.d(
+                        "리스트리스트",
+                        "통신 시작 -- ${_todayTodoList?.value!![0].todayMembersWithTypeColor.size}"
+                    )
                 }
                 .onFailure {
                     Log.d(TAG, "RulesViewModel - init - getRulesTodayList fail : ${it.message}")
@@ -88,7 +91,7 @@ class RulesViewModel @Inject constructor(
                     fetchToTodayToDoList()
                 }
                 .onFailure {
-                    Log.d(TAG, " result fail : ${tmp}")
+                    Log.d(TAG, " result fail : $tmp")
                     Log.d(TAG, " result fail : ${it.message}")
                 }
         }
@@ -126,11 +129,32 @@ class RulesViewModel @Inject constructor(
             rulesTodayRepository.getTodayTodayInfoList("")
                 .onSuccess {
                     _todayTodoList.value = it.data!!.todayTodoRules
-                    Log.d("리스트리스트", "다시서버통신 -- Size: ${_todayTodoList?.value!![0].todayMembersWithTypeColor.size}")
-
+                    Log.d(
+                        "리스트리스트",
+                        "다시서버통신 -- Size: ${_todayTodoList?.value!![0].todayMembersWithTypeColor.size}"
+                    )
                 }
                 .onFailure {
-                    Log.d(TAG, "RulesViewModel - init - getRulesTodayList fail : ${it.message}")
+                    Log.d(
+                        "리스트리스트",
+                        "RulesViewModel - init - getRulesTodayList fail : ${it.message}"
+                    )
+                }
+        }
+    }
+
+    /** get
+     * My -To - DO 서버통신*/
+    fun fetchToMyTodayToDoList() {
+        viewModelScope.launch {
+            rulesTodayRepository.getMyTodoInfoList("")
+                .onSuccess {
+                    _myTodoList.value = it.data!!
+                    Log.d(TAG, "RulesViewModel - fetchToMyTodayToDoList() called")
+                    Log.d("MYTODO", "Success ")
+                }
+                .onFailure {
+                    Log.d("MYTODO", "fail : ${it.message}")
                 }
         }
     }
@@ -189,44 +213,6 @@ class RulesViewModel @Inject constructor(
             )
         )
         _keyRulesTableList.value = tmp.map { it.copy() }
-    }
-
-    fun fetchToMyTodayToDoList() {
-        val tmpMyTodoList = mutableListOf(
-            Rule(
-                id = "sjodFdsfdsfdsflc",
-                categoryIcon = "CLEAN",
-                ruleName = "거실 청소기 돌리기",
-                isChecked = false
-            ),
-            Rule(
-                id = "sjklsdfdsfsmvklc",
-                categoryIcon = "BEER",
-                ruleName = "맥주 마시기",
-                isChecked = true
-            ),
-            Rule(
-                id = "sjodkajofsdfdsfdmaklc",
-                categoryIcon = "LAUNDRY",
-                ruleName = "세탁기 돌리기",
-                isChecked = false
-            ),
-            Rule(
-                id = "sjdsfsdfkmcsaklc",
-                categoryIcon = "LIGHT",
-                ruleName = "전구 갈기",
-                isChecked = true
-            ),
-            Rule(
-                id = "sjklfansdjkdsfdsdsmvklc",
-                categoryIcon = "BEER",
-                ruleName = "맥주 마시기",
-                isChecked = true
-            )
-        )
-        _myTodoList.value = tmpMyTodoList.map { data ->
-            data.copy()
-        }
     }
 
     fun setToDoViewType(toDoViewType: ToDoViewType) {
