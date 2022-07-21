@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hous.hous_aos.R
+import com.hous.hous_aos.util.getColorSet
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -50,11 +51,11 @@ fun PentagonBox(
     typeColor: String,
     typeScore: List<Int>
 ) {
-    val boxColor = getColorSet(typeColor)
+    val boxColor = typeColor.getColorSet(typeColor)
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(15.dp))
-            .background(colorResource(id = boxColor.boxColor))
+            .background(colorResource(id = boxColor.colorBg))
     ) {
         Column(
             verticalArrangement = Arrangement.Center,
@@ -64,7 +65,7 @@ fun PentagonBox(
             Text(
                 text = typeName,
                 fontStyle = FontStyle(R.font.spoqa_han_sans_neo),
-                color = colorResource(id = boxColor.pentagonColor),
+                color = colorResource(id = boxColor.colorPrimary),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
                 lineHeight = 8.sp,
@@ -73,11 +74,11 @@ fun PentagonBox(
             Spacer(modifier = Modifier.size(16.dp))
             Box(modifier = Modifier.height(302.dp)) {
                 Pentagon(
-                    colorRes = boxColor.backgroundColor,
+                    colorRes = boxColor.colorBg2,
                     changeUserRadius = listOf(8, 8, 8, 8, 8)
                 )
                 Pentagon(
-                    colorRes = boxColor.pentagonColor,
+                    colorRes = boxColor.colorPrimary,
                     changeUserRadius = typeScore
                 )
                 PentagonText()
@@ -127,39 +128,3 @@ private fun PentagonText() {
         }
     }
 }
-
-private fun getColorSet(typeColor: String): ColorSet {
-    return when (typeColor) {
-        "PURPLE" -> ColorSet(
-            boxColor = R.color.hous_purple_bg,
-            backgroundColor = R.color.hous_purple_bg_2,
-            pentagonColor = R.color.hous_purple
-        )
-        "GREEN" -> ColorSet(
-            boxColor = R.color.hous_green_bg,
-            backgroundColor = R.color.hous_green_bg_2,
-            pentagonColor = R.color.hous_green
-        )
-        "YELLOW" -> ColorSet(
-            boxColor = R.color.hous_yellow_bg,
-            backgroundColor = R.color.hous_yellow_bg_2,
-            pentagonColor = R.color.hous_yellow
-        )
-        "BLUE" -> ColorSet(
-            boxColor = R.color.hous_blue_bg,
-            backgroundColor = R.color.hous_blue_bg_2,
-            pentagonColor = R.color.hous_blue
-        )
-        else -> ColorSet(
-            boxColor = R.color.hous_red_bg,
-            backgroundColor = R.color.hous_red_bg_2,
-            pentagonColor = R.color.hous_red
-        )
-    }
-}
-
-data class ColorSet(
-    val boxColor: Int,
-    val backgroundColor: Int,
-    val pentagonColor: Int
-)
