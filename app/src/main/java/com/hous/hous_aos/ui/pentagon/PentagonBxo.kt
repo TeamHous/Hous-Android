@@ -40,7 +40,7 @@ fun PreviewPentagon() {
         PentagonBox(
             "동그란 동글이",
             "PURPLE",
-            listOf(5, 5, 5, 5, 5)
+            listOf(3, 3, 3, 3, 3)
         )
     }
 }
@@ -75,7 +75,7 @@ fun PentagonBox(
             Box(modifier = Modifier.height(302.dp)) {
                 Pentagon(
                     colorRes = boxColor.colorBg2,
-                    changeUserRadius = listOf(8, 8, 8, 8, 8)
+                    changeUserRadius = listOf(12, 12, 12, 12, 12)
                 )
                 Pentagon(
                     colorRes = boxColor.colorPrimary,
