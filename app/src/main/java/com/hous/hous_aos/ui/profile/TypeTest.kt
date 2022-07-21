@@ -1,7 +1,9 @@
 package com.hous.hous_aos.ui.profile
 
+import com.google.gson.annotations.SerializedName
+
 data class TypeTest(
-    val _id: String,
+    @SerializedName("_id") val id: String,
     val testNum: Int,
     val question: String,
     val questionType: String,
