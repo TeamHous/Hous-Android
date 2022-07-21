@@ -17,3 +17,6 @@ class RommateViewModel @Inject constructor(
     private val _homieData = MutableLiveData<Homie>()
     val homieData get() = _homieData
 
+    private val _homieId = MutableLiveData<String>()
+    val homieId get() = _homieId
+
