@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
@@ -65,33 +66,44 @@ class EventDialogFragment : DialogFragment() {
         binding.rvParticipant.adapter = eventParticipantAdapter
     }
 
-
     private fun clickDatePicker() {
         binding.clDates.setOnClickListener {
+            val date: String = viewModel.eventDate.value!!
+            val dateList = date.split("-")
+            val year = dateList[0].toInt()
+            val month = dateList[1].toInt()
+            val day = dateList[2].toInt()
+
             val cal = Calendar.getInstance() // 캘린더뷰 만들기
             val dateSetListener =
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                     cal.set(year, month, dayOfMonth)
                     val year = year.toString()
-                    val month = if (month < 9) "0${month + 1}" else month.toString()
-                    val dayOfMonth = if (dayOfMonth < 10) "0$dayOfMonth" else dayOfMonth.toString()
+                    val month = if (month < 9) {
+                        ("0" + (month + 1).toString())
+                    } else {
+                        (month + 1).toString()
+                    }
+                    val dayOfMonth = if (dayOfMonth < 10) {
+                        "0$dayOfMonth"
+                    } else {
+                        dayOfMonth.toString()
+                    }
                     val date = "$year-$month-$dayOfMonth"
                     viewModel.setEventData(date)
                 }
-
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
                 R.style.MyDatePickerDialogTheme_Spinner,
                 dateSetListener,
-                cal.get(Calendar.YEAR),
-                cal.get(Calendar.MONTH),
-                cal.get(Calendar.DAY_OF_MONTH)
+                year,
+                month - 1,
+                day
             )
             datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
             datePickerDialog.show()
         }
     }
-
 
     private fun initDialog() {
         isCancelable = false
@@ -124,10 +136,9 @@ class EventDialogFragment : DialogFragment() {
     private fun saveDialog() {
         binding.clSave.setOnClickListener {
             Log.d(TAG, "EventDialogFragment - saveDialog() called")
-            // viewModel.putEventData??
             if (binding.edtEventName.text.isNotEmpty()) {
+                viewModel.putToEventParticipant()
                 dialog?.dismiss()
-                viewModel.fetchToResponseEventData()
             }
         }
     }

@@ -51,8 +51,6 @@ Fapp/src/main/java/com/hous/hous_aos/ui/rules/my_to_do/MyToDoAdapter.kt,5/0/504
 Kapp/src/main/java/com/hous/hous_aos/ui/rules/rules_table/KeyRulesAdapter.kt,e/c/ec7c57613f15a7aa5c7db5f80db83f0025664f93
 t
 Dapp/src/main/java/com/hous/hous_aos/ui/rules/ItemCategoryViewType.kt,7/7/77156a4690dc159001c172419ad1340d60579cc0
-q
-Aapp/src/main/java/com/hous/hous_aos/ui/rules/my_to_do/IconType.kt,c/8/c8b852f746f4284b67be58f2274f60a7631cada8
 i
 9app/src/main/java/com/hous/hous_aos/ui/rules/HomieIcon.kt,d/8/d8714d56c431862d5000e3af7f542dc2c160d330
 ˆ
