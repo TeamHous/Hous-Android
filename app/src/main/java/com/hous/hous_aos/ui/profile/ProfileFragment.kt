@@ -40,7 +40,10 @@ class ProfileFragment : Fragment() {
 
     private fun initButtonClickListener() {
         binding.clTypeDetail.setOnClickListener {
-            startActivity(Intent(context, TendencyResultActivity::class.java))
+            val intent = Intent(context, TendencyResultActivity::class.java)
+            intent.putExtra("data", "end") // "back"면 백버튼, "end"면 완료버튼
+            startActivity(intent)
+
         }
     }
 
