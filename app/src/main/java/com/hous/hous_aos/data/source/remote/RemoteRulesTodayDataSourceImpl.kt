@@ -4,6 +4,8 @@ import com.hous.hous_aos.BuildConfig
 import com.hous.hous_aos.data.api.RulesApi
 import com.hous.hous_aos.data.entity.Rule
 import com.hous.hous_aos.data.model.WrapperClass
+import com.hous.hous_aos.data.model.request.MyToDoCheckRequest
+import com.hous.hous_aos.data.model.response.RulesTableResponse
 import com.hous.hous_aos.data.model.response.RulesTodayInfoListResponse
 import com.hous.hous_aos.data.model.response.TempManagerRequest
 import com.hous.hous_aos.data.model.response.TempManagerResponse
@@ -18,6 +20,7 @@ class RemoteRulesTodayDataSourceImpl @Inject constructor(
     override suspend fun getTodayTodayInfoList(roomId: String): WrapperClass<RulesTodayInfoListResponse> {
         return rulesApi.getTodayTodayInfoList(ROOM_ID)
     }
+
     override suspend fun getTempManagerInfoList(
         roomId: String,
         ruleId: String
@@ -29,7 +32,7 @@ class RemoteRulesTodayDataSourceImpl @Inject constructor(
         roomId: String,
         ruleId: String,
         tmpRuleMembers: TempManagerRequest
-    ): TempManagerRequest {
+    ): WrapperClass<Any> {
         return rulesApi.putTempManagerInfoList(ROOM_ID, ruleId, tmpRuleMembers)
     }
 
@@ -37,4 +40,14 @@ class RemoteRulesTodayDataSourceImpl @Inject constructor(
         return rulesApi.getMyTodoInfoList(ROOM_ID)
     }
 
+    override suspend fun putMyToDoCheckLust(roomId: String, ruleId: String, isCheck: MyToDoCheckRequest): WrapperClass<MyToDoCheckRequest> {
+        return rulesApi.putMyToDoCheckList(ROOM_ID, ruleId, isCheck)
+    }
+
+    override suspend fun getRuleTableInfoList(
+        roomId: String,
+        categoryId: String
+    ): WrapperClass<RulesTableResponse> {
+        return rulesApi.getRuleTableInfoList(ROOM_ID, categoryId)
+    }
 }

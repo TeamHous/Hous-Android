@@ -30,6 +30,8 @@ class GeneralRulesAdapter :
 
     override fun onBindViewHolder(holder: GeneralRulesViewHolder, position: Int) {
         val currentItem = currentList[position]
+        Log.d("크기", "$currentList")
+        Log.d("크기", "${currentList.size}")
         holder.onBind(currentItem)
     }
 
@@ -47,7 +49,9 @@ class GeneralRulesAdapter :
             )
             when (memberCnt) {
                 MEMBER_COUNT_NONE -> binding.iconColorOne = IconColor.NONE
-                MEMBER_COUNT_ONE -> binding.iconColorOne = getIconColor(data.typeColors[0])
+                MEMBER_COUNT_ONE -> {
+                    binding.iconColorOne = getIconColor(data.typeColors[0])
+                }
                 MEMBER_COUNT_TWO -> {
                     binding.iconColorOne = getIconColor(data.typeColors[0])
                     binding.iconColorTwo = getIconColor(data.typeColors[1])
