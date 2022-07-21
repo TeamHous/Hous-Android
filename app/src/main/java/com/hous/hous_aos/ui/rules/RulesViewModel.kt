@@ -13,6 +13,7 @@ import com.hous.hous_aos.data.model.response.TempManagerRequest
 import com.hous.hous_aos.data.repository.RulesTodayRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.stream.Collectors.toList
 import javax.inject.Inject
 
 @HiltViewModel
@@ -51,15 +52,25 @@ class RulesViewModel @Inject constructor(
     private var _tmpTodayToDoPosition = MutableLiveData<Int>(0)
     val tmpTodayToDoPosition get() = _tmpTodayToDoPosition
 
+    private var _ruleTableSize = MutableLiveData<Int>(0)
+    val ruleTableSize get() = _ruleTableSize
+
     init {
         viewModelScope.launch {
             rulesTodayRepository.getTodayTodayInfoList("")
                 .onSuccess {
                     _todayTodoList.value = it.data!!.todayTodoRules
                     _categoryOfRuleList.value = it.data.homeRuleCategories
+                    _categoryOfRuleList.value = (_categoryOfRuleList.value!!).plus(
+                        Category(
+                            id = "62d6b94e0e9be86f165d48db",
+                            categoryName = "없음",
+                            categoryIcon = "CLEAN"
+                        )
+                    )
                     Log.d(
-                        "리스트리스트",
-                        "통신 시작 -- ${_todayTodoList?.value!![0].todayMembersWithTypeColor.size}"
+                        TAG,
+                        "통신 시작 -- ${_todayTodoList?.value}"
                     )
                 }
                 .onFailure {
@@ -79,7 +90,7 @@ class RulesViewModel @Inject constructor(
         }
         val tmp = TempManagerRequest(clickedTmpManagerList)
         Log.d(
-            "리스트리스트",
+            TAG,
             "Put -- tmp.tmpRuleMembers: ${tmp.tmpRuleMembers} tmp.size : ${tmp.tmpRuleMembers.size}"
         )
         viewModelScope.launch {
@@ -130,14 +141,14 @@ class RulesViewModel @Inject constructor(
             rulesTodayRepository.getTodayTodayInfoList("")
                 .onSuccess {
                     _todayTodoList.value = it.data!!.todayTodoRules
-                    Log.d(
-                        "리스트리스트",
-                        "다시서버통신 -- Size: ${_todayTodoList?.value!![0].todayMembersWithTypeColor.size}"
-                    )
+//                    Log.d(
+//                        TAG,
+//                        "다시서버통신 -- Size: ${_todayTodoList?.value!![0].todayMembersWithTypeColor.size}"
+//                    )
                 }
                 .onFailure {
                     Log.d(
-                        "리스트리스트",
+                        TAG,
                         "RulesViewModel - init - getRulesTodayList fail : ${it.message}"
                     )
                 }
@@ -155,7 +166,7 @@ class RulesViewModel @Inject constructor(
                     Log.d("MYTODO", "Success ")
                 }
                 .onFailure {
-                    Log.d("MYTODO", "fail : ${it.message}")
+                    Log.d(TAG, "fail : ${it.message}")
                 }
         }
     }
@@ -171,71 +182,50 @@ class RulesViewModel @Inject constructor(
         viewModelScope.launch {
             rulesTodayRepository.putMyToDoCheckLust("", id, MyToDoCheckRequest(checked))
                 .onSuccess {
-                    Log.d("MYTODO", "Success - id: $id, checked: $checked ")
+                    Log.d(TAG, "Success - id: $id, checked: $checked ")
                 }
                 .onFailure {
                     Log.d(
-                        "MYTODO",
+                        TAG,
                         "fail - $id, checked: $checked -  :${it.message}"
                     )
                 }
         }
     }
 
-    /** Rules Table 일반 rules*/
-    fun fetchToGeneralRulesTableList() {
-        val tmp = listOf(
-            Rule(
-                id = "62cc74e8dasdasd591384e4ecd",
-                ruleName = "설거지하기",
-                membersCnt = 2,
-                typeColors = listOf("GRAY", "RED")
-            ),
-            Rule(
-                id = "62ccsad209asdasd00f",
-                ruleName = "청소하기",
-                membersCnt = 4,
-                typeColors = listOf(
-                    "GRAY",
-                    "GREEN",
-                    "RED"
-                )
-            ),
-            Rule(
-                id = "62ccasdsadsasd00f",
-                ruleName = "바퀴벌레 잡기",
-                membersCnt = 3,
-                typeColors = listOf(
-                    "PURPLE",
-                    "YELLOW",
-                    "RED"
-                )
-            ),
-            Rule(
-                id = "62ccsasdasdcdcfa7asdsad0f",
-                ruleName = "쓰레기 구분",
-                membersCnt = 1,
-                typeColors = listOf("PURPLE")
-            ),
-            Rule(
-                id = "62cd4easdsaee723123dawsd",
-                ruleName = "임시 담당자 규칙",
-                membersCnt = 0,
-                typeColors = listOf()
-            )
-        )
-        _generalRulesTableList.value = tmp.map { it.copy() }
-    }
+    /**
+     * get
+     * 카테고리 아이콘 클릭시 Rule Table 받아오기*/
+    fun fetchToRulesTableList(position: Int) {
+        val categoryId = categoryOfRuleList.value!![position].id
+        Log.d("RulesViewModel", "categoryId: $categoryId")
+        viewModelScope.launch {
+            rulesTodayRepository.getRuleTableInfoList("", categoryId)
+                .onSuccess {
+                    Log.d("RulesViewModel", "Success - RulesTableList() ${it.message}")
+                    val data = it.data
+                    Log.d("RulesViewModel", "Success- data: $data")
+                    val tmpGeneralRulesTableList = data!!.rules
+                    val tmpKeyRulesTableList = data.keyRules
+                    val totalRulesDataSize =
+                        tmpGeneralRulesTableList.size + tmpKeyRulesTableList.size
 
-    /** Rules Table key rules*/
-    fun fetchToKeyRulesTableList() {
-        val tmp = listOf(
-            Rule(
-                id = "62cc81ac1a034f0287c5c6ec",
-                ruleName = "상단규칙"
-            )
-        )
-        _keyRulesTableList.value = tmp.map { it.copy() }
+                    _ruleTableSize.value = totalRulesDataSize
+                    _generalRulesTableList.value = tmpGeneralRulesTableList
+                    _keyRulesTableList.value = tmpKeyRulesTableList
+                    Log.d(
+                        "RulesViewModel",
+                        "Success -keyRulesTableList: ${generalRulesTableList.value}"
+                    )
+                    Log.d(
+                        "RulesViewModel",
+                        "Success -tmpGeneralRulesTableList: ${keyRulesTableList.value}"
+                    )
+                }
+                .onFailure {
+                    Log.d("RulesViewModel", "Fail - RulesTableList() ${it.message}")
+                }
+        }
     }
 
     fun setToDoViewType(toDoViewType: ToDoViewType) {
@@ -244,24 +234,21 @@ class RulesViewModel @Inject constructor(
 
     fun setSmileSelected(selected: Boolean) {
         _isSelectedCategorySmile.value = selected
+        fetchToTodayToDoList()
     }
 
+    /**
+     * 스마일 버튼 or 바텀네비로 돌아왔을 때 상단 카테고리 name 없애기
+     * */
     fun initCategorySelected() {
+        if (_categoryOfRuleList.value == null) {
+            return
+        }
         val tmpCategoryOfRuleList = requireNotNull(_categoryOfRuleList.value).map { data ->
             data.copy().apply { isChecked = false }
         }
-        Log.d(TAG, "RulesViewModel - initCategorySelected() called")
-        tmpCategoryOfRuleList.toMutableList().apply {
-            add(
-                Category(
-                    id = "62d6b94e0e9be86f165d48db",
-                    categoryName = "청소",
-                    categoryIcon = "CLEAN"
-                )
-            )
-        }
 
-        _categoryOfRuleList.value = tmpCategoryOfRuleList.toList()
+        _categoryOfRuleList.value = tmpCategoryOfRuleList
     }
 
     fun setCategorySelected(position: Int) {
@@ -273,6 +260,6 @@ class RulesViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TAG = "rulesViewmodel"
+        private const val TAG = "RulesViewModel"
     }
 }

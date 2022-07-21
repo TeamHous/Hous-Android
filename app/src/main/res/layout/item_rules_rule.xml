@@ -6,9 +6,11 @@
     <data>
 
         <import type="android.view.View" />
+
         <variable
             name="iconType"
             type="com.hous.hous_aos.ui.rules.CategoryIconType" />
+
         <variable
             name="data"
             type="com.hous.hous_aos.data.entity.Category" />
@@ -21,30 +23,32 @@
 
         <ImageView
             android:id="@+id/iv_rules_icon"
+            android:layout_marginHorizontal="12dp"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginStart="24dp"
-            android:src="@{context.getDrawable(iconType.drawableRes)}"
             android:background="@{context.getDrawable(iconType.background)}"
+            android:src="@{context.getDrawable(iconType.drawableRes)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:background="@drawable/ic_rules_category_yellow_bg_m"
-            tools:src="@drawable/ic_rules_heart_s" />
+            tools:src="@drawable/ic_rules_beer_s" />
 
         <TextView
             android:id="@+id/tv_rule"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
+            android:maxLines="1"
             android:text="@{data.categoryName}"
+            android:textAlignment="center"
             android:textAppearance="@style/B3"
             android:textColor="@color/g_6"
             android:visibility="@{data.isChecked == false ? View.INVISIBLE : View.VISIBLE }"
-            app:layout_constraintEnd_toEndOf="@id/iv_rules_icon"
-            app:layout_constraintStart_toStartOf="@id/iv_rules_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_rules_icon"
-            tools:text="청소" />
+            tools:text="원용아여기" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

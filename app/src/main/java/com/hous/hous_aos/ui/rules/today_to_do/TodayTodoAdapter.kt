@@ -25,6 +25,7 @@ class TodayTodoAdapter(
     override fun getItemViewType(position: Int): Int {
         val data = currentList[position]
         val managerCnt = data.todayMembersWithTypeColor.size
+        //TODO 추후에, NONE이랑 ONE 뷰타입 합치기
         return if (data.todayMembersWithTypeColor.isEmpty()) {
             ItemToDoViewType.NONE_MANAGER_VIEW_TYPE.index
         } else if (managerCnt == MANAGER_NUMBER_ONE) {
