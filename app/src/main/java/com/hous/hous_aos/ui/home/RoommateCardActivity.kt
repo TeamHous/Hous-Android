@@ -27,6 +27,8 @@ class RoommateCardActivity : AppCompatActivity() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
 
+        viewModel.homieId.value = intent.getStringExtra("position")
+
         binding.ivBack.setOnClickListener {
             finish()
         }
