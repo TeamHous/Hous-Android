@@ -21,6 +21,6 @@ class RemoteProfileDataSourceImpl @Inject constructor(
     override suspend fun getTypeTestList(): WrapperClass<TypeTestResponse> =
         profileApi.getTypeTestList()
 
-    override suspend fun getMyResult(typeId: String): WrapperClass<ResultData> =
-        profileApi.getMyResult(typeId)
+    override suspend fun getMyResult(): WrapperClass<ResultData> =
+        profileApi.getMyResult()
 }

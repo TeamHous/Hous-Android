@@ -20,6 +20,6 @@ class ProfileRepositoryImpl @Inject constructor(
     override suspend fun getTypeTestList(): Result<WrapperClass<TypeTestResponse>> =
         runCatching { profileDataSource.getTypeTestList() }
 
-    override suspend fun getMyResult(typeId: String): Result<WrapperClass<ResultData>> =
+    override suspend fun getMyResult(): Result<WrapperClass<ResultData>> =
         runCatching { profileDataSource.getMyResult() }
 }
