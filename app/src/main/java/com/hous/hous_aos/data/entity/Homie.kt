@@ -6,6 +6,7 @@ data class Homie(
     @SerializedName("_id") val id: String? = null,
     val userName: String = "",
     val typeName: String = "",
+    val typeId: String = "",
     val typeColor: String = "",
     val job: String = "",
     val introduction: String = "",
