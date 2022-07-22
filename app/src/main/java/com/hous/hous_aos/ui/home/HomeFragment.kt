@@ -101,7 +101,6 @@ class HomeFragment : Fragment() {
         viewModel.homieList.observe(viewLifecycleOwner) {
             homieAdapter = HomieAdapter(
                 showToast = ::showToast,
-                onClickMe = ::onClickMe,
                 onClickHomie = ::onClickHomie
             )
             binding.rvProfile.adapter = homieAdapter
@@ -113,14 +112,8 @@ class HomeFragment : Fragment() {
         requireActivity().showToast(getString(R.string.copy_code))
     }
 
-    private fun onClickMe() {
-        val profile = 2
-        (activity as MainActivity).replace(profile)
-    }
-
     private fun onClickHomie(position: Int) {
         val currentId = viewModel.homieList.value!![position].id
-        Log.d("bbbb", "${currentId}")
         val intent = Intent(requireActivity(), RoommateCardActivity::class.java)
         intent.putExtra("position", currentId)
         startActivity(intent)
