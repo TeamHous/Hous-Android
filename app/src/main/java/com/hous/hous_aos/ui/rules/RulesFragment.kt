@@ -11,7 +11,6 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentRulesBinding
-import com.hous.hous_aos.ui.rules.edit_category.EditCategoryFragment
 import com.hous.hous_aos.ui.rules.my_to_do.MyToDoFragment
 import com.hous.hous_aos.ui.rules.new_category.NewCategoryFragment
 import com.hous.hous_aos.ui.rules.rules_table.RulesTableFragment
@@ -108,19 +107,21 @@ class RulesFragment : Fragment() {
 
     /** EditCategoryFragment로 이동 */
     private fun onLongClickCategoryIcon() {
-        viewModel.setSmileSelected(false)
-        childFragmentManager.commit {
-            setReorderingAllowed(true)
-            replace<EditCategoryFragment>(R.id.frg_bottom)
-        }
+        /** 앱잼 내에서는 비활성화*/
+//        viewModel.setSmileSelected(false)
+//        childFragmentManager.commit {
+//            setReorderingAllowed(true)
+//            replace<EditCategoryFragment>(R.id.frg_bottom)
+//        }
     }
 
     /** 추가 Fragment로 이동 */
     private fun onClickPlusIcon() {
-        childFragmentManager.commit {
-            setReorderingAllowed(true)
-            replace<NewCategoryFragment>(R.id.frg_bottom)
-        }
+        /** 앱잼 내에서는 비활성화*/
+//        childFragmentManager.commit {
+//            setReorderingAllowed(true)
+//            replace<NewCategoryFragment>(R.id.frg_bottom)
+//        }
     }
 
     private fun setCategoryIsSelected(position: Int) {
