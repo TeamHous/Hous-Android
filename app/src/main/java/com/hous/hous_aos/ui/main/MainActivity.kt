@@ -108,6 +108,13 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+            setOnItemReselectedListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.ic_bot_nav_home -> Unit
+                    R.id.ic_bot_nav_rules -> Unit
+                    R.id.ic_bot_nav_profile -> Unit
+                }
+            }
         }
     }
 
