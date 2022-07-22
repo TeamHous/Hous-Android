@@ -2,6 +2,7 @@ package com.hous.hous_aos.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -22,21 +23,6 @@ class RoommateCardActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_roommate_card)
         setContentView(binding.root)
         init()
-        observePentagon()
-    }
-
-    private fun observePentagon() {
-        viewModel.homieData.observe(this) {
-            binding.cvProfilePentagon.setContent {
-                with(viewModel.homieData.value!!) {
-                    PentagonBox(
-                        typeName = typeName,
-                        typeColor = typeColor,
-                        typeScore = typeScore
-                    )
-                }
-            }
-        }
     }
 
     private fun init() {
@@ -59,6 +45,15 @@ class RoommateCardActivity : AppCompatActivity() {
         }
 
         viewModel.homieData.observe(this) {
+            binding.cvProfilePentagon.setContent {
+                with(viewModel.homieData.value!!) {
+                    PentagonBox(
+                        typeName = typeName,
+                        typeColor = typeColor,
+                        typeScore = typeScore
+                    )
+                }
+            }
             when (it.hashTag.size) {
                 0 -> {
                     binding.tvHashtag1.visibility = View.INVISIBLE
@@ -67,18 +62,24 @@ class RoommateCardActivity : AppCompatActivity() {
                 }
                 1 -> {
                     binding.tvHashtag1.text = it.hashTag[0]
+                    binding.tvHashtag1.visibility = View.VISIBLE
                     binding.tvHashtag2.visibility = View.INVISIBLE
                     binding.tvHashtag3.visibility = View.INVISIBLE
                 }
                 2 -> {
                     binding.tvHashtag1.text = it.hashTag[0]
                     binding.tvHashtag2.text = it.hashTag[1]
+                    binding.tvHashtag1.visibility = View.VISIBLE
+                    binding.tvHashtag2.visibility = View.VISIBLE
                     binding.tvHashtag3.visibility = View.INVISIBLE
                 }
                 3 -> {
                     binding.tvHashtag1.text = it.hashTag[0]
                     binding.tvHashtag2.text = it.hashTag[1]
                     binding.tvHashtag3.text = it.hashTag[2]
+                    binding.tvHashtag1.visibility = View.VISIBLE
+                    binding.tvHashtag2.visibility = View.VISIBLE
+                    binding.tvHashtag3.visibility = View.VISIBLE
                 }
             }
 
