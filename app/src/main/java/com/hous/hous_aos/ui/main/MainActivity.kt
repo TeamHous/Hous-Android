@@ -50,8 +50,6 @@ class MainActivity : AppCompatActivity() {
                             this@MainActivity,
                             R.color.sel_bot_navi_home_color
                         )
-                        binding.tvMainTitle.text = getString(R.string.home_title)
-                        binding.tvMainTitle.setTextSize(Dimension.SP, 28F)
                         supportFragmentManager.commit {
                             replace<HomeFragment>(R.id.fcv_main)
                             setReorderingAllowed(true)
@@ -72,8 +70,6 @@ class MainActivity : AppCompatActivity() {
                             this@MainActivity,
                             R.color.sel_bot_navi_rule_color
                         )
-                        binding.tvMainTitle.text = getString(R.string.home_title)
-                        binding.tvMainTitle.setTextSize(Dimension.SP, 20F)
                         supportFragmentManager.commit {
                             viewModel.setSmileSelected(true)
                             viewModel.setToDoViewType(ToDoViewType.TODAY_TO_DO)
@@ -98,8 +94,6 @@ class MainActivity : AppCompatActivity() {
                             this@MainActivity,
                             R.color.sel_bot_navi_profile_color
                         )
-                        binding.tvMainTitle.text = getString(R.string.profile_title)
-                        binding.tvMainTitle.setTextSize(Dimension.SP, 20F)
                         supportFragmentManager.commit {
                             replace<ProfileFragment>(R.id.fcv_main)
                             setReorderingAllowed(true)
