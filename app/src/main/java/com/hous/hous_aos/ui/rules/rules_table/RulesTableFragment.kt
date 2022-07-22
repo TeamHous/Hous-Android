@@ -62,7 +62,7 @@ class RulesTableFragment : Fragment() {
         binding.clPlusRules.setOnClickListener {
             val intent = Intent(activity, NewRuleActivity::class.java)
             intent.putExtra("categoryName", viewModel.categoryName.value)
-            intent.putExtra("categoryId", viewModel.categoryName.value)
+            intent.putExtra("categoryId", viewModel.categoryId.value)
             startActivity(intent)
         }
     }

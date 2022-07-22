@@ -8,7 +8,6 @@ import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.repository.NewRulesRepository
 import com.hous.hous_aos.ui.newrules.component.State
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -16,6 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class NewRulesViewModel @Inject constructor(
@@ -84,6 +84,7 @@ class NewRulesViewModel @Inject constructor(
             categoryId = categoryId,
             categoryName = category
         )
+        Log.d("viewModel", "$categoryId $category")
     }
 
     fun setCheckBoxState(where: String, state: State) {
