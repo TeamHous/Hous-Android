@@ -118,7 +118,7 @@
                         android:layout_marginTop="8dp"
                         android:text="@{vm.resultData.typeDesc}"
                         android:textAlignment="center"
-                        android:textAppearance="@style/B2"
+                        android:textAppearance="@style/RESULT_B2"
                         android:textColor="@color/g_7"
                         android:paddingHorizontal="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
