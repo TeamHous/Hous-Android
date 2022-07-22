@@ -3,6 +3,7 @@ package com.hous.hous_aos.ui.newrules
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.ActivityNewRuleBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,5 +21,10 @@ class NewRuleActivity : AppCompatActivity() {
                 this::finish
             )
         }
+        initStatusBarColor()
+    }
+
+    private fun initStatusBarColor(){
+        window.statusBarColor = getColor(R.color.hous_blue_bg)
     }
 }

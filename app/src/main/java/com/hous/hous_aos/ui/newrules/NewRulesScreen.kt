@@ -19,6 +19,8 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -69,7 +71,12 @@ fun NewRulesScreen(
 
                 Text(
                     text = stringResource(id = R.string.new_rules_rule_name),
-                    fontStyle = FontStyle(R.style.B2),
+                    fontFamily = FontFamily(
+                        Font(
+                            resId = R.font.spoqa_han_sans_neo_medium,
+                            style = FontStyle(R.style.B2)
+                        )
+                    ),
                     color = colorResource(id = R.color.hous_blue)
                 )
                 Spacer(modifier = Modifier.size(8.dp))
@@ -83,7 +90,12 @@ fun NewRulesScreen(
 
                 Text(
                     text = stringResource(id = R.string.new_rules_category),
-                    fontStyle = FontStyle(R.style.B2),
+                    fontFamily = FontFamily(
+                        Font(
+                            resId = R.font.spoqa_han_sans_neo_medium,
+                            style = FontStyle(R.style.B2)
+                        )
+                    ),
                     color = colorResource(id = R.color.hous_blue)
                 )
                 Spacer(modifier = Modifier.size(8.dp))
@@ -107,7 +119,12 @@ fun NewRulesScreen(
                     Spacer(Modifier.size(30.dp))
                     Text(
                         text = stringResource(id = R.string.new_rules_description),
-                        fontStyle = FontStyle(R.style.Description),
+                        fontFamily = FontFamily(
+                            Font(
+                                resId = R.font.spoqa_han_sans_neo_medium,
+                                style = FontStyle(R.style.Description)
+                            )
+                        ),
                         color = colorResource(id = R.color.g_4)
                     )
                 }
@@ -115,7 +132,12 @@ fun NewRulesScreen(
 
                 Text(
                     text = stringResource(id = R.string.new_rules_manager_setting),
-                    fontStyle = FontStyle(R.style.B2),
+                    fontFamily = FontFamily(
+                        Font(
+                            resId = R.font.spoqa_han_sans_neo,
+                            style = FontStyle(R.style.B2)
+                        )
+                    ),
                     color = colorResource(id = R.color.hous_blue)
                 )
                 Spacer(modifier = Modifier.size(12.dp))

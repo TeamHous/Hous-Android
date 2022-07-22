@@ -13,6 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
@@ -39,7 +41,7 @@ fun NewRulesDay(
             .size(40.dp)
             .clip(shape = CircleShape)
             .background(color)
-            .clickable {
+            .clickable(dayData.dayState != State.BLOCK) {
                 Log.d("sdlhfjaskdf", "index: $currentIndex dayData $dayData")
                 selectDay(currentIndex, dayData)
             }
@@ -50,7 +52,12 @@ fun NewRulesDay(
                 .align(Alignment.Center),
             text = dayData.day,
             color = textColor,
-            fontStyle = FontStyle(R.style.B3)
+            fontFamily = FontFamily(
+                Font(
+                    resId = R.font.spoqa_han_sans_neo_medium,
+                    style = FontStyle(R.style.B3)
+                )
+            ),
         )
     }
 }

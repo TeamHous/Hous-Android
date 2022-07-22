@@ -13,6 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -41,8 +43,13 @@ fun CategoryItem(
         ) {
             Text(
                 text = categoryName,
-                fontStyle = FontStyle(R.style.B2),
-                color = colorResource(id = R.color.g_6)
+                fontFamily = FontFamily(
+                    Font(
+                        resId = R.font.spoqa_han_sans_neo_medium,
+                        style = FontStyle(R.style.B2)
+                    )
+                ),
+                color = colorResource(id = R.color.black)
             )
         }
         Box(
