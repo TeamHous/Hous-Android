@@ -54,10 +54,11 @@ class EventViewModel @Inject constructor(
      * Event 조회
      * 리사이클러뷰에 postion 받아오기*/
     fun getEventDetail(position: Int) {
-        _eventIconPosition.value = position
-        _tmpEventId.value = eventList.value!![position].id
 
         viewModelScope.launch {
+            Log.d(TAG, "                       position: $position , evenList.value: ${eventList.value}")
+            _eventIconPosition.value = position
+            _tmpEventId.value = eventList.value!![position].id
             homeRepository.getEventList("", tmpEventId.value!!)
                 .onSuccess {
                     Log.d(TAG, "onSuccess - eventId: $tmpEventId.value!!, 성공메세지: ${it.message}")
@@ -101,56 +102,6 @@ class EventViewModel @Inject constructor(
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ISO_DATE
         _eventDate.value = current.format(formatter)
-    }
-
-    fun fetchToResponseEventData() {
-        _responseEventData.value = Event(
-            id = "62d4335e17e70062873f3d28",
-            eventName = "파티 파티",
-            eventIcon = "PARTY",
-            date = "2022-07-28",
-            participants = listOf<Homie>(
-                Homie(
-                    id = "62cc7409csdsd06c46adf652f",
-                    userName = "이준원",
-                    isChecked = true,
-                    typeColor = "GRAY"
-                ),
-                Homie(
-                    id = "6dasdasdasdsadsad52f",
-                    userName = "이영주",
-                    isChecked = false,
-                    typeColor = "RED"
-                ),
-                Homie(
-                    id = "62cc740asdsadsadf652f",
-                    userName = "강워어뇽",
-                    isChecked = true,
-                    typeColor = "BLUE"
-                ),
-                Homie(
-                    id = "62cc7409csasdsadsa52f",
-                    userName = "꾸우웅",
-                    isChecked = false,
-                    typeColor = "GREEN"
-                ),
-                Homie(
-                    id = "62cc7409csasdsadsa52f",
-                    userName = "꾸우우웅",
-                    isChecked = false,
-                    typeColor = "GRAY"
-                )
-            )
-        )
-        when (requireNotNull(responseEventData.value).eventIcon) {
-            "PARTY" -> setSelectedEvent(EventIcon.FIRST)
-            "CAKE" -> setSelectedEvent(EventIcon.SECOND)
-            "BEER" -> setSelectedEvent(EventIcon.THIRD)
-            "COFFEE" -> setSelectedEvent(EventIcon.FOURTH)
-        }
-        setParticipantList()
-        setEventName()
-        setEventData()
     }
 
     /**
@@ -243,14 +194,46 @@ class EventViewModel @Inject constructor(
         }
     }
 
+    fun addToEventParticipant() {
+        val clickedTmpManagerList: MutableList<String> = mutableListOf()
+        eventParticipantList.value?.forEach {
+            if (it.isChecked) clickedTmpManagerList.add(it.id!!)
+        }
+        viewModelScope.launch {
+            homeRepository.addEvent(
+                "",
+                EventListRequest(
+                    eventName = eventName.value!!,
+                    date = eventDate.value!!,
+                    participants = clickedTmpManagerList,
+                    eventIcon = selectedEvent.value!!.IconName
+                )
+            )
+                .onSuccess {
+                    Log.d("EventViewModel", "이벤트 삭제 성공 : ${it.message}")
+                    getEventList()
+                }
+                .onFailure { Log.d("EventViewModel", "이벤트 삭제 실패 : ${it.message}") }
+        }
+    }
+
+    fun deleteEventItem() {
+        viewModelScope.launch {
+            homeRepository.deleteEvent("", _tmpEventId.value!!)
+                .onSuccess {
+                    Log.d("EventViewModel", "이벤트 삭제 성공 : ${it.message}")
+                    getEventList()
+                }
+                .onFailure { Log.d("EventViewModel", "이벤트 삭제 실패 : ${it.message}") }
+        }
+    }
+
     private suspend fun getEventList() {
         homeRepository.getHomeList("").onSuccess { result ->
             Log.d("asdf", "success ${result.message}")
             val tempEventList = mutableListOf(Event())
             result.data!!.eventList.forEach { tempEventList.add(it) }
             _eventList.value = tempEventList
-            val tempHomieList = mutableListOf(Homie())
-            _homieList.value = _homieList.value?.plus(tempHomieList)
         }.onFailure { result ->
             Log.d("asdf", "fail ${result.message}")
         }

@@ -1,5 +1,6 @@
 package com.hous.hous_aos.ui.home.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -55,6 +56,7 @@ class EventAdapter(
                 }
             }
             binding.clEvent.setOnClickListener {
+                Log.d(TAG, "                    $absoluteAdapterPosition")
                 onClickEventIcon(absoluteAdapterPosition)
             }
         }
@@ -68,5 +70,6 @@ class EventAdapter(
             override fun areContentsTheSame(oldItem: Event, newItem: Event): Boolean =
                 oldItem == newItem
         }
+        private val TAG = "dialod"
     }
 }

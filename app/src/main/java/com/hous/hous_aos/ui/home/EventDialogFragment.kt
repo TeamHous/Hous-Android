@@ -2,6 +2,7 @@ package com.hous.hous_aos.ui.home
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.TextUtils.substring
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -37,8 +38,8 @@ class EventDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchToViewModel()
         initAdapter()
+        fetchToViewModel()
         initDialog()
         observeParticipateList()
         closeDialog()
@@ -53,12 +54,16 @@ class EventDialogFragment : DialogFragment() {
         eventParticipantAdapter = null
     }
 
+    /**
+     * 0번째 아이디는 추가 다이얼로그 띄우게 하기*/
     private fun fetchToViewModel() {
         if (viewModel.eventIconPosition.value == 0) {
             viewModel.fetchToAddEventData()
-        } else {
-            viewModel.fetchToResponseEventData()
         }
+        Log.e(TAG, "           viewModel.eventDate : ${viewModel.eventDate.value} ")
+//        binding.tvNumYear.text = viewModel.eventDate.value!!.substring(0, 4)
+//        binding.tvNumMonth.text = viewModel.eventDate.value!!.substring(5, 7)
+//        binding.tvNumDate.text = viewModel.eventDate.value!!.substring(8, 10)
     }
 
     private fun initAdapter() {
@@ -100,6 +105,7 @@ class EventDialogFragment : DialogFragment() {
                 month - 1,
                 day
             )
+            datePickerDialog.setCancelable(false)
             datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
             datePickerDialog.show()
         }
@@ -126,19 +132,29 @@ class EventDialogFragment : DialogFragment() {
 
     private fun deleteDialog() {
         binding.btnDelete.setOnClickListener {
-            Log.d(TAG, "EventDialogFragment - deleteDialog() called")
-            // 삭제로직 추가 viewModel.deleteEventData??
-            viewModel.fetchToResponseEventData()
+            if (binding.btnDelete.text.equals("삭제")) {
+                Log.d(TAG, "EventDialogFragment - deleteDialog() called")
+                viewModel.deleteEventItem()
+            }
             dialog?.dismiss()
         }
     }
 
     private fun saveDialog() {
         binding.clSave.setOnClickListener {
-            Log.d(TAG, "EventDialogFragment - saveDialog() called")
-            if (binding.edtEventName.text.isNotEmpty()) {
-                viewModel.putToEventParticipant()
-                dialog?.dismiss()
+            when (binding.tvSave.text) {
+                "저장" -> {
+                    if (binding.edtEventName.text.isNotEmpty()) {
+                        viewModel.putToEventParticipant()
+                        dialog?.dismiss()
+                    }
+                }
+                "추가" -> {
+                    if (binding.edtEventName.text.isNotEmpty()) {
+                        viewModel.addToEventParticipant()
+                        dialog?.dismiss()
+                    }
+                }
             }
         }
     }

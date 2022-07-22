@@ -15,7 +15,6 @@ import com.hous.hous_aos.ui.home.adapter.EventAdapter
 import com.hous.hous_aos.ui.home.adapter.HomieAdapter
 import com.hous.hous_aos.ui.home.adapter.RulesAdapter
 import com.hous.hous_aos.ui.home.adapter.ToDoAdapter
-import com.hous.hous_aos.ui.main.MainActivity
 import com.hous.hous_aos.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -69,7 +68,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun onClickEventIcon(position: Int) {
-
+        if (position == 0) {
+            viewModel.setSelectedEvent(EventIcon.FIRST)
+        }
         val dialog = EventDialogFragment()
         dialog.show(childFragmentManager, HOME_FRAGMENT)
         viewModel.getEventDetail(position)
@@ -114,6 +115,7 @@ class HomeFragment : Fragment() {
 
     private fun onClickHomie(position: Int) {
         val currentId = viewModel.homieList.value!![position].id
+        Log.d("bbbb", "$currentId")
         val intent = Intent(requireActivity(), RoommateCardActivity::class.java)
         intent.putExtra("position", currentId)
         startActivity(intent)
