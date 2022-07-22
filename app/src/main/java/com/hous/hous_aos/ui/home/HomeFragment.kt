@@ -69,6 +69,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun onClickEventIcon(position: Int) {
+        if (position == 0) {
+            viewModel.setSelectedEvent(EventIcon.FIRST)
+        }
         val dialog = EventDialogFragment()
         dialog.show(childFragmentManager, HOME_FRAGMENT)
         viewModel.getEventDetail(position)
@@ -119,7 +122,7 @@ class HomeFragment : Fragment() {
 
     private fun onClickHomie(position: Int) {
         val currentId = viewModel.homieList.value!![position].id
-        Log.d("bbbb", "${currentId}")
+        Log.d("bbbb", "$currentId")
         val intent = Intent(requireActivity(), RoommateCardActivity::class.java)
         intent.putExtra("position", currentId)
         startActivity(intent)
