@@ -71,6 +71,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="18dp"
                 android:textAppearance="@style/B3"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textColor="@color/hous_blue"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tv_today_to_do"

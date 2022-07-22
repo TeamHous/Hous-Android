@@ -72,6 +72,9 @@
     <string name="home_event_year">년</string>
     <string name="home_event_month">월</string>
     <string name="home_event_date">일</string>
+    <string name="home_event_num_year">2022</string>
+    <string name="home_event_num_month">07</string>
+    <string name="home_event_num_date">23</string>
     <string name="rules_empty_category">카테고리가 비어있어요!\n하단 버튼을 눌러 규칙을 추가해보세요!</string>
     <string-array name="pentagon_text">
         <item>빛</item>

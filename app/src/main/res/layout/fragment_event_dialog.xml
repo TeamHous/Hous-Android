@@ -238,13 +238,12 @@
                     android:maxLines="1"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="7dp"
-                    android:text="2022"
+                    android:text="@{viewModel.eventDate.length() == 0 ? @string/home_event_num_year : viewModel.eventDate.substring(0,4)}"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@{viewModel.eventDate.substring(0,4)}" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_year"
@@ -272,14 +271,13 @@
                     android:maxLines="1"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="7dp"
-                    android:text="05"
+                    android:text="@{viewModel.eventDate.length() == 0 ? @string/home_event_num_month : viewModel.eventDate.substring(5,7)}"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toEndOf="@id/tv_year"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@{viewModel.eventDate.substring(5,7)}" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_month"
@@ -306,14 +304,13 @@
                     android:maxLines="1"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="7dp"
-                    android:text="18"
+                    android:text="@{viewModel.eventDate.length() == 0 ? @string/home_event_num_date : viewModel.eventDate.substring(8,10)}"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="normal"
                     app:layout_constraintStart_toEndOf="@id/tv_month"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@{viewModel.eventDate.substring(8,10)}" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_date"

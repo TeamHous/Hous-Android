@@ -54,10 +54,11 @@ class EventViewModel @Inject constructor(
      * Event 조회
      * 리사이클러뷰에 postion 받아오기*/
     fun getEventDetail(position: Int) {
-        _eventIconPosition.value = position
-        _tmpEventId.value = eventList.value!![position].id
 
         viewModelScope.launch {
+            Log.d(TAG, "                       position: $position , evenList.value: ${eventList.value}")
+            _eventIconPosition.value = position
+            _tmpEventId.value = eventList.value!![position].id
             homeRepository.getEventList("", tmpEventId.value!!)
                 .onSuccess {
                     Log.d(TAG, "onSuccess - eventId: $tmpEventId.value!!, 성공메세지: ${it.message}")

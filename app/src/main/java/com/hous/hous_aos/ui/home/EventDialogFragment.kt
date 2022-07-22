@@ -2,6 +2,7 @@ package com.hous.hous_aos.ui.home
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.TextUtils.substring
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -59,6 +60,9 @@ class EventDialogFragment : DialogFragment() {
         if (viewModel.eventIconPosition.value == 0) {
             viewModel.fetchToAddEventData()
         }
+        binding.tvNumYear.text = viewModel.eventDate.value!!.substring(0, 4)
+        binding.tvNumMonth.text = viewModel.eventDate.value!!.substring(5, 7)
+        binding.tvNumDate.text = viewModel.eventDate.value!!.substring(8, 10)
     }
 
     private fun initAdapter() {
@@ -100,6 +104,7 @@ class EventDialogFragment : DialogFragment() {
                 month - 1,
                 day
             )
+            datePickerDialog.setCancelable(false)
             datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
             datePickerDialog.show()
         }
