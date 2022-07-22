@@ -162,7 +162,7 @@ class TendencyResultActivity : AppCompatActivity() {
                     binding.clBad.backgroundTintList = this.getColorStateList(R.color.hous_blue_bg)
                     binding.tvBad.setTextColor(ContextCompat.getColor(this, R.color.hous_blue))
                 }
-                "하이 레벨 오각이" -> {
+                "하이레벨 오각이" -> {
                     binding.clBad.backgroundTintList = this.getColorStateList(R.color.hous_purple_bg)
                     binding.tvBad.setTextColor(ContextCompat.getColor(this, R.color.hous_purple))
                 }
@@ -184,7 +184,7 @@ class TendencyResultActivity : AppCompatActivity() {
                     binding.clGood.backgroundTintList = this.getColorStateList(R.color.hous_blue_bg)
                     binding.tvGood.setTextColor(ContextCompat.getColor(this, R.color.hous_blue))
                 }
-                "하이 레벨 오각이" -> {
+                "하이레벨 오각이" -> {
                     binding.clGood.backgroundTintList = this.getColorStateList(R.color.hous_purple_bg)
                     binding.tvGood.setTextColor(ContextCompat.getColor(this, R.color.hous_purple))
                 }
