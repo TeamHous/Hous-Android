@@ -150,6 +150,7 @@ fun NewRulesScreen(
             addNewRule = viewModel::addNewRule,
             finish = finish
         )
+        Spacer(modifier = Modifier.size(24.dp))
     }
 }
 
