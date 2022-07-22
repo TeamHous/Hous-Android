@@ -2,6 +2,7 @@ package com.hous.hous_aos.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -22,21 +23,6 @@ class RoommateCardActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_roommate_card)
         setContentView(binding.root)
         init()
-        observePentagon()
-    }
-
-    private fun observePentagon() {
-        viewModel.homieData.observe(this) {
-            binding.cvProfilePentagon.setContent {
-                with(viewModel.homieData.value!!) {
-                    PentagonBox(
-                        typeName = typeName,
-                        typeColor = typeColor,
-                        typeScore = typeScore
-                    )
-                }
-            }
-        }
     }
 
     private fun init() {
@@ -59,6 +45,15 @@ class RoommateCardActivity : AppCompatActivity() {
         }
 
         viewModel.homieData.observe(this) {
+            binding.cvProfilePentagon.setContent {
+                with(viewModel.homieData.value!!) {
+                    PentagonBox(
+                        typeName = typeName,
+                        typeColor = typeColor,
+                        typeScore = typeScore
+                    )
+                }
+            }
             when (it.hashTag.size) {
                 0 -> {
                     binding.tvHashtag1.visibility = View.INVISIBLE
