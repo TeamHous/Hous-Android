@@ -8,6 +8,7 @@ import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.repository.NewRulesRepository
 import com.hous.hous_aos.ui.newrules.component.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +16,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class NewRulesViewModel @Inject constructor(
@@ -27,7 +27,8 @@ class NewRulesViewModel @Inject constructor(
         it.ruleName.isNotEmpty() &&
             it.categoryName.isNotEmpty() &&
             (uiState.value.checkBoxState == State.SELECT || isDayCheck())
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(3000L), false)
+    }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(3000L), false)
 
     init {
         viewModelScope.launch {
@@ -76,10 +77,7 @@ class NewRulesViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(ruleName = rule)
     }
 
-    fun setCategoryName(
-        categoryId: String,
-        category: String
-    ) {
+    fun setCategoryName(categoryId: String, category: String) {
         _uiState.value = _uiState.value.copy(
             categoryId = categoryId,
             categoryName = category
@@ -145,7 +143,7 @@ class NewRulesViewModel @Inject constructor(
             _uiState.value = _uiState.value.copy(ManagerList = tempManager)
         } else {
             _uiState.value = _uiState.value.copy(ManagerList = listOf(Manager()))
-            _uiState.value = _uiState.value.copy(checkBoxState = State.UNSELECT)
+            setCheckBoxState("deleteManager", State.UNSELECT)
         }
     }
 
@@ -216,18 +214,17 @@ class NewRulesViewModel @Inject constructor(
                 when (dayData.dayState) {
                     State.UNSELECT -> {
                         tempDay.add(DayData(d.day, State.SELECT))
-                        _uiState.value = _uiState.value.copy(checkBoxState = State.BLOCK)
+                        setCheckBoxState("changeDayState Unselect", State.BLOCK)
                     }
                     State.SELECT -> {
                         tempDay.add(DayData(d.day, State.UNSELECT))
                         if (uiState.value.ManagerList.size == 1) {
-                            var isCheck = false
+                            var isCheck = true
                             uiState.value.ManagerList[0].dayDataList.forEach { dayData ->
-                                if (dayData.dayState == State.SELECT) isCheck = true
+                                if (dayData.dayState == State.SELECT) isCheck = false
                             }
                             if (isCheck && uiState.value.ManagerList[0].managerHomie.userName == "담당자 없음")
-                                _uiState.value =
-                                    _uiState.value.copy(checkBoxState = State.UNSELECT)
+                                setCheckBoxState("changeDayState select", State.UNSELECT)
                         }
                     }
                 }
