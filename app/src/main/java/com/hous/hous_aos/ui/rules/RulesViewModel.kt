@@ -13,7 +13,6 @@ import com.hous.hous_aos.data.model.response.TempManagerRequest
 import com.hous.hous_aos.data.repository.RulesTodayRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.util.stream.Collectors.toList
 import javax.inject.Inject
 
 @HiltViewModel
@@ -54,6 +53,12 @@ class RulesViewModel @Inject constructor(
 
     private var _ruleTableSize = MutableLiveData<Int>(0)
     val ruleTableSize get() = _ruleTableSize
+
+    private var _categoryName = MutableLiveData("")
+    val categoryName get() = _categoryName
+
+    private var _categoryId = MutableLiveData("")
+    val categoryId get() = _categoryId
 
     init {
         viewModelScope.launch {
@@ -198,6 +203,8 @@ class RulesViewModel @Inject constructor(
      * 카테고리 아이콘 클릭시 Rule Table 받아오기*/
     fun fetchToRulesTableList(position: Int) {
         val categoryId = categoryOfRuleList.value!![position].id
+        _categoryName.value = categoryOfRuleList.value!![position].categoryName
+        _categoryId.value = categoryOfRuleList.value!![position].id
         Log.d("RulesViewModel", "categoryId: $categoryId")
         viewModelScope.launch {
             rulesTodayRepository.getRuleTableInfoList("", categoryId)
