@@ -31,8 +31,6 @@ l
 <app/src/main/java/com/hous/hous_aos/ui/rules/ToDoViewType.kt,a/4/a480e6dc91914dd113ff17ee6fbf0743eee3dd7a
 A
 gradle.properties,2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4
-q
-Aapp/src/main/java/com/hous/hous_aos/ui/profile/ProfileFragment.kt,5/5/55649260a196f1ceaab3fe4bfdbe68184c1efff0
 r
 Bapp/src/main/java/com/hous/hous_aos/ui/profile/ProfileViewModel.kt,d/8/d83ef2367caca12c18c8ccde7cf45e1eaebd4c55
 s
@@ -57,12 +55,8 @@ y
 Iapp/src/main/java/com/hous/hous_aos/data/entity/rules/RequestEventData.kt,7/1/71901ec4384bbabdac42389e09b776eba5d5f38c
 |
 Lapp/src/main/java/com/hous/hous_aos/ui/newrules/component/ManagerDropDown.kt,6/c/6c30efff69b84fdb046a46f2951cb8a9fd32211d
-s
-Capp/src/main/java/com/hous/hous_aos/ui/home/adapter/HomieAdapter.kt,d/a/daa7a485e989920901983255e1e4378afcc625d3
 <
 build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
-s
-Capp/src/main/java/com/hous/hous_aos/ui/home/RoommateCardActivity.kt,0/b/0b960a547e6177adbaecd31a17c32189dd9d4785
 q
 Aapp/src/main/java/com/hous/hous_aos/ui/newrules/NewRulesScreen.kt,3/c/3c0606852dfabb407d6f65ecfd7d0a3ff676a8f9
 x

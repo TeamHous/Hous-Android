@@ -15,7 +15,6 @@ import com.hous.hous_aos.ui.home.adapter.EventAdapter
 import com.hous.hous_aos.ui.home.adapter.HomieAdapter
 import com.hous.hous_aos.ui.home.adapter.RulesAdapter
 import com.hous.hous_aos.ui.home.adapter.ToDoAdapter
-import com.hous.hous_aos.ui.main.MainActivity
 import com.hous.hous_aos.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -103,7 +102,6 @@ class HomeFragment : Fragment() {
         viewModel.homieList.observe(viewLifecycleOwner) {
             homieAdapter = HomieAdapter(
                 showToast = ::showToast,
-                onClickMe = ::onClickMe,
                 onClickHomie = ::onClickHomie
             )
             binding.rvProfile.adapter = homieAdapter
@@ -113,11 +111,6 @@ class HomeFragment : Fragment() {
 
     private fun showToast() {
         requireActivity().showToast(getString(R.string.copy_code))
-    }
-
-    private fun onClickMe() {
-        val profile = 2
-        (activity as MainActivity).replace(profile)
     }
 
     private fun onClickHomie(position: Int) {

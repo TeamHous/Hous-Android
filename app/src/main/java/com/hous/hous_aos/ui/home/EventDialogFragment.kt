@@ -60,9 +60,10 @@ class EventDialogFragment : DialogFragment() {
         if (viewModel.eventIconPosition.value == 0) {
             viewModel.fetchToAddEventData()
         }
-        binding.tvNumYear.text = viewModel.eventDate.value!!.substring(0, 4)
-        binding.tvNumMonth.text = viewModel.eventDate.value!!.substring(5, 7)
-        binding.tvNumDate.text = viewModel.eventDate.value!!.substring(8, 10)
+        Log.e(TAG, "           viewModel.eventDate : ${viewModel.eventDate.value} ")
+//        binding.tvNumYear.text = viewModel.eventDate.value!!.substring(0, 4)
+//        binding.tvNumMonth.text = viewModel.eventDate.value!!.substring(5, 7)
+//        binding.tvNumDate.text = viewModel.eventDate.value!!.substring(8, 10)
     }
 
     private fun initAdapter() {
