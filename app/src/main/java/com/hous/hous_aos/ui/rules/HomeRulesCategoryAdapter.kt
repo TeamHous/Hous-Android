@@ -12,7 +12,7 @@ import com.hous.hous_aos.databinding.ItemRulesRuleBinding
 
 class HomeRulesCategoryAdapter(
     private val onLongClick: () -> Unit,
-    private val onCategoryClick: (Int) -> Unit,
+    private val onCategoryClick: () -> Unit,
     private val onPlusClick: () -> Unit,
     private val onChangeIsSelected: (Int) -> Unit,
 ) :
@@ -72,7 +72,7 @@ class HomeRulesCategoryAdapter(
     class CategoryOfRuleViewHolder(
         private val iconTypeHashMap: HashMap<String, CategoryIconType>,
         private val onLongClick: () -> Unit,
-        private val onCategoryClick: (Int) -> Unit,
+        private val onCategoryClick: () -> Unit,
         private val onChangeIsSelected: (Int) -> Unit,
         private val binding: ItemRulesRuleBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -87,7 +87,7 @@ class HomeRulesCategoryAdapter(
 //                return@setOnLongClickListener true
 //            }
             binding.clRuleItem.setOnClickListener {
-                onCategoryClick(absoluteAdapterPosition)
+                onCategoryClick()
                 onChangeIsSelected(absoluteAdapterPosition)
             }
         }

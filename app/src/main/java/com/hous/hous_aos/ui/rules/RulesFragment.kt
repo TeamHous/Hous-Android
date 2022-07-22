@@ -1,6 +1,7 @@
 package com.hous.hous_aos.ui.rules
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,6 @@ import androidx.fragment.app.replace
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentRulesBinding
 import com.hous.hous_aos.ui.rules.my_to_do.MyToDoFragment
-import com.hous.hous_aos.ui.rules.new_category.NewCategoryFragment
 import com.hous.hous_aos.ui.rules.rules_table.RulesTableFragment
 import com.hous.hous_aos.ui.rules.today_to_do.TodayToDoFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,7 +47,7 @@ class RulesFragment : Fragment() {
     private fun initAdapter() {
         homeRulesCategoryAdapter = HomeRulesCategoryAdapter(
             ::onLongClickCategoryIcon,
-            onCategoryClick = { onClickCategoryIcon() },
+            ::onCategoryClick,
             onPlusClick = { onClickPlusIcon() },
             onChangeIsSelected = { setCategoryIsSelected(it) },
         )
@@ -97,11 +97,14 @@ class RulesFragment : Fragment() {
     }
 
     /** RulesTableFragment로 이동 */
-    private fun onClickCategoryIcon() {
-        viewModel.setSmileSelected(false)
-        childFragmentManager.commit {
-            setReorderingAllowed(true)
-            replace<RulesTableFragment>(R.id.frg_bottom)
+    private fun onCategoryClick() {
+        if (viewModel.isSelectedCategorySmile.value == true) {
+            Log.e("에러에러", "CategoryClick RulesTableFragment 교체")
+            viewModel.setSmileSelected(false)
+            childFragmentManager.commit {
+                setReorderingAllowed(true)
+                replace<RulesTableFragment>(R.id.frg_bottom)
+            }
         }
     }
 
