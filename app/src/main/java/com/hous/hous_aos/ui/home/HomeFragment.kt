@@ -114,9 +114,14 @@ class HomeFragment : Fragment() {
 
     private fun onClickHomie(position: Int) {
         val currentId = viewModel.homieList.value!![position].id
-        val intent = Intent(requireActivity(), RoommateCardActivity::class.java)
-        intent.putExtra("position", currentId)
-        startActivity(intent)
+        when (viewModel.homieList.value!![position].typeColor) {
+            "GRAY" -> return
+            else -> {
+                val intent = Intent(requireActivity(), RoommateCardActivity::class.java)
+                intent.putExtra("position", currentId)
+                startActivity(intent)
+            }
+        }
     }
 
     companion object {
