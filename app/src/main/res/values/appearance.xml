@@ -57,6 +57,22 @@
         <item name="android:lineSpacingExtra">7sp</item>
     </style>
 
+    <style name="ANSWER_B1">
+        <item name="android:fontFamily">@font/spoqa_han_sans_neo_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+    </style>
+
+    <style name="RESULT_B2">
+        <item name="android:fontFamily">@font/spoqa_han_sans_neo_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:lineSpacingExtra">7sp</item>
+    </style>
+
     <style name="B3">
         <item name="android:fontFamily">@font/spoqa_han_sans_neo_medium</item>
         <item name="android:textStyle">normal</item>
