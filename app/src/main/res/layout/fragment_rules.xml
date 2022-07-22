@@ -12,7 +12,40 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_title_eng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/home_title"
+            android:textColor="@color/hous_black"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_main_title_kor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/spoqa_han_sans_neo_bold"
+            android:text="@string/rules_title"
+            android:textColor="@color/hous_black"
+            android:paddingStart="4dp"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintTop_toTopOf="@id/tv_title_eng"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title_eng"
+            app:layout_constraintStart_toEndOf="@id/tv_title_eng" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_eng"
         tools:context=".ui.rules.RulesFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,5 +92,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_category" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
