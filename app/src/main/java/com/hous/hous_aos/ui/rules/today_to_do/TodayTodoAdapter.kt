@@ -25,7 +25,7 @@ class TodayTodoAdapter(
     override fun getItemViewType(position: Int): Int {
         val data = currentList[position]
         val managerCnt = data.todayMembersWithTypeColor.size
-        //TODO 추후에, NONE이랑 ONE 뷰타입 합치기
+        // TODO 추후에, NONE이랑 ONE 뷰타입 합치기
         return if (data.todayMembersWithTypeColor.isEmpty()) {
             ItemToDoViewType.NONE_MANAGER_VIEW_TYPE.index
         } else if (managerCnt == MANAGER_NUMBER_ONE) {
@@ -103,6 +103,7 @@ class TodayTodoAdapter(
             binding.tvManager.text =
                 changeListToString(requireNotNull(data.todayMembersWithTypeColor))
             binding.iconColor = getIconColor(data.todayMembersWithTypeColor[0].typeColor)
+            if (!data.isAllChecked) binding.ivManager.isClickable = false
             binding.ivManager.setOnClickListener {
                 fetchToTmpManagerList(absoluteAdapterPosition)
                 onClickIcon()
@@ -155,7 +156,7 @@ class TodayTodoAdapter(
                     binding.iconColorThree =
                         getIconColor(data.todayMembersWithTypeColor[2].typeColor)
                 }
-                4 -> {
+                else -> {
                     binding.count = 4
                     binding.iconColorOne = getIconColor(data.todayMembersWithTypeColor[0].typeColor)
                     binding.iconColorTwo = getIconColor(data.todayMembersWithTypeColor[1].typeColor)
@@ -164,7 +165,6 @@ class TodayTodoAdapter(
                     binding.iconColorFour =
                         getIconColor(data.todayMembersWithTypeColor[3].typeColor)
                 }
-                else -> throw IllegalArgumentException("잘못된 data.iconList.size 값 : ${memberCnt}이 들어왔습니다.")
             }
         }
 
@@ -176,8 +176,12 @@ class TodayTodoAdapter(
                 text
             } else if (sizeOfTextList >= 4) {
                 val restOfthePeopleCount = sizeOfTextList - 3
+                val mTextList = mutableListOf<String>()
+                for (i in 0..2) {
+                    mTextList.add(textList[i])
+                }
                 val text =
-                    textList.joinToString(separator = ", ", postfix = " 외 $restOfthePeopleCount 명")
+                    mTextList.joinToString(separator = ", ", postfix = " 외 $restOfthePeopleCount 명")
                 text
             } else {
                 throw IllegalArgumentException("잘못된 값이 들어왔습니다. textList: $textList , sizeOfTextList: $sizeOfTextList")

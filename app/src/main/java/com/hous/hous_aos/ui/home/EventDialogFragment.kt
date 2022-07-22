@@ -2,10 +2,12 @@ package com.hous.hous_aos.ui.home
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.TextUtils.substring
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
@@ -36,8 +38,8 @@ class EventDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchToViewModel()
         initAdapter()
+        fetchToViewModel()
         initDialog()
         observeParticipateList()
         closeDialog()
@@ -52,12 +54,16 @@ class EventDialogFragment : DialogFragment() {
         eventParticipantAdapter = null
     }
 
+    /**
+     * 0번째 아이디는 추가 다이얼로그 띄우게 하기*/
     private fun fetchToViewModel() {
         if (viewModel.eventIconPosition.value == 0) {
             viewModel.fetchToAddEventData()
-        } else {
-            viewModel.fetchToResponseEventData()
         }
+        Log.e(TAG, "           viewModel.eventDate : ${viewModel.eventDate.value} ")
+//        binding.tvNumYear.text = viewModel.eventDate.value!!.substring(0, 4)
+//        binding.tvNumMonth.text = viewModel.eventDate.value!!.substring(5, 7)
+//        binding.tvNumDate.text = viewModel.eventDate.value!!.substring(8, 10)
     }
 
     private fun initAdapter() {
@@ -65,33 +71,45 @@ class EventDialogFragment : DialogFragment() {
         binding.rvParticipant.adapter = eventParticipantAdapter
     }
 
-
     private fun clickDatePicker() {
         binding.clDates.setOnClickListener {
+            val date: String = viewModel.eventDate.value!!
+            val dateList = date.split("-")
+            val year = dateList[0].toInt()
+            val month = dateList[1].toInt()
+            val day = dateList[2].toInt()
+
             val cal = Calendar.getInstance() // 캘린더뷰 만들기
             val dateSetListener =
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                     cal.set(year, month, dayOfMonth)
                     val year = year.toString()
-                    val month = if (month < 9) "0${month + 1}" else month.toString()
-                    val dayOfMonth = if (dayOfMonth < 10) "0$dayOfMonth" else dayOfMonth.toString()
+                    val month = if (month < 9) {
+                        ("0" + (month + 1).toString())
+                    } else {
+                        (month + 1).toString()
+                    }
+                    val dayOfMonth = if (dayOfMonth < 10) {
+                        "0$dayOfMonth"
+                    } else {
+                        dayOfMonth.toString()
+                    }
                     val date = "$year-$month-$dayOfMonth"
                     viewModel.setEventData(date)
                 }
-
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
                 R.style.MyDatePickerDialogTheme_Spinner,
                 dateSetListener,
-                cal.get(Calendar.YEAR),
-                cal.get(Calendar.MONTH),
-                cal.get(Calendar.DAY_OF_MONTH)
+                year,
+                month - 1,
+                day
             )
+            datePickerDialog.setCancelable(false)
             datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
             datePickerDialog.show()
         }
     }
-
 
     private fun initDialog() {
         isCancelable = false
@@ -114,20 +132,29 @@ class EventDialogFragment : DialogFragment() {
 
     private fun deleteDialog() {
         binding.btnDelete.setOnClickListener {
-            Log.d(TAG, "EventDialogFragment - deleteDialog() called")
-            // 삭제로직 추가 viewModel.deleteEventData??
-            viewModel.fetchToResponseEventData()
+            if (binding.btnDelete.text.equals("삭제")) {
+                Log.d(TAG, "EventDialogFragment - deleteDialog() called")
+                viewModel.deleteEventItem()
+            }
             dialog?.dismiss()
         }
     }
 
     private fun saveDialog() {
         binding.clSave.setOnClickListener {
-            Log.d(TAG, "EventDialogFragment - saveDialog() called")
-            // viewModel.putEventData??
-            if (binding.edtEventName.text.isNotEmpty()) {
-                dialog?.dismiss()
-                viewModel.fetchToResponseEventData()
+            when (binding.tvSave.text) {
+                "저장" -> {
+                    if (binding.edtEventName.text.isNotEmpty()) {
+                        viewModel.putToEventParticipant()
+                        dialog?.dismiss()
+                    }
+                }
+                "추가" -> {
+                    if (binding.edtEventName.text.isNotEmpty()) {
+                        viewModel.addToEventParticipant()
+                        dialog?.dismiss()
+                    }
+                }
             }
         }
     }

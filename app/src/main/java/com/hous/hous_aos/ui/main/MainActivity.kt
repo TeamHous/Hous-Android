@@ -102,14 +102,13 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        }
-    }
-
-    fun replace(Position: Int) {
-        when (Position) {
-            HOME -> binding.botNavMain.selectedItemId = R.id.ic_bot_nav_home
-            RULES -> binding.botNavMain.selectedItemId = R.id.ic_bot_nav_rules
-            PROFILE -> binding.botNavMain.selectedItemId = R.id.ic_bot_nav_profile
+            setOnItemReselectedListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.ic_bot_nav_home -> Unit
+                    R.id.ic_bot_nav_rules -> Unit
+                    R.id.ic_bot_nav_profile -> Unit
+                }
+            }
         }
     }
 

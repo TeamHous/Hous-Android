@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.hous.hous_aos.data.entity.Event
 import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.entity.Rule
+import com.hous.hous_aos.data.model.request.EventListRequest
 import com.hous.hous_aos.data.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,6 +19,9 @@ import javax.inject.Inject
 class EventViewModel @Inject constructor(
     private val homeRepository: HomeRepository
 ) : ViewModel() {
+    private var _tmpEventId = MutableLiveData<String>("")
+    val tmpEventId get() = _tmpEventId
+
     private var _eventDate = MutableLiveData<String>("")
     val eventDate get() = _eventDate
 
@@ -49,14 +53,16 @@ class EventViewModel @Inject constructor(
     /** get
      * Event 조회
      * 리사이클러뷰에 postion 받아오기*/
-    fun setEventIconPosition(position: Int) {
-        _eventIconPosition.value = position
-        val eventid = eventList.value!![position].id
+    fun getEventDetail(position: Int) {
+
         viewModelScope.launch {
-            homeRepository.getEventList("", eventid)
+            Log.d(TAG, "                       position: $position , evenList.value: ${eventList.value}")
+            _eventIconPosition.value = position
+            _tmpEventId.value = eventList.value!![position].id
+            homeRepository.getEventList("", tmpEventId.value!!)
                 .onSuccess {
-                    Log.d(TAG, "onSuccess - eventId: $eventid, 성공메세지: ${it.message}")
-                    Log.d(TAG, "onSuccess - eventId: $eventid, 성공메세지: ${it.message}")
+                    Log.d(TAG, "onSuccess - eventId: $tmpEventId.value!!, 성공메세지: ${it.message}")
+                    Log.d(TAG, "onSuccess - eventId: $tmpEventId.value!!, 성공메세지: ${it.message}")
                     _responseEventData.value = it.data!!
                     when (requireNotNull(responseEventData.value).eventIcon) {
                         "PARTY" -> setSelectedEvent(EventIcon.FIRST)
@@ -68,7 +74,12 @@ class EventViewModel @Inject constructor(
                     setEventName()
                     setEventData()
                 }
-                .onFailure { Log.d(TAG, "onFail - eventId: $eventid, 오류메세지: ${it.message}") }
+                .onFailure {
+                    Log.d(
+                        TAG,
+                        "onFail - eventId: $tmpEventId.value!!, 오류메세지: ${it.message}"
+                    )
+                }
         }
     }
 
@@ -91,56 +102,6 @@ class EventViewModel @Inject constructor(
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ISO_DATE
         _eventDate.value = current.format(formatter)
-    }
-
-    fun fetchToResponseEventData() {
-        _responseEventData.value = Event(
-            id = "62d4335e17e70062873f3d28",
-            eventName = "파티 파티",
-            eventIcon = "PARTY",
-            date = "2022-07-28",
-            participants = listOf<Homie>(
-                Homie(
-                    id = "62cc7409csdsd06c46adf652f",
-                    userName = "이준원",
-                    isChecked = true,
-                    typeColor = "GRAY"
-                ),
-                Homie(
-                    id = "6dasdasdasdsadsad52f",
-                    userName = "이영주",
-                    isChecked = false,
-                    typeColor = "RED"
-                ),
-                Homie(
-                    id = "62cc740asdsadsadf652f",
-                    userName = "강워어뇽",
-                    isChecked = true,
-                    typeColor = "BLUE"
-                ),
-                Homie(
-                    id = "62cc7409csasdsadsa52f",
-                    userName = "꾸우웅",
-                    isChecked = false,
-                    typeColor = "GREEN"
-                ),
-                Homie(
-                    id = "62cc7409csasdsadsa52f",
-                    userName = "꾸우우웅",
-                    isChecked = false,
-                    typeColor = "GRAY"
-                )
-            )
-        )
-        when (requireNotNull(responseEventData.value).eventIcon) {
-            "PARTY" -> setSelectedEvent(EventIcon.FIRST)
-            "CAKE" -> setSelectedEvent(EventIcon.SECOND)
-            "BEER" -> setSelectedEvent(EventIcon.THIRD)
-            "COFFEE" -> setSelectedEvent(EventIcon.FOURTH)
-        }
-        setParticipantList()
-        setEventName()
-        setEventData()
     }
 
     /**
@@ -167,12 +128,31 @@ class EventViewModel @Inject constructor(
     /**
      *  save버튼 누르면 파티 참여자 서버로 보내기
      * */
-    fun putToEventParticipant(): List<String> {
+    /** put
+     *  save버튼 누르면 파티 참여자 서버로 보내기
+     * */
+    fun putToEventParticipant() {
+        // 이벤트 put Body 값
         val clickedTmpManagerList: MutableList<String> = mutableListOf()
         eventParticipantList.value?.forEach {
             if (it.isChecked) clickedTmpManagerList.add(it.id!!)
         }
-        return clickedTmpManagerList.toList()
+        viewModelScope.launch {
+            homeRepository.putEventList(
+                "", _tmpEventId.value!!,
+                EventListRequest(
+                    eventName = eventName.value!!,
+                    date = eventDate.value!!,
+                    participants = clickedTmpManagerList,
+                    eventIcon = selectedEvent.value!!.IconName
+                )
+            ).onSuccess {
+                getEventList()
+                Log.d(TAG, "이벤트 수정 Success - ${it.message}")
+            }.onFailure {
+                Log.d(TAG, "이벤트 수정 Fail - ${it.message}")
+            }
+        }
     }
 
     /**************************************************************************************************
@@ -211,6 +191,51 @@ class EventViewModel @Inject constructor(
                 .onFailure { result ->
                     Log.d("asdf", "fail ${result.message}")
                 }
+        }
+    }
+
+    fun addToEventParticipant() {
+        val clickedTmpManagerList: MutableList<String> = mutableListOf()
+        eventParticipantList.value?.forEach {
+            if (it.isChecked) clickedTmpManagerList.add(it.id!!)
+        }
+        viewModelScope.launch {
+            homeRepository.addEvent(
+                "",
+                EventListRequest(
+                    eventName = eventName.value!!,
+                    date = eventDate.value!!,
+                    participants = clickedTmpManagerList,
+                    eventIcon = selectedEvent.value!!.IconName
+                )
+            )
+                .onSuccess {
+                    Log.d("EventViewModel", "이벤트 삭제 성공 : ${it.message}")
+                    getEventList()
+                }
+                .onFailure { Log.d("EventViewModel", "이벤트 삭제 실패 : ${it.message}") }
+        }
+    }
+
+    fun deleteEventItem() {
+        viewModelScope.launch {
+            homeRepository.deleteEvent("", _tmpEventId.value!!)
+                .onSuccess {
+                    Log.d("EventViewModel", "이벤트 삭제 성공 : ${it.message}")
+                    getEventList()
+                }
+                .onFailure { Log.d("EventViewModel", "이벤트 삭제 실패 : ${it.message}") }
+        }
+    }
+
+    private suspend fun getEventList() {
+        homeRepository.getHomeList("").onSuccess { result ->
+            Log.d("asdf", "success ${result.message}")
+            val tempEventList = mutableListOf(Event())
+            result.data!!.eventList.forEach { tempEventList.add(it) }
+            _eventList.value = tempEventList
+        }.onFailure { result ->
+            Log.d("asdf", "fail ${result.message}")
         }
     }
 

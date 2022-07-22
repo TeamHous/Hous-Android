@@ -80,11 +80,12 @@ class HomeRulesCategoryAdapter(
         fun onBind(data: Category) {
             binding.data = data
             binding.iconType = iconTypeHashMap[data.categoryIcon]
-            binding.clRuleItem.setOnLongClickListener {
-                onLongClick()
-                onChangeIsSelected(absoluteAdapterPosition)
-                return@setOnLongClickListener true
-            }
+            /** 앱잼 내에서는 비활성화*/
+//            binding.clRuleItem.setOnLongClickListener {
+//                onLongClick()
+//                onChangeIsSelected(absoluteAdapterPosition)
+//                return@setOnLongClickListener true
+//            }
             binding.clRuleItem.setOnClickListener {
                 onCategoryClick(absoluteAdapterPosition)
                 onChangeIsSelected(absoluteAdapterPosition)
@@ -100,9 +101,10 @@ class HomeRulesCategoryAdapter(
         fun onBind(data: Category) {
             binding.data = data
             binding.iconType = CategoryIconType.NONE
-            binding.clRuleItem.setOnClickListener {
-                onPlusClick()
-            }
+            /** 앱잼 내에서는 비활성화*/
+//            binding.clRuleItem.setOnClickListener {
+//                onPlusClick()
+//            }
         }
     }
 

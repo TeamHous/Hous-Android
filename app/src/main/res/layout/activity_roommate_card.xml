@@ -20,22 +20,22 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
             android:text="@string/roommate_profile"
             android:textAppearance="@style/B1"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="42dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:src="@drawable/ic_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_title"
             app:layout_constraintBottom_toBottomOf="@id/tv_title"
-            android:layout_marginStart="20dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_title" />
 
         <ImageView
             android:id="@+id/iv_profile"
@@ -146,29 +146,48 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_profile" />
 
-        <ImageView
-            android:id="@+id/iv_next_tendency"
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/cv_profile_pentagon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tendency" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_type_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_profile_next"
-            app:layout_constraintBottom_toBottomOf="@id/tv_detail_tendency"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_tendency"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_detail_tendency" />
+            app:layout_constraintTop_toTopOf="@+id/tv_tendency">
 
-        <TextView
-            android:id="@+id/tv_detail_tendency"
-            android:paddingVertical="14dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingEnd="4dp"
-            android:paddingStart="14dp"
-            android:text="@string/profile_detail"
-            android:textAppearance="@style/B3"
-            android:textColor="@color/g_3"
-            app:layout_constraintBottom_toBottomOf="@id/tv_tendency"
-            app:layout_constraintEnd_toStartOf="@id/iv_next_tendency"
-            app:layout_constraintTop_toTopOf="@+id/tv_tendency" />
+            <ImageView
+                android:id="@+id/iv_next_tendency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_profile_next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_detail_tendency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/profile_detail"
+                android:textAppearance="@style/B3"
+                android:textColor="@color/g_3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_next_tendency"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

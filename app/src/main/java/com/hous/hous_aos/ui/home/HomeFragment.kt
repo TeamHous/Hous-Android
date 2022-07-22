@@ -15,7 +15,6 @@ import com.hous.hous_aos.ui.home.adapter.EventAdapter
 import com.hous.hous_aos.ui.home.adapter.HomieAdapter
 import com.hous.hous_aos.ui.home.adapter.RulesAdapter
 import com.hous.hous_aos.ui.home.adapter.ToDoAdapter
-import com.hous.hous_aos.ui.main.MainActivity
 import com.hous.hous_aos.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -69,10 +68,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun onClickEventIcon(position: Int) {
-
+        if (position == 0) {
+            viewModel.setSelectedEvent(EventIcon.FIRST)
+        }
         val dialog = EventDialogFragment()
         dialog.show(childFragmentManager, HOME_FRAGMENT)
-        viewModel.setEventIconPosition(position)
+        viewModel.getEventDetail(position)
     }
 
     private fun initRulesAdapter() {
