@@ -21,6 +21,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringArrayResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -64,7 +66,7 @@ fun PentagonBox(
             Spacer(modifier = Modifier.size(32.dp))
             Text(
                 text = typeName,
-                fontStyle = FontStyle(R.font.spoqa_han_sans_neo),
+                fontFamily = FontFamily(Font(resId = R.font.spoqa_han_sans_neo_bold)),
                 color = colorResource(id = boxColor.colorPrimary),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,

@@ -25,6 +25,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
@@ -87,7 +89,12 @@ fun ManagerDropDownMenu(
                             Spacer(modifier = Modifier.size(6.dp))
                             Text(
                                 text = homie.userName,
-                                fontStyle = FontStyle(R.style.B2),
+                                fontFamily = FontFamily(
+                                    Font(
+                                        resId = R.font.spoqa_han_sans_neo_medium,
+                                        style = FontStyle(R.style.B2)
+                                    )
+                                ),
                                 color = colorResource(id = R.color.black)
                             )
                         }

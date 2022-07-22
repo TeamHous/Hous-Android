@@ -15,6 +15,8 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -40,7 +42,12 @@ fun NewRulesTextField(
             .padding(vertical = 8.dp, horizontal = 15.dp),
         textStyle = TextStyle(
             color = colorResource(id = R.color.black),
-            fontStyle = FontStyle(R.style.B2)
+            fontFamily = FontFamily(
+                Font(
+                    resId = R.font.spoqa_han_sans_neo_medium,
+                    style = FontStyle(R.style.B2)
+                )
+            )
         ),
         maxLines = 1,
         singleLine = true,
