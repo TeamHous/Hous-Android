@@ -20,6 +20,11 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: ProfileViewModel by viewModels()
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getProfileDate()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
