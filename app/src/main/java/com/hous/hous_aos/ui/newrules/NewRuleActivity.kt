@@ -15,6 +15,9 @@ class NewRuleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNewRuleBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val categoryName = intent.getStringExtra("categoryName") ?: ""
+        val categoryId = intent.getStringExtra("categoryId") ?: ""
+        viewModel.setCategoryName(categoryId, categoryName)
         binding.cvNewRuleScreen.setContent {
             NewRulesScreen(
                 viewModel,
@@ -24,7 +27,7 @@ class NewRuleActivity : AppCompatActivity() {
         initStatusBarColor()
     }
 
-    private fun initStatusBarColor(){
+    private fun initStatusBarColor() {
         window.statusBarColor = getColor(R.color.hous_blue_bg)
     }
 }

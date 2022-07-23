@@ -27,7 +27,8 @@ class NewRulesViewModel @Inject constructor(
         it.ruleName.isNotEmpty() &&
             it.categoryName.isNotEmpty() &&
             (uiState.value.checkBoxState == State.SELECT || isDayCheck())
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(3000L), false)
+    }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(3000L), false)
 
     init {
         viewModelScope.launch {
@@ -76,14 +77,12 @@ class NewRulesViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(ruleName = rule)
     }
 
-    fun setCategoryName(
-        categoryId: String,
-        category: String
-    ) {
+    fun setCategoryName(categoryId: String, category: String) {
         _uiState.value = _uiState.value.copy(
             categoryId = categoryId,
             categoryName = category
         )
+        Log.d("viewModel", "$categoryId $category")
     }
 
     fun setCheckBoxState(where: String, state: State) {
@@ -144,7 +143,7 @@ class NewRulesViewModel @Inject constructor(
             _uiState.value = _uiState.value.copy(ManagerList = tempManager)
         } else {
             _uiState.value = _uiState.value.copy(ManagerList = listOf(Manager()))
-            _uiState.value = _uiState.value.copy(checkBoxState = State.UNSELECT)
+            setCheckBoxState("deleteManager", State.UNSELECT)
         }
     }
 
@@ -215,18 +214,17 @@ class NewRulesViewModel @Inject constructor(
                 when (dayData.dayState) {
                     State.UNSELECT -> {
                         tempDay.add(DayData(d.day, State.SELECT))
-                        _uiState.value = _uiState.value.copy(checkBoxState = State.BLOCK)
+                        setCheckBoxState("changeDayState Unselect", State.BLOCK)
                     }
                     State.SELECT -> {
                         tempDay.add(DayData(d.day, State.UNSELECT))
                         if (uiState.value.ManagerList.size == 1) {
-                            var isCheck = false
+                            var isCheck = true
                             uiState.value.ManagerList[0].dayDataList.forEach { dayData ->
-                                if (dayData.dayState == State.SELECT) isCheck = true
+                                if (dayData.dayState == State.SELECT) isCheck = false
                             }
                             if (isCheck && uiState.value.ManagerList[0].managerHomie.userName == "담당자 없음")
-                                _uiState.value =
-                                    _uiState.value.copy(checkBoxState = State.UNSELECT)
+                                setCheckBoxState("changeDayState select", State.UNSELECT)
                         }
                     }
                 }
