@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.data.repository.ProfileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
@@ -18,6 +18,10 @@ class ProfileViewModel @Inject constructor(
     val profileData get() = _profileData
 
     init {
+        getProfileDate()
+    }
+
+    fun getProfileDate() {
         viewModelScope.launch {
             profileRepository.getUserProfile()
                 .onSuccess {
