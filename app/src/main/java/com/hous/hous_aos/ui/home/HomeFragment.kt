@@ -39,6 +39,7 @@ class HomeFragment : Fragment() {
 
         val manager = GridLayoutManager(activity, 3, GridLayoutManager.VERTICAL, false)
         binding.rvProfile.layoutManager = manager
+        viewModel.homeInfo()
         initEventAdapter()
         initRulesAdapter()
         initToDoAdapter()

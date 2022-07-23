@@ -2,7 +2,6 @@ package com.hous.hous_aos.ui.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.annotation.Dimension
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil

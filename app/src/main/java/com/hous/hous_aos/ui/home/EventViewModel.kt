@@ -173,11 +173,11 @@ class EventViewModel @Inject constructor(
     private val _roomCode = MutableLiveData<String>()
     val roomCode get() = _roomCode
 
-    init {
+    fun homeInfo() {
         viewModelScope.launch {
             homeRepository.getHomeList("")
                 .onSuccess { result ->
-                    Log.d("asdf", "success ${result.message}")
+                    Log.d("asdf", "success ${result.data}")
                     val tempEventList = mutableListOf(Event())
                     result.data!!.eventList.forEach { tempEventList.add(it) }
                     _eventList.value = tempEventList
