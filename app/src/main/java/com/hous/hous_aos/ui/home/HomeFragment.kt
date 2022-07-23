@@ -81,8 +81,14 @@ class HomeFragment : Fragment() {
             rulesAdapter = RulesAdapter()
             binding.rvRules.adapter = rulesAdapter
             rulesAdapter!!.rulesList.addAll(it)
-            if (it.isEmpty()) binding.tvRulesEmpty.visibility = View.VISIBLE
-            else binding.tvRulesEmpty.visibility = View.INVISIBLE
+            if (it.isEmpty()) {
+                binding.tvRulesEmpty.visibility = View.VISIBLE
+                binding.rvRules.visibility = View.INVISIBLE
+            }
+            else {
+                binding.tvRulesEmpty.visibility = View.INVISIBLE
+                binding.rvRules.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -93,8 +99,14 @@ class HomeFragment : Fragment() {
             requireNotNull(todoAdapter).submitList(
                 it
             )
-            if (it.isEmpty()) binding.tvToDoEmpty.visibility = View.VISIBLE
-            else binding.tvToDoEmpty.visibility = View.INVISIBLE
+            if (it.isEmpty()) {
+                binding.tvToDoEmpty.visibility = View.VISIBLE
+                binding.rvToDo.visibility = View.INVISIBLE
+            }
+            else {
+                binding.tvToDoEmpty.visibility = View.INVISIBLE
+                binding.rvToDo.visibility = View.VISIBLE
+            }
         }
     }
 
