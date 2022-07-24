@@ -38,6 +38,7 @@ android {
         versionName "1.0"
         buildConfigField "String", "HOUS_URL", properties["HOUS_URL"]
         buildConfigField "String", "DUMMY_ACCESS_TOKEN", properties["DUMMY_ACCESS_TOKEN"]
+        buildConfigField "String", "ROOM_ID", properties["ROOM_ID"]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -57,9 +58,14 @@ android {
 }
 
 dependencies {
+    // lottie
+    implementation 'com.airbnb.android:lottie:5.2.0'
+
+    // intercepter
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+
     // Coil
     implementation "io.coil-kt:coil:2.1.0"
-
     // compose
     implementation 'androidx.activity:activity-compose:1.5.0'
     implementation 'androidx.compose.material:material:1.1.1'
@@ -69,7 +75,6 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.1.1'
     implementation "com.google.android.material:compose-theme-adapter:1.1.14"
     implementation "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
-
     // gson
     implementation "com.google.code.gson:gson:2.9.0"
 
@@ -105,4 +110,6 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // recycler View
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
 }

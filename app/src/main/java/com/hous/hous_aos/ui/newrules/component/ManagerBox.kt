@@ -15,11 +15,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
-import com.hous.hous_aos.data.model.response.NewRulesResponse
+import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.ui.newrules.Manager
 
 @Composable
@@ -27,10 +29,10 @@ fun ManagerBox(
     radius: Dp,
     managerIndex: Int,
     manager: Manager,
-    homies: List<NewRulesResponse.Homie>,
+    homies: List<Homie>,
     homieState: HashMap<String, Boolean>,
     checkBoxState: State,
-    choiceManager: (Int, NewRulesResponse.Homie) -> Unit
+    choiceManager: (Int, Homie) -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -63,8 +65,13 @@ fun ManagerBox(
                 Spacer(modifier = Modifier.size(6.dp))
             }
             Text(
-                text = manager.managerHomie.name,
-                fontStyle = FontStyle(R.style.B2),
+                text = manager.managerHomie.userName,
+                fontFamily = FontFamily(
+                    Font(
+                        resId = R.font.spoqa_han_sans_neo_medium,
+                        style = FontStyle(R.style.B2)
+                    )
+                ),
                 color = colorResource(id = R.color.black)
             )
         }

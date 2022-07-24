@@ -1,25 +1,32 @@
 package com.hous.hous_aos.ui.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentHomeBinding
-import com.hous.hous_aos.ui.home.adapter.ComingUpAdapter
-import com.hous.hous_aos.ui.home.adapter.ProfileAdapter
+import com.hous.hous_aos.ui.home.adapter.EventAdapter
+import com.hous.hous_aos.ui.home.adapter.HomieAdapter
 import com.hous.hous_aos.ui.home.adapter.RulesAdapter
 import com.hous.hous_aos.ui.home.adapter.ToDoAdapter
+import com.hous.hous_aos.util.showToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private var comingUpAdapter: ComingUpAdapter? = null
+    private var eventAdapter: EventAdapter? = null
     private var rulesAdapter: RulesAdapter? = null
-    private var toDoAdapter: ToDoAdapter? = null
-    private var profileAdapter: ProfileAdapter? = null
+    private var todoAdapter: ToDoAdapter? = null
+    private var homieAdapter: HomieAdapter? = null
+    private val viewModel: EventViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,102 +34,111 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        binding.vm = viewModel
+        binding.lifecycleOwner = this
+
         val manager = GridLayoutManager(activity, 3, GridLayoutManager.VERTICAL, false)
         binding.rvProfile.layoutManager = manager
-        initAdapter()
+        viewModel.homeInfo()
+        initEventAdapter()
+        initRulesAdapter()
+        initToDoAdapter()
+        initHomieAdapter()
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.apply {
-            rulesPosition = rules.size
-            toDoPosition = toDo.size
-        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        comingUpAdapter = null
+        eventAdapter = null
         rulesAdapter = null
-        toDoAdapter = null
-        profileAdapter = null
+        todoAdapter = null
+        homieAdapter = null
     }
 
-    private fun initAdapter() {
-        comingUpAdapter = ComingUpAdapter()
-        binding.rvComingUp.adapter = comingUpAdapter
-        requireNotNull(comingUpAdapter).submitList(
-            comingUp
-        )
+    private fun initEventAdapter() {
+        viewModel.eventList.observe(viewLifecycleOwner) {
+            eventAdapter = EventAdapter(
+                onClickEventIcon = ::onClickEventIcon
+            )
+            binding.rvEvent.adapter = eventAdapter
+            requireNotNull(eventAdapter).submitList(
+                it
+            )
+        }
+    }
 
-        rulesAdapter = RulesAdapter()
-        binding.rvRules.adapter = rulesAdapter
-        requireNotNull(rulesAdapter).submitList(
-            rules
-        )
+    private fun onClickEventIcon(position: Int) {
+        if (position == 0) {
+            viewModel.setSelectedEvent(EventIcon.FIRST)
+        }
+        val dialog = EventDialogFragment()
+        dialog.show(childFragmentManager, HOME_FRAGMENT)
+        viewModel.getEventDetail(position)
+    }
 
-        toDoAdapter = ToDoAdapter()
-        binding.rvToDo.adapter = toDoAdapter
-        requireNotNull(toDoAdapter).submitList(
-            toDo
-        )
+    private fun initRulesAdapter() {
+        viewModel.keyRulesList.observe(viewLifecycleOwner) {
+            rulesAdapter = RulesAdapter()
+            binding.rvRules.adapter = rulesAdapter
+            rulesAdapter!!.rulesList.addAll(it)
+            if (it.isEmpty()) {
+                binding.tvRulesEmpty.visibility = View.VISIBLE
+                binding.rvRules.visibility = View.INVISIBLE
+            }
+            else {
+                binding.tvRulesEmpty.visibility = View.INVISIBLE
+                binding.rvRules.visibility = View.VISIBLE
+            }
+        }
+    }
 
-        profileAdapter = ProfileAdapter()
-        binding.rvProfile.adapter = profileAdapter
-        requireNotNull(profileAdapter).submitList(
-            profile
-        )
+    private fun initToDoAdapter() {
+        viewModel.todoList.observe(viewLifecycleOwner) {
+            todoAdapter = ToDoAdapter()
+            binding.rvToDo.adapter = todoAdapter
+            requireNotNull(todoAdapter).submitList(
+                it
+            )
+            if (it.isEmpty()) {
+                binding.tvToDoEmpty.visibility = View.VISIBLE
+                binding.rvToDo.visibility = View.INVISIBLE
+            }
+            else {
+                binding.tvToDoEmpty.visibility = View.INVISIBLE
+                binding.rvToDo.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun initHomieAdapter() {
+        viewModel.homieList.observe(viewLifecycleOwner) {
+            homieAdapter = HomieAdapter(
+                showToast = ::showToast,
+                onClickHomie = ::onClickHomie
+            )
+            binding.rvProfile.adapter = homieAdapter
+            requireNotNull(homieAdapter).submitList(it.toList())
+        }
+    }
+
+    private fun showToast() {
+        requireActivity().showToast(getString(R.string.copy_code))
+    }
+
+    private fun onClickHomie(position: Int) {
+        val currentId = viewModel.homieList.value!![position].id
+        when (viewModel.homieList.value!![position].typeColor) {
+            "GRAY" -> return
+            else -> {
+                val intent = Intent(requireActivity(), RoommateCardActivity::class.java)
+                intent.putExtra("position", currentId)
+                startActivity(intent)
+            }
+        }
     }
 
     companion object {
-        val comingUp = listOf<ComingUpData>(
-            ComingUpData(R.drawable.ic_party, "D-1"),
-            ComingUpData(R.drawable.ic_party, "D-4"),
-            ComingUpData(R.drawable.ic_beer, "D-6"),
-            ComingUpData(R.drawable.ic_coffee, "D-10"),
-            ComingUpData(R.drawable.ic_pancake, "D-15"),
-            ComingUpData(R.drawable.ic_party, "D-18"),
-            ComingUpData(R.drawable.ic_coffee, "D-20"),
-            ComingUpData(R.drawable.ic_beer, "D-25"),
-            ComingUpData(R.drawable.ic_pancake, "D-80"),
-        )
-
-        val rules = listOf<RulesData>(
-//            RulesData("00시~ 불 끄기!밤새모니터에튀긴침이마르기도전에"),
-//            RulesData("23시~ 이어폰 필수!밤새모니터에튀긴침이마르기도전에"),
-//            RulesData("세탁기는 화,수,토밤새모니터에튀긴침이마르기도전에"),
-//            RulesData("일 - 청소하는 날!밤새모니터에튀긴침이마르기도전에"),
-//            RulesData("2,4주 토- 장보기밤새모니터에튀긴침이마르기도전에"),
-//            RulesData("00시~ 불 끄기!밤새모니터에튀긴침이마르기도전에"),
-//            RulesData("23시~ 이어폰 필수!밤새모니터에튀긴침이마르기도전에"),
-//            RulesData("세탁기는 화,수,토밤새모니터에튀긴침이마르기도전에"),
-//            RulesData("일 - 청소하는 날!밤새모니터에튀긴침이마르기도전에"),
-//            RulesData("2,4주 토- 장보기밤새모니터에튀긴침이마르기도전에"),
-
-        )
-
-        val toDo = listOf<ToDoData>(
-            ToDoData("퇴근하고 마트ㄹㄹㄹ밤새모니터에튀긴침이마르기도전에"),
-            ToDoData("저녁 설거지ㅇㅇㅇㅇㅇㅇㅇㅇㅇ밤새모니터에튀긴침이마르기도전에"),
-            ToDoData("아침 설거지ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ밤새모니터에튀긴침이마르기도전에"),
-            ToDoData("물 사기밤새모니터에튀긴침이마르기도전에"),
-            ToDoData("야식 먹지 말자밤새모니터에튀긴침이마르기도전에"),
-        )
-
-        val profile = listOf<ProfileData?>(
-            ProfileData(1, "이영주"),
-            ProfileData(1, "강원용"),
-            ProfileData(1, "이준원"),
-            ProfileData(1, "김아무개"),
-            ProfileData(1, "나까무라"),
-            ProfileData(1, "이영주"),
-            ProfileData(1, "강원용"),
-            ProfileData(1, "이준원"),
-            ProfileData(1, "김아무개"),
-            ProfileData(1, "나까무라"),
-            null
-        )
+        const val HOME_FRAGMENT = "HOME_FRAGMENT"
     }
 }

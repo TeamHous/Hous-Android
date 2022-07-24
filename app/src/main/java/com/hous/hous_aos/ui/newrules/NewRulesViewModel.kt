@@ -3,18 +3,49 @@ package com.hous.hous_aos.ui.newrules
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hous.hous_aos.data.model.response.NewRulesResponse
+import com.hous.hous_aos.data.entity.Category
+import com.hous.hous_aos.data.entity.Homie
+import com.hous.hous_aos.data.repository.NewRulesRepository
 import com.hous.hous_aos.ui.newrules.component.State
-import kotlinx.coroutines.flow.*
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
-class NewRulesViewModel : ViewModel() {
+@HiltViewModel
+class NewRulesViewModel @Inject constructor(
+    private val newRulesRepository: NewRulesRepository,
+) : ViewModel() {
     private val _uiState = MutableStateFlow(NewRulesUiState())
     val uiState = _uiState.asStateFlow()
     val buttonState: StateFlow<Boolean> = uiState.map {
-        it.ruleCategory.isNotEmpty() &&
+        it.ruleName.isNotEmpty() &&
             it.categoryName.isNotEmpty() &&
             (uiState.value.checkBoxState == State.SELECT || isDayCheck())
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(3000L), false)
+    }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(3000L), false)
+
+    init {
+        viewModelScope.launch {
+            newRulesRepository.getNewRuleList("")
+                .onSuccess {
+                    Log.d("NewRulesViewModel", "getNewRuleList success : ${it.message}")
+                    _uiState.value = _uiState.value.copy(
+                        ruleCategory = it.data!!.ruleCategories,
+                        homies = it.data.homies
+                    )
+                    setUserMapping()
+                }
+                .onFailure {
+                    Log.d("NewRulesViewModel", "getNewRuleList fail : ${it.message}")
+                }
+        }
+    }
 
     private fun isDayCheck(): Boolean {
         var isDay = true
@@ -34,18 +65,24 @@ class NewRulesViewModel : ViewModel() {
         return isDay
     }
 
+    private fun setUserMapping() {
+        val tempHomieState = hashMapOf<String, Boolean>()
+        uiState.value.homies.forEach {
+            tempHomieState[it.userName] = true
+        }
+        _uiState.value = _uiState.value.copy(homieState = tempHomieState)
+    }
+
     fun setRuleName(rule: String) {
         _uiState.value = _uiState.value.copy(ruleName = rule)
     }
 
-    fun setCategoryName(
-        categoryId: String,
-        category: String
-    ) {
+    fun setCategoryName(categoryId: String, category: String) {
         _uiState.value = _uiState.value.copy(
             categoryId = categoryId,
             categoryName = category
         )
+        Log.d("viewModel", "$categoryId $category")
     }
 
     fun setCheckBoxState(where: String, state: State) {
@@ -98,7 +135,7 @@ class NewRulesViewModel : ViewModel() {
     }
 
     fun deleteManager(index: Int) {
-        uiState.value.homieState[uiState.value.ManagerList[index].managerHomie.name] = true
+        uiState.value.homieState[uiState.value.ManagerList[index].managerHomie.userName] = true
         if (uiState.value.ManagerList.size > 1) {
             val tempManager = mutableListOf<Manager>()
             _uiState.value.ManagerList.forEach { manager -> tempManager.add(manager) }
@@ -106,13 +143,13 @@ class NewRulesViewModel : ViewModel() {
             _uiState.value = _uiState.value.copy(ManagerList = tempManager)
         } else {
             _uiState.value = _uiState.value.copy(ManagerList = listOf(Manager()))
-            _uiState.value = _uiState.value.copy(checkBoxState = State.UNSELECT)
+            setCheckBoxState("deleteManager", State.UNSELECT)
         }
     }
 
-    fun choiceManager(managerIndex: Int, homie: NewRulesResponse.Homie) {
-        if (uiState.value.ManagerList[managerIndex].managerHomie.name != "담당자 없음")
-            _uiState.value.homieState[uiState.value.ManagerList[managerIndex].managerHomie.name] =
+    fun choiceManager(managerIndex: Int, homie: Homie) {
+        if (uiState.value.ManagerList[managerIndex].managerHomie.userName != "담당자 없음")
+            _uiState.value.homieState[uiState.value.ManagerList[managerIndex].managerHomie.userName] =
                 true
         val tempManager = Manager(
             managerHomie = homie,
@@ -121,7 +158,7 @@ class NewRulesViewModel : ViewModel() {
         val tempManagerList = mutableListOf<Manager>()
         _uiState.value.ManagerList.forEach { manager -> tempManagerList.add(manager) }
         tempManagerList[managerIndex] = tempManager
-        _uiState.value.homieState[homie.name] = false
+        _uiState.value.homieState[homie.userName] = false
         _uiState.value = _uiState.value.copy(ManagerList = tempManagerList)
     }
 
@@ -139,7 +176,7 @@ class NewRulesViewModel : ViewModel() {
     }
 
     fun isShowAddButton(): Boolean =
-        uiState.value.ManagerList[uiState.value.ManagerList.size - 1].managerHomie.name != "담당자 없음"
+        uiState.value.ManagerList[uiState.value.ManagerList.size - 1].managerHomie.userName != "담당자 없음"
 
     fun addManager() {
         val tempManagerList = mutableListOf<Manager>()
@@ -149,12 +186,21 @@ class NewRulesViewModel : ViewModel() {
         _uiState.value = _uiState.value.copy(ManagerList = tempManagerList)
     }
 
-    private fun nextManager(): NewRulesResponse.Homie {
-        var tempHomie = NewRulesResponse.Homie("", "담당자 없음", "NULL")
+    fun addNewRule() {
+        Log.d("NewRulesViewModel", "data : ${uiState.value}")
+        viewModelScope.launch {
+            newRulesRepository.addNewRule(uiState.value)
+                .onSuccess { Log.d("NewRulesViewModel", "addNewRule success : ${it.message}") }
+                .onFailure { Log.d("NewRulesViewModel", "addNewRule fail : ${it.message}") }
+        }
+    }
+
+    private fun nextManager(): Homie {
+        var tempHomie = Homie("", "담당자 없음", typeColor = "NULL")
         for (i in uiState.value.homies) {
-            if (uiState.value.homieState[i.name]!!) {
-                tempHomie = NewRulesResponse.Homie(i._id, i.name, i.typeColor)
-                uiState.value.homieState[tempHomie.name] = false
+            if (uiState.value.homieState[i.userName]!!) {
+                tempHomie = Homie(id = i.id, userName = i.userName, typeColor = i.typeColor)
+                uiState.value.homieState[tempHomie.userName] = false
                 break
             }
         }
@@ -168,17 +214,17 @@ class NewRulesViewModel : ViewModel() {
                 when (dayData.dayState) {
                     State.UNSELECT -> {
                         tempDay.add(DayData(d.day, State.SELECT))
-                        _uiState.value = _uiState.value.copy(checkBoxState = State.BLOCK)
+                        setCheckBoxState("changeDayState Unselect", State.BLOCK)
                     }
                     State.SELECT -> {
                         tempDay.add(DayData(d.day, State.UNSELECT))
                         if (uiState.value.ManagerList.size == 1) {
-                            var isCheck = false
+                            var isCheck = true
                             uiState.value.ManagerList[0].dayDataList.forEach { dayData ->
-                                if (dayData.dayState == State.SELECT) isCheck = true
+                                if (dayData.dayState == State.SELECT) isCheck = false
                             }
-                            if (isCheck && uiState.value.ManagerList[0].managerHomie.name == "담당자 없음")
-                                _uiState.value = _uiState.value.copy(checkBoxState = State.UNSELECT)
+                            if (isCheck && uiState.value.ManagerList[0].managerHomie.userName == "담당자 없음")
+                                setCheckBoxState("changeDayState select", State.UNSELECT)
                         }
                     }
                 }
@@ -194,20 +240,20 @@ data class NewRulesUiState(
     val categoryId: String = "",
     val notificationState: Boolean = false,
     val checkBoxState: State = State.UNSELECT,
-    val ruleCategory: List<NewRulesResponse.Category> =
+    val ruleCategory: List<Category> =
         listOf(
-            NewRulesResponse.Category("1", "청소기"),
-            NewRulesResponse.Category("2", "분리수거"),
-            NewRulesResponse.Category("3", "세탁기"),
-            NewRulesResponse.Category("4", "물 주기"),
+            Category("1", "청소기"),
+            Category("2", "분리수거"),
+            Category("3", "세탁기"),
+            Category("4", "물 주기"),
         ),
-    val homies: List<NewRulesResponse.Homie> =
+    val homies: List<Homie> =
         listOf(
-            NewRulesResponse.Homie("1", "강원용", "RED"),
-            NewRulesResponse.Homie("2", "이영주", "BLUE"),
-            NewRulesResponse.Homie("3", "이준원", "YELLOW"),
-            NewRulesResponse.Homie("4", "최인영", "GREEN"),
-            NewRulesResponse.Homie("5", "최소현", "PURPLE"),
+            Homie("1", "강원용", typeColor = "RED"),
+            Homie("2", "이영주", typeColor = "BLUE"),
+            Homie("3", "이준원", typeColor = "YELLOW"),
+            Homie("4", "최인영", typeColor = "GREEN"),
+            Homie("5", "최소현", typeColor = "PURPLE"),
         ),
     val homieState: HashMap<String, Boolean> = hashMapOf(
         "강원용" to true,
@@ -220,7 +266,7 @@ data class NewRulesUiState(
 )
 
 data class Manager(
-    val managerHomie: NewRulesResponse.Homie = NewRulesResponse.Homie("", "담당자 없음", "NULL"),
+    val managerHomie: Homie = Homie(userName = "담당자 없음", typeColor = "NULL"),
     val dayDataList: List<DayData> = listOf(
         DayData("월", State.UNSELECT),
         DayData("화", State.UNSELECT),

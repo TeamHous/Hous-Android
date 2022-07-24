@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.hous.hous_aos.ui.home.RommateViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.RoommateCardActivity">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="42dp"
+            android:text="@string/roommate_profile"
+            android:textAppearance="@style/B1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_title" />
+
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_profile_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_back" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
+            android:text="@{vm.homieData.userName}"
+            android:textAppearance="@style/B1"
+            android:textColor="@color/g_7"
+            app:layout_constraintStart_toEndOf="@id/iv_profile"
+            app:layout_constraintTop_toTopOf="@id/iv_profile"
+            tools:text="이영주" />
+
+        <TextView
+            android:id="@+id/tv_job"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:text="@{vm.homieData.job}"
+            android:textAppearance="@style/B3"
+            android:textColor="@color/hous_red"
+            app:layout_constraintBottom_toBottomOf="@id/tv_name"
+            app:layout_constraintStart_toEndOf="@id/tv_name"
+            tools:text="대학생" />
+
+        <TextView
+            android:id="@+id/tv_introduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:maxEms="20"
+            android:maxLines="1"
+            android:text="@{vm.homieData.introduction}"
+            android:textAppearance="@style/B3"
+            android:textColor="@color/g_6"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_name"
+            tools:text="낮에 자고 밤에 일하는 부엉.." />
+
+        <TextView
+            android:id="@+id/tv_hashtag1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/shape_red_bg2_fill_8_rect"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="1dp"
+            android:textAppearance="@style/B3"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@id/tv_introduce"
+            app:layout_constraintTop_toBottomOf="@id/tv_introduce"
+            tools:backgroundTint="@color/hous_red_bg"
+            tools:text="부엉이" />
+
+        <TextView
+            android:id="@+id/tv_hashtag2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/shape_red_bg2_fill_8_rect"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="1dp"
+            android:textAppearance="@style/B3"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@id/tv_hashtag1"
+            app:layout_constraintTop_toBottomOf="@id/tv_introduce"
+            tools:backgroundTint="@color/hous_red_bg"
+            tools:text="부엉이" />
+
+        <TextView
+            android:id="@+id/tv_hashtag3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/shape_red_bg2_fill_8_rect"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="1dp"
+            android:textAppearance="@style/B3"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@id/tv_hashtag2"
+            app:layout_constraintTop_toBottomOf="@id/tv_introduce"
+            tools:backgroundTint="@color/hous_red_bg"
+            tools:text="부엉이" />
+
+        <TextView
+            android:id="@+id/tv_tendency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/profile_my_tendency"
+            android:textAppearance="@style/B1"
+            android:textColor="@color/g_7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_profile" />
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/cv_profile_pentagon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tendency" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_type_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_tendency"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_tendency">
+
+            <ImageView
+                android:id="@+id/iv_next_tendency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_profile_next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_detail_tendency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/profile_detail"
+                android:textAppearance="@style/B3"
+                android:textColor="@color/g_3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_next_tendency"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

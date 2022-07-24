@@ -1,3 +1,14 @@
 package com.hous.hous_aos.data.source.remote
 
-interface RemoteProfileDataSource
+import com.hous.hous_aos.data.entity.Homie
+import com.hous.hous_aos.data.entity.ResultData
+import com.hous.hous_aos.data.model.WrapperClass
+import com.hous.hous_aos.data.model.request.PutTestResultRequest
+import com.hous.hous_aos.data.model.response.TypeTestResponse
+
+interface RemoteProfileDataSource {
+    suspend fun getUserProfile(): WrapperClass<Homie>
+    suspend fun putTestResult(typeScore: PutTestResultRequest): WrapperClass<Any>
+    suspend fun getTypeTestList(): WrapperClass<TypeTestResponse>
+    suspend fun getMyResult(): WrapperClass<ResultData>
+}

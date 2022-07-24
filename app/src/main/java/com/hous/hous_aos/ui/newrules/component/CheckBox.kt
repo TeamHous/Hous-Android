@@ -18,6 +18,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
@@ -91,7 +93,12 @@ fun NewRulesBoxRow(
         Text(
             text = stringResource(id = R.string.new_rules_key_rules),
             color = textColor,
-            fontStyle = FontStyle(R.style.B1)
+            fontFamily = FontFamily(
+                Font(
+                    resId = R.font.spoqa_han_sans_neo_medium,
+                    style = FontStyle(R.style.B1)
+                )
+            )
         )
     }
 }

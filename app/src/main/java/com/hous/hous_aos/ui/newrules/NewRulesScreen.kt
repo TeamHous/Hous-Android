@@ -2,12 +2,16 @@ package com.hous.hous_aos.ui.newrules
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -15,16 +19,25 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
-import com.hous.hous_aos.data.model.response.NewRulesResponse
-import com.hous.hous_aos.ui.newrules.component.*
+import com.hous.hous_aos.data.entity.Homie
+import com.hous.hous_aos.ui.newrules.component.CategoryItem
+import com.hous.hous_aos.ui.newrules.component.ManagerItem
+import com.hous.hous_aos.ui.newrules.component.NewRulesAddMangerButton
+import com.hous.hous_aos.ui.newrules.component.NewRulesAddRuleButton
+import com.hous.hous_aos.ui.newrules.component.NewRulesCheckBox
+import com.hous.hous_aos.ui.newrules.component.NewRulesTextField
+import com.hous.hous_aos.ui.newrules.component.NewRulesToolbar
 
 @Composable
 fun NewRulesScreen(
-    viewModel: NewRulesViewModel
+    viewModel: NewRulesViewModel,
+    finish: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val buttonState by viewModel.buttonState.collectAsState()
@@ -51,13 +64,19 @@ fun NewRulesScreen(
                 NewRulesToolbar(
                     notificationState = uiState.notificationState,
                     checkBoxState = uiState.checkBoxState,
-                    toggleState = viewModel::toggleNotificationState
+                    toggleState = viewModel::toggleNotificationState,
+                    finish = finish
                 )
                 Spacer(modifier = Modifier.size(27.dp))
 
                 Text(
                     text = stringResource(id = R.string.new_rules_rule_name),
-                    fontStyle = FontStyle(R.style.B2),
+                    fontFamily = FontFamily(
+                        Font(
+                            resId = R.font.spoqa_han_sans_neo_medium,
+                            style = FontStyle(R.style.B2)
+                        )
+                    ),
                     color = colorResource(id = R.color.hous_blue)
                 )
                 Spacer(modifier = Modifier.size(8.dp))
@@ -71,7 +90,12 @@ fun NewRulesScreen(
 
                 Text(
                     text = stringResource(id = R.string.new_rules_category),
-                    fontStyle = FontStyle(R.style.B2),
+                    fontFamily = FontFamily(
+                        Font(
+                            resId = R.font.spoqa_han_sans_neo_medium,
+                            style = FontStyle(R.style.B2)
+                        )
+                    ),
                     color = colorResource(id = R.color.hous_blue)
                 )
                 Spacer(modifier = Modifier.size(8.dp))
@@ -95,7 +119,12 @@ fun NewRulesScreen(
                     Spacer(Modifier.size(30.dp))
                     Text(
                         text = stringResource(id = R.string.new_rules_description),
-                        fontStyle = FontStyle(R.style.Description),
+                        fontFamily = FontFamily(
+                            Font(
+                                resId = R.font.spoqa_han_sans_neo_medium,
+                                style = FontStyle(R.style.Description)
+                            )
+                        ),
                         color = colorResource(id = R.color.g_4)
                     )
                 }
@@ -103,7 +132,12 @@ fun NewRulesScreen(
 
                 Text(
                     text = stringResource(id = R.string.new_rules_manager_setting),
-                    fontStyle = FontStyle(R.style.B2),
+                    fontFamily = FontFamily(
+                        Font(
+                            resId = R.font.spoqa_han_sans_neo,
+                            style = FontStyle(R.style.B2)
+                        )
+                    ),
                     color = colorResource(id = R.color.hous_blue)
                 )
                 Spacer(modifier = Modifier.size(12.dp))
@@ -133,37 +167,22 @@ fun NewRulesScreen(
                 )
             }
         }
-        NewRulesAddRuleButton(buttonState)
+        NewRulesAddRuleButton(
+            isAddButton = buttonState,
+            addNewRule = viewModel::addNewRule,
+            finish = finish
+        )
+        Spacer(modifier = Modifier.size(24.dp))
     }
-}
-
-fun IsAdd(
-    test: MutableState<List<Pair<MutableState<NewRulesResponse.Homie>, List<Pair<String, MutableState<State>>>>>>
-): Boolean {
-    var isAdd = true
-    for (dayList in test.value) {
-        var temp = false
-        for (dayState in dayList.second) {
-            if (dayState.second.value == State.SELECT) {
-                temp = true
-                break
-            }
-        }
-        if (!temp) {
-            isAdd = false
-            break
-        }
-    }
-    return isAdd
 }
 
 fun isAddDay(
-    homies: List<NewRulesResponse.Homie>,
+    homies: List<Homie>,
     homieState: HashMap<String, Boolean>
 ): Boolean {
     var temp = false
     homies.forEach { h ->
-        if (homieState[h.name]!!) temp = true
+        if (homieState[h.userName]!!) temp = true
     }
     return temp
 }

@@ -17,97 +17,22 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/tb_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/tv_main_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="50dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/home_title"
-                android:textColor="@color/hous_black"
-                android:textSize="28sp"
-                android:textStyle="normal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Hous-" />
-
-            <TextView
-                android:id="@+id/tv_main_title_space"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:fontFamily="@font/spoqa_han_sans_neo_bold"
-                android:text=" "
-                android:textColor="@color/hous_black"
-                android:textSize="24sp"
-                android:textStyle="normal"
-                android:visibility="@{position==1?View.VISIBLE:View.GONE}"
-                app:layout_constraintStart_toEndOf="@id/tv_main_title"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text=" " />
-
-            <TextView
-                android:id="@+id/tv_main_title_kor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:fontFamily="@font/spoqa_han_sans_neo_bold"
-                android:text="@string/rules_title"
-                android:textColor="@color/hous_black"
-                android:textSize="18sp"
-                android:textStyle="normal"
-                android:visibility="@{position==1?View.VISIBLE:View.GONE}"
-                app:layout_constraintStart_toEndOf="@id/tv_main_title_space"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="규칙" />
-
-            <ImageView
-                android:id="@+id/iv_main_edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:src="@drawable/ic_main_edit"
-                android:visibility="@{position==2?View.VISIBLE:View.GONE}"
-                app:layout_constraintEnd_toStartOf="@id/iv_main_setting"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/iv_main_setting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/ic_main_setting"
-                android:visibility="@{position==2?View.VISIBLE:View.GONE}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fcv_main"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/bot_nav_main"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tb_main" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bot_nav_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_yellow_fill_20_rect"
+            android:paddingTop="10dp"
+            android:paddingBottom="2dp"
             app:itemIconTint="@color/sel_bot_navi_home_color"
             app:itemTextColor="@color/sel_bot_navi_home_color"
             app:labelVisibilityMode="labeled"

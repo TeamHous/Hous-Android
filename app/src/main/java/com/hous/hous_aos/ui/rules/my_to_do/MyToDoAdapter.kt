@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.hous_aos.data.entity.rules.MyToDoResponse
-import com.hous.hous_aos.databinding.ItemRulesMyToDoItemBinding
+import com.hous.hous_aos.data.entity.Rule
+import com.hous.hous_aos.databinding.ItemRulesMyToDoBinding
 
 class MyToDoAdapter(private val onClickIcon: (Int) -> Unit) :
-    ListAdapter<MyToDoResponse, MyToDoAdapter.MyToDoViewHolder>(
+    ListAdapter<Rule, MyToDoAdapter.MyToDoViewHolder>(
         MyTodoDiffUtilCallback
     ) {
     private val iconTypeHashMap: HashMap<String, IconType> = hashMapOf(
@@ -24,24 +24,23 @@ class MyToDoAdapter(private val onClickIcon: (Int) -> Unit) :
     )
 
     class MyToDoViewHolder(
-        private val binding: ItemRulesMyToDoItemBinding,
+        private val binding: ItemRulesMyToDoBinding,
         private val iconTypeHashMap: HashMap<String, IconType>,
         private val onClickIcon: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: MyToDoResponse) {
+        fun onBind(data: Rule) {
             binding.data = data
             binding.iconType = iconTypeHashMap[data.categoryIcon]
-            binding.ivCheckBox.setOnClickListener {
-                val isSelected = binding.ivCheckBox.isSelected
-                binding.ivCheckBox.isSelected = !isSelected
-                onClickIcon(adapterPosition)
+            binding.clMyToDo.setOnClickListener {
+                binding.ivCheckBox.isSelected = !binding.ivCheckBox.isSelected
+                onClickIcon(absoluteAdapterPosition)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyToDoViewHolder {
 
-        val binding = ItemRulesMyToDoItemBinding.inflate(
+        val binding = ItemRulesMyToDoBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -57,18 +56,18 @@ class MyToDoAdapter(private val onClickIcon: (Int) -> Unit) :
 
     companion object {
         private val MyTodoDiffUtilCallback =
-            object : DiffUtil.ItemCallback<MyToDoResponse>() {
+            object : DiffUtil.ItemCallback<Rule>() {
                 override fun areItemsTheSame(
-                    oldItem: MyToDoResponse,
-                    newItem: MyToDoResponse
+                    oldItem: Rule,
+                    newItem: Rule
 
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: MyToDoResponse,
-                    newItem: MyToDoResponse
+                    oldItem: Rule,
+                    newItem: Rule
                 ): Boolean {
                     return oldItem == newItem
                 }

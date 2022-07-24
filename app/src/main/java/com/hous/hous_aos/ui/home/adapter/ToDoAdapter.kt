@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.hous.hous_aos.data.entity.Rule
 import com.hous.hous_aos.databinding.ItemHomeToDoBinding
-import com.hous.hous_aos.ui.home.ToDoData
 
-class ToDoAdapter : ListAdapter<ToDoData, ToDoAdapter.ToDoViewHolder>(toDoDiffUtil) {
+class ToDoAdapter : ListAdapter<Rule, ToDoAdapter.ToDoViewHolder>(toDoDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoViewHolder {
         val binding =
@@ -22,17 +22,18 @@ class ToDoAdapter : ListAdapter<ToDoData, ToDoAdapter.ToDoViewHolder>(toDoDiffUt
 
     class ToDoViewHolder(val binding: ItemHomeToDoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: ToDoData) {
-            binding.toDoData = data
+        fun onBind(data: Rule) {
+            binding.cbToDo.isChecked = data.isChecked != false
+            binding.todo = data
         }
     }
 
     companion object {
-        private val toDoDiffUtil = object : DiffUtil.ItemCallback<ToDoData>() {
-            override fun areItemsTheSame(oldItem: ToDoData, newItem: ToDoData): Boolean =
-                oldItem.rules == newItem.rules
+        private val toDoDiffUtil = object : DiffUtil.ItemCallback<Rule>() {
+            override fun areItemsTheSame(oldItem: Rule, newItem: Rule): Boolean =
+                oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: ToDoData, newItem: ToDoData): Boolean =
+            override fun areContentsTheSame(oldItem: Rule, newItem: Rule): Boolean =
                 oldItem == newItem
         }
     }

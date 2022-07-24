@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="homie"
+            type="com.hous.hous_aos.data.entity.Homie" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_homie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/iv_homie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="13dp"
+            android:paddingBottom="35dp"
+            android:src="@drawable/ic_profile_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_homie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="34dp"
+            android:layout_marginTop="73dp"
+            android:layout_marginBottom="11dp"
+            android:maxEms="5"
+            android:maxLines="1"
+            android:text="@{homie.userName}"
+            android:textAppearance="@style/Description"
+            android:textColor="@color/hous_black"
+            app:layout_constraintBottom_toBottomOf="@id/cl_homie"
+            app:layout_constraintEnd_toEndOf="@id/cl_homie"
+            app:layout_constraintStart_toStartOf="@id/cl_homie"
+            app:layout_constraintTop_toTopOf="@id/cl_homie"
+            tools:text="이영주" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+
+

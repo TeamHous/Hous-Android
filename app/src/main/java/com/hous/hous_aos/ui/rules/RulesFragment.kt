@@ -1,6 +1,7 @@
 package com.hous.hous_aos.ui.rules
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +15,9 @@ import com.hous.hous_aos.databinding.FragmentRulesBinding
 import com.hous.hous_aos.ui.rules.my_to_do.MyToDoFragment
 import com.hous.hous_aos.ui.rules.rules_table.RulesTableFragment
 import com.hous.hous_aos.ui.rules.today_to_do.TodayToDoFragment
-import com.hous.hous_aos.util.showToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RulesFragment : Fragment() {
     private var _binding: FragmentRulesBinding? = null
     private val binding get() = _binding ?: error("null값 들어감")
@@ -35,8 +37,8 @@ class RulesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initTransaction()
-        changeTransaction()
         initAdapter()
         observeCategory()
         onClickSmileIcon()
@@ -44,9 +46,10 @@ class RulesFragment : Fragment() {
 
     private fun initAdapter() {
         homeRulesCategoryAdapter = HomeRulesCategoryAdapter(
-            onCategoryClick = { onClickCategoryIcon() },
+            ::onLongClickCategoryIcon,
+            ::onCategoryClick,
             onPlusClick = { onClickPlusIcon() },
-            onChangeIsSelected = { setCategoryIsSelected(it) }
+            onChangeIsSelected = { setCategoryIsSelected(it) },
         )
         binding.rvRules.adapter = homeRulesCategoryAdapter
     }
@@ -75,10 +78,6 @@ class RulesFragment : Fragment() {
         }
     }
 
-    private fun changeTransaction() {
-        // TODO Category <-> ToDoFragment transaction 로직
-    }
-
     /** to-do로 돌아가기*/
     private fun onClickSmileIcon() {
         binding.ivSmile.setOnClickListener {
@@ -98,21 +97,39 @@ class RulesFragment : Fragment() {
     }
 
     /** RulesTableFragment로 이동 */
-    private fun onClickCategoryIcon() {
-        viewModel.setSmileSelected(false)
-        childFragmentManager.commit {
-            setReorderingAllowed(true)
-            replace<RulesTableFragment>(R.id.frg_bottom)
+    private fun onCategoryClick() {
+        if (viewModel.isSelectedCategorySmile.value == true) {
+            Log.e("에러에러", "CategoryClick RulesTableFragment 교체")
+            viewModel.setSmileSelected(false)
+            childFragmentManager.commit {
+                setReorderingAllowed(true)
+                replace<RulesTableFragment>(R.id.frg_bottom)
+            }
         }
+    }
+
+    /** EditCategoryFragment로 이동 */
+    private fun onLongClickCategoryIcon() {
+        /** 앱잼 내에서는 비활성화*/
+//        viewModel.setSmileSelected(false)
+//        childFragmentManager.commit {
+//            setReorderingAllowed(true)
+//            replace<EditCategoryFragment>(R.id.frg_bottom)
+//        }
     }
 
     /** 추가 Fragment로 이동 */
     private fun onClickPlusIcon() {
-        requireActivity().showToast(" 카테고리 수정 Fragment로 이동")
+        /** 앱잼 내에서는 비활성화*/
+//        childFragmentManager.commit {
+//            setReorderingAllowed(true)
+//            replace<NewCategoryFragment>(R.id.frg_bottom)
+//        }
     }
 
     private fun setCategoryIsSelected(position: Int) {
         viewModel.setCategorySelected(position)
+        viewModel.fetchToRulesTableList(position)
     }
 
     override fun onDestroyView() {

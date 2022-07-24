@@ -1,7 +1,7 @@
 package com.hous.hous_aos.ui.main
 
 import android.os.Bundle
-import androidx.annotation.Dimension
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -12,9 +12,14 @@ import com.hous.hous_aos.databinding.ActivityMainBinding
 import com.hous.hous_aos.ui.home.HomeFragment
 import com.hous.hous_aos.ui.profile.ProfileFragment
 import com.hous.hous_aos.ui.rules.RulesFragment
+import com.hous.hous_aos.ui.rules.RulesViewModel
+import com.hous.hous_aos.ui.rules.ToDoViewType
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: RulesViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -44,8 +49,6 @@ class MainActivity : AppCompatActivity() {
                             this@MainActivity,
                             R.color.sel_bot_navi_home_color
                         )
-                        binding.tvMainTitle.text = getString(R.string.home_title)
-                        binding.tvMainTitle.setTextSize(Dimension.SP, 28F)
                         supportFragmentManager.commit {
                             replace<HomeFragment>(R.id.fcv_main)
                             setReorderingAllowed(true)
@@ -66,11 +69,13 @@ class MainActivity : AppCompatActivity() {
                             this@MainActivity,
                             R.color.sel_bot_navi_rule_color
                         )
-                        binding.tvMainTitle.text = getString(R.string.home_title)
-                        binding.tvMainTitle.setTextSize(Dimension.SP, 20F)
                         supportFragmentManager.commit {
-                            replace<RulesFragment>(R.id.fcv_main)
+                            viewModel.setSmileSelected(true)
+                            viewModel.setToDoViewType(ToDoViewType.TODAY_TO_DO)
+                            viewModel.initCategorySelected()
                             setReorderingAllowed(true)
+                            replace<RulesFragment>(R.id.fcv_main)
+                            //
                         }
                         true
                     }
@@ -88,14 +93,19 @@ class MainActivity : AppCompatActivity() {
                             this@MainActivity,
                             R.color.sel_bot_navi_profile_color
                         )
-                        binding.tvMainTitle.text = getString(R.string.profile_title)
-                        binding.tvMainTitle.setTextSize(Dimension.SP, 20F)
                         supportFragmentManager.commit {
                             replace<ProfileFragment>(R.id.fcv_main)
                             setReorderingAllowed(true)
                         }
                         true
                     }
+                }
+            }
+            setOnItemReselectedListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.ic_bot_nav_home -> Unit
+                    R.id.ic_bot_nav_rules -> Unit
+                    R.id.ic_bot_nav_profile -> Unit
                 }
             }
         }

@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.hous.hous_aos.ui.home.EventIcon" />
+
+        <variable
+            name="viewModel"
+            type="com.hous.hous_aos.ui.home.EventViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cd_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        tools:strokeColor="@color/black"
+        tools:strokeWidth="3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:context=".ui.home.EventDialogFragment">
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="@color/g_6"
+                android:src="@drawable/ic_dialog_close"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibility="@{viewModel.eventIconPosition != 0}" />
+
+            <TextView
+                android:id="@+id/tv_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="36dp"
+                android:textAppearance="@style/B1"
+                android:layout_marginEnd="204dp"
+                android:text="@string/home_event_event"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/shape_blue_fill_circle"
+                android:backgroundTint="@color/hous_yellow_bg"
+                app:imageRes="@{viewModel.selectedEvent.drawableRes}"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_dialog"
+                app:layout_constraintWidth_percent="0.17"
+                tools:src="@drawable/ic_evemt_party_m" />
+
+            <EditText
+                android:id="@+id/edt_event_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="26dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/shape_purple_fill_10_rect"
+                android:backgroundTint="@color/hous_yellow_bg"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:paddingLeft="12dp"
+                android:paddingTop="9dp"
+                android:paddingBottom="7dp"
+                android:text="@={viewModel.eventName}"
+                android:textAppearance="@style/B2"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_dialog"
+                tools:text="다영언니 생파" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_events"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_title">
+
+                <ImageView
+                    android:id="@+id/iv_event_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:background="@drawable/sel_home_event_icon"
+                    android:onClick="@{()-> viewModel.setSelectedEvent(EventIcon.FIRST)}"
+                    android:src="@drawable/sel_event_party"
+                    app:isSelected="@{viewModel.selectedEvent == EventIcon.FIRST}"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/cl_events"
+                    tools:backgroundTint="@color/hous_yellow_bg_2" />
+
+                <ImageView
+                    android:id="@+id/iv_check_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="13dp"
+                    android:src="@drawable/ic_event_check"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_event_one"
+                    app:layout_constraintEnd_toEndOf="@id/iv_event_one"
+                    app:layout_constraintStart_toStartOf="@id/iv_event_one"
+                    app:layout_constraintTop_toTopOf="@id/iv_event_one"
+                    app:visibility="@{viewModel.selectedEvent == EventIcon.FIRST}" />
+
+                <ImageView
+                    android:id="@+id/iv_event_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sel_home_event_icon"
+                    android:onClick="@{()-> viewModel.setSelectedEvent(EventIcon.SECOND)}"
+                    android:src="@drawable/sel_event_pancake"
+                    app:isSelected="@{viewModel.selectedEvent == EventIcon.SECOND}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_event_three"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/iv_event_one"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:backgroundTint="@color/hous_yellow_bg" />
+
+                <ImageView
+                    android:id="@+id/iv_check_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="13dp"
+                    android:src="@drawable/ic_event_check"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_event_two"
+                    app:layout_constraintEnd_toEndOf="@id/iv_event_two"
+                    app:layout_constraintStart_toStartOf="@id/iv_event_two"
+                    app:layout_constraintTop_toTopOf="@id/iv_event_two"
+                    app:visibility="@{viewModel.selectedEvent == EventIcon.SECOND}" />
+
+                <ImageView
+                    android:id="@+id/iv_event_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sel_home_event_icon"
+                    android:onClick="@{()-> viewModel.setSelectedEvent(EventIcon.THIRD)}"
+                    android:src="@drawable/sel_event_beer"
+                    app:isSelected="@{viewModel.selectedEvent == EventIcon.THIRD}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_event_four"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/iv_event_two"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:backgroundTint="@color/hous_yellow_bg" />
+
+                <ImageView
+                    android:id="@+id/iv_check_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="13dp"
+                    android:src="@drawable/ic_event_check"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_event_three"
+                    app:layout_constraintEnd_toEndOf="@id/iv_event_three"
+                    app:layout_constraintStart_toStartOf="@id/iv_event_three"
+                    app:layout_constraintTop_toTopOf="@id/iv_event_three"
+                    app:visibility="@{viewModel.selectedEvent == EventIcon.THIRD}" />
+
+                <ImageView
+                    android:id="@+id/iv_event_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/sel_home_event_icon"
+                    android:onClick="@{()-> viewModel.setSelectedEvent(EventIcon.FOURTH)}"
+                    android:src="@drawable/sel_event_coffee"
+                    app:isSelected="@{viewModel.selectedEvent == EventIcon.FOURTH}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:backgroundTint="@color/hous_yellow_bg" />
+
+                <ImageView
+                    android:id="@+id/iv_check_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="13dp"
+                    android:src="@drawable/ic_event_check"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_event_four"
+                    app:layout_constraintEnd_toEndOf="@id/iv_event_four"
+                    app:layout_constraintStart_toStartOf="@id/iv_event_four"
+                    app:layout_constraintTop_toTopOf="@id/iv_event_four"
+                    app:visibility="@{viewModel.selectedEvent == EventIcon.FOURTH}" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_dates"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_events">
+
+                <TextView
+                    android:id="@+id/tv_num_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:background="@drawable/shape_red_fill_10_rect"
+                    android:backgroundTint="@color/hous_yellow_bg"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:letterSpacing="-0.02"
+                    android:lineSpacingExtra="7.5sp"
+                    android:maxLines="1"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="7dp"
+                    android:text="@{viewModel.eventDate.length() == 0 ? @string/home_event_num_year : viewModel.eventDate.substring(0,4)}"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/home_event_year"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/B1"
+                    android:textColor="@color/g_6"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_num_year"
+                    app:layout_constraintStart_toEndOf="@id/tv_num_year"
+                    app:layout_constraintTop_toTopOf="@id/tv_num_year" />
+
+                <TextView
+                    android:id="@+id/tv_num_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/shape_red_fill_10_rect"
+                    android:backgroundTint="@color/hous_yellow_bg"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:letterSpacing="-0.02"
+                    android:lineSpacingExtra="7.5sp"
+                    android:maxLines="1"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="7dp"
+                    android:text="@{viewModel.eventDate.length() == 0 ? @string/home_event_num_month : viewModel.eventDate.substring(5,7)}"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toEndOf="@id/tv_year"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/home_event_month"
+                    android:textAppearance="@style/B1"
+                    android:textColor="@color/g_6"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_num_month"
+                    app:layout_constraintStart_toEndOf="@id/tv_num_month"
+                    app:layout_constraintTop_toTopOf="@id/tv_num_month" />
+
+                <TextView
+                    android:id="@+id/tv_num_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/shape_red_fill_10_rect"
+                    android:backgroundTint="@color/hous_yellow_bg"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:letterSpacing="-0.02"
+                    android:lineSpacingExtra="7.5sp"
+                    android:maxLines="1"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="7dp"
+                    android:text="@{viewModel.eventDate.length() == 0 ? @string/home_event_num_date : viewModel.eventDate.substring(8,10)}"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toEndOf="@id/tv_month"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="@string/home_event_date"
+                    android:textAppearance="@style/B1"
+                    android:textColor="@color/g_6"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_num_year"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_num_year" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_participant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/home_event_participant"
+                android:textAppearance="@style/B1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_dates" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_participant"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/btn_delete"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_participant"
+                app:layout_constraintTop_toBottomOf="@id/tv_participant"
+                tools:listitem="@layout/item_home_participants" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_delete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/shape_red_line_10_rect"
+                android:text="@{viewModel.eventIconPosition == 0 ? @string/home_event_cancel: @string/home_event_delete}"
+                android:textAppearance="@style/B2"
+                android:textColor="@color/hous_red"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cl_save"
+                app:layout_constraintStart_toStartOf="@id/rv_participant"
+                tools:text="삭제" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_save"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/shape_purple_fill_10_rect"
+                android:backgroundTint="@color/hous_yellow"
+                app:layout_constraintBottom_toBottomOf="@id/btn_delete"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_delete"
+                app:layout_constraintTop_toTopOf="@id/btn_delete">
+
+                <TextView
+                    android:id="@+id/tv_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@{viewModel.eventIconPosition == 0 ? @string/home_event_add: @string/home_event_save}"
+                    android:textAppearance="@style/B2"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    tools:text="저장" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

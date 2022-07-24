@@ -13,9 +13,11 @@ import androidx.viewpager2.widget.ViewPager2
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.ActivityTendencyTestBinding
 import com.hous.hous_aos.databinding.DialogTypeTestStopBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
+@AndroidEntryPoint
 class TendencyTestActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTendencyTestBinding
     private lateinit var tendencyAdapter: TendencyAdapter
@@ -52,6 +54,7 @@ class TendencyTestActivity : AppCompatActivity() {
             if (move) {
                 if(binding.vpTendency.currentItem == 14){
                     val intent = Intent(this, TendencyResultActivity::class.java)
+                    intent.putExtra("data", "end") // "back"면 백버튼, "end"면 완료버튼
                     startActivity(intent)
                     finish()
                 }

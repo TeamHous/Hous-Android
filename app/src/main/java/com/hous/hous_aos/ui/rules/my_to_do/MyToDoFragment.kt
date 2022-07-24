@@ -35,6 +35,7 @@ class MyToDoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewModel()
         initAdapter()
         observeCategory()
         setOnClickMyToDO()
@@ -44,6 +45,10 @@ class MyToDoFragment : Fragment() {
         super.onDestroyView()
         _binding = null
         myToDoAdapter = null
+    }
+
+    private fun initViewModel() {
+        viewModel.fetchToMyTodayToDoList()
     }
 
     private fun initAdapter() {

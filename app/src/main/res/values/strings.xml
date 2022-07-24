@@ -7,22 +7,26 @@
 
     <string name="home_title">Hous-</string>
     <string name="rules_title">규칙</string>
-    <string name="profile_title">Hous- ME</string>
+    <string name="profile_title">ME</string>
 
     <string name="home_coming_up">Coming up-</string>
-    <string name="home_rules">Rules</string>
-    <string name="home_to_do">to-do</string>
+    <string name="home_rules">Key Rules</string>
+    <string name="home_to_do">To-Do</string>
     <string name="home_homie_profile">Homie Profile-</string>
 
     <string name="profile_my_tendency">나의 성향</string>
     <string name="profile_test">테스트 하러 가기</string>
     <string name="profile_my_badge">나의 배지</string>
-    <string name="profile_rules">규칙 한 걸음</string>
+    <string name="profile_rules_1">규칙 한 걸음</string>
+    <string name="profile_rules_2">소통 한 걸음</string>
+    <string name="profile_rules_3">Homie 탄신일</string>
     <string name="profile_detail">자세히 보기</string>
+    <string name="roommate_profile">룸메이트 프로필</string>
 
     <string name="home_rules_empty">아직 규칙이 없어요 ;(</string>
     <string name="home_to_do_empty">아직 할 일이 없어요 ;(</string>
     <string name="home_profile_copy">룸메이트 초대\n코드 복사하기</string>
+    <string name="copy_code">초대코드가 복사되었습니다.</string>
 
     <string name="test_index"><br /> /<br /> 15</string>
     <string name="test_info_title">생활패턴 체크 시작</string>
@@ -52,7 +56,32 @@
     <string name="home_rules_my">나의 </string>
     <string name="home_rules_todo">to-do</string>
     <string name="home_rules_select_manager">담당자 선택하기</string>
+    <string name="home_rules_select_tmp_manager">임시 담당자 설정</string>
+    <string name="home_rules_tmp_manager_save">저장</string>
+    <string name="home_rules_today_todo_empty">아직 내 담당의 to-do가 없어요!</string>
 
     <string name="type_test_dialog_content">테스트를 완료하지 않았어요.\n여기서 그만두면 내용이 삭제됩니다.</string>
+    <string name="type_go_test">테스트 하러 가기</string>
     <string name="type_test_dialog_title">테스트 중단</string>
+    <string name="home_event_event">이벤트</string>
+    <string name="home_event_save">저장</string>
+    <string name="home_event_cancel">취소</string>
+    <string name="home_event_add">추가</string>
+    <string name="home_event_delete">삭제</string>
+    <string name="home_event_participant">참여자</string>
+    <string name="home_event_year">년</string>
+    <string name="home_event_month">월</string>
+    <string name="home_event_date">일</string>
+    <string name="home_event_num_year">2022</string>
+    <string name="home_event_num_month">07</string>
+    <string name="home_event_num_date">23</string>
+    <string name="rules_empty_category">카테고리가 비어있어요!\n하단 버튼을 눌러 규칙을 추가해보세요!</string>
+    <string-array name="pentagon_text">
+        <item>빛</item>
+        <item>정리\n정돈</item>
+        <item>내향</item>
+        <item>냄새</item>
+        <item>소음</item>
+    </string-array>
+
 </resources>

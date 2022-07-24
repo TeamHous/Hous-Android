@@ -15,15 +15,45 @@
         android:layout_height="match_parent"
         tools:context=".ui.rules.RulesFragment">
 
+
+
+        <TextView
+            android:id="@+id/tv_title_eng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/home_title"
+            android:textColor="@color/hous_black"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_main_title_kor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/spoqa_han_sans_neo_bold"
+            android:paddingStart="4dp"
+            android:text="@string/rules_title"
+            android:textColor="@color/hous_black"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title_eng"
+            app:layout_constraintStart_toEndOf="@id/tv_title_eng"
+            app:layout_constraintTop_toTopOf="@id/tv_title_eng" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_category"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/tv_title_eng">
 
             <ImageView
                 android:id="@+id/iv_smile"
@@ -40,6 +70,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginStart="12dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_smile"

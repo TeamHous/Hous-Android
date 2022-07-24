@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.hous.hous_aos.data.model.response.NewRulesResponse
+import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.ui.newrules.DayData
 import com.hous.hous_aos.ui.newrules.Manager
 
@@ -17,16 +17,16 @@ fun ManagerItem(
     manager: Manager,
     currentIndex: Int,
     checkBoxState: State,
-    homies: List<NewRulesResponse.Homie>,
+    homies: List<Homie>,
     homieState: HashMap<String, Boolean>,
     setCheckBoxState: (String, State) -> Unit,
     deleteManager: (Int) -> Unit,
-    choiceManager: (Int, NewRulesResponse.Homie) -> Unit,
+    choiceManager: (Int, Homie) -> Unit,
     selectDay: (Int, DayData) -> Unit
 ) {
     Column {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            if (manager.managerHomie.name != "담당자 없음") {
+            if (manager.managerHomie.userName != "담당자 없음") {
                 DeleteButton(
                     index = currentIndex,
                     setCheckBoxState = setCheckBoxState,

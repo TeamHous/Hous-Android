@@ -1,26 +1,58 @@
 package com.hous.hous_aos.ui.profile
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hous.hous_aos.data.model.request.PutTestResultRequest
+import com.hous.hous_aos.data.repository.ProfileRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class TendencyViewModel : ViewModel() {
+@HiltViewModel
+class TendencyViewModel @Inject constructor(
+    private val profileRepository: ProfileRepository
+) : ViewModel() {
     private val _move = MutableLiveData<Boolean>()
     val move: LiveData<Boolean> = _move
     private val _uiState = MutableStateFlow(TestUiState())
     val uiState = _uiState.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            profileRepository.getTypeTestList()
+                .onSuccess {
+                    Log.d("TendencyViewModel", "success ${it.data!!.typeTests}")
+                    val tempList = it.data.typeTests.map { typeTest ->
+                        TypeTest(
+                            id = typeTest.id,
+                            testNum = typeTest.testNum,
+                            question = typeTest.question,
+                            questionType = typeTest.questionType,
+                            answers = typeTest.answers,
+                            questionImg = typeTest.questionImg,
+                            type = TypeState.NONE
+                        )
+                    }
+                    _uiState.value = _uiState.value.copy(typeTests = tempList)
+                }
+                .onFailure {
+                    Log.d("TendencyViewModel", "fail ${it.message}")
+                }
+        }
+    }
 
     fun select(position: Int, state: TypeState) {
         viewModelScope.launch {
             val tempTest = mutableListOf<TypeTest>()
             _uiState.value.typeTests.forEach { tempTest.add(it) }
             val tempTypeTest = TypeTest(
-                _id = _uiState.value.typeTests[position]._id,
+                id = _uiState.value.typeTests[position].id,
                 question = _uiState.value.typeTests[position].question,
                 questionType = _uiState.value.typeTests[position].questionType,
                 questionImg = _uiState.value.typeTests[position].questionImg,
@@ -44,8 +76,12 @@ class TendencyViewModel : ViewModel() {
     }
 
     fun sendData() {
-        sumScore()
-        /* 서버 통신 작업 */
+        viewModelScope.launch {
+            sumScore()
+            profileRepository.putTestResult(PutTestResultRequest(uiState.value.answerHolder))
+                .onSuccess { Log.d("TendencyViewModel", "result success : ${it.message}") }
+                .onFailure { Log.d("TendencyViewModel", "fail : ${it.message}") }
+        }
     }
 
     private fun sumScore() {
@@ -65,127 +101,6 @@ class TendencyViewModel : ViewModel() {
 }
 
 data class TestUiState(
-    val typeTests: List<TypeTest> = listOf(
-        TypeTest(
-            _id = "",
-            testNum = 1,
-            question = "",
-            questionType = "",
-            answers = listOf("test1", "test2", "test3"),
-            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
-        ),
-        TypeTest(
-            _id = "",
-            testNum = 2,
-            question = "",
-            questionType = "",
-            answers = listOf("test1", "test2", "test3"),
-            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
-        ),
-        TypeTest(
-            _id = "",
-            testNum = 3,
-            question = "",
-            questionType = "",
-            answers = listOf("test1", "test2", "test3"),
-            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
-        ),
-        TypeTest(
-            _id = "",
-            testNum = 4,
-            question = "",
-            questionType = "",
-            answers = listOf("test1", "test2", "test3"),
-            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
-        ),
-        TypeTest(
-            _id = "",
-            testNum = 5,
-            question = "",
-            questionType = "",
-            answers = listOf("test1", "test2", "test3"),
-            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
-        ),
-        TypeTest(
-            _id = "",
-            testNum = 6,
-            question = "",
-            questionType = "",
-            answers = listOf("test1", "test2", "test3"),
-            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
-        ),
-        TypeTest(
-            _id = "",
-            testNum = 7,
-            question = "",
-            questionType = "",
-            answers = listOf("test1", "test2", "test3"),
-            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
-        ),
-        TypeTest(
-            _id = "",
-            testNum = 8,
-            question = "",
-            questionType = "",
-            answers = listOf("test1", "test2", "test3"),
-            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
-        ),
-        TypeTest(
-            _id = "",
-            testNum = 9,
-            question = "",
-            questionType = "",
-            answers = listOf("test1", "test2", "test3"),
-            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
-        ),
-        TypeTest(
-            _id = "",
-            testNum = 10,
-            question = "",
-            questionType = "",
-            answers = listOf("test1", "test2", "test3"),
-            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
-        ),
-        TypeTest(
-            _id = "",
-            testNum = 11,
-            question = "",
-            questionType = "",
-            answers = listOf("test1", "test2", "test3"),
-            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
-        ),
-        TypeTest(
-            _id = "",
-            testNum = 12,
-            question = "",
-            questionType = "",
-            answers = listOf("test1", "test2", "test3"),
-            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
-        ),
-        TypeTest(
-            _id = "",
-            testNum = 13,
-            question = "",
-            questionType = "",
-            answers = listOf("test1", "test2", "test3"),
-            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
-        ),
-        TypeTest(
-            _id = "",
-            testNum = 14,
-            question = "",
-            questionType = "",
-            answers = listOf("test1", "test2", "test3"),
-            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
-        ),
-        TypeTest(
-            _id = "",
-            testNum = 15,
-            question = "",
-            questionType = "",
-            answers = listOf("test1", "test2", "test3"),
-            questionImg = "https://team-hous.s3.ap-northeast-2.amazonaws.com/Type/test/type_test_1.png"
-        )
-    ),
+    val typeTests: List<TypeTest> = listOf(),
     val answerHolder: List<Int> = listOf(0, 0, 0, 0, 0)
 )
