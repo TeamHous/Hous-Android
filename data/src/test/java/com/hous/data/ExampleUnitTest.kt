@@ -1,4 +1,4 @@
-package com.hous.hous_aos
+package com.hous.data
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
