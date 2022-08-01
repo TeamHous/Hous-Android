@@ -27,5 +27,5 @@ object Versions {
     const val fragmentKTXVersion = "1.5.0"
 
     const val gradleVersion = "7.1.1"
-    const val kotlinVersion = "1.6.20"
+    const val kotlinVersion = "1.6.10"
 }
