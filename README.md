@@ -1,6 +1,5 @@
-# Hous-Android
-멘트 추천 받아요~🏡
-<br/><br/><br/>
+# 🏡 Hous-Android
+![Android](https://user-images.githubusercontent.com/82709044/182391860-4c190765-8aab-4e7c-887d-644b18c845aa.png)
 
 ## 사용한 기술 스택
 - MVVM
