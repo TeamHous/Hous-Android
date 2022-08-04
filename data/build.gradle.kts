@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("kapt")
+    id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
 }
 
 android {
@@ -52,5 +53,17 @@ dependencies {
         implementation(gson)
         implementation(retrofit2)
         implementation(retrofit2Converter)
+    }
+}
+
+ktlint {
+    android.set(true)
+    coloredOutput.set(true)
+    verbose.set(true)
+    outputToConsole.set(true)
+    disabledRules.set(setOf("max-line-length", "no-wildcard-imports", "import-ordering"))
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
     }
 }

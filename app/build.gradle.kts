@@ -5,6 +5,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
+    id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
 }
 val properties = Properties()
 properties.load(project.rootProject.file("local.properties").inputStream())
@@ -111,5 +112,17 @@ dependencies {
         androidTestImplementation(androidTest)
         androidTestImplementation(espresso)
         androidTestImplementation(composeTest)
+    }
+}
+
+ktlint {
+    android.set(true)
+    coloredOutput.set(true)
+    verbose.set(true)
+    outputToConsole.set(true)
+    disabledRules.set(setOf("max-line-length", "no-wildcard-imports", "import-ordering"))
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
     }
 }
