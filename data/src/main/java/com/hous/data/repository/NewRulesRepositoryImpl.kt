@@ -1,4 +1,4 @@
-package com.hous.hous_aos.data.repository
+package com.hous.data.repository
 
 import android.util.Log
 import com.hous.data.model.WrapperClass
@@ -12,17 +12,17 @@ import com.hous.hous_aos.ui.newrules.component.State
 import javax.inject.Inject
 
 class NewRulesRepositoryImpl @Inject constructor(
-    private val remoteNewRulesDataSource: com.hous.data.source.remote.RemoteNewRulesDataSource
+    private val remoteNewRulesDataSource: RemoteNewRulesDataSource
 ) : NewRulesRepository {
-    override suspend fun addNewRule(newRulesUiState: NewRulesUiState): Result<com.hous.data.model.WrapperClass<Any>> {
+    override suspend fun addNewRule(newRulesUiState: NewRulesUiState): Result<WrapperClass<Any>> {
         val ruleMember = newRulesUiState.ManagerList.map {
             val dayList = dayToInt(it.dayDataList)
-            com.hous.data.model.request.Member(
+            Member(
                 userId = it.managerHomie.id,
                 day = dayList
             )
         }
-        val newRulesRequest = com.hous.data.model.request.NewRulesRequest(
+        val newRulesRequest = NewRulesRequest(
             notificationState = newRulesUiState.notificationState,
             ruleName = newRulesUiState.ruleName,
             categoryId = newRulesUiState.categoryId,
@@ -33,7 +33,7 @@ class NewRulesRepositoryImpl @Inject constructor(
         return runCatching { remoteNewRulesDataSource.addNewRule(newRulesRequest) }
     }
 
-    override suspend fun getNewRuleList(roomId: String): Result<com.hous.data.model.WrapperClass<com.hous.data.model.response.NewRulesListResponse>> =
+    override suspend fun getNewRuleList(roomId: String): Result<WrapperClass<NewRulesListResponse>> =
         runCatching { remoteNewRulesDataSource.getNewRuleList(roomId) }
 
     private fun dayToInt(dayDataList: List<DayData>): List<Int> {

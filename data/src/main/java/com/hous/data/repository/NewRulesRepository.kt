@@ -1,7 +1,5 @@
-package com.hous.hous_aos.data.repository
+package com.hous.data.repository
 
-import com.hous.data.model.WrapperClass
-import com.hous.data.model.response.NewRulesListResponse
 import com.hous.hous_aos.ui.newrules.NewRulesUiState
 
 interface NewRulesRepository {

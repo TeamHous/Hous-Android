@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Hous-Aos"
-include ':app'
-include ':data'
+include(":app")
+include(":data")
