@@ -17,6 +17,10 @@ android {
         kotlinCompilerExtensionVersion = Versions.composeVersion
     }
 
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+
     buildFeatures {
         viewBinding = true
         dataBinding = true
