@@ -155,7 +155,8 @@ class TendencyResultActivity : AppCompatActivity() {
                     binding.tvBad.setTextColor(ContextCompat.getColor(this, R.color.hous_red))
                 }
                 "늘 행복한 동글이" -> {
-                    binding.clBad.backgroundTintList = this.getColorStateList(R.color.hous_yellow_bg)
+                    binding.clBad.backgroundTintList =
+                        this.getColorStateList(R.color.hous_yellow_bg)
                     binding.tvBad.setTextColor(ContextCompat.getColor(this, R.color.hous_yellow))
                 }
                 "룸메 맞춤형 네각이" -> {
@@ -163,7 +164,8 @@ class TendencyResultActivity : AppCompatActivity() {
                     binding.tvBad.setTextColor(ContextCompat.getColor(this, R.color.hous_blue))
                 }
                 "하이 레벨 오각이" -> {
-                    binding.clBad.backgroundTintList = this.getColorStateList(R.color.hous_purple_bg)
+                    binding.clBad.backgroundTintList =
+                        this.getColorStateList(R.color.hous_purple_bg)
                     binding.tvBad.setTextColor(ContextCompat.getColor(this, R.color.hous_purple))
                 }
                 "룰 세터 육각이" -> {
@@ -177,7 +179,8 @@ class TendencyResultActivity : AppCompatActivity() {
                     binding.tvGood.setTextColor(ContextCompat.getColor(this, R.color.hous_red))
                 }
                 "늘 행복한 동글이" -> {
-                    binding.clGood.backgroundTintList = this.getColorStateList(R.color.hous_yellow_bg)
+                    binding.clGood.backgroundTintList =
+                        this.getColorStateList(R.color.hous_yellow_bg)
                     binding.tvGood.setTextColor(ContextCompat.getColor(this, R.color.hous_yellow))
                 }
                 "룸메 맞춤형 네각이" -> {
@@ -185,11 +188,13 @@ class TendencyResultActivity : AppCompatActivity() {
                     binding.tvGood.setTextColor(ContextCompat.getColor(this, R.color.hous_blue))
                 }
                 "하이 레벨 오각이" -> {
-                    binding.clGood.backgroundTintList = this.getColorStateList(R.color.hous_purple_bg)
+                    binding.clGood.backgroundTintList =
+                        this.getColorStateList(R.color.hous_purple_bg)
                     binding.tvGood.setTextColor(ContextCompat.getColor(this, R.color.hous_purple))
                 }
                 "룰 세터 육각이" -> {
-                    binding.clGood.backgroundTintList = this.getColorStateList(R.color.hous_green_bg)
+                    binding.clGood.backgroundTintList =
+                        this.getColorStateList(R.color.hous_green_bg)
                     binding.tvGood.setTextColor(ContextCompat.getColor(this, R.color.hous_green))
                 }
             }

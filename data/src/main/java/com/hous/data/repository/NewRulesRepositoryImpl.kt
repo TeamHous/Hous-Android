@@ -1,21 +1,27 @@
 package com.hous.data.repository
 
 import android.util.Log
+import com.hous.data.entity.DayData
+import com.hous.data.entity.Manager
+import com.hous.data.entity.State
 import com.hous.data.model.WrapperClass
 import com.hous.data.model.request.Member
 import com.hous.data.model.request.NewRulesRequest
 import com.hous.data.model.response.NewRulesListResponse
 import com.hous.data.source.remote.RemoteNewRulesDataSource
-import com.hous.hous_aos.ui.newrules.DayData
-import com.hous.hous_aos.ui.newrules.NewRulesUiState
-import com.hous.hous_aos.ui.newrules.component.State
 import javax.inject.Inject
 
 class NewRulesRepositoryImpl @Inject constructor(
     private val remoteNewRulesDataSource: RemoteNewRulesDataSource
 ) : NewRulesRepository {
-    override suspend fun addNewRule(newRulesUiState: NewRulesUiState): Result<WrapperClass<Any>> {
-        val ruleMember = newRulesUiState.ManagerList.map {
+    override suspend fun addNewRule(
+        ruleName: String,
+        categoryId: String,
+        notificationState: Boolean,
+        checkBoxState: State,
+        managerList: List<Manager>
+    ): Result<WrapperClass<Any>> {
+        val ruleMember = managerList.map {
             val dayList = dayToInt(it.dayDataList)
             Member(
                 userId = it.managerHomie.id,
@@ -23,11 +29,11 @@ class NewRulesRepositoryImpl @Inject constructor(
             )
         }
         val newRulesRequest = NewRulesRequest(
-            notificationState = newRulesUiState.notificationState,
-            ruleName = newRulesUiState.ruleName,
-            categoryId = newRulesUiState.categoryId,
-            isKeyRules = newRulesUiState.checkBoxState == State.SELECT,
-            ruleMembers = if (newRulesUiState.checkBoxState != State.SELECT) ruleMember else emptyList()
+            notificationState = notificationState,
+            ruleName = ruleName,
+            categoryId = categoryId,
+            isKeyRules = checkBoxState == State.SELECT,
+            ruleMembers = if (checkBoxState != State.SELECT) ruleMember else emptyList()
         )
         Log.d("NewRulesViewModel", "repository rules data: $newRulesRequest")
         return runCatching { remoteNewRulesDataSource.addNewRule(newRulesRequest) }

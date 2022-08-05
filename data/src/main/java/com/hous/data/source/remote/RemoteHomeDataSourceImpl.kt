@@ -1,5 +1,6 @@
 package com.hous.data.source.remote
 
+import com.hous.data.BuildConfig
 import com.hous.data.api.HomeApi
 import com.hous.data.entity.Event
 import com.hous.data.entity.Homie
@@ -7,7 +8,6 @@ import com.hous.data.entity.ResultData
 import com.hous.data.model.WrapperClass
 import com.hous.data.model.request.EventListRequest
 import com.hous.data.model.response.HomeResponse
-import com.hous.hous_aos.BuildConfig
 import javax.inject.Inject
 
 class RemoteHomeDataSourceImpl @Inject constructor(

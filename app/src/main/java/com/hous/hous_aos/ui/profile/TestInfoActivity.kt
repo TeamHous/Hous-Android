@@ -14,8 +14,8 @@ class TestInfoActivity : AppCompatActivity() {
         init()
     }
 
-    private fun init(){
-        binding.btnStart.setOnClickListener{
+    private fun init() {
+        binding.btnStart.setOnClickListener {
             val intent = Intent(this, TendencyTestActivity::class.java)
             startActivity(intent)
             finish()

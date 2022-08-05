@@ -1,5 +1,6 @@
 package com.hous.data.source.remote
 
+import com.hous.data.BuildConfig
 import com.hous.data.api.RulesApi
 import com.hous.data.entity.Rule
 import com.hous.data.model.WrapperClass
@@ -8,7 +9,6 @@ import com.hous.data.model.response.RulesTableResponse
 import com.hous.data.model.response.RulesTodayInfoListResponse
 import com.hous.data.model.response.TempManagerRequest
 import com.hous.data.model.response.TempManagerResponse
-import com.hous.hous_aos.BuildConfig
 import javax.inject.Inject
 
 class RemoteRulesTodayDataSourceImpl @Inject constructor(

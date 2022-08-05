@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.hous.data.entity.TypeTest
 import com.hous.hous_aos.databinding.ItemTendencyTestBinding
 
 class TendencyAdapter(
@@ -70,12 +71,19 @@ class TendencyAdapter(
     }
 
     companion object {
-        private val tendencyDiffUtil = object : DiffUtil.ItemCallback<com.hous.data.entity.TypeTest>() {
-            override fun areItemsTheSame(oldItem: com.hous.data.entity.TypeTest, newItem: com.hous.data.entity.TypeTest): Boolean =
-                oldItem.id == newItem.id
+        private val tendencyDiffUtil =
+            object : DiffUtil.ItemCallback<TypeTest>() {
+                override fun areItemsTheSame(
+                    oldItem: TypeTest,
+                    newItem: TypeTest
+                ): Boolean =
+                    oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: com.hous.data.entity.TypeTest, newItem: com.hous.data.entity.TypeTest): Boolean =
-                oldItem == newItem
-        }
+                override fun areContentsTheSame(
+                    oldItem: TypeTest,
+                    newItem: TypeTest
+                ): Boolean =
+                    oldItem == newItem
+            }
     }
 }

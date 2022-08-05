@@ -1,10 +1,10 @@
 package com.hous.data.source.remote
 
+import com.hous.data.BuildConfig
 import com.hous.data.api.NewRulesApi
 import com.hous.data.model.WrapperClass
 import com.hous.data.model.request.NewRulesRequest
 import com.hous.data.model.response.NewRulesListResponse
-import com.hous.hous_aos.BuildConfig
 import javax.inject.Inject
 
 class RemoteNewRulesDataSourceImpl @Inject constructor(

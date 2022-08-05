@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hous.data.entity.DayData
 import com.hous.data.entity.Manager
-import com.hous.data.repository.NewRulesRepository
 import com.hous.data.entity.State
+import com.hous.data.repository.NewRulesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -190,7 +190,13 @@ class NewRulesViewModel @Inject constructor(
     fun addNewRule() {
         Log.d("NewRulesViewModel", "data : ${uiState.value}")
         viewModelScope.launch {
-            newRulesRepository.addNewRule(uiState.value)
+            newRulesRepository.addNewRule(
+                ruleName = uiState.value.ruleName,
+                categoryId = uiState.value.categoryId,
+                notificationState = uiState.value.notificationState,
+                checkBoxState = uiState.value.checkBoxState,
+                managerList = uiState.value.ManagerList
+            )
                 .onSuccess { Log.d("NewRulesViewModel", "addNewRule success : ${it.message}") }
                 .onFailure { Log.d("NewRulesViewModel", "addNewRule fail : ${it.message}") }
         }
