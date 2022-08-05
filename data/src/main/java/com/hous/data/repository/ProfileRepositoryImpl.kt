@@ -5,10 +5,11 @@ import com.hous.data.entity.ResultData
 import com.hous.data.model.WrapperClass
 import com.hous.data.model.request.PutTestResultRequest
 import com.hous.data.model.response.TypeTestResponse
+import com.hous.data.source.remote.RemoteProfileDataSource
 import javax.inject.Inject
 
 class ProfileRepositoryImpl @Inject constructor(
-    private val profileDataSource: com.hous.data.source.remote.RemoteProfileDataSource
+    private val profileDataSource: RemoteProfileDataSource
 ) : ProfileRepository {
     override suspend fun getUserProfile(): Result<WrapperClass<Homie>> =
         runCatching { profileDataSource.getUserProfile() }

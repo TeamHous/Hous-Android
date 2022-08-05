@@ -1,4 +1,4 @@
-package com.hous.hous_aos.ui.newrules.component
+package com.hous.data.entity
 
 enum class State {
     UNSELECT, SELECT, BLOCK

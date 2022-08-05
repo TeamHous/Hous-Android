@@ -3,8 +3,10 @@ package com.hous.hous_aos.ui.newrules
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hous.data.entity.DayData
+import com.hous.data.entity.Manager
 import com.hous.data.repository.NewRulesRepository
-import com.hous.hous_aos.ui.newrules.component.State
+import com.hous.data.entity.State
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -267,25 +269,4 @@ data class NewRulesUiState(
         "최소현" to true
     ),
     val ManagerList: List<Manager> = listOf(Manager())
-)
-
-data class Manager(
-    val managerHomie: com.hous.data.entity.Homie = com.hous.data.entity.Homie(
-        userName = "담당자 없음",
-        typeColor = "NULL"
-    ),
-    val dayDataList: List<DayData> = listOf(
-        DayData("월", State.UNSELECT),
-        DayData("화", State.UNSELECT),
-        DayData("수", State.UNSELECT),
-        DayData("목", State.UNSELECT),
-        DayData("금", State.UNSELECT),
-        DayData("토", State.UNSELECT),
-        DayData("일", State.UNSELECT)
-    )
-)
-
-data class DayData(
-    val day: String,
-    val dayState: State
 )

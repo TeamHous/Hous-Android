@@ -7,10 +7,11 @@ import com.hous.data.model.response.RulesTableResponse
 import com.hous.data.model.response.RulesTodayInfoListResponse
 import com.hous.data.model.response.TempManagerRequest
 import com.hous.data.model.response.TempManagerResponse
+import com.hous.data.source.remote.RemoteRulesTodayDataSource
 import javax.inject.Inject
 
 class RulesTodayRepositoryImpl @Inject constructor(
-    private val remoteRulesTodayDataSource: com.hous.data.source.remote.RemoteRulesTodayDataSource
+    private val remoteRulesTodayDataSource: RemoteRulesTodayDataSource
 ) : RulesTodayRepository {
     override suspend fun getTodayTodayInfoList(roomId: String): Result<WrapperClass<RulesTodayInfoListResponse>> {
         return runCatching { remoteRulesTodayDataSource.getTodayTodayInfoList(roomId) }

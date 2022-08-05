@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
+import com.hous.data.entity.State
 import com.hous.hous_aos.R
 import com.hous.hous_aos.ui.newrules.DayData
 

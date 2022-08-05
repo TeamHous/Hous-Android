@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.hous.data.entity.Homie
+import com.hous.data.entity.State
 import com.hous.hous_aos.ui.newrules.DayData
 import com.hous.hous_aos.ui.newrules.Manager
 

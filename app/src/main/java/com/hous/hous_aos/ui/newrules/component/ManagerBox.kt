@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
 import com.hous.data.entity.Homie
+import com.hous.data.entity.State
 import com.hous.hous_aos.ui.newrules.Manager
 
 @Composable
