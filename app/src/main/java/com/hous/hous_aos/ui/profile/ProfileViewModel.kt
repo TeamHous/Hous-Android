@@ -4,17 +4,17 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hous.hous_aos.data.entity.Homie
-import com.hous.hous_aos.data.repository.ProfileRepository
+import com.hous.data.entity.Homie
+import com.hous.data.repository.ProfileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val profileRepository: ProfileRepository
+    private val profileRepository: com.hous.data.repository.ProfileRepository
 ) : ViewModel() {
-    private val _profileData = MutableLiveData<Homie>()
+    private val _profileData = MutableLiveData<com.hous.data.entity.Homie>()
     val profileData get() = _profileData
 
     init {

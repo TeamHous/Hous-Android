@@ -1,13 +1,13 @@
 package com.hous.hous_aos.di
 
-import com.hous.hous_aos.data.repository.HomeRepository
-import com.hous.hous_aos.data.repository.HomeRepositoryImpl
+import com.hous.data.repository.HomeRepository
+import com.hous.data.repository.HomeRepositoryImpl
 import com.hous.hous_aos.data.repository.NewRulesRepository
 import com.hous.hous_aos.data.repository.NewRulesRepositoryImpl
-import com.hous.hous_aos.data.repository.ProfileRepository
-import com.hous.hous_aos.data.repository.ProfileRepositoryImpl
-import com.hous.hous_aos.data.repository.RulesTodayRepository
-import com.hous.hous_aos.data.repository.RulesTodayRepositoryImpl
+import com.hous.data.repository.ProfileRepository
+import com.hous.data.repository.ProfileRepositoryImpl
+import com.hous.data.repository.RulesTodayRepository
+import com.hous.data.repository.RulesTodayRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,19 +26,19 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun providesRulesTodayRepository(
-        impl: RulesTodayRepositoryImpl
-    ): RulesTodayRepository = impl
+        impl: com.hous.data.repository.RulesTodayRepositoryImpl
+    ): com.hous.data.repository.RulesTodayRepository = impl
 
     @Provides
     @Singleton
     fun providesProfileRepository(
-        impl: ProfileRepositoryImpl
-    ): ProfileRepository = impl
+        impl: com.hous.data.repository.ProfileRepositoryImpl
+    ): com.hous.data.repository.ProfileRepository = impl
 
     @Provides
     @Singleton
     fun providesHomeRepository(
-        impl: HomeRepositoryImpl
-    ): HomeRepository = impl
+        impl: com.hous.data.repository.HomeRepositoryImpl
+    ): com.hous.data.repository.HomeRepository = impl
     
 }

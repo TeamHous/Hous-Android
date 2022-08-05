@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hous.hous_aos.data.model.request.PutTestResultRequest
-import com.hous.hous_aos.data.repository.ProfileRepository
+import com.hous.data.model.request.PutTestResultRequest
+import com.hous.data.repository.ProfileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.delay
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class TendencyViewModel @Inject constructor(
-    private val profileRepository: ProfileRepository
+    private val profileRepository: com.hous.data.repository.ProfileRepository
 ) : ViewModel() {
     private val _move = MutableLiveData<Boolean>()
     val move: LiveData<Boolean> = _move
@@ -29,14 +29,14 @@ class TendencyViewModel @Inject constructor(
                 .onSuccess {
                     Log.d("TendencyViewModel", "success ${it.data!!.typeTests}")
                     val tempList = it.data.typeTests.map { typeTest ->
-                        TypeTest(
+                        com.hous.data.entity.TypeTest(
                             id = typeTest.id,
                             testNum = typeTest.testNum,
                             question = typeTest.question,
                             questionType = typeTest.questionType,
                             answers = typeTest.answers,
                             questionImg = typeTest.questionImg,
-                            type = TypeState.NONE
+                            type = com.hous.data.entity.TypeState.NONE
                         )
                     }
                     _uiState.value = _uiState.value.copy(typeTests = tempList)
@@ -47,11 +47,11 @@ class TendencyViewModel @Inject constructor(
         }
     }
 
-    fun select(position: Int, state: TypeState) {
+    fun select(position: Int, state: com.hous.data.entity.TypeState) {
         viewModelScope.launch {
-            val tempTest = mutableListOf<TypeTest>()
+            val tempTest = mutableListOf<com.hous.data.entity.TypeTest>()
             _uiState.value.typeTests.forEach { tempTest.add(it) }
-            val tempTypeTest = TypeTest(
+            val tempTypeTest = com.hous.data.entity.TypeTest(
                 id = _uiState.value.typeTests[position].id,
                 question = _uiState.value.typeTests[position].question,
                 questionType = _uiState.value.typeTests[position].questionType,
@@ -78,7 +78,7 @@ class TendencyViewModel @Inject constructor(
     fun sendData() {
         viewModelScope.launch {
             sumScore()
-            profileRepository.putTestResult(PutTestResultRequest(uiState.value.answerHolder))
+            profileRepository.putTestResult(com.hous.data.model.request.PutTestResultRequest(uiState.value.answerHolder))
                 .onSuccess { Log.d("TendencyViewModel", "result success : ${it.message}") }
                 .onFailure { Log.d("TendencyViewModel", "fail : ${it.message}") }
         }
@@ -92,15 +92,15 @@ class TendencyViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(answerHolder = tempAnswer)
     }
 
-    private fun getScore(state: TypeState): Int = when (state) {
-        TypeState.ONE -> 1
-        TypeState.TWO -> 2
-        TypeState.THREE -> 3
-        TypeState.NONE -> 0
+    private fun getScore(state: com.hous.data.entity.TypeState): Int = when (state) {
+        com.hous.data.entity.TypeState.ONE -> 1
+        com.hous.data.entity.TypeState.TWO -> 2
+        com.hous.data.entity.TypeState.THREE -> 3
+        com.hous.data.entity.TypeState.NONE -> 0
     }
 }
 
 data class TestUiState(
-    val typeTests: List<TypeTest> = listOf(),
+    val typeTests: List<com.hous.data.entity.TypeTest> = listOf(),
     val answerHolder: List<Int> = listOf(0, 0, 0, 0, 0)
 )

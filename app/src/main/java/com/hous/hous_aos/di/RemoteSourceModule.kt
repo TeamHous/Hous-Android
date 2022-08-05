@@ -13,24 +13,24 @@ object RemoteSourceModule {
     @Provides
     @Singleton
     fun providesRemoteHomeSource(
-        impl: RemoteHomeDataSourceImpl
-    ): RemoteHomeDataSource = impl
+        impl: com.hous.data.source.remote.RemoteHomeDataSourceImpl
+    ): com.hous.data.source.remote.RemoteHomeDataSource = impl
 
     @Provides
     @Singleton
     fun providesRemoteRulesSource(
-        impl: RemoteRulesTodayDataSourceImpl
-    ): RemoteRulesTodayDataSource = impl
+        impl: com.hous.data.source.remote.RemoteRulesTodayDataSourceImpl
+    ): com.hous.data.source.remote.RemoteRulesTodayDataSource = impl
 
     @Provides
     @Singleton
     fun providesRemoteProfileSource(
-        impl: RemoteProfileDataSourceImpl
-    ): RemoteProfileDataSource = impl
+        impl: com.hous.data.source.remote.RemoteProfileDataSourceImpl
+    ): com.hous.data.source.remote.RemoteProfileDataSource = impl
 
     @Provides
     @Singleton
     fun providesRemoteNewRulesSource(
-        impl: RemoteNewRulesDataSourceImpl
-    ): RemoteNewRulesDataSource = impl
+        impl: com.hous.data.source.remote.RemoteNewRulesDataSourceImpl
+    ): com.hous.data.source.remote.RemoteNewRulesDataSource = impl
 }

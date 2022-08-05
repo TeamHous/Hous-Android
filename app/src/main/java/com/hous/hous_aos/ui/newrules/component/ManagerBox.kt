@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
-import com.hous.hous_aos.data.entity.Homie
+import com.hous.data.entity.Homie
 import com.hous.hous_aos.ui.newrules.Manager
 
 @Composable
@@ -29,10 +29,10 @@ fun ManagerBox(
     radius: Dp,
     managerIndex: Int,
     manager: Manager,
-    homies: List<Homie>,
+    homies: List<com.hous.data.entity.Homie>,
     homieState: HashMap<String, Boolean>,
     checkBoxState: State,
-    choiceManager: (Int, Homie) -> Unit
+    choiceManager: (Int, com.hous.data.entity.Homie) -> Unit
 ) {
     Box(
         modifier = Modifier

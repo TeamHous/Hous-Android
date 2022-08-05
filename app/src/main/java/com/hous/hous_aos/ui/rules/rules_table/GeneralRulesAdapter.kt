@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.hous_aos.data.entity.Rule
+import com.hous.data.entity.Rule
 import com.hous.hous_aos.databinding.ItemRulesTableGeneralBinding
 import com.hous.hous_aos.ui.rules.IconColor
 
 class GeneralRulesAdapter :
-    ListAdapter<Rule, GeneralRulesAdapter.GeneralRulesViewHolder>(generalRulesDiffUtil) {
+    ListAdapter<com.hous.data.entity.Rule, GeneralRulesAdapter.GeneralRulesViewHolder>(generalRulesDiffUtil) {
 
     private val iconColorHashMap: HashMap<String, IconColor> = hashMapOf(
         "RED" to IconColor.RED,
@@ -40,7 +40,7 @@ class GeneralRulesAdapter :
         private val iconColorHashMap: HashMap<String, IconColor>
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Rule) {
+        fun onBind(data: com.hous.data.entity.Rule) {
             binding.data = data
             val memberCnt = if (data.membersCnt >= 4) 3 else data.membersCnt
             Log.d(
@@ -73,17 +73,17 @@ class GeneralRulesAdapter :
     }
 
     companion object {
-        private val generalRulesDiffUtil = object : DiffUtil.ItemCallback<Rule>() {
+        private val generalRulesDiffUtil = object : DiffUtil.ItemCallback<com.hous.data.entity.Rule>() {
             override fun areItemsTheSame(
-                oldItem: Rule,
-                newItem: Rule
+                oldItem: com.hous.data.entity.Rule,
+                newItem: com.hous.data.entity.Rule
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: Rule,
-                newItem: Rule
+                oldItem: com.hous.data.entity.Rule,
+                newItem: com.hous.data.entity.Rule
             ): Boolean {
                 return oldItem == newItem
             }

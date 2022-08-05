@@ -5,19 +5,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hous.hous_aos.data.entity.Category
-import com.hous.hous_aos.data.entity.Homie
-import com.hous.hous_aos.data.entity.Rule
-import com.hous.hous_aos.data.model.request.MyToDoCheckRequest
-import com.hous.hous_aos.data.model.response.TempManagerRequest
-import com.hous.hous_aos.data.repository.RulesTodayRepository
+import com.hous.data.entity.Category
+import com.hous.data.entity.Homie
+import com.hous.data.entity.Rule
+import com.hous.data.model.request.MyToDoCheckRequest
+import com.hous.data.model.response.TempManagerRequest
+import com.hous.data.repository.RulesTodayRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class RulesViewModel @Inject constructor(
-    private val rulesTodayRepository: RulesTodayRepository
+    private val rulesTodayRepository: com.hous.data.repository.RulesTodayRepository
 ) : ViewModel() {
     private var _toDoViewType = MutableLiveData(ToDoViewType.TODAY_TO_DO)
     val toDoViewType: LiveData<ToDoViewType> get() = _toDoViewType
@@ -26,26 +26,26 @@ class RulesViewModel @Inject constructor(
     val isSelectedCategorySmile: LiveData<Boolean> get() = _isSelectedCategorySmile
 
     private var _categoryOfRuleList =
-        MutableLiveData<List<Category>>()
+        MutableLiveData<List<com.hous.data.entity.Category>>()
     val categoryOfRuleList get() = _categoryOfRuleList
 
     private var _todayTodoList =
-        MutableLiveData<List<Rule>>()
+        MutableLiveData<List<com.hous.data.entity.Rule>>()
     val todayTodoList get() = _todayTodoList
 
     private var _myTodoList =
-        MutableLiveData<List<Rule>>()
+        MutableLiveData<List<com.hous.data.entity.Rule>>()
     val myTodoList get() = _myTodoList
 
     private var _keyRulesTableList =
-        MutableLiveData<List<Rule>>()
+        MutableLiveData<List<com.hous.data.entity.Rule>>()
     val keyRulesTableList get() = _keyRulesTableList
 
     private var _generalRulesTableList =
-        MutableLiveData<List<Rule>>()
+        MutableLiveData<List<com.hous.data.entity.Rule>>()
     val generalRulesTableList get() = _generalRulesTableList
 
-    private var _tmpManagerList = MutableLiveData<List<Homie>>()
+    private var _tmpManagerList = MutableLiveData<List<com.hous.data.entity.Homie>>()
     val tmpManagerList get() = _tmpManagerList
 
     private var _tmpTodayToDoPosition = MutableLiveData<Int>(0)
@@ -67,7 +67,7 @@ class RulesViewModel @Inject constructor(
                     _todayTodoList.value = it.data!!.todayTodoRules
                     _categoryOfRuleList.value = it.data.homeRuleCategories
                     _categoryOfRuleList.value = (_categoryOfRuleList.value!!).plus(
-                        Category(
+                        com.hous.data.entity.Category(
                             id = "62d6b94e0e9be86f165d48db",
                             categoryName = "없음",
                             categoryIcon = "CLEAN"
@@ -93,7 +93,7 @@ class RulesViewModel @Inject constructor(
         _tmpManagerList.value?.forEach {
             if (it.isChecked) clickedTmpManagerList.add(it.id!!)
         }
-        val tmp = TempManagerRequest(clickedTmpManagerList)
+        val tmp = com.hous.data.model.response.TempManagerRequest(clickedTmpManagerList)
         Log.d(
             TAG,
             "Put -- tmp.tmpRuleMembers: ${tmp.tmpRuleMembers} tmp.size : ${tmp.tmpRuleMembers.size}"
@@ -185,7 +185,9 @@ class RulesViewModel @Inject constructor(
         val checked = myTodoList.value!![position].isChecked
         val id = myTodoList.value!![position].id
         viewModelScope.launch {
-            rulesTodayRepository.putMyToDoCheckLust("", id, MyToDoCheckRequest(checked))
+            rulesTodayRepository.putMyToDoCheckLust("", id,
+                com.hous.data.model.request.MyToDoCheckRequest(checked)
+            )
                 .onSuccess {
                     Log.d(TAG, "Success - id: $id, checked: $checked ")
                 }

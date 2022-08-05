@@ -1,28 +1,28 @@
 package com.hous.hous_aos.data.repository
 
 import android.util.Log
-import com.hous.hous_aos.data.model.WrapperClass
-import com.hous.hous_aos.data.model.request.Member
-import com.hous.hous_aos.data.model.request.NewRulesRequest
-import com.hous.hous_aos.data.model.response.NewRulesListResponse
-import com.hous.hous_aos.data.source.remote.RemoteNewRulesDataSource
+import com.hous.data.model.WrapperClass
+import com.hous.data.model.request.Member
+import com.hous.data.model.request.NewRulesRequest
+import com.hous.data.model.response.NewRulesListResponse
+import com.hous.data.source.remote.RemoteNewRulesDataSource
 import com.hous.hous_aos.ui.newrules.DayData
 import com.hous.hous_aos.ui.newrules.NewRulesUiState
 import com.hous.hous_aos.ui.newrules.component.State
 import javax.inject.Inject
 
 class NewRulesRepositoryImpl @Inject constructor(
-    private val remoteNewRulesDataSource: RemoteNewRulesDataSource
+    private val remoteNewRulesDataSource: com.hous.data.source.remote.RemoteNewRulesDataSource
 ) : NewRulesRepository {
-    override suspend fun addNewRule(newRulesUiState: NewRulesUiState): Result<WrapperClass<Any>> {
+    override suspend fun addNewRule(newRulesUiState: NewRulesUiState): Result<com.hous.data.model.WrapperClass<Any>> {
         val ruleMember = newRulesUiState.ManagerList.map {
             val dayList = dayToInt(it.dayDataList)
-            Member(
+            com.hous.data.model.request.Member(
                 userId = it.managerHomie.id,
                 day = dayList
             )
         }
-        val newRulesRequest = NewRulesRequest(
+        val newRulesRequest = com.hous.data.model.request.NewRulesRequest(
             notificationState = newRulesUiState.notificationState,
             ruleName = newRulesUiState.ruleName,
             categoryId = newRulesUiState.categoryId,
@@ -33,7 +33,7 @@ class NewRulesRepositoryImpl @Inject constructor(
         return runCatching { remoteNewRulesDataSource.addNewRule(newRulesRequest) }
     }
 
-    override suspend fun getNewRuleList(roomId: String): Result<WrapperClass<NewRulesListResponse>> =
+    override suspend fun getNewRuleList(roomId: String): Result<com.hous.data.model.WrapperClass<com.hous.data.model.response.NewRulesListResponse>> =
         runCatching { remoteNewRulesDataSource.getNewRuleList(roomId) }
 
     private fun dayToInt(dayDataList: List<DayData>): List<Int> {

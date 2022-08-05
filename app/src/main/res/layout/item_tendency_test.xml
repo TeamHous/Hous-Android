@@ -7,11 +7,11 @@
 
         <import type="android.view.View" />
 
-        <import type="com.hous.hous_aos.ui.profile.TypeState" />
+        <import type="com.hous.data.entity.TypeState" />
 
         <variable
             name="data"
-            type="com.hous.hous_aos.ui.profile.TypeTest" />
+            type="com.hous.data.entity.TypeTest" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

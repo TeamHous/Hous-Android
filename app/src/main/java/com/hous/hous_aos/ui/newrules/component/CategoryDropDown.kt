@@ -17,11 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.hous.hous_aos.R
-import com.hous.hous_aos.data.entity.Category
+import com.hous.data.entity.Category
 
 @Composable
 fun CategoryDropDownMenu(
-    ruleCategoryList: List<Category>,
+    ruleCategoryList: List<com.hous.data.entity.Category>,
     setCategory: (String, String) -> Unit
 ) {
     var isExpanded by remember { mutableStateOf(false) }

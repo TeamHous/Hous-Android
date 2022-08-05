@@ -30,16 +30,16 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
-import com.hous.hous_aos.data.entity.Homie
+import com.hous.data.entity.Homie
 import com.hous.hous_aos.ui.newrules.isAddDay
 
 @Composable
 fun ManagerDropDownMenu(
     managerIndex: Int,
-    homies: List<Homie>,
+    homies: List<com.hous.data.entity.Homie>,
     homieState: HashMap<String, Boolean>,
     checkBoxState: State,
-    choiceManager: (Int, Homie) -> Unit
+    choiceManager: (Int, com.hous.data.entity.Homie) -> Unit
 ) {
     if (checkBoxState != State.SELECT && isAddDay(homies, homieState)) {
         var isExpanded by remember { mutableStateOf(false) }
