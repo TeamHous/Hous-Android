@@ -10,7 +10,7 @@ import com.hous.hous_aos.databinding.ItemHomeParticipantsBinding
 import com.hous.hous_aos.ui.rules.HomieIconType
 
 class EventParticipantAdapter(private val setSelectedEventParticipant: (Int) -> Unit) :
-    ListAdapter<com.hous.data.entity.Homie, EventParticipantAdapter.EventParticipantViewHolder>(
+    ListAdapter<Homie, EventParticipantAdapter.EventParticipantViewHolder>(
         eventParticipantDiffUtil
     ) {
 
@@ -20,7 +20,7 @@ class EventParticipantAdapter(private val setSelectedEventParticipant: (Int) -> 
         "GREEN" to HomieIconType.GREEN,
         "YELLOW" to HomieIconType.YELLOW,
         "GRAY" to HomieIconType.GRAY,
-        "PURPLE" to HomieIconType.PURPLE,
+        "PURPLE" to HomieIconType.PURPLE
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventParticipantViewHolder {
@@ -44,7 +44,7 @@ class EventParticipantAdapter(private val setSelectedEventParticipant: (Int) -> 
         private val setSelectedTmpManager: (Int) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: com.hous.data.entity.Homie) {
+        fun onBind(data: Homie) {
             binding.data = data
             binding.homieIconType = homieIconHashMap[data.typeColor]
             binding.ivManagerIcon.setOnClickListener {
@@ -56,14 +56,21 @@ class EventParticipantAdapter(private val setSelectedEventParticipant: (Int) -> 
     }
 
     companion object {
-        private val eventParticipantDiffUtil = object : DiffUtil.ItemCallback<com.hous.data.entity.Homie>() {
-            override fun areItemsTheSame(oldItem: com.hous.data.entity.Homie, newItem: com.hous.data.entity.Homie): Boolean {
-                return oldItem.id == newItem.id
-            }
+        private val eventParticipantDiffUtil =
+            object : DiffUtil.ItemCallback<Homie>() {
+                override fun areItemsTheSame(
+                    oldItem: Homie,
+                    newItem: Homie
+                ): Boolean {
+                    return oldItem.id == newItem.id
+                }
 
-            override fun areContentsTheSame(oldItem: com.hous.data.entity.Homie, newItem: com.hous.data.entity.Homie): Boolean {
-                return oldItem == newItem
+                override fun areContentsTheSame(
+                    oldItem: Homie,
+                    newItem: Homie
+                ): Boolean {
+                    return oldItem == newItem
+                }
             }
-        }
     }
 }

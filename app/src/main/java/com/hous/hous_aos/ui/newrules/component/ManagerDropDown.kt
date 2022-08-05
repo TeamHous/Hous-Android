@@ -36,10 +36,10 @@ import com.hous.hous_aos.ui.newrules.isAddDay
 @Composable
 fun ManagerDropDownMenu(
     managerIndex: Int,
-    homies: List<com.hous.data.entity.Homie>,
+    homies: List<Homie>,
     homieState: HashMap<String, Boolean>,
     checkBoxState: State,
-    choiceManager: (Int, com.hous.data.entity.Homie) -> Unit
+    choiceManager: (Int, Homie) -> Unit
 ) {
     if (checkBoxState != State.SELECT && isAddDay(homies, homieState)) {
         var isExpanded by remember { mutableStateOf(false) }

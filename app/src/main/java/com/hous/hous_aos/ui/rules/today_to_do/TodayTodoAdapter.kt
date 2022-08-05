@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.data.entity.Homie
 import com.hous.data.entity.Rule
 import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemMultiBinding
 import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemNoneBinding
@@ -18,7 +17,7 @@ class TodayTodoAdapter(
     private val onClickIcon: () -> Unit,
     private val fetchToTmpManagerList: (Int) -> Unit
 ) :
-    ListAdapter<com.hous.data.entity.Rule, RecyclerView.ViewHolder>(
+    ListAdapter<Rule, RecyclerView.ViewHolder>(
         TodayTodoDiffUtilCallback
     ) {
 
@@ -203,18 +202,18 @@ class TodayTodoAdapter(
 
     companion object {
         private val TodayTodoDiffUtilCallback =
-            object : DiffUtil.ItemCallback<com.hous.data.entity.Rule>() {
+            object : DiffUtil.ItemCallback<Rule>() {
                 override fun areItemsTheSame(
-                    oldItem: com.hous.data.entity.Rule,
-                    newItem: com.hous.data.entity.Rule
+                    oldItem: Rule,
+                    newItem: Rule
 
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: com.hous.data.entity.Rule,
-                    newItem: com.hous.data.entity.Rule
+                    oldItem: Rule,
+                    newItem: Rule
                 ): Boolean {
                     return oldItem == newItem
                 }

@@ -13,5 +13,5 @@ import javax.inject.Singleton
 object LocalSourceModule {
     @Singleton
     @Provides
-    fun providesLocalDataSource(impl: com.hous.data.source.local.LocalDataSourceImpl): com.hous.data.source.local.LocalDataSource = impl
+    fun providesLocalDataSource(impl: LocalDataSourceImpl): LocalDataSource = impl
 }

@@ -8,50 +8,49 @@ import androidx.lifecycle.viewModelScope
 import com.hous.data.entity.Category
 import com.hous.data.entity.Homie
 import com.hous.data.entity.Rule
-import com.hous.data.model.request.MyToDoCheckRequest
 import com.hous.data.model.response.TempManagerRequest
 import com.hous.data.repository.RulesTodayRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class RulesViewModel @Inject constructor(
-    private val rulesTodayRepository: com.hous.data.repository.RulesTodayRepository
+    private val rulesTodayRepository: RulesTodayRepository
 ) : ViewModel() {
     private var _toDoViewType = MutableLiveData(ToDoViewType.TODAY_TO_DO)
     val toDoViewType: LiveData<ToDoViewType> get() = _toDoViewType
 
-    private var _isSelectedCategorySmile = MutableLiveData<Boolean>(true)
+    private var _isSelectedCategorySmile = MutableLiveData(true)
     val isSelectedCategorySmile: LiveData<Boolean> get() = _isSelectedCategorySmile
 
     private var _categoryOfRuleList =
-        MutableLiveData<List<com.hous.data.entity.Category>>()
+        MutableLiveData<List<Category>>()
     val categoryOfRuleList get() = _categoryOfRuleList
 
     private var _todayTodoList =
-        MutableLiveData<List<com.hous.data.entity.Rule>>()
+        MutableLiveData<List<Rule>>()
     val todayTodoList get() = _todayTodoList
 
     private var _myTodoList =
-        MutableLiveData<List<com.hous.data.entity.Rule>>()
+        MutableLiveData<List<Rule>>()
     val myTodoList get() = _myTodoList
 
     private var _keyRulesTableList =
-        MutableLiveData<List<com.hous.data.entity.Rule>>()
+        MutableLiveData<List<Rule>>()
     val keyRulesTableList get() = _keyRulesTableList
 
     private var _generalRulesTableList =
-        MutableLiveData<List<com.hous.data.entity.Rule>>()
+        MutableLiveData<List<Rule>>()
     val generalRulesTableList get() = _generalRulesTableList
 
-    private var _tmpManagerList = MutableLiveData<List<com.hous.data.entity.Homie>>()
+    private var _tmpManagerList = MutableLiveData<List<Homie>>()
     val tmpManagerList get() = _tmpManagerList
 
     private var _tmpTodayToDoPosition = MutableLiveData<Int>(0)
     val tmpTodayToDoPosition get() = _tmpTodayToDoPosition
 
-    private var _ruleTableSize = MutableLiveData<Int>(0)
+    private var _ruleTableSize = MutableLiveData(0)
     val ruleTableSize get() = _ruleTableSize
 
     private var _categoryName = MutableLiveData("")
@@ -65,9 +64,9 @@ class RulesViewModel @Inject constructor(
             rulesTodayRepository.getTodayTodayInfoList("")
                 .onSuccess {
                     _todayTodoList.value = it.data!!.todayTodoRules
-                    _categoryOfRuleList.value = it.data.homeRuleCategories
+                    _categoryOfRuleList.value = it.data!!.homeRuleCategories
                     _categoryOfRuleList.value = (_categoryOfRuleList.value!!).plus(
-                        com.hous.data.entity.Category(
+                        Category(
                             id = "62d6b94e0e9be86f165d48db",
                             categoryName = "없음",
                             categoryIcon = "CLEAN"
@@ -93,7 +92,7 @@ class RulesViewModel @Inject constructor(
         _tmpManagerList.value?.forEach {
             if (it.isChecked) clickedTmpManagerList.add(it.id!!)
         }
-        val tmp = com.hous.data.model.response.TempManagerRequest(clickedTmpManagerList)
+        val tmp = TempManagerRequest(clickedTmpManagerList)
         Log.d(
             TAG,
             "Put -- tmp.tmpRuleMembers: ${tmp.tmpRuleMembers} tmp.size : ${tmp.tmpRuleMembers.size}"
@@ -185,7 +184,9 @@ class RulesViewModel @Inject constructor(
         val checked = myTodoList.value!![position].isChecked
         val id = myTodoList.value!![position].id
         viewModelScope.launch {
-            rulesTodayRepository.putMyToDoCheckLust("", id,
+            rulesTodayRepository.putMyToDoCheckLust(
+                "",
+                id,
                 com.hous.data.model.request.MyToDoCheckRequest(checked)
             )
                 .onSuccess {

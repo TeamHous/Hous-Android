@@ -17,11 +17,11 @@ fun ManagerItem(
     manager: Manager,
     currentIndex: Int,
     checkBoxState: State,
-    homies: List<com.hous.data.entity.Homie>,
+    homies: List<Homie>,
     homieState: HashMap<String, Boolean>,
     setCheckBoxState: (String, State) -> Unit,
     deleteManager: (Int) -> Unit,
-    choiceManager: (Int, com.hous.data.entity.Homie) -> Unit,
+    choiceManager: (Int, Homie) -> Unit,
     selectDay: (Int, DayData) -> Unit
 ) {
     Column {

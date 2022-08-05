@@ -22,7 +22,7 @@ import com.hous.hous_aos.ui.newrules.isAddDay
 
 @Composable
 fun NewRulesAddMangerButton(
-    homies: List<com.hous.data.entity.Homie>,
+    homies: List<Homie>,
     homieState: HashMap<String, Boolean>,
     isShowAddButton: () -> Boolean,
     addManager: () -> Unit

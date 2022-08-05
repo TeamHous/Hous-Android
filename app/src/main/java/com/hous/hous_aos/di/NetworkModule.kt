@@ -1,23 +1,19 @@
 package com.hous.hous_aos.di
 
 import com.google.gson.GsonBuilder
-import com.hous.hous_aos.BuildConfig
-import com.hous.data.api.HomeApi
-import com.hous.data.api.NewRulesApi
-import com.hous.data.api.ProfileApi
-import com.hous.data.api.RulesApi
 import com.hous.data.source.local.LocalDataSource
+import com.hous.hous_aos.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -28,7 +24,7 @@ object NetworkModule {
     @Provides
     @Singleton
     fun providesHousInterceptor(
-        localDataSource: com.hous.data.source.local.LocalDataSource
+        localDataSource: LocalDataSource
     ): Interceptor =
         Interceptor { chain ->
             with(chain) {
@@ -48,7 +44,7 @@ object NetworkModule {
     @Provides
     @Singleton
     fun providesHousOkHttpClient(
-        interceptor: Interceptor,
+        interceptor: Interceptor
     ): OkHttpClient =
         OkHttpClient.Builder()
             .connectTimeout(15, TimeUnit.SECONDS)

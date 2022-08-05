@@ -9,7 +9,7 @@ import com.hous.data.entity.Rule
 import com.hous.hous_aos.databinding.ItemRulesMyToDoBinding
 
 class MyToDoAdapter(private val onClickIcon: (Int) -> Unit) :
-    ListAdapter<com.hous.data.entity.Rule, MyToDoAdapter.MyToDoViewHolder>(
+    ListAdapter<Rule, MyToDoAdapter.MyToDoViewHolder>(
         MyTodoDiffUtilCallback
     ) {
     private val iconTypeHashMap: HashMap<String, IconType> = hashMapOf(
@@ -28,7 +28,7 @@ class MyToDoAdapter(private val onClickIcon: (Int) -> Unit) :
         private val iconTypeHashMap: HashMap<String, IconType>,
         private val onClickIcon: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: com.hous.data.entity.Rule) {
+        fun onBind(data: Rule) {
             binding.data = data
             binding.iconType = iconTypeHashMap[data.categoryIcon]
             binding.clMyToDo.setOnClickListener {
@@ -39,7 +39,6 @@ class MyToDoAdapter(private val onClickIcon: (Int) -> Unit) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyToDoViewHolder {
-
         val binding = ItemRulesMyToDoBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -56,18 +55,18 @@ class MyToDoAdapter(private val onClickIcon: (Int) -> Unit) :
 
     companion object {
         private val MyTodoDiffUtilCallback =
-            object : DiffUtil.ItemCallback<com.hous.data.entity.Rule>() {
+            object : DiffUtil.ItemCallback<Rule>() {
                 override fun areItemsTheSame(
-                    oldItem: com.hous.data.entity.Rule,
-                    newItem: com.hous.data.entity.Rule
+                    oldItem: Rule,
+                    newItem: Rule
 
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: com.hous.data.entity.Rule,
-                    newItem: com.hous.data.entity.Rule
+                    oldItem: Rule,
+                    newItem: Rule
                 ): Boolean {
                     return oldItem == newItem
                 }

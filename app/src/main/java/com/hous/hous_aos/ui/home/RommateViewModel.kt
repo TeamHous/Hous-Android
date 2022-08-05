@@ -7,15 +7,15 @@ import androidx.lifecycle.viewModelScope
 import com.hous.data.entity.Homie
 import com.hous.data.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class RommateViewModel @Inject constructor(
-    private val homeRepository: com.hous.data.repository.HomeRepository
+    private val homeRepository: HomeRepository
 ) : ViewModel() {
-    private val _homieData = MutableLiveData<com.hous.data.entity.Homie>(
-        com.hous.data.entity.Homie(
+    private val _homieData = MutableLiveData(
+        Homie(
             typeScore = listOf(3, 3, 3, 3, 3)
         )
     )

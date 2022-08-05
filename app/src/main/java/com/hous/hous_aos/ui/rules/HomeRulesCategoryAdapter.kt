@@ -6,17 +6,17 @@ import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.hous_aos.R
 import com.hous.data.entity.Category
+import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.ItemRulesRuleBinding
 
 class HomeRulesCategoryAdapter(
     private val onLongClick: () -> Unit,
     private val onCategoryClick: () -> Unit,
     private val onPlusClick: () -> Unit,
-    private val onChangeIsSelected: (Int) -> Unit,
+    private val onChangeIsSelected: (Int) -> Unit
 ) :
-    ListAdapter<com.hous.data.entity.Category, RecyclerView.ViewHolder>(
+    ListAdapter<Category, RecyclerView.ViewHolder>(
         CategoryOfRuleDiffUtilCallback
     ) {
     private val iconTypeHashMap: HashMap<String, CategoryIconType> = hashMapOf(
@@ -55,7 +55,9 @@ class HomeRulesCategoryAdapter(
                 onCategoryClick,
                 onChangeIsSelected,
                 ItemRulesRuleBinding.inflate(
-                    LayoutInflater.from(parent.context), parent, false
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
                 )
             )
         }

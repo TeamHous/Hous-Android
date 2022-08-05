@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.hous_aos.R
 import com.hous.data.entity.Homie
+import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.ItemHomeHomieBinding
 import com.hous.hous_aos.databinding.ItemHomeHomieCopyBinding
 
 class HomieAdapter(
     private val showToast: () -> Unit,
-    private val onClickHomie: (Int) -> Unit,
+    private val onClickHomie: (Int) -> Unit
 ) :
-    ListAdapter<com.hous.data.entity.Homie, RecyclerView.ViewHolder>(homieDiffUtil) {
+    ListAdapter<Homie, RecyclerView.ViewHolder>(homieDiffUtil) {
 
     private lateinit var itemHomeHomieBinding: ItemHomeHomieBinding
     private lateinit var itemHomeHomieCopyBinding: ItemHomeHomieCopyBinding
@@ -65,7 +65,7 @@ class HomieAdapter(
         private val onClickHomie: (Int) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: com.hous.data.entity.Homie) {
+        fun onBind(data: Homie) {
             itemView.setOnClickListener {
                 onClickHomie(absoluteAdapterPosition)
             }
@@ -113,11 +113,11 @@ class HomieAdapter(
     }
 
     companion object {
-        private val homieDiffUtil = object : DiffUtil.ItemCallback<com.hous.data.entity.Homie>() {
-            override fun areItemsTheSame(oldItem: com.hous.data.entity.Homie, newItem: com.hous.data.entity.Homie): Boolean =
+        private val homieDiffUtil = object : DiffUtil.ItemCallback<Homie>() {
+            override fun areItemsTheSame(oldItem: Homie, newItem: Homie): Boolean =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: com.hous.data.entity.Homie, newItem: com.hous.data.entity.Homie): Boolean =
+            override fun areContentsTheSame(oldItem: Homie, newItem: Homie): Boolean =
                 oldItem == newItem
         }
 

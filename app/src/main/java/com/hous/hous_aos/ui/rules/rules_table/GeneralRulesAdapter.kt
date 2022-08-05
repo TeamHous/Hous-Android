@@ -11,7 +11,7 @@ import com.hous.hous_aos.databinding.ItemRulesTableGeneralBinding
 import com.hous.hous_aos.ui.rules.IconColor
 
 class GeneralRulesAdapter :
-    ListAdapter<com.hous.data.entity.Rule, GeneralRulesAdapter.GeneralRulesViewHolder>(generalRulesDiffUtil) {
+    ListAdapter<Rule, GeneralRulesAdapter.GeneralRulesViewHolder>(generalRulesDiffUtil) {
 
     private val iconColorHashMap: HashMap<String, IconColor> = hashMapOf(
         "RED" to IconColor.RED,
@@ -19,7 +19,7 @@ class GeneralRulesAdapter :
         "GREEN" to IconColor.GREEN,
         "YELLOW" to IconColor.YELLOW,
         "GRAY" to IconColor.GRAY,
-        "PURPLE" to IconColor.PURPLE,
+        "PURPLE" to IconColor.PURPLE
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GeneralRulesViewHolder {
@@ -40,7 +40,7 @@ class GeneralRulesAdapter :
         private val iconColorHashMap: HashMap<String, IconColor>
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: com.hous.data.entity.Rule) {
+        fun onBind(data: Rule) {
             binding.data = data
             val memberCnt = if (data.membersCnt >= 4) 3 else data.membersCnt
             Log.d(
@@ -73,17 +73,17 @@ class GeneralRulesAdapter :
     }
 
     companion object {
-        private val generalRulesDiffUtil = object : DiffUtil.ItemCallback<com.hous.data.entity.Rule>() {
+        private val generalRulesDiffUtil = object : DiffUtil.ItemCallback<Rule>() {
             override fun areItemsTheSame(
-                oldItem: com.hous.data.entity.Rule,
-                newItem: com.hous.data.entity.Rule
+                oldItem: Rule,
+                newItem: Rule
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: com.hous.data.entity.Rule,
-                newItem: com.hous.data.entity.Rule
+                oldItem: Rule,
+                newItem: Rule
             ): Boolean {
                 return oldItem == newItem
             }

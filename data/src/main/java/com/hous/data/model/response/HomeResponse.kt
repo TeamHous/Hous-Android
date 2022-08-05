@@ -1,8 +1,8 @@
 package com.hous.data.model.response
 
-import com.hous.hous_aos.data.entity.Event
-import com.hous.hous_aos.data.entity.Homie
-import com.hous.hous_aos.data.entity.Rule
+import com.hous.data.entity.Event
+import com.hous.data.entity.Homie
+import com.hous.data.entity.Rule
 
 data class HomeResponse(
     val eventList: List<Event>,

@@ -12,9 +12,9 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val profileRepository: com.hous.data.repository.ProfileRepository
+    private val profileRepository: ProfileRepository
 ) : ViewModel() {
-    private val _profileData = MutableLiveData<com.hous.data.entity.Homie>()
+    private val _profileData = MutableLiveData<Homie>()
     val profileData get() = _profileData
 
     init {

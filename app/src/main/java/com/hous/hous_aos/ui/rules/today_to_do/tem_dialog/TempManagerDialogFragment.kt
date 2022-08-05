@@ -11,7 +11,6 @@ import androidx.fragment.app.activityViewModels
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentTempManagerBinding
 import com.hous.hous_aos.ui.rules.RulesViewModel
-import com.hous.hous_aos.util.showToast
 
 class TempManagerFragment : DialogFragment() {
     private var _binding: FragmentTempManagerBinding? = null

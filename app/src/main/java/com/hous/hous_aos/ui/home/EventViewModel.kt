@@ -4,16 +4,11 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hous.data.entity.Event
-import com.hous.data.entity.Homie
-import com.hous.data.entity.Rule
-import com.hous.data.model.request.EventListRequest
-import com.hous.data.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class EventViewModel @Inject constructor(
@@ -54,9 +49,11 @@ class EventViewModel @Inject constructor(
      * Event 조회
      * 리사이클러뷰에 postion 받아오기*/
     fun getEventDetail(position: Int) {
-
         viewModelScope.launch {
-            Log.d(TAG, "                       position: $position , evenList.value: ${eventList.value}")
+            Log.d(
+                TAG,
+                "                       position: $position , evenList.value: ${eventList.value}"
+            )
             _eventIconPosition.value = position
             _tmpEventId.value = eventList.value!![position].id
             homeRepository.getEventList("", tmpEventId.value!!)
@@ -139,7 +136,8 @@ class EventViewModel @Inject constructor(
         }
         viewModelScope.launch {
             homeRepository.putEventList(
-                "", _tmpEventId.value!!,
+                "",
+                _tmpEventId.value!!,
                 com.hous.data.model.request.EventListRequest(
                     eventName = eventName.value!!,
                     date = eventDate.value!!,

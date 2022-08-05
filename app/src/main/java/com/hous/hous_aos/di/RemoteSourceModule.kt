@@ -1,6 +1,13 @@
 package com.hous.hous_aos.di
 
-import com.hous.hous_aos.data.source.remote.*
+import com.hous.data.source.remote.RemoteHomeDataSource
+import com.hous.data.source.remote.RemoteHomeDataSourceImpl
+import com.hous.data.source.remote.RemoteNewRulesDataSource
+import com.hous.data.source.remote.RemoteNewRulesDataSourceImpl
+import com.hous.data.source.remote.RemoteProfileDataSource
+import com.hous.data.source.remote.RemoteProfileDataSourceImpl
+import com.hous.data.source.remote.RemoteRulesTodayDataSource
+import com.hous.data.source.remote.RemoteRulesTodayDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,24 +20,24 @@ object RemoteSourceModule {
     @Provides
     @Singleton
     fun providesRemoteHomeSource(
-        impl: com.hous.data.source.remote.RemoteHomeDataSourceImpl
-    ): com.hous.data.source.remote.RemoteHomeDataSource = impl
+        impl: RemoteHomeDataSourceImpl
+    ): RemoteHomeDataSource = impl
 
     @Provides
     @Singleton
     fun providesRemoteRulesSource(
-        impl: com.hous.data.source.remote.RemoteRulesTodayDataSourceImpl
-    ): com.hous.data.source.remote.RemoteRulesTodayDataSource = impl
+        impl: RemoteRulesTodayDataSourceImpl
+    ): RemoteRulesTodayDataSource = impl
 
     @Provides
     @Singleton
     fun providesRemoteProfileSource(
-        impl: com.hous.data.source.remote.RemoteProfileDataSourceImpl
-    ): com.hous.data.source.remote.RemoteProfileDataSource = impl
+        impl: RemoteProfileDataSourceImpl
+    ): RemoteProfileDataSource = impl
 
     @Provides
     @Singleton
     fun providesRemoteNewRulesSource(
-        impl: com.hous.data.source.remote.RemoteNewRulesDataSourceImpl
-    ): com.hous.data.source.remote.RemoteNewRulesDataSource = impl
+        impl: RemoteNewRulesDataSourceImpl
+    ): RemoteNewRulesDataSource = impl
 }

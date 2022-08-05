@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hous.data.model.request.PutTestResultRequest
 import com.hous.data.repository.ProfileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -16,7 +15,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class TendencyViewModel @Inject constructor(
-    private val profileRepository: com.hous.data.repository.ProfileRepository
+    private val profileRepository: ProfileRepository
 ) : ViewModel() {
     private val _move = MutableLiveData<Boolean>()
     val move: LiveData<Boolean> = _move
@@ -28,7 +27,7 @@ class TendencyViewModel @Inject constructor(
             profileRepository.getTypeTestList()
                 .onSuccess {
                     Log.d("TendencyViewModel", "success ${it.data!!.typeTests}")
-                    val tempList = it.data.typeTests.map { typeTest ->
+                    val tempList = it.data!!.typeTests.map { typeTest ->
                         com.hous.data.entity.TypeTest(
                             id = typeTest.id,
                             testNum = typeTest.testNum,

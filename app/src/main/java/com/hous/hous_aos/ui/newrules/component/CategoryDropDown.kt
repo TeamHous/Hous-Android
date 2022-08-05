@@ -21,7 +21,7 @@ import com.hous.data.entity.Category
 
 @Composable
 fun CategoryDropDownMenu(
-    ruleCategoryList: List<com.hous.data.entity.Category>,
+    ruleCategoryList: List<Category>,
     setCategory: (String, String) -> Unit
 ) {
     var isExpanded by remember { mutableStateOf(false) }

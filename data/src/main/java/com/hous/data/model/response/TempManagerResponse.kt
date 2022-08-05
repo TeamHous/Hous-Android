@@ -1,7 +1,7 @@
 package com.hous.data.model.response
 
 import com.google.gson.annotations.SerializedName
-import com.hous.hous_aos.data.entity.Homie
+import com.hous.data.entity.Homie
 
 data class TempManagerResponse(
     @SerializedName("_id")

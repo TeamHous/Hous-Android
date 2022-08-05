@@ -1,6 +1,6 @@
 package com.hous.data.model.response
 
-import com.hous.hous_aos.data.entity.Rule
+import com.hous.data.entity.Rule
 
 data class RulesTableResponse(
     val keyRules: List<Rule>,

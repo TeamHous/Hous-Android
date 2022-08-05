@@ -10,7 +10,7 @@ import com.hous.hous_aos.databinding.ItemRulesTmpManagersBinding
 import com.hous.hous_aos.ui.rules.HomieIconType
 
 class TempMangerAdapter(private val setSelectedTmpManager: (Int) -> Unit) :
-    ListAdapter<com.hous.data.entity.Homie, TempMangerAdapter.TmpManagerViewHolder>(tempManagerDiffUtil) {
+    ListAdapter<Homie, TempMangerAdapter.TmpManagerViewHolder>(tempManagerDiffUtil) {
     private val homieIconHashMap: HashMap<String, HomieIconType> = hashMapOf(
         "RED" to HomieIconType.RED,
         "BLUE" to HomieIconType.BLUE,
@@ -37,7 +37,7 @@ class TempMangerAdapter(private val setSelectedTmpManager: (Int) -> Unit) :
         private val setSelectedTmpManager: (Int) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: com.hous.data.entity.Homie) {
+        fun onBind(data: Homie) {
             binding.data = data
             binding.homieIconType = homieIconHashMap[data.typeColor]
             binding.ivManagerIcon.setOnClickListener {
@@ -48,17 +48,17 @@ class TempMangerAdapter(private val setSelectedTmpManager: (Int) -> Unit) :
     }
 
     companion object {
-        private val tempManagerDiffUtil = object : DiffUtil.ItemCallback<com.hous.data.entity.Homie>() {
+        private val tempManagerDiffUtil = object : DiffUtil.ItemCallback<Homie>() {
             override fun areItemsTheSame(
-                oldItem: com.hous.data.entity.Homie,
-                newItem: com.hous.data.entity.Homie
+                oldItem: Homie,
+                newItem: Homie
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: com.hous.data.entity.Homie,
-                newItem: com.hous.data.entity.Homie
+                oldItem: Homie,
+                newItem: Homie
             ): Boolean {
                 return oldItem == newItem
             }

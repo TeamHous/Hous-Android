@@ -25,7 +25,7 @@ import com.hous.data.entity.Category
 fun CategoryItem(
     radius: Dp,
     categoryName: String,
-    ruleCategoryList: List<com.hous.data.entity.Category>,
+    ruleCategoryList: List<Category>,
     setCategory: (String, String) -> Unit
 ) {
     Box(

@@ -29,10 +29,10 @@ fun ManagerBox(
     radius: Dp,
     managerIndex: Int,
     manager: Manager,
-    homies: List<com.hous.data.entity.Homie>,
+    homies: List<Homie>,
     homieState: HashMap<String, Boolean>,
     checkBoxState: State,
-    choiceManager: (Int, com.hous.data.entity.Homie) -> Unit
+    choiceManager: (Int, Homie) -> Unit
 ) {
     Box(
         modifier = Modifier
