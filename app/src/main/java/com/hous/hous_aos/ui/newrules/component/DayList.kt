@@ -5,8 +5,8 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import com.hous.hous_aos.ui.newrules.DayData
-import com.hous.hous_aos.ui.newrules.Manager
+import com.hous.data.entity.DayData
+import com.hous.data.entity.Manager
 
 @Composable
 fun NewRulesDayList(

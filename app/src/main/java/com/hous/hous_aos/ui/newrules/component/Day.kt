@@ -17,8 +17,9 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
+import com.hous.data.entity.DayData
+import com.hous.data.entity.State
 import com.hous.hous_aos.R
-import com.hous.hous_aos.ui.newrules.DayData
 
 @Composable
 fun NewRulesDay(
@@ -57,7 +58,7 @@ fun NewRulesDay(
                     resId = R.font.spoqa_han_sans_neo_medium,
                     style = FontStyle(R.style.B3)
                 )
-            ),
+            )
         )
     }
 }

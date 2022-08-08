@@ -1,7 +1,7 @@
 package com.hous.hous_aos.di
 
-import com.hous.hous_aos.data.source.local.LocalDataSource
-import com.hous.hous_aos.data.source.local.LocalDataSourceImpl
+import com.hous.data.source.local.LocalDataSource
+import com.hous.data.source.local.LocalDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

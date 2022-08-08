@@ -4,6 +4,7 @@
     <disabledRules>
       <list>
         <option value="filename" />
+        <option value="package-name" />
       </list>
     </disabledRules>
   </component>

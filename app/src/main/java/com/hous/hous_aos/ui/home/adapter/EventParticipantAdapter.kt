@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.hous_aos.data.entity.Homie
+import com.hous.data.entity.Homie
 import com.hous.hous_aos.databinding.ItemHomeParticipantsBinding
 import com.hous.hous_aos.ui.rules.HomieIconType
 
@@ -20,7 +20,7 @@ class EventParticipantAdapter(private val setSelectedEventParticipant: (Int) -> 
         "GREEN" to HomieIconType.GREEN,
         "YELLOW" to HomieIconType.YELLOW,
         "GRAY" to HomieIconType.GRAY,
-        "PURPLE" to HomieIconType.PURPLE,
+        "PURPLE" to HomieIconType.PURPLE
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventParticipantViewHolder {
@@ -56,14 +56,21 @@ class EventParticipantAdapter(private val setSelectedEventParticipant: (Int) -> 
     }
 
     companion object {
-        private val eventParticipantDiffUtil = object : DiffUtil.ItemCallback<Homie>() {
-            override fun areItemsTheSame(oldItem: Homie, newItem: Homie): Boolean {
-                return oldItem.id == newItem.id
-            }
+        private val eventParticipantDiffUtil =
+            object : DiffUtil.ItemCallback<Homie>() {
+                override fun areItemsTheSame(
+                    oldItem: Homie,
+                    newItem: Homie
+                ): Boolean {
+                    return oldItem.id == newItem.id
+                }
 
-            override fun areContentsTheSame(oldItem: Homie, newItem: Homie): Boolean {
-                return oldItem == newItem
+                override fun areContentsTheSame(
+                    oldItem: Homie,
+                    newItem: Homie
+                ): Boolean {
+                    return oldItem == newItem
+                }
             }
-        }
     }
 }

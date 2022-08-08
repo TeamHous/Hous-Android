@@ -1,0 +1,1913 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.2.0" type="baseline" client="gradle" dependencies="false" name="AGP (7.2.0)" variant="all" version="7.2.0">
+
+    <issue
+        id="LintError"
+        message="Unexpected failure during lint analysis of HomieAdapter.kt (this is a bug in lint or one of the libraries it depends on)&#xA;&#xA;Message: &apos;java.util.List org.jetbrains.uast.UField.getAnnotations()&apos;&#xA;&#xA;The crash seems to involve the detector `dagger.lint.DaggerKotlinIssueDetector`.&#xA;You can try disabling it with something like this:&#xA;    android {&#xA;        lintOptions {&#xA;            disable &quot;JvmStaticProvidesInObjectDetector&quot;, &quot;FieldSiteTargetOnQualifierAnnotation&quot;, &quot;ModuleCompanionObjects&quot;, &quot;ModuleCompanionObjectsNotInModuleParent&quot;&#xA;        }&#xA;    }&#xA;&#xA;Stack: `NoSuchMethodError:DaggerKotlinIssueDetector$createUastHandler$1.visitField(DaggerKotlinIssueDetector.kt:167)←UElementVisitor$DispatchPsiVisitor.visitField(UElementVisitor.kt:659)←KotlinUField.accept(KotlinUField.kt:51)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←AbstractKotlinUClass.accept(AbstractKotlinUClass.kt:42)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←UFile$DefaultImpls.accept(UFile.kt:87)←KotlinUFile.accept(KotlinUFile.kt:14)`&#xA;&#xA;You can run with --stacktrace or set environment variable `LINT_PRINT_STACKTRACE=true` to dump a full stacktrace to stdout.">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/adapter/HomieAdapter.kt"/>
+    </issue>
+
+    <issue
+        id="LintError"
+        message="Unexpected failure during lint analysis of IntroActivity.kt (this is a bug in lint or one of the libraries it depends on)&#xA;&#xA;Message: &apos;java.util.List org.jetbrains.uast.UField.getAnnotations()&apos;&#xA;&#xA;The crash seems to involve the detector `dagger.lint.DaggerKotlinIssueDetector`.&#xA;You can try disabling it with something like this:&#xA;    android {&#xA;        lintOptions {&#xA;            disable &quot;JvmStaticProvidesInObjectDetector&quot;, &quot;FieldSiteTargetOnQualifierAnnotation&quot;, &quot;ModuleCompanionObjects&quot;, &quot;ModuleCompanionObjectsNotInModuleParent&quot;&#xA;        }&#xA;    }&#xA;&#xA;Stack: `NoSuchMethodError:DaggerKotlinIssueDetector$createUastHandler$1.visitField(DaggerKotlinIssueDetector.kt:167)←UElementVisitor$DispatchPsiVisitor.visitField(UElementVisitor.kt:659)←KotlinUField.accept(KotlinUField.kt:51)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←AbstractKotlinUClass.accept(AbstractKotlinUClass.kt:42)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←UFile$DefaultImpls.accept(UFile.kt:87)←KotlinUFile.accept(KotlinUFile.kt:14)`&#xA;&#xA;You can run with --stacktrace or set environment variable `LINT_PRINT_STACKTRACE=true` to dump a full stacktrace to stdout.">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/splash/IntroActivity.kt"/>
+    </issue>
+
+    <issue
+        id="LintError"
+        message="Unexpected failure during lint analysis of MainActivity.kt (this is a bug in lint or one of the libraries it depends on)&#xA;&#xA;Message: &apos;java.util.List org.jetbrains.uast.UField.getAnnotations()&apos;&#xA;&#xA;The crash seems to involve the detector `dagger.lint.DaggerKotlinIssueDetector`.&#xA;You can try disabling it with something like this:&#xA;    android {&#xA;        lintOptions {&#xA;            disable &quot;JvmStaticProvidesInObjectDetector&quot;, &quot;FieldSiteTargetOnQualifierAnnotation&quot;, &quot;ModuleCompanionObjects&quot;, &quot;ModuleCompanionObjectsNotInModuleParent&quot;&#xA;        }&#xA;    }&#xA;&#xA;Stack: `NoSuchMethodError:DaggerKotlinIssueDetector$createUastHandler$1.visitField(DaggerKotlinIssueDetector.kt:167)←UElementVisitor$DispatchPsiVisitor.visitField(UElementVisitor.kt:659)←KotlinUField.accept(KotlinUField.kt:51)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←AbstractKotlinUClass.accept(AbstractKotlinUClass.kt:42)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←UFile$DefaultImpls.accept(UFile.kt:87)←KotlinUFile.accept(KotlinUFile.kt:14)`&#xA;&#xA;You can run with --stacktrace or set environment variable `LINT_PRINT_STACKTRACE=true` to dump a full stacktrace to stdout.">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/main/MainActivity.kt"/>
+    </issue>
+
+    <issue
+        id="LintError"
+        message="Unexpected failure during lint analysis of NewRuleActivity.kt (this is a bug in lint or one of the libraries it depends on)&#xA;&#xA;Message: &apos;java.util.List org.jetbrains.uast.UField.getAnnotations()&apos;&#xA;&#xA;The crash seems to involve the detector `dagger.lint.DaggerKotlinIssueDetector`.&#xA;You can try disabling it with something like this:&#xA;    android {&#xA;        lintOptions {&#xA;            disable &quot;JvmStaticProvidesInObjectDetector&quot;, &quot;FieldSiteTargetOnQualifierAnnotation&quot;, &quot;ModuleCompanionObjects&quot;, &quot;ModuleCompanionObjectsNotInModuleParent&quot;&#xA;        }&#xA;    }&#xA;&#xA;Stack: `NoSuchMethodError:DaggerKotlinIssueDetector$createUastHandler$1.visitField(DaggerKotlinIssueDetector.kt:167)←UElementVisitor$DispatchPsiVisitor.visitField(UElementVisitor.kt:659)←KotlinUField.accept(KotlinUField.kt:51)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←AbstractKotlinUClass.accept(AbstractKotlinUClass.kt:42)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←UFile$DefaultImpls.accept(UFile.kt:87)←KotlinUFile.accept(KotlinUFile.kt:14)`&#xA;&#xA;You can run with --stacktrace or set environment variable `LINT_PRINT_STACKTRACE=true` to dump a full stacktrace to stdout.">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/newrules/NewRuleActivity.kt"/>
+    </issue>
+
+    <issue
+        id="LintError"
+        message="Unexpected failure during lint analysis of RoommateCardActivity.kt (this is a bug in lint or one of the libraries it depends on)&#xA;&#xA;Message: &apos;java.util.List org.jetbrains.uast.UField.getAnnotations()&apos;&#xA;&#xA;The crash seems to involve the detector `dagger.lint.DaggerKotlinIssueDetector`.&#xA;You can try disabling it with something like this:&#xA;    android {&#xA;        lintOptions {&#xA;            disable &quot;JvmStaticProvidesInObjectDetector&quot;, &quot;FieldSiteTargetOnQualifierAnnotation&quot;, &quot;ModuleCompanionObjects&quot;, &quot;ModuleCompanionObjectsNotInModuleParent&quot;&#xA;        }&#xA;    }&#xA;&#xA;Stack: `NoSuchMethodError:DaggerKotlinIssueDetector$createUastHandler$1.visitField(DaggerKotlinIssueDetector.kt:167)←UElementVisitor$DispatchPsiVisitor.visitField(UElementVisitor.kt:659)←KotlinUField.accept(KotlinUField.kt:51)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←AbstractKotlinUClass.accept(AbstractKotlinUClass.kt:42)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←UFile$DefaultImpls.accept(UFile.kt:87)←KotlinUFile.accept(KotlinUFile.kt:14)`&#xA;&#xA;You can run with --stacktrace or set environment variable `LINT_PRINT_STACKTRACE=true` to dump a full stacktrace to stdout.">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/RoommateCardActivity.kt"/>
+    </issue>
+
+    <issue
+        id="LintError"
+        message="Unexpected failure during lint analysis of RulesFragment.kt (this is a bug in lint or one of the libraries it depends on)&#xA;&#xA;Message: &apos;java.util.List org.jetbrains.uast.UField.getAnnotations()&apos;&#xA;&#xA;The crash seems to involve the detector `dagger.lint.DaggerKotlinIssueDetector`.&#xA;You can try disabling it with something like this:&#xA;    android {&#xA;        lintOptions {&#xA;            disable &quot;JvmStaticProvidesInObjectDetector&quot;, &quot;FieldSiteTargetOnQualifierAnnotation&quot;, &quot;ModuleCompanionObjects&quot;, &quot;ModuleCompanionObjectsNotInModuleParent&quot;&#xA;        }&#xA;    }&#xA;&#xA;Stack: `NoSuchMethodError:DaggerKotlinIssueDetector$createUastHandler$1.visitField(DaggerKotlinIssueDetector.kt:167)←UElementVisitor$DispatchPsiVisitor.visitField(UElementVisitor.kt:659)←KotlinUField.accept(KotlinUField.kt:51)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←AbstractKotlinUClass.accept(AbstractKotlinUClass.kt:42)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←UFile$DefaultImpls.accept(UFile.kt:87)←KotlinUFile.accept(KotlinUFile.kt:14)`&#xA;&#xA;You can run with --stacktrace or set environment variable `LINT_PRINT_STACKTRACE=true` to dump a full stacktrace to stdout.">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesFragment.kt"/>
+    </issue>
+
+    <issue
+        id="LintError"
+        message="Unexpected failure during lint analysis of TendencyResultActivity.kt (this is a bug in lint or one of the libraries it depends on)&#xA;&#xA;Message: &apos;java.util.List org.jetbrains.uast.UField.getAnnotations()&apos;&#xA;&#xA;The crash seems to involve the detector `dagger.lint.DaggerKotlinIssueDetector`.&#xA;You can try disabling it with something like this:&#xA;    android {&#xA;        lintOptions {&#xA;            disable &quot;JvmStaticProvidesInObjectDetector&quot;, &quot;FieldSiteTargetOnQualifierAnnotation&quot;, &quot;ModuleCompanionObjects&quot;, &quot;ModuleCompanionObjectsNotInModuleParent&quot;&#xA;        }&#xA;    }&#xA;&#xA;Stack: `NoSuchMethodError:DaggerKotlinIssueDetector$createUastHandler$1.visitField(DaggerKotlinIssueDetector.kt:167)←UElementVisitor$DispatchPsiVisitor.visitField(UElementVisitor.kt:659)←KotlinUField.accept(KotlinUField.kt:51)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←AbstractKotlinUClass.accept(AbstractKotlinUClass.kt:42)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←UFile$DefaultImpls.accept(UFile.kt:87)←KotlinUFile.accept(KotlinUFile.kt:14)`&#xA;&#xA;You can run with --stacktrace or set environment variable `LINT_PRINT_STACKTRACE=true` to dump a full stacktrace to stdout.">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/profile/TendencyResultActivity.kt"/>
+    </issue>
+
+    <issue
+        id="LintError"
+        message="Unexpected failure during lint analysis of TendencyTestActivity.kt (this is a bug in lint or one of the libraries it depends on)&#xA;&#xA;Message: &apos;java.util.List org.jetbrains.uast.UField.getAnnotations()&apos;&#xA;&#xA;The crash seems to involve the detector `dagger.lint.DaggerKotlinIssueDetector`.&#xA;You can try disabling it with something like this:&#xA;    android {&#xA;        lintOptions {&#xA;            disable &quot;JvmStaticProvidesInObjectDetector&quot;, &quot;FieldSiteTargetOnQualifierAnnotation&quot;, &quot;ModuleCompanionObjects&quot;, &quot;ModuleCompanionObjectsNotInModuleParent&quot;&#xA;        }&#xA;    }&#xA;&#xA;Stack: `NoSuchMethodError:DaggerKotlinIssueDetector$createUastHandler$1.visitField(DaggerKotlinIssueDetector.kt:167)←UElementVisitor$DispatchPsiVisitor.visitField(UElementVisitor.kt:659)←KotlinUField.accept(KotlinUField.kt:51)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←AbstractKotlinUClass.accept(AbstractKotlinUClass.kt:42)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←UFile$DefaultImpls.accept(UFile.kt:87)←KotlinUFile.accept(KotlinUFile.kt:14)`&#xA;&#xA;You can run with --stacktrace or set environment variable `LINT_PRINT_STACKTRACE=true` to dump a full stacktrace to stdout.">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/profile/TendencyTestActivity.kt"/>
+    </issue>
+
+    <issue
+        id="LintError"
+        message="Unexpected failure during lint analysis of TestInfoActivity.kt (this is a bug in lint or one of the libraries it depends on)&#xA;&#xA;Message: &apos;java.util.List org.jetbrains.uast.UField.getAnnotations()&apos;&#xA;&#xA;The crash seems to involve the detector `dagger.lint.DaggerKotlinIssueDetector`.&#xA;You can try disabling it with something like this:&#xA;    android {&#xA;        lintOptions {&#xA;            disable &quot;JvmStaticProvidesInObjectDetector&quot;, &quot;FieldSiteTargetOnQualifierAnnotation&quot;, &quot;ModuleCompanionObjects&quot;, &quot;ModuleCompanionObjectsNotInModuleParent&quot;&#xA;        }&#xA;    }&#xA;&#xA;Stack: `NoSuchMethodError:DaggerKotlinIssueDetector$createUastHandler$1.visitField(DaggerKotlinIssueDetector.kt:167)←UElementVisitor$DispatchPsiVisitor.visitField(UElementVisitor.kt:659)←KotlinUField.accept(KotlinUField.kt:51)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←AbstractKotlinUClass.accept(AbstractKotlinUClass.kt:42)←ImplementationUtilsKt.acceptList(implementationUtils.kt:23)←UFile$DefaultImpls.accept(UFile.kt:87)←KotlinUFile.accept(KotlinUFile.kt:14)`&#xA;&#xA;You can run with --stacktrace or set environment variable `LINT_PRINT_STACKTRACE=true` to dump a full stacktrace to stdout.">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/profile/TestInfoActivity.kt"/>
+    </issue>
+
+    <issue
+        id="VectorRaster"
+        message="Limit vector icons sizes to 200×200 to keep icon drawing fast; see https://developer.android.com/studio/write/vector-asset-studio#when for more"
+        errorLine1="    android:width=&quot;1080dp&quot;"
+        errorLine2="                   ~~~~~~">
+        <location
+            file="src/main/res/drawable/ic_icon.xml"
+            line="2"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="LockedOrientationActivity"
+        message="Expecting `android:screenOrientation=&quot;unspecified&quot;` or `&quot;fullSensor&quot;` for this activity so the user can use the application in any orientation and provide a great experience on Chrome OS devices"
+        errorLine1="            android:screenOrientation=&quot;portrait&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="22"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="LockedOrientationActivity"
+        message="Expecting `android:screenOrientation=&quot;unspecified&quot;` or `&quot;fullSensor&quot;` for this activity so the user can use the application in any orientation and provide a great experience on Chrome OS devices"
+        errorLine1="            android:screenOrientation=&quot;portrait&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="32"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="LockedOrientationActivity"
+        message="Expecting `android:screenOrientation=&quot;unspecified&quot;` or `&quot;fullSensor&quot;` for this activity so the user can use the application in any orientation and provide a great experience on Chrome OS devices"
+        errorLine1="            android:screenOrientation=&quot;portrait&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="36"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="LockedOrientationActivity"
+        message="Expecting `android:screenOrientation=&quot;unspecified&quot;` or `&quot;fullSensor&quot;` for this activity so the user can use the application in any orientation and provide a great experience on Chrome OS devices"
+        errorLine1="            android:screenOrientation=&quot;portrait&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="40"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="LockedOrientationActivity"
+        message="Expecting `android:screenOrientation=&quot;unspecified&quot;` or `&quot;fullSensor&quot;` for this activity so the user can use the application in any orientation and provide a great experience on Chrome OS devices"
+        errorLine1="            android:screenOrientation=&quot;portrait&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="44"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="LockedOrientationActivity"
+        message="Expecting `android:screenOrientation=&quot;unspecified&quot;` or `&quot;fullSensor&quot;` for this activity so the user can use the application in any orientation and provide a great experience on Chrome OS devices"
+        errorLine1="            android:screenOrientation=&quot;portrait&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="48"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="LockedOrientationActivity"
+        message="Expecting `android:screenOrientation=&quot;unspecified&quot;` or `&quot;fullSensor&quot;` for this activity so the user can use the application in any orientation and provide a great experience on Chrome OS devices"
+        errorLine1="            android:screenOrientation=&quot;portrait&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="52"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="SpUsage"
+        message="Should use &quot;`sp`&quot; instead of &quot;`dp`&quot; for text sizes"
+        errorLine1="        &lt;item name=&quot;android:textSize&quot;>16dp&lt;/item>"
+        errorLine2="                                      ~~~~">
+        <location
+            file="src/main/res/values/appearance.xml"
+            line="63"
+            column="39"/>
+    </issue>
+
+    <issue
+        id="SpUsage"
+        message="Should use &quot;`sp`&quot; instead of &quot;`dp`&quot; for text sizes"
+        errorLine1="        &lt;item name=&quot;android:textSize&quot;>14dp&lt;/item>"
+        errorLine2="                                      ~~~~">
+        <location
+            file="src/main/res/values/appearance.xml"
+            line="71"
+            column="39"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                Log.d(&quot;sdlhfjaskdf&quot;, &quot;index: $currentIndex dayData $dayData&quot;)"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/newrules/component/Day.kt"
+            line="46"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                Log.d(TAG, &quot;                    $absoluteAdapterPosition&quot;)"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/adapter/EventAdapter.kt"
+            line="59"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="        Log.e(TAG, &quot;           viewModel.eventDate : ${viewModel.eventDate.value} &quot;)"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventDialogFragment.kt"
+            line="61"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="            Log.d(TAG, &quot;EventDialogFragment - closeDialog() called&quot;)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventDialogFragment.kt"
+            line="126"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                Log.d(TAG, &quot;EventDialogFragment - deleteDialog() called&quot;)"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventDialogFragment.kt"
+            line="134"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="            Log.d("
+        errorLine2="            ^">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt"
+            line="53"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(TAG, &quot;onSuccess - eventId: $tmpEventId.value!!, 성공메세지: ${it.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt"
+            line="61"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(TAG, &quot;onSuccess - eventId: $tmpEventId.value!!, 성공메세지: ${it.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt"
+            line="62"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d("
+        errorLine2="                    ^">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt"
+            line="75"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                Log.d(TAG, &quot;이벤트 수정 Success - ${it.message}&quot;)"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt"
+            line="149"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                Log.d(TAG, &quot;이벤트 수정 Fail - ${it.message}&quot;)"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt"
+            line="151"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;asdf&quot;, &quot;success ${result.data}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt"
+            line="178"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;asdf&quot;, &quot;fail ${result.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt"
+            line="190"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;EventViewModel&quot;, &quot;이벤트 삭제 성공 : ${it.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt"
+            line="211"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                .onFailure { Log.d(&quot;EventViewModel&quot;, &quot;이벤트 삭제 실패 : ${it.message}&quot;) }"
+        errorLine2="                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt"
+            line="214"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;EventViewModel&quot;, &quot;이벤트 삭제 성공 : ${it.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt"
+            line="222"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                .onFailure { Log.d(&quot;EventViewModel&quot;, &quot;이벤트 삭제 실패 : ${it.message}&quot;) }"
+        errorLine2="                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt"
+            line="225"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="            Log.d(&quot;asdf&quot;, &quot;success ${result.message}&quot;)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt"
+            line="231"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="            Log.d(&quot;asdf&quot;, &quot;fail ${result.message}&quot;)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/EventViewModel.kt"
+            line="236"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="        Log.d(&quot;크기&quot;, &quot;$currentList&quot;)"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/rules_table/GeneralRulesAdapter.kt"
+            line="33"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="        Log.d(&quot;크기&quot;, &quot;${currentList.size}&quot;)"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/rules_table/GeneralRulesAdapter.kt"
+            line="34"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="            Log.d("
+        errorLine2="            ^">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/rules_table/GeneralRulesAdapter.kt"
+            line="46"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;NewRulesViewModel&quot;, &quot;getNewRuleList success : ${it.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/newrules/NewRulesViewModel.kt"
+            line="37"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;NewRulesViewModel&quot;, &quot;getNewRuleList fail : ${it.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/newrules/NewRulesViewModel.kt"
+            line="45"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="        Log.d(&quot;viewModel&quot;, &quot;$categoryId $category&quot;)"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/newrules/NewRulesViewModel.kt"
+            line="85"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="        Log.d(&quot;lsdkjflsadjlfk&quot;, &quot;Where: $where value: $state&quot;)"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/newrules/NewRulesViewModel.kt"
+            line="89"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="        Log.d(&quot;NewRulesViewModel&quot;, &quot;data : ${uiState.value}&quot;)"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/newrules/NewRulesViewModel.kt"
+            line="191"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                .onSuccess { Log.d(&quot;NewRulesViewModel&quot;, &quot;addNewRule success : ${it.message}&quot;) }"
+        errorLine2="                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/newrules/NewRulesViewModel.kt"
+            line="200"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                .onFailure { Log.d(&quot;NewRulesViewModel&quot;, &quot;addNewRule fail : ${it.message}&quot;) }"
+        errorLine2="                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/newrules/NewRulesViewModel.kt"
+            line="201"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;ProfileViewModel&quot;, &quot;data : ${it.data}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/profile/ProfileViewModel.kt"
+            line="28"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;ProfileViewModel&quot;, &quot;data : ${it.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/profile/ProfileViewModel.kt"
+            line="32"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;MyResultViewModel&quot;, &quot;data : ${result.data}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/profile/ResultViewModel.kt"
+            line="29"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;MyResultViewModel&quot;, &quot;data : ${result.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/profile/ResultViewModel.kt"
+            line="33"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;HomieResultViewModel&quot;, &quot;data : ${result.data}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/profile/ResultViewModel.kt"
+            line="42"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;HomieResultViewModel&quot;, &quot;data : ${result.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/profile/ResultViewModel.kt"
+            line="46"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;Homie&quot;, &quot;data : ${result.data}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/RommateViewModel.kt"
+            line="31"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;Homie&quot;, &quot;data : ${result.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/home/RommateViewModel.kt"
+            line="35"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d("
+        errorLine2="                    ^">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="75"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(TAG, &quot;RulesViewModel - init - getRulesTodayList fail : ${it.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="81"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="        Log.d("
+        errorLine2="        ^">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="96"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(TAG, &quot; result fail : $tmp&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="110"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(TAG, &quot; result fail : ${it.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="111"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="        Log.d("
+        errorLine2="        ^">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="127"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(TAG, &quot;RulesViewModel - fetchToTmpManagerList() - ${it.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="138"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d("
+        errorLine2="                    ^">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="154"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(TAG, &quot;RulesViewModel - fetchToMyTodayToDoList() called&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="169"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;MYTODO&quot;, &quot;Success &quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="170"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(TAG, &quot;fail : ${it.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="173"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(TAG, &quot;Success - id: $id, checked: $checked &quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="193"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d("
+        errorLine2="                    ^">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="196"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="        Log.d(&quot;RulesViewModel&quot;, &quot;categoryId: $categoryId&quot;)"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="211"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;RulesViewModel&quot;, &quot;Success - RulesTableList() ${it.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="215"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;RulesViewModel&quot;, &quot;Success- data: $data&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="217"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d("
+        errorLine2="                    ^">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="226"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d("
+        errorLine2="                    ^">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="230"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;RulesViewModel&quot;, &quot;Fail - RulesTableList() ${it.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/RulesViewModel.kt"
+            line="236"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;TendencyViewModel&quot;, &quot;success ${it.data!!.typeTests}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/profile/TendencyViewModel.kt"
+            line="29"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                    Log.d(&quot;TendencyViewModel&quot;, &quot;fail ${it.message}&quot;)"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/profile/TendencyViewModel.kt"
+            line="44"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                .onSuccess { Log.d(&quot;TendencyViewModel&quot;, &quot;result success : ${it.message}&quot;) }"
+        errorLine2="                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/profile/TendencyViewModel.kt"
+            line="81"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="                .onFailure { Log.d(&quot;TendencyViewModel&quot;, &quot;fail : ${it.message}&quot;) }"
+        errorLine2="                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/profile/TendencyViewModel.kt"
+            line="82"
+            column="30"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="            Log.d(TAG, &quot;NONE : ,  data: $data&quot;)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/today_to_do/TodayTodoAdapter.kt"
+            line="85"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="            Log.d(TAG, &quot;One : ,  data: $data&quot;)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/today_to_do/TodayTodoAdapter.kt"
+            line="100"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="LogNotTimber"
+        message="Using &apos;Log&apos; instead of &apos;Timber&apos;"
+        errorLine1="            Log.d(TAG, &quot;MULTI : ,  data: $data&quot;)"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/hous/hous_aos/ui/rules/today_to_do/TodayTodoAdapter.kt"
+            line="136"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="This folder configuration (`v24`) is unnecessary; `minSdkVersion` is 26. Merge all the resources in this folder into `drawable`.">
+        <location
+            file="src/main/res/drawable-v24"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="This folder configuration (`v26`) is unnecessary; `minSdkVersion` is 26. Merge all the resources in this folder into `mipmap-anydpi`.">
+        <location
+            file="src/main/res/mipmap-anydpi-v26"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="Unnecessary; SDK_INT is always >= 21"
+        errorLine1="        &lt;item name=&quot;android:statusBarColor&quot; tools:targetApi=&quot;l&quot;>@color/white&lt;/item>"
+        errorLine2="                                            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values-night/themes.xml"
+            line="13"
+            column="45"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="Unnecessary; SDK_INT is always >= 21"
+        errorLine1="        &lt;item name=&quot;android:statusBarColor&quot; tools:targetApi=&quot;l&quot;>@color/white&lt;/item>"
+        errorLine2="                                            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/themes.xml"
+            line="13"
+            column="45"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (1120 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="      android:pathData=&quot;M11,13.5c0,-0.453 0.11,-0.87 0.329,-1.25 0.22,-0.395 0.519,-0.702 0.9,-0.921 0.394,-0.22 0.818,-0.329 1.271,-0.329h15c0.453,0 0.87,0.11 1.25,0.329 0.395,0.22 0.702,0.526 0.921,0.921 0.22,0.38 0.329,0.797 0.329,1.25v15c0,0.453 -0.11,0.877 -0.329,1.272 -0.22,0.38 -0.526,0.68 -0.921,0.9 -0.38,0.218 -0.797,0.328 -1.25,0.328h-15c-0.453,0 -0.877,-0.11 -1.272,-0.329 -0.38,-0.22 -0.68,-0.519 -0.9,-0.9A2.577,2.577 0,0 1,11 28.5v-15zM29.75,17.316h3.75c0.453,0 0.87,0.11 1.25,0.329 0.395,0.219 0.702,0.526 0.921,0.92 0.22,0.38 0.329,0.798 0.329,1.25L36,33.5c0,0.453 -0.11,0.877 -0.329,1.272 -0.22,0.38 -0.526,0.68 -0.921,0.9 -0.38,0.218 -0.797,0.328 -1.25,0.328L19.816,36c-0.453,0 -0.877,-0.11 -1.272,-0.329 -0.38,-0.22 -0.68,-0.519 -0.9,-0.9a2.577,2.577 0,0 1,-0.328 -1.271v-3.75h2.5v3.75c0,0.088 -0.022,0.132 -0.066,0.132a0.144,0.144 0,0 1,-0.066 -0.066c0,-0.044 0.044,-0.066 0.132,-0.066L33.5,33.5c0.088,0 0.124,0.022 0.11,0.066 0,0.029 -0.022,0.051 -0.066,0.066 -0.03,0 -0.044,-0.044 -0.044,-0.132L33.5,19.816c0,-0.088 0.015,-0.124 0.044,-0.11 0.044,0 0.066,0.022 0.066,0.066 0.014,0.03 -0.022,0.044 -0.11,0.044h-3.75v-2.5z&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/ic_copy.xml"
+            line="7"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (1326 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="      android:pathData=&quot;M19,19c0.07,0 0.1,0.017 0.088,0.053 0,0.023 -0.018,0.04 -0.053,0.052 -0.023,0 -0.035,-0.035 -0.035,-0.105v-8.28a0.706,0.706 0,0 0,-0.053 -0.281,0.683 0.683,0 0,0 -0.157,-0.246L12,3.403c-0.059,-0.058 -0.059,-0.087 0,-0.087s0.059,0.029 0,0.088l-6.79,6.789a0.682,0.682 0,0 0,-0.157 0.246,0.707 0.707,0 0,0 -0.053,0.28L5,19c0,0.07 -0.018,0.105 -0.053,0.105a0.115,0.115 0,0 1,-0.052 -0.052c0,-0.036 0.035,-0.053 0.105,-0.053h4v-6c0,-0.363 0.088,-0.696 0.263,-1 0.176,-0.316 0.415,-0.561 0.72,-0.737A2.061,2.061 0,0 1,11 11h2c0.363,0 0.696,0.088 1,0.263 0.316,0.176 0.561,0.421 0.737,0.737 0.175,0.304 0.263,0.637 0.263,1v6h4zM13,13c0,-0.07 0.012,-0.1 0.035,-0.088 0.035,0 0.053,0.018 0.053,0.053 0.011,0.023 -0.018,0.035 -0.088,0.035h-2c-0.07,0 -0.105,-0.012 -0.105,-0.035 0.011,-0.035 0.029,-0.053 0.052,-0.053 0.036,-0.011 0.053,0.018 0.053,0.088v8L5,21c-0.363,0 -0.702,-0.088 -1.018,-0.263a1.93,1.93 0,0 1,-0.719 -0.72A2.062,2.062 0,0 1,3 19v-8.28c0,-0.34 0.076,-0.685 0.228,-1.036 0.152,-0.362 0.345,-0.66 0.579,-0.895L10.597,2c0.257,-0.257 0.555,-0.427 0.894,-0.509a1.88,1.88 0,0 1,1.018 0c0.35,0.082 0.649,0.252 0.894,0.509l6.79,6.79c0.234,0.233 0.427,0.532 0.579,0.894 0.152,0.351 0.228,0.696 0.228,1.035L21,19c0,0.363 -0.088,0.702 -0.263,1.017a1.894,1.894 0,0 1,-0.737 0.72A1.965,1.965 0,0 1,19 21h-6v-8zM15,21L9,21v-2h6v2z&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/ic_home_stroke.xml"
+            line="7"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (805 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="      android:pathData=&quot;M16.035,25.65a6.02,6.02 0,0 1,0 -1.3l-2.088,-1.929 2.807,-4.842 2.685,0.842c0.386,-0.269 0.771,-0.485 1.157,-0.65L21.194,15h5.614l0.597,2.772c0.386,0.164 0.771,0.38 1.157,0.65l2.685,-0.843 2.807,4.842 -2.088,1.93a6.02,6.02 0,0 1,0 1.298l2.088,1.93 -2.807,4.842 -2.685,-0.842c-0.386,0.269 -0.771,0.485 -1.157,0.65L26.806,35h-5.614l-0.597,-2.772a6.407,6.407 0,0 1,-1.157 -0.65l-2.685,0.843 -2.807,-4.842 2.088,-1.93zM21,25c0,0.538 0.134,1.04 0.404,1.509a3.03,3.03 0,0 0,1.087 1.087c0.468,0.27 0.971,0.404 1.509,0.404 0.55,0 1.053,-0.134 1.509,-0.404a3.03,3.03 0,0 0,1.087 -1.087c0.27,-0.468 0.404,-0.971 0.404,-1.509 0,-0.55 -0.134,-1.053 -0.404,-1.509a3.03,3.03 0,0 0,-1.087 -1.087A2.916,2.916 0,0 0,24 22c-0.538,0 -1.04,0.134 -1.509,0.404a3.03,3.03 0,0 0,-1.087 1.087c-0.27,0.456 -0.404,0.96 -0.404,1.509z&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/ic_main_setting.xml"
+            line="7"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (1521 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="      android:pathData=&quot;M9,7c0,0.585 0.123,1.105 0.368,1.561 0.258,0.457 0.614,0.813 1.07,1.07 0.457,0.246 0.977,0.369 1.562,0.369 0.597,0 1.117,-0.123 1.561,-0.368a2.649,2.649 0,0 0,1.053 -1.07C14.871,8.104 15,7.584 15,7c0,-0.596 -0.129,-1.117 -0.386,-1.561a2.537,2.537 0,0 0,-1.053 -1.053C13.117,4.129 12.597,4 12,4c-0.585,0 -1.105,0.129 -1.561,0.386a2.649,2.649 0,0 0,-1.07 1.053C9.122,5.883 9,6.404 9,7zM7,7c0,-0.912 0.222,-1.749 0.667,-2.509A5.053,5.053 0,0 1,9.49 2.667,4.942 4.942,0 0,1 12,2c0.912,0 1.748,0.222 2.509,0.667a4.879,4.879 0,0 1,1.824 1.824A4.88,4.88 0,0 1,17 7c0,0.9 -0.222,1.737 -0.667,2.509a5.052,5.052 0,0 1,-1.824 1.824A4.88,4.88 0,0 1,12 12c-0.9,0 -1.737,-0.222 -2.509,-0.667A5.24,5.24 0,0 1,7.667 9.51,4.942 4.942,0 0,1 7,7zM4,20c0,0.058 -0.012,0.088 -0.035,0.088a0.115,0.115 0,0 1,-0.053 -0.053c0,-0.023 0.03,-0.035 0.088,-0.035h16c0.07,0 0.1,0.017 0.088,0.053 0,0.023 -0.018,0.04 -0.053,0.052 -0.023,0 -0.035,-0.035 -0.035,-0.105v-2c0,-0.526 -0.34,-1.017 -1.017,-1.474 -0.679,-0.468 -1.632,-0.836 -2.86,-1.105C14.906,15.141 13.533,15 12,15c-1.532,0 -2.912,0.14 -4.14,0.421 -1.217,0.27 -2.164,0.637 -2.842,1.105C4.339,16.983 4,17.474 4,18v2zM2,18c0,-0.983 0.456,-1.854 1.368,-2.614 0.913,-0.76 2.135,-1.345 3.667,-1.754C8.567,13.21 10.222,13 12,13s3.433,0.21 4.965,0.632c1.532,0.409 2.754,0.994 3.667,1.754C21.544,16.146 22,17.017 22,18v2c0,0.363 -0.088,0.702 -0.263,1.017a1.894,1.894 0,0 1,-0.737 0.72A1.965,1.965 0,0 1,20 22L4,22c-0.35,0 -0.684,-0.088 -1,-0.263A2.219,2.219 0,0 1,2.263 21,2.029 2.029,0 0,1 2,20v-2z&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/ic_person_stroke.xml"
+            line="7"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="VectorPath"
+        message="Very long vector path (1152 characters), which is bad for performance. Considering reducing precision, removing minor details or rasterizing vector."
+        errorLine1="      android:pathData=&quot;M3,9c0,-0.363 0.088,-0.696 0.263,-1 0.187,-0.304 0.433,-0.544 0.737,-0.72 0.316,-0.186 0.65,-0.28 1,-0.28h14c0.363,0 0.696,0.094 1,0.28 0.304,0.176 0.544,0.416 0.72,0.72 0.186,0.304 0.28,0.637 0.28,1v10c0,0.35 -0.094,0.684 -0.28,1 -0.176,0.304 -0.416,0.55 -0.72,0.737A1.965,1.965 0,0 1,19 21L5,21c-0.35,0 -0.684,-0.088 -1,-0.263A2.219,2.219 0,0 1,3.263 20,2.029 2.029,0 0,1 3,19L3,9zM10,14c0,0.35 0.088,0.684 0.263,1 0.187,0.304 0.433,0.55 0.737,0.737 0.316,0.175 0.65,0.263 1,0.263 0.363,0 0.696,-0.088 1,-0.263 0.304,-0.187 0.544,-0.433 0.72,-0.737 0.186,-0.316 0.28,-0.65 0.28,-1 0,-0.363 -0.094,-0.696 -0.28,-1a1.93,1.93 0,0 0,-0.72 -0.72,1.872 1.872,0 0,0 -1,-0.28c-0.35,0 -0.684,0.094 -1,0.28 -0.304,0.176 -0.55,0.416 -0.737,0.72A1.965,1.965 0,0 0,10 14zM8,8L8,5c0,-0.725 0.181,-1.392 0.544,-2A3.953,3.953 0,0 1,10 1.544,3.834 3.834,0 0,1 12,1c0.725,0 1.392,0.181 2,0.544 0.62,0.35 1.105,0.836 1.456,1.456 0.363,0.608 0.544,1.275 0.544,2v3h-2L14,5c0,-0.41 -0.082,-0.766 -0.246,-1.07a1.492,1.492 0,0 0,-0.684 -0.684C12.766,3.082 12.41,3 12,3c-0.398,0 -0.748,0.082 -1.053,0.246 -0.304,0.152 -0.538,0.38 -0.701,0.684C10.082,4.234 10,4.59 10,5v3L8,8z&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/drawable/ic_profile_lock.xml"
+            line="7"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.style.H1` appears to be unused"
+        errorLine1="    &lt;style name=&quot;H1&quot;>"
+        errorLine2="           ~~~~~~~~~">
+        <location
+            file="src/main/res/values/appearance.xml"
+            line="4"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.style.H224Pt` appears to be unused"
+        errorLine1="    &lt;style name=&quot;H224Pt&quot;>"
+        errorLine2="           ~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/appearance.xml"
+            line="12"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.style.H2` appears to be unused"
+        errorLine1="    &lt;style name=&quot;H2&quot;>"
+        errorLine2="           ~~~~~~~~~">
+        <location
+            file="src/main/res/values/appearance.xml"
+            line="20"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.style.Description12Pt` appears to be unused"
+        errorLine1="    &lt;style name=&quot;Description12Pt&quot;>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/appearance.xml"
+            line="84"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.hous_yellow_home` appears to be unused"
+        errorLine1="    &lt;color name=&quot;hous_yellow_home&quot;>#ffda7b&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="17"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.g_1` appears to be unused"
+        errorLine1="    &lt;color name=&quot;g_1&quot;>#fafafa&lt;/color>"
+        errorLine2="           ~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="26"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.test_color` appears to be unused"
+        errorLine1="    &lt;color name=&quot;test_color&quot;>#fafafa&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="34"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.hous_black_layer` appears to be unused"
+        errorLine1="    &lt;color name=&quot;hous_black_layer&quot;>#b3000000&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="41"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.hous_event_bg` appears to be unused"
+        errorLine1="    &lt;color name=&quot;hous_event_bg&quot;>#ffda7b&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="42"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.mipmap.ic_launcher` appears to be unused"
+        errorLine1="&lt;adaptive-icon xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.ic_launcher_background` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/ic_launcher_background.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.ic_launcher_foreground` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable-v24/ic_launcher_foreground.xml"
+            line="1"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.mipmap.ic_launcher_round` appears to be unused"
+        errorLine1="&lt;adaptive-icon xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.ic_rules_category_blue_bg_m` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/ic_rules_category_blue_bg_m.xml"
+            line="1"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.ic_rules_categry_purple_bg_2` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/ic_rules_categry_purple_bg_2.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.ic_rules_categry_red_bg_2` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/ic_rules_categry_red_bg_2.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.laundry_list` appears to be unused">
+        <location
+            file="src/main/res/drawable-hdpi/laundry_list.webp"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.sel_rules_my_to_do` appears to be unused"
+        errorLine1="&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/color/sel_rules_my_to_do.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.shape_blue_bg_fill_15_rect` appears to be unused"
+        errorLine1="&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/shape_blue_bg_fill_15_rect.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.shape_blue_bg_fill_circle` appears to be unused"
+        errorLine1="&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable-hdpi/shape_blue_bg_fill_circle.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.shape_g1_fill_15_rect` appears to be unused"
+        errorLine1="&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/shape_g1_fill_15_rect.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.shape_purple_bg_fill_15_rect` appears to be unused"
+        errorLine1="&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/shape_purple_bg_fill_15_rect.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.profile_test` appears to be unused"
+        errorLine1="    &lt;string name=&quot;profile_test&quot;>테스트 하러 가기&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="18"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.array.new_rules_day_list` appears to be unused"
+        errorLine1="    &lt;string-array name=&quot;new_rules_day_list&quot;>"
+        errorLine2="                  ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="46"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.type_go_test` appears to be unused"
+        errorLine1="    &lt;string name=&quot;type_go_test&quot;>테스트 하러 가기&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="64"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="IconDensities"
+        message="Missing the following drawables in `drawable-mdpi`: shape_blue_bg_fill_circle.xml (found in drawable-hdpi)">
+        <location
+            file="src/main/res/drawable-mdpi"/>
+    </issue>
+
+    <issue
+        id="IconDensities"
+        message="Missing the following drawables in `drawable-xhdpi`: shape_blue_bg_fill_circle.xml (found in drawable-hdpi)">
+        <location
+            file="src/main/res/drawable-xhdpi"/>
+    </issue>
+
+    <issue
+        id="IconDensities"
+        message="Missing the following drawables in `drawable-xxhdpi`: shape_blue_bg_fill_circle.xml (found in drawable-hdpi)">
+        <location
+            file="src/main/res/drawable-xxhdpi"/>
+    </issue>
+
+    <issue
+        id="TextFields"
+        message="This text field does not specify an `inputType`"
+        errorLine1="            &lt;EditText"
+        errorLine2="             ~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_event_dialog.xml"
+            line="71"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="Autofill"
+        message="Missing `autofillHints` attribute"
+        errorLine1="            &lt;EditText"
+        errorLine2="             ~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_event_dialog.xml"
+            line="71"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_roommate_card.xml"
+            line="30"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_roommate_card.xml"
+            line="40"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_roommate_card.xml"
+            line="168"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tendency_result.xml"
+            line="32"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                &lt;ImageView"
+        errorLine2="                 ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tendency_result.xml"
+            line="79"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                    &lt;ImageView"
+        errorLine2="                     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tendency_result.xml"
+            line="160"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                    &lt;ImageView"
+        errorLine2="                     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tendency_result.xml"
+            line="182"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                    &lt;ImageView"
+        errorLine2="                     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tendency_result.xml"
+            line="246"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                    &lt;ImageView"
+        errorLine2="                     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tendency_result.xml"
+            line="300"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_test_info.xml"
+            line="9"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_type_test_stop.xml"
+            line="22"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_event_dialog.xml"
+            line="28"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_event_dialog.xml"
+            line="56"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                &lt;ImageView"
+        errorLine2="                 ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_event_dialog.xml"
+            line="102"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                &lt;ImageView"
+        errorLine2="                 ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_event_dialog.xml"
+            line="117"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                &lt;ImageView"
+        errorLine2="                 ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_event_dialog.xml"
+            line="130"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                &lt;ImageView"
+        errorLine2="                 ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_event_dialog.xml"
+            line="146"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                &lt;ImageView"
+        errorLine2="                 ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_event_dialog.xml"
+            line="159"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                &lt;ImageView"
+        errorLine2="                 ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_event_dialog.xml"
+            line="175"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                &lt;ImageView"
+        errorLine2="                 ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_event_dialog.xml"
+            line="188"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                &lt;ImageView"
+        errorLine2="                 ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_event_dialog.xml"
+            line="205"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_my_to_do.xml"
+            line="78"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_profile.xml"
+            line="46"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_profile.xml"
+            line="55"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                &lt;ImageView"
+        errorLine2="                 ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_profile.xml"
+            line="79"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                    &lt;ImageView"
+        errorLine2="                     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_profile.xml"
+            line="197"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                &lt;ImageView"
+        errorLine2="                 ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_profile.xml"
+            line="245"
+            column="18"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                    &lt;ImageView"
+        errorLine2="                     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_profile.xml"
+            line="280"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                    &lt;ImageView"
+        errorLine2="                     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_profile.xml"
+            line="306"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="                    &lt;ImageView"
+        errorLine2="                     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_profile.xml"
+            line="331"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_rules.xml"
+            line="58"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_rules_table.xml"
+            line="92"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_temp_manager.xml"
+            line="30"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_today_to_do.xml"
+            line="78"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_home_event.xml"
+            line="26"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_home_event.xml"
+            line="35"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_home_homie.xml"
+            line="20"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_home_homie_copy.xml"
+            line="19"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_home_participants.xml"
+            line="21"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_home_rules.xml"
+            line="19"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_rules_my_to_do.xml"
+            line="25"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_rules_my_to_do.xml"
+            line="50"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_rules_rule.xml"
+            line="24"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_rules_tmp_managers.xml"
+            line="21"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_rules_today_to_do_item_multi.xml"
+            line="133"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_rules_today_to_do_item_none.xml"
+            line="39"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_rules_today_to_do_item_none.xml"
+            line="75"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_rules_today_to_do_item_one.xml"
+            line="29"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_rules_today_to_do_item_one.xml"
+            line="82"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_tendency_test.xml"
+            line="21"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_tendency_test.xml"
+            line="73"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="        &lt;ImageView"
+        errorLine2="         ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/item_tendency_test.xml"
+            line="114"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="LabelFor"
+        message="Missing accessibility label: provide either a view with an `android:labelFor` that references this view or provide an `android:hint`"
+        errorLine1="            &lt;EditText"
+        errorLine2="             ~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_event_dialog.xml"
+            line="71"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;우 야야야야야야야~&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;우 야야야야야야야~&quot; />"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_edit_category.xml"
+            line="11"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="RtlSymmetry"
+        message="When you define `paddingLeft` you should probably also define `paddingRight` for right-to-left symmetry"
+        errorLine1="                android:paddingLeft=&quot;12dp&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_event_dialog.xml"
+            line="82"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="RtlSymmetry"
+        message="When you define `paddingStart` you should probably also define `paddingEnd` for right-to-left symmetry"
+        errorLine1="            android:paddingStart=&quot;4dp&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_profile.xml"
+            line="37"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="RtlSymmetry"
+        message="When you define `paddingStart` you should probably also define `paddingEnd` for right-to-left symmetry"
+        errorLine1="            android:paddingStart=&quot;4dp&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_rules.xml"
+            line="39"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Consider replacing `android:paddingLeft` with `android:paddingStart=&quot;12dp&quot;` to better support right-to-left layouts"
+        errorLine1="                android:paddingLeft=&quot;12dp&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_event_dialog.xml"
+            line="82"
+            column="17"/>
+    </issue>
+
+</issues>

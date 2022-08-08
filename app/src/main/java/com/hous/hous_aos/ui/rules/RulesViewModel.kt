@@ -5,15 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hous.hous_aos.data.entity.Category
-import com.hous.hous_aos.data.entity.Homie
-import com.hous.hous_aos.data.entity.Rule
-import com.hous.hous_aos.data.model.request.MyToDoCheckRequest
-import com.hous.hous_aos.data.model.response.TempManagerRequest
-import com.hous.hous_aos.data.repository.RulesTodayRepository
+import com.hous.data.entity.Category
+import com.hous.data.entity.Homie
+import com.hous.data.entity.Rule
+import com.hous.data.model.response.TempManagerRequest
+import com.hous.data.repository.RulesTodayRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class RulesViewModel @Inject constructor(
@@ -22,7 +21,7 @@ class RulesViewModel @Inject constructor(
     private var _toDoViewType = MutableLiveData(ToDoViewType.TODAY_TO_DO)
     val toDoViewType: LiveData<ToDoViewType> get() = _toDoViewType
 
-    private var _isSelectedCategorySmile = MutableLiveData<Boolean>(true)
+    private var _isSelectedCategorySmile = MutableLiveData(true)
     val isSelectedCategorySmile: LiveData<Boolean> get() = _isSelectedCategorySmile
 
     private var _categoryOfRuleList =
@@ -51,7 +50,7 @@ class RulesViewModel @Inject constructor(
     private var _tmpTodayToDoPosition = MutableLiveData<Int>(0)
     val tmpTodayToDoPosition get() = _tmpTodayToDoPosition
 
-    private var _ruleTableSize = MutableLiveData<Int>(0)
+    private var _ruleTableSize = MutableLiveData(0)
     val ruleTableSize get() = _ruleTableSize
 
     private var _categoryName = MutableLiveData("")
@@ -65,7 +64,7 @@ class RulesViewModel @Inject constructor(
             rulesTodayRepository.getTodayTodayInfoList("")
                 .onSuccess {
                     _todayTodoList.value = it.data!!.todayTodoRules
-                    _categoryOfRuleList.value = it.data.homeRuleCategories
+                    _categoryOfRuleList.value = it.data!!.homeRuleCategories
                     _categoryOfRuleList.value = (_categoryOfRuleList.value!!).plus(
                         Category(
                             id = "62d6b94e0e9be86f165d48db",
@@ -185,7 +184,11 @@ class RulesViewModel @Inject constructor(
         val checked = myTodoList.value!![position].isChecked
         val id = myTodoList.value!![position].id
         viewModelScope.launch {
-            rulesTodayRepository.putMyToDoCheckLust("", id, MyToDoCheckRequest(checked))
+            rulesTodayRepository.putMyToDoCheckLust(
+                "",
+                id,
+                com.hous.data.model.request.MyToDoCheckRequest(checked)
+            )
                 .onSuccess {
                     Log.d(TAG, "Success - id: $id, checked: $checked ")
                 }

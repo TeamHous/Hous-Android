@@ -4,12 +4,12 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hous.hous_aos.data.entity.ResultData
-import com.hous.hous_aos.data.repository.HomeRepository
-import com.hous.hous_aos.data.repository.ProfileRepository
+import com.hous.data.entity.ResultData
+import com.hous.data.repository.HomeRepository
+import com.hous.data.repository.ProfileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class ResultViewModel @Inject constructor(
@@ -37,7 +37,7 @@ class ResultViewModel @Inject constructor(
 
     fun homieResult() {
         viewModelScope.launch {
-            homeRepository.getHomieResult(userId= userId.value!!)
+            homeRepository.getHomieResult(userId = userId.value!!)
                 .onSuccess { result ->
                     Log.d("HomieResultViewModel", "data : ${result.data}")
                     _resultData.value = result.data!!

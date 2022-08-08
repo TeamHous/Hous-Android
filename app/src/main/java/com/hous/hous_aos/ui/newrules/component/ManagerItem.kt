@@ -8,9 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.hous.hous_aos.data.entity.Homie
-import com.hous.hous_aos.ui.newrules.DayData
-import com.hous.hous_aos.ui.newrules.Manager
+import com.hous.data.entity.DayData
+import com.hous.data.entity.Homie
+import com.hous.data.entity.Manager
+import com.hous.data.entity.State
 
 @Composable
 fun ManagerItem(

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.hous_aos.data.entity.Rule
+import com.hous.data.entity.Rule
 import com.hous.hous_aos.databinding.ItemRulesTableGeneralBinding
 import com.hous.hous_aos.ui.rules.IconColor
 
@@ -19,7 +19,7 @@ class GeneralRulesAdapter :
         "GREEN" to IconColor.GREEN,
         "YELLOW" to IconColor.YELLOW,
         "GRAY" to IconColor.GRAY,
-        "PURPLE" to IconColor.PURPLE,
+        "PURPLE" to IconColor.PURPLE
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GeneralRulesViewHolder {

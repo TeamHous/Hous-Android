@@ -15,7 +15,7 @@ import com.hous.hous_aos.ui.rules.RulesViewModel
 import com.hous.hous_aos.ui.rules.ToDoViewType
 import com.hous.hous_aos.ui.rules.adapter.TodayTodoAdapter
 import com.hous.hous_aos.ui.rules.my_to_do.MyToDoFragment
-import com.hous.hous_aos.ui.rules.today_to_do.tem_dialog.TempManagerFragment
+import com.hous.hous_aos.ui.rules.today_to_do.tem_dialog.TempManagerDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,12 +51,13 @@ class TodayToDoFragment : Fragment() {
     }
 
     private fun onClickTmpManagerDialog() {
-        val dialog = TempManagerFragment()
+        val dialog = TempManagerDialogFragment()
         dialog.show(childFragmentManager, TEMP_MANAGER_DIALOG_TAG)
     }
 
     private fun initAdapter() {
-        todayTodDoAdapter = TodayTodoAdapter(::onClickTmpManagerDialog, viewModel::fetchToTmpManagerList)
+        todayTodDoAdapter =
+            TodayTodoAdapter(::onClickTmpManagerDialog, viewModel::fetchToTmpManagerList)
         binding.rvToDo.adapter = todayTodDoAdapter
     }
 

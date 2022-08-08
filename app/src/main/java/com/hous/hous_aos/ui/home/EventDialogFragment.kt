@@ -2,12 +2,10 @@ package com.hous.hous_aos.ui.home
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.text.TextUtils.substring
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
@@ -15,7 +13,7 @@ import androidx.fragment.app.activityViewModels
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentEventDialogBinding
 import com.hous.hous_aos.ui.home.adapter.EventParticipantAdapter
-import java.util.*
+import java.util.Calendar
 
 class EventDialogFragment : DialogFragment() {
 

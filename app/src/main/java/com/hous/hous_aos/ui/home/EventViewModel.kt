@@ -4,20 +4,15 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hous.hous_aos.data.entity.Event
-import com.hous.hous_aos.data.entity.Homie
-import com.hous.hous_aos.data.entity.Rule
-import com.hous.hous_aos.data.model.request.EventListRequest
-import com.hous.hous_aos.data.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class EventViewModel @Inject constructor(
-    private val homeRepository: HomeRepository
+    private val homeRepository: com.hous.data.repository.HomeRepository
 ) : ViewModel() {
     private var _tmpEventId = MutableLiveData<String>("")
     val tmpEventId get() = _tmpEventId
@@ -28,7 +23,7 @@ class EventViewModel @Inject constructor(
     private var _eventIconPosition = MutableLiveData<Int>(START_POSITION)
     val eventIconPosition get() = _eventIconPosition
 
-    private val _responseEventData = MutableLiveData<Event>()
+    private val _responseEventData = MutableLiveData<com.hous.data.entity.Event>()
     val responseEventData get() = _responseEventData
 
     private val _eventName = MutableLiveData<String>()
@@ -37,7 +32,7 @@ class EventViewModel @Inject constructor(
     private val _selectedEvent = MutableLiveData<EventIcon>(EventIcon.FIRST)
     val selectedEvent get() = _selectedEvent
 
-    private var _eventParticipantList = MutableLiveData<List<Homie>>()
+    private var _eventParticipantList = MutableLiveData<List<com.hous.data.entity.Homie>>()
     val eventParticipantList get() = _eventParticipantList
 
     // 받아올 때
@@ -54,9 +49,11 @@ class EventViewModel @Inject constructor(
      * Event 조회
      * 리사이클러뷰에 postion 받아오기*/
     fun getEventDetail(position: Int) {
-
         viewModelScope.launch {
-            Log.d(TAG, "                       position: $position , evenList.value: ${eventList.value}")
+            Log.d(
+                TAG,
+                "                       position: $position , evenList.value: ${eventList.value}"
+            )
             _eventIconPosition.value = position
             _tmpEventId.value = eventList.value!![position].id
             homeRepository.getEventList("", tmpEventId.value!!)
@@ -139,8 +136,9 @@ class EventViewModel @Inject constructor(
         }
         viewModelScope.launch {
             homeRepository.putEventList(
-                "", _tmpEventId.value!!,
-                EventListRequest(
+                "",
+                _tmpEventId.value!!,
+                com.hous.data.model.request.EventListRequest(
                     eventName = eventName.value!!,
                     date = eventDate.value!!,
                     participants = clickedTmpManagerList,
@@ -158,16 +156,16 @@ class EventViewModel @Inject constructor(
     /**************************************************************************************************
      *  영주 코드
      */
-    private val _eventList = MutableLiveData<List<Event>>()
+    private val _eventList = MutableLiveData<List<com.hous.data.entity.Event>>()
     val eventList get() = _eventList
 
     private val _keyRulesList = MutableLiveData<List<String>>()
     val keyRulesList get() = _keyRulesList
 
-    private val _todoList = MutableLiveData<List<Rule>>()
+    private val _todoList = MutableLiveData<List<com.hous.data.entity.Rule>>()
     val todoList get() = _todoList
 
-    private val _homieList = MutableLiveData<List<Homie>>()
+    private val _homieList = MutableLiveData<List<com.hous.data.entity.Homie>>()
     val homieList get() = _homieList
 
     private val _roomCode = MutableLiveData<String>()
@@ -178,14 +176,14 @@ class EventViewModel @Inject constructor(
             homeRepository.getHomeList("")
                 .onSuccess { result ->
                     Log.d("asdf", "success ${result.data}")
-                    val tempEventList = mutableListOf(Event())
+                    val tempEventList = mutableListOf(com.hous.data.entity.Event())
                     result.data!!.eventList.forEach { tempEventList.add(it) }
                     _eventList.value = tempEventList
                     _roomCode.value = result.data!!.roomCode
                     _todoList.value = result.data!!.todoList
                     _keyRulesList.value = result.data!!.keyRulesList
                     _homieList.value = result.data!!.homieProfileList
-                    val tempHomieList = mutableListOf(Homie())
+                    val tempHomieList = mutableListOf(com.hous.data.entity.Homie())
                     _homieList.value = _homieList.value?.plus(tempHomieList)
                 }
                 .onFailure { result ->
@@ -202,7 +200,7 @@ class EventViewModel @Inject constructor(
         viewModelScope.launch {
             homeRepository.addEvent(
                 "",
-                EventListRequest(
+                com.hous.data.model.request.EventListRequest(
                     eventName = eventName.value!!,
                     date = eventDate.value!!,
                     participants = clickedTmpManagerList,
@@ -231,7 +229,7 @@ class EventViewModel @Inject constructor(
     private suspend fun getEventList() {
         homeRepository.getHomeList("").onSuccess { result ->
             Log.d("asdf", "success ${result.message}")
-            val tempEventList = mutableListOf(Event())
+            val tempEventList = mutableListOf(com.hous.data.entity.Event())
             result.data!!.eventList.forEach { tempEventList.add(it) }
             _eventList.value = tempEventList
         }.onFailure { result ->

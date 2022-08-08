@@ -1,7 +1,7 @@
 package com.hous.hous_aos.util
 
+import com.hous.data.entity.ColorSet
 import com.hous.hous_aos.R
-import com.hous.hous_aos.data.entity.ColorSet
 
 fun String.getColorSet(colorType: String): ColorSet {
     return when (colorType) {

@@ -49,7 +49,7 @@ class RulesFragment : Fragment() {
             ::onLongClickCategoryIcon,
             ::onCategoryClick,
             onPlusClick = { onClickPlusIcon() },
-            onChangeIsSelected = { setCategoryIsSelected(it) },
+            onChangeIsSelected = { setCategoryIsSelected(it) }
         )
         binding.rvRules.adapter = homeRulesCategoryAdapter
     }

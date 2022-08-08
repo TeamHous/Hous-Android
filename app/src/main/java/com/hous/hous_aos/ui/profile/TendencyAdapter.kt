@@ -5,16 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.hous.data.entity.TypeTest
 import com.hous.hous_aos.databinding.ItemTendencyTestBinding
 
 class TendencyAdapter(
-    private val select: (Int, TypeState) -> Unit,
+    private val select: (Int, com.hous.data.entity.TypeState) -> Unit,
     private val backPage: () -> Unit,
     private val nextPage: () -> Unit,
     private val sendData: () -> Unit,
     private val showDialog: () -> Unit
 ) :
-    ListAdapter<TypeTest, TendencyAdapter.TendencyViewHolder>(tendencyDiffUtil) {
+    ListAdapter<com.hous.data.entity.TypeTest, TendencyAdapter.TendencyViewHolder>(tendencyDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TendencyViewHolder {
         val binding =
@@ -28,30 +29,30 @@ class TendencyAdapter(
 
     class TendencyViewHolder(
         private val binding: ItemTendencyTestBinding,
-        private val select: (Int, TypeState) -> Unit,
+        private val select: (Int, com.hous.data.entity.TypeState) -> Unit,
         private val backPage: () -> Unit,
         private val nextPage: () -> Unit,
         private val sendData: () -> Unit,
         private val showDialog: () -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(typeTest: TypeTest) {
+        fun onBind(typeTest: com.hous.data.entity.TypeTest) {
             with(binding) {
                 data = typeTest
                 tvAnswer1.setOnClickListener {
-                    select(adapterPosition, TypeState.ONE)
+                    select(adapterPosition, com.hous.data.entity.TypeState.ONE)
                     if (typeTest.testNum == 15) {
                         sendData()
                     }
                 }
                 tvAnswer2.setOnClickListener {
-                    select(adapterPosition, TypeState.TWO)
+                    select(adapterPosition, com.hous.data.entity.TypeState.TWO)
                     if (typeTest.testNum == 15) {
                         sendData()
                     }
                 }
                 tvAnswer3.setOnClickListener {
-                    select(adapterPosition, TypeState.THREE)
+                    select(adapterPosition, com.hous.data.entity.TypeState.THREE)
                     if (typeTest.testNum == 15) {
                         sendData()
                     }
@@ -60,9 +61,9 @@ class TendencyAdapter(
                 ivLeft.setOnClickListener { backPage() }
                 ivRight.setOnClickListener { nextPage() }
 
-                tvAnswer1.isSelected = typeTest.type == TypeState.ONE
-                tvAnswer2.isSelected = typeTest.type == TypeState.TWO
-                tvAnswer3.isSelected = typeTest.type == TypeState.THREE
+                tvAnswer1.isSelected = typeTest.type == com.hous.data.entity.TypeState.ONE
+                tvAnswer2.isSelected = typeTest.type == com.hous.data.entity.TypeState.TWO
+                tvAnswer3.isSelected = typeTest.type == com.hous.data.entity.TypeState.THREE
 
                 tvQuit.setOnClickListener { showDialog() }
             }
@@ -70,12 +71,19 @@ class TendencyAdapter(
     }
 
     companion object {
-        private val tendencyDiffUtil = object : DiffUtil.ItemCallback<TypeTest>() {
-            override fun areItemsTheSame(oldItem: TypeTest, newItem: TypeTest): Boolean =
-                oldItem.id == newItem.id
+        private val tendencyDiffUtil =
+            object : DiffUtil.ItemCallback<TypeTest>() {
+                override fun areItemsTheSame(
+                    oldItem: TypeTest,
+                    newItem: TypeTest
+                ): Boolean =
+                    oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: TypeTest, newItem: TypeTest): Boolean =
-                oldItem == newItem
-        }
+                override fun areContentsTheSame(
+                    oldItem: TypeTest,
+                    newItem: TypeTest
+                ): Boolean =
+                    oldItem == newItem
+            }
     }
 }

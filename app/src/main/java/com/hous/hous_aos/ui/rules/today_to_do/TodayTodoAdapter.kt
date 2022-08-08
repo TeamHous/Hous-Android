@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.hous_aos.data.entity.Homie
-import com.hous.hous_aos.data.entity.Rule
+import com.hous.data.entity.Rule
 import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemMultiBinding
 import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemNoneBinding
 import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemOneBinding
@@ -82,7 +81,7 @@ class TodayTodoAdapter(
         private val onClickIcon: () -> Unit,
         private val binding: ItemRulesTodayToDoItemNoneBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Rule) {
+        fun onBind(data: com.hous.data.entity.Rule) {
             Log.d(TAG, "NONE : ,  data: $data")
             binding.data = data
             binding.ivManagerEmpty.setOnClickListener {
@@ -97,7 +96,7 @@ class TodayTodoAdapter(
         private val onClickIcon: () -> Unit,
         private val binding: ItemRulesTodayToDoItemOneBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Rule) {
+        fun onBind(data: com.hous.data.entity.Rule) {
             Log.d(TAG, "One : ,  data: $data")
             binding.data = data
             binding.tvManager.text =
@@ -110,7 +109,7 @@ class TodayTodoAdapter(
             }
         }
 
-        private fun changeListToString(managerDataList: List<Homie>): String {
+        private fun changeListToString(managerDataList: List<com.hous.data.entity.Homie>): String {
             val textList = managerDataList.map { it.userName }
             return textList[0]
         }
@@ -133,7 +132,7 @@ class TodayTodoAdapter(
         private val onClickIcon: () -> Unit,
         private val binding: ItemRulesTodayToDoItemMultiBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Rule) {
+        fun onBind(data: com.hous.data.entity.Rule) {
             Log.d(TAG, "MULTI : ,  data: $data")
             binding.data = data
             binding.tvManager.text =
@@ -168,7 +167,7 @@ class TodayTodoAdapter(
             }
         }
 
-        private fun changeListToString(managerDataList: List<Homie>): String {
+        private fun changeListToString(managerDataList: List<com.hous.data.entity.Homie>): String {
             val textList = managerDataList.map { it.userName }
             val sizeOfTextList = textList.size
             return if (sizeOfTextList in 2..3) {

@@ -3,10 +3,10 @@ package com.hous.hous_aos.ui.newrules
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hous.hous_aos.data.entity.Category
-import com.hous.hous_aos.data.entity.Homie
-import com.hous.hous_aos.data.repository.NewRulesRepository
-import com.hous.hous_aos.ui.newrules.component.State
+import com.hous.data.entity.DayData
+import com.hous.data.entity.Manager
+import com.hous.data.entity.State
+import com.hous.data.repository.NewRulesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class NewRulesViewModel @Inject constructor(
-    private val newRulesRepository: NewRulesRepository,
+    private val newRulesRepository: NewRulesRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(NewRulesUiState())
     val uiState = _uiState.asStateFlow()
@@ -37,7 +37,7 @@ class NewRulesViewModel @Inject constructor(
                     Log.d("NewRulesViewModel", "getNewRuleList success : ${it.message}")
                     _uiState.value = _uiState.value.copy(
                         ruleCategory = it.data!!.ruleCategories,
-                        homies = it.data.homies
+                        homies = it.data!!.homies
                     )
                     setUserMapping()
                 }
@@ -110,7 +110,7 @@ class NewRulesViewModel @Inject constructor(
                         DayData("목", State.UNSELECT),
                         DayData("금", State.UNSELECT),
                         DayData("토", State.UNSELECT),
-                        DayData("일", State.UNSELECT),
+                        DayData("일", State.UNSELECT)
                     )
                 )
             )
@@ -126,7 +126,7 @@ class NewRulesViewModel @Inject constructor(
                         DayData("목", State.BLOCK),
                         DayData("금", State.BLOCK),
                         DayData("토", State.BLOCK),
-                        DayData("일", State.BLOCK),
+                        DayData("일", State.BLOCK)
                     )
                 )
             )
@@ -147,10 +147,11 @@ class NewRulesViewModel @Inject constructor(
         }
     }
 
-    fun choiceManager(managerIndex: Int, homie: Homie) {
-        if (uiState.value.ManagerList[managerIndex].managerHomie.userName != "담당자 없음")
+    fun choiceManager(managerIndex: Int, homie: com.hous.data.entity.Homie) {
+        if (uiState.value.ManagerList[managerIndex].managerHomie.userName != "담당자 없음") {
             _uiState.value.homieState[uiState.value.ManagerList[managerIndex].managerHomie.userName] =
                 true
+        }
         val tempManager = Manager(
             managerHomie = homie,
             dayDataList = uiState.value.ManagerList[managerIndex].dayDataList
@@ -189,17 +190,27 @@ class NewRulesViewModel @Inject constructor(
     fun addNewRule() {
         Log.d("NewRulesViewModel", "data : ${uiState.value}")
         viewModelScope.launch {
-            newRulesRepository.addNewRule(uiState.value)
+            newRulesRepository.addNewRule(
+                ruleName = uiState.value.ruleName,
+                categoryId = uiState.value.categoryId,
+                notificationState = uiState.value.notificationState,
+                checkBoxState = uiState.value.checkBoxState,
+                managerList = uiState.value.ManagerList
+            )
                 .onSuccess { Log.d("NewRulesViewModel", "addNewRule success : ${it.message}") }
                 .onFailure { Log.d("NewRulesViewModel", "addNewRule fail : ${it.message}") }
         }
     }
 
-    private fun nextManager(): Homie {
-        var tempHomie = Homie("", "담당자 없음", typeColor = "NULL")
+    private fun nextManager(): com.hous.data.entity.Homie {
+        var tempHomie = com.hous.data.entity.Homie("", "담당자 없음", typeColor = "NULL")
         for (i in uiState.value.homies) {
             if (uiState.value.homieState[i.userName]!!) {
-                tempHomie = Homie(id = i.id, userName = i.userName, typeColor = i.typeColor)
+                tempHomie = com.hous.data.entity.Homie(
+                    id = i.id,
+                    userName = i.userName,
+                    typeColor = i.typeColor
+                )
                 uiState.value.homieState[tempHomie.userName] = false
                 break
             }
@@ -223,8 +234,9 @@ class NewRulesViewModel @Inject constructor(
                             uiState.value.ManagerList[0].dayDataList.forEach { dayData ->
                                 if (dayData.dayState == State.SELECT) isCheck = false
                             }
-                            if (isCheck && uiState.value.ManagerList[0].managerHomie.userName == "담당자 없음")
+                            if (isCheck && uiState.value.ManagerList[0].managerHomie.userName == "담당자 없음") {
                                 setCheckBoxState("changeDayState select", State.UNSELECT)
+                            }
                         }
                     }
                 }
@@ -240,45 +252,27 @@ data class NewRulesUiState(
     val categoryId: String = "",
     val notificationState: Boolean = false,
     val checkBoxState: State = State.UNSELECT,
-    val ruleCategory: List<Category> =
+    val ruleCategory: List<com.hous.data.entity.Category> =
         listOf(
-            Category("1", "청소기"),
-            Category("2", "분리수거"),
-            Category("3", "세탁기"),
-            Category("4", "물 주기"),
+            com.hous.data.entity.Category("1", "청소기"),
+            com.hous.data.entity.Category("2", "분리수거"),
+            com.hous.data.entity.Category("3", "세탁기"),
+            com.hous.data.entity.Category("4", "물 주기")
         ),
-    val homies: List<Homie> =
+    val homies: List<com.hous.data.entity.Homie> =
         listOf(
-            Homie("1", "강원용", typeColor = "RED"),
-            Homie("2", "이영주", typeColor = "BLUE"),
-            Homie("3", "이준원", typeColor = "YELLOW"),
-            Homie("4", "최인영", typeColor = "GREEN"),
-            Homie("5", "최소현", typeColor = "PURPLE"),
+            com.hous.data.entity.Homie("1", "강원용", typeColor = "RED"),
+            com.hous.data.entity.Homie("2", "이영주", typeColor = "BLUE"),
+            com.hous.data.entity.Homie("3", "이준원", typeColor = "YELLOW"),
+            com.hous.data.entity.Homie("4", "최인영", typeColor = "GREEN"),
+            com.hous.data.entity.Homie("5", "최소현", typeColor = "PURPLE")
         ),
     val homieState: HashMap<String, Boolean> = hashMapOf(
         "강원용" to true,
         "이영주" to true,
         "이준원" to true,
         "최인영" to true,
-        "최소현" to true,
+        "최소현" to true
     ),
     val ManagerList: List<Manager> = listOf(Manager())
-)
-
-data class Manager(
-    val managerHomie: Homie = Homie(userName = "담당자 없음", typeColor = "NULL"),
-    val dayDataList: List<DayData> = listOf(
-        DayData("월", State.UNSELECT),
-        DayData("화", State.UNSELECT),
-        DayData("수", State.UNSELECT),
-        DayData("목", State.UNSELECT),
-        DayData("금", State.UNSELECT),
-        DayData("토", State.UNSELECT),
-        DayData("일", State.UNSELECT),
-    )
-)
-
-data class DayData(
-    val day: String,
-    val dayState: State
 )

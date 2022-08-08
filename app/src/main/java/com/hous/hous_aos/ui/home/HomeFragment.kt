@@ -2,7 +2,6 @@ package com.hous.hous_aos.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -85,8 +84,7 @@ class HomeFragment : Fragment() {
             if (it.isEmpty()) {
                 binding.tvRulesEmpty.visibility = View.VISIBLE
                 binding.rvRules.visibility = View.INVISIBLE
-            }
-            else {
+            } else {
                 binding.tvRulesEmpty.visibility = View.INVISIBLE
                 binding.rvRules.visibility = View.VISIBLE
             }
@@ -103,8 +101,7 @@ class HomeFragment : Fragment() {
             if (it.isEmpty()) {
                 binding.tvToDoEmpty.visibility = View.VISIBLE
                 binding.rvToDo.visibility = View.INVISIBLE
-            }
-            else {
+            } else {
                 binding.tvToDoEmpty.visibility = View.INVISIBLE
                 binding.rvToDo.visibility = View.VISIBLE
             }

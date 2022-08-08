@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.hous.data.entity.Event
 import com.hous.hous_aos.R
-import com.hous.hous_aos.data.entity.Event
 import com.hous.hous_aos.databinding.ItemHomeEventBinding
 
 class EventAdapter(
@@ -27,10 +27,10 @@ class EventAdapter(
 
     class EventViewHolder(
         val binding: ItemHomeEventBinding,
-        private val onClickEventIcon: (Int) -> Unit,
+        private val onClickEventIcon: (Int) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Event) {
+        fun onBind(data: com.hous.data.entity.Event) {
             binding.event = data
             binding.position = absoluteAdapterPosition
             when (data.eventIcon) {
@@ -63,11 +63,17 @@ class EventAdapter(
     }
 
     companion object {
-        private val eventDiffUtil = object : DiffUtil.ItemCallback<Event>() {
-            override fun areItemsTheSame(oldItem: Event, newItem: Event): Boolean =
+        private val eventDiffUtil = object : DiffUtil.ItemCallback<com.hous.data.entity.Event>() {
+            override fun areItemsTheSame(
+                oldItem: com.hous.data.entity.Event,
+                newItem: com.hous.data.entity.Event
+            ): Boolean =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: Event, newItem: Event): Boolean =
+            override fun areContentsTheSame(
+                oldItem: com.hous.data.entity.Event,
+                newItem: com.hous.data.entity.Event
+            ): Boolean =
                 oldItem == newItem
         }
         private val TAG = "dialod"

@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
-import com.hous.hous_aos.data.entity.Category
+import com.hous.data.entity.Category
 
 @Composable
 fun CategoryItem(

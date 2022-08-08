@@ -13,7 +13,7 @@
 
         <variable
             name="data"
-            type="com.hous.hous_aos.data.entity.Category" />
+            type="com.hous.data.entity.Category" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

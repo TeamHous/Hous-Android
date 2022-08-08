@@ -1,19 +1,18 @@
 package com.hous.hous_aos.ui.home.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.hous.data.entity.Homie
 import com.hous.hous_aos.R
-import com.hous.hous_aos.data.entity.Homie
 import com.hous.hous_aos.databinding.ItemHomeHomieBinding
 import com.hous.hous_aos.databinding.ItemHomeHomieCopyBinding
 
 class HomieAdapter(
     private val showToast: () -> Unit,
-    private val onClickHomie: (Int) -> Unit,
+    private val onClickHomie: (Int) -> Unit
 ) :
     ListAdapter<Homie, RecyclerView.ViewHolder>(homieDiffUtil) {
 
