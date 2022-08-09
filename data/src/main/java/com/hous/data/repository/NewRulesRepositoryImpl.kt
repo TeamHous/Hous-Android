@@ -1,14 +1,14 @@
 package com.hous.data.repository
 
 import android.util.Log
-import com.hous.data.entity.DayData
-import com.hous.data.entity.Manager
-import com.hous.data.entity.State
-import com.hous.data.model.WrapperClass
 import com.hous.data.model.request.Member
 import com.hous.data.model.request.NewRulesRequest
-import com.hous.data.model.response.NewRulesListResponse
 import com.hous.data.source.remote.RemoteNewRulesDataSource
+import com.hous.domain.model.DayData
+import com.hous.domain.model.Manager
+import com.hous.domain.model.NewRuleInfo
+import com.hous.domain.model.State
+import com.hous.domain.repository.NewRulesRepository
 import javax.inject.Inject
 
 class NewRulesRepositoryImpl @Inject constructor(
@@ -20,7 +20,7 @@ class NewRulesRepositoryImpl @Inject constructor(
         notificationState: Boolean,
         checkBoxState: State,
         managerList: List<Manager>
-    ): Result<WrapperClass<Any>> {
+    ) {
         val ruleMember = managerList.map {
             val dayList = dayToInt(it.dayDataList)
             Member(
@@ -36,11 +36,17 @@ class NewRulesRepositoryImpl @Inject constructor(
             ruleMembers = if (checkBoxState != State.SELECT) ruleMember else emptyList()
         )
         Log.d("NewRulesViewModel", "repository rules data: $newRulesRequest")
-        return runCatching { remoteNewRulesDataSource.addNewRule(newRulesRequest) }
+        remoteNewRulesDataSource.addNewRule(newRulesRequest)
     }
 
-    override suspend fun getNewRuleList(roomId: String): Result<WrapperClass<NewRulesListResponse>> =
-        runCatching { remoteNewRulesDataSource.getNewRuleList(roomId) }
+    override suspend fun getNewRuleList(roomId: String): Result<NewRuleInfo> =
+        runCatching {
+            val response = remoteNewRulesDataSource.getNewRuleList(roomId)
+            NewRuleInfo(
+                response.data!!.ruleCategories.map { it.toCategory() },
+                response.data.homies.map { it.toHomie() }
+            )
+        }
 
     private fun dayToInt(dayDataList: List<DayData>): List<Int> {
         val tempList = mutableListOf<Int>()

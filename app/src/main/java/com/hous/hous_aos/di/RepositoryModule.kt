@@ -2,7 +2,7 @@ package com.hous.hous_aos.di
 
 import com.hous.data.repository.HomeRepository
 import com.hous.data.repository.HomeRepositoryImpl
-import com.hous.data.repository.NewRulesRepository
+import com.hous.domain.repository.NewRulesRepository
 import com.hous.data.repository.NewRulesRepositoryImpl
 import com.hous.data.repository.ProfileRepository
 import com.hous.data.repository.ProfileRepositoryImpl

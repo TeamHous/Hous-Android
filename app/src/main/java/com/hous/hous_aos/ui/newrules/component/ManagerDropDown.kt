@@ -30,8 +30,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.hous.hous_aos.R
-import com.hous.data.entity.Homie
-import com.hous.data.entity.State
+import com.hous.domain.model.Homie
+import com.hous.domain.model.State
 import com.hous.hous_aos.ui.newrules.isAddDay
 
 @Composable

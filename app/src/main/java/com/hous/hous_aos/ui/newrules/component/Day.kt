@@ -17,8 +17,8 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
-import com.hous.data.entity.DayData
-import com.hous.data.entity.State
+import com.hous.domain.model.DayData
+import com.hous.domain.model.State
 import com.hous.hous_aos.R
 
 @Composable
