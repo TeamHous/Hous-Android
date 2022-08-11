@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.hous.hous_aos.R
-import com.hous.data.entity.Category
+import com.hous.domain.model.Category
 
 @Composable
 fun CategoryDropDownMenu(

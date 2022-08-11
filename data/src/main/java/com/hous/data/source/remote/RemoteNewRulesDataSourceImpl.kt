@@ -12,8 +12,9 @@ class RemoteNewRulesDataSourceImpl @Inject constructor(
 ) : RemoteNewRulesDataSource {
     private val ROOM_ID = BuildConfig.ROOM_ID
 
-    override suspend fun addNewRule(newRulesRequest: NewRulesRequest): WrapperClass<Any> =
-        newRulesApi.addNewRule(ROOM_ID, newRulesRequest)
+    override suspend fun addNewRule(newRulesRequest: NewRulesRequest) {
+        runCatching { newRulesApi.addNewRule(ROOM_ID, newRulesRequest) }
+    }
 
     override suspend fun getNewRuleList(roomId: String): WrapperClass<NewRulesListResponse> =
         newRulesApi.getNewRuleList(ROOM_ID)

@@ -16,8 +16,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.hous.domain.model.Homie
 import com.hous.hous_aos.R
-import com.hous.data.entity.Homie
 import com.hous.hous_aos.ui.newrules.isAddDay
 
 @Composable

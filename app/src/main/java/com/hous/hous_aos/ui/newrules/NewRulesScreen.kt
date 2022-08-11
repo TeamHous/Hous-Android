@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.hous.domain.model.Homie
 import com.hous.hous_aos.R
 import com.hous.hous_aos.ui.newrules.component.CategoryItem
 import com.hous.hous_aos.ui.newrules.component.ManagerItem
@@ -176,7 +177,7 @@ fun NewRulesScreen(
 }
 
 fun isAddDay(
-    homies: List<com.hous.data.entity.Homie>,
+    homies: List<Homie>,
     homieState: HashMap<String, Boolean>
 ): Boolean {
     var temp = false

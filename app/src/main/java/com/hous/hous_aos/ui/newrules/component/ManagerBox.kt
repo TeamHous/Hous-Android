@@ -20,9 +20,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.hous.data.entity.Homie
-import com.hous.data.entity.Manager
-import com.hous.data.entity.State
+import com.hous.domain.model.Homie
+import com.hous.domain.model.Manager
+import com.hous.domain.model.State
 import com.hous.hous_aos.R
 
 @Composable
@@ -41,7 +41,7 @@ fun ManagerBox(
             .size(36.dp)
             .clip(shape = RoundedCornerShape(radius))
             .background(colorResource(id = R.color.white))
-            .padding(horizontal = 12.dp),
+            .padding(horizontal = 12.dp)
     ) {
         val color = when (manager.managerHomie.typeColor) {
             "RED" -> colorResource(id = R.color.hous_red)
@@ -54,7 +54,7 @@ fun ManagerBox(
         }
         Row(
             modifier = Modifier.fillMaxSize(),
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             if (color != null) {
                 Box(
@@ -79,7 +79,7 @@ fun ManagerBox(
 
         Box(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
         ) {
             ManagerDropDownMenu(
                 managerIndex = managerIndex,

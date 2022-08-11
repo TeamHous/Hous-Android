@@ -8,10 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.hous.data.entity.DayData
-import com.hous.data.entity.Homie
-import com.hous.data.entity.Manager
-import com.hous.data.entity.State
+import com.hous.domain.model.DayData
+import com.hous.domain.model.Homie
+import com.hous.domain.model.Manager
+import com.hous.domain.model.State
 
 @Composable
 fun ManagerItem(
