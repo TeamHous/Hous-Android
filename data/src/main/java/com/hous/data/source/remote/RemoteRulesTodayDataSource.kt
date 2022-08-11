@@ -4,34 +4,36 @@ import com.hous.data.entity.Rule
 import com.hous.data.model.WrapperClass
 import com.hous.data.model.request.MyToDoCheckRequest
 import com.hous.data.model.response.RulesTableResponse
-import com.hous.data.model.response.RulesTodayInfoListResponse
-import com.hous.data.model.response.TempManagerRequest
-import com.hous.data.model.response.TempManagerResponse
+import com.hous.data.model.request.TempManagerRequest
+import com.hous.domain.model.RuleInfo
+import com.hous.domain.model.rules.RulesTodayInfo
+import com.hous.domain.model.TempManagerInfo
+import com.hous.domain.model.rules.RulesTableInfo
 
 interface RemoteRulesTodayDataSource {
-    suspend fun getTodayTodayInfoList(roomId: String): WrapperClass<RulesTodayInfoListResponse>
+    suspend fun getTodayTodayInfoList(roomId: String): RulesTodayInfo?
 
     suspend fun getTempManagerInfoList(
         roomId: String,
         ruleId: String
-    ): WrapperClass<TempManagerResponse>
+    ): TempManagerInfo?
 
     suspend fun putTempManagerInfoList(
         roomId: String,
         ruleId: String,
         tmpRuleMembers: TempManagerRequest
-    ): WrapperClass<Any>
+    ): Any?
 
-    suspend fun getMyToDoInfoList(roomId: String): WrapperClass<List<Rule>>
+    suspend fun getMyToDoInfoList(roomId: String): List<RuleInfo>?
 
     suspend fun putMyToDoCheckLust(
         roomId: String,
         ruleId: String,
         isCheck: MyToDoCheckRequest
-    ): WrapperClass<MyToDoCheckRequest>
+    )
 
     suspend fun getRuleTableInfoList(
         roomId: String,
         categoryId: String
-    ): WrapperClass<RulesTableResponse>
+    ): RulesTableInfo?
 }

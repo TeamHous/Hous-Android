@@ -1,7 +1,7 @@
 package com.hous.data.entity
 
 import com.google.gson.annotations.SerializedName
-import com.hous.domain.model.Homie
+import com.hous.domain.model.HomieInfo
 
 data class Homie(
     @SerializedName("_id") val id: String? = null,
@@ -16,7 +16,7 @@ data class Homie(
     var isChecked: Boolean = false,
     val notificationState: Boolean = false
 ) {
-    fun toHomie(): Homie = Homie(
+    fun toHomieInfo(): HomieInfo = HomieInfo(
         id,
         userName,
         typeName,
