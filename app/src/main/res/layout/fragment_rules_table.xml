@@ -37,6 +37,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:itemCount="3"
+                android:clipToPadding="true"
                 tools:listitem="@layout/item_rules_table_general" />
 
             <androidx.constraintlayout.widget.ConstraintLayout

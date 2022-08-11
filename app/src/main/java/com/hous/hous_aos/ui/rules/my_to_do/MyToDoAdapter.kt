@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.data.entity.Rule
+import com.hous.domain.model.RuleInfo
 import com.hous.hous_aos.databinding.ItemRulesMyToDoBinding
 
 class MyToDoAdapter(private val onClickIcon: (Int) -> Unit) :
-    ListAdapter<Rule, MyToDoAdapter.MyToDoViewHolder>(
+    ListAdapter<RuleInfo, MyToDoAdapter.MyToDoViewHolder>(
         MyTodoDiffUtilCallback
     ) {
     private val iconTypeHashMap: HashMap<String, IconType> = hashMapOf(
@@ -28,7 +28,7 @@ class MyToDoAdapter(private val onClickIcon: (Int) -> Unit) :
         private val iconTypeHashMap: HashMap<String, IconType>,
         private val onClickIcon: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Rule) {
+        fun onBind(data: RuleInfo) {
             binding.data = data
             binding.iconType = iconTypeHashMap[data.categoryIcon]
             binding.clMyToDo.setOnClickListener {
@@ -55,18 +55,18 @@ class MyToDoAdapter(private val onClickIcon: (Int) -> Unit) :
 
     companion object {
         private val MyTodoDiffUtilCallback =
-            object : DiffUtil.ItemCallback<Rule>() {
+            object : DiffUtil.ItemCallback<RuleInfo>() {
                 override fun areItemsTheSame(
-                    oldItem: Rule,
-                    newItem: Rule
+                    oldItem: RuleInfo,
+                    newItem: RuleInfo
 
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: Rule,
-                    newItem: Rule
+                    oldItem: RuleInfo,
+                    newItem: RuleInfo
                 ): Boolean {
                     return oldItem == newItem
                 }

@@ -11,7 +11,7 @@
 
         <variable
             name="data"
-            type="com.hous.data.entity.Homie" />
+            type="com.hous.domain.model.HomieInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

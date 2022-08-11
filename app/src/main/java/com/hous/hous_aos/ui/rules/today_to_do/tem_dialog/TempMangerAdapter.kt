@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.data.entity.Homie
+import com.hous.domain.model.HomieInfo
 import com.hous.hous_aos.databinding.ItemRulesTmpManagersBinding
 import com.hous.hous_aos.ui.rules.HomieIconType
 
 class TempMangerAdapter(private val setSelectedTmpManager: (Int) -> Unit) :
-    ListAdapter<Homie, TempMangerAdapter.TmpManagerViewHolder>(tempManagerDiffUtil) {
+    ListAdapter<HomieInfo, TempMangerAdapter.TmpManagerViewHolder>(tempManagerDiffUtil) {
     private val homieIconHashMap: HashMap<String, HomieIconType> = hashMapOf(
         "RED" to HomieIconType.RED,
         "BLUE" to HomieIconType.BLUE,
@@ -37,7 +37,7 @@ class TempMangerAdapter(private val setSelectedTmpManager: (Int) -> Unit) :
         private val setSelectedTmpManager: (Int) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Homie) {
+        fun onBind(data: HomieInfo) {
             binding.data = data
             binding.homieIconType = homieIconHashMap[data.typeColor]
             binding.ivManagerIcon.setOnClickListener {
@@ -48,17 +48,17 @@ class TempMangerAdapter(private val setSelectedTmpManager: (Int) -> Unit) :
     }
 
     companion object {
-        private val tempManagerDiffUtil = object : DiffUtil.ItemCallback<Homie>() {
+        private val tempManagerDiffUtil = object : DiffUtil.ItemCallback<HomieInfo>() {
             override fun areItemsTheSame(
-                oldItem: Homie,
-                newItem: Homie
+                oldItem: HomieInfo,
+                newItem: HomieInfo
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: Homie,
-                newItem: Homie
+                oldItem: HomieInfo,
+                newItem: HomieInfo
             ): Boolean {
                 return oldItem == newItem
             }

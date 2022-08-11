@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.data.entity.Rule
+import com.hous.domain.model.RuleInfo
 import com.hous.hous_aos.databinding.ItemRulesTableKeysBinding
 
 class KeyRulesAdapter :
-    ListAdapter<Rule, KeyRulesAdapter.KeyRulesViewHolder>(rulesTableDiffUtil) {
+    ListAdapter<RuleInfo, KeyRulesAdapter.KeyRulesViewHolder>(rulesTableDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KeyRulesViewHolder {
         val binding =
@@ -24,18 +24,18 @@ class KeyRulesAdapter :
 
     class KeyRulesViewHolder(private val binding: ItemRulesTableKeysBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Rule) {
+        fun onBind(data: RuleInfo) {
             binding.data = data
         }
     }
 
     companion object {
-        private val rulesTableDiffUtil = object : DiffUtil.ItemCallback<Rule>() {
-            override fun areItemsTheSame(oldItem: Rule, newItem: Rule): Boolean {
+        private val rulesTableDiffUtil = object : DiffUtil.ItemCallback<RuleInfo>() {
+            override fun areItemsTheSame(oldItem: RuleInfo, newItem: RuleInfo): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: Rule, newItem: Rule): Boolean {
+            override fun areContentsTheSame(oldItem: RuleInfo, newItem: RuleInfo): Boolean {
                 return oldItem == newItem
             }
         }

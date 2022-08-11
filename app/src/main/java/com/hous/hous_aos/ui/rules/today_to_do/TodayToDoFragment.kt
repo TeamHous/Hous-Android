@@ -13,7 +13,6 @@ import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentTodayToDoBinding
 import com.hous.hous_aos.ui.rules.RulesViewModel
 import com.hous.hous_aos.ui.rules.ToDoViewType
-import com.hous.hous_aos.ui.rules.adapter.TodayTodoAdapter
 import com.hous.hous_aos.ui.rules.my_to_do.MyToDoFragment
 import com.hous.hous_aos.ui.rules.today_to_do.tem_dialog.TempManagerDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
