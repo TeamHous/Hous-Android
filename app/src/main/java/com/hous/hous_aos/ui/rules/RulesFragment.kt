@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.hous.hous_aos.BuildConfig
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.FragmentRulesBinding
 import com.hous.hous_aos.ui.rules.my_to_do.MyToDoFragment

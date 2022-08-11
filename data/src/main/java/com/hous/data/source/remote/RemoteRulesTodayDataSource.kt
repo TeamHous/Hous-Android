@@ -1,14 +1,11 @@
 package com.hous.data.source.remote
 
-import com.hous.data.entity.Rule
-import com.hous.data.model.WrapperClass
 import com.hous.data.model.request.MyToDoCheckRequest
-import com.hous.data.model.response.RulesTableResponse
 import com.hous.data.model.request.TempManagerRequest
 import com.hous.domain.model.RuleInfo
-import com.hous.domain.model.rules.RulesTodayInfo
 import com.hous.domain.model.TempManagerInfo
 import com.hous.domain.model.rules.RulesTableInfo
+import com.hous.domain.model.rules.RulesTodayInfo
 
 interface RemoteRulesTodayDataSource {
     suspend fun getTodayTodayInfoList(roomId: String): RulesTodayInfo?

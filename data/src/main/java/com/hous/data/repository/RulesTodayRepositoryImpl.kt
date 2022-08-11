@@ -1,10 +1,7 @@
 package com.hous.data.repository
 
-import com.hous.data.entity.Rule
-import com.hous.data.model.WrapperClass
 import com.hous.data.model.request.MyToDoCheckRequest
 import com.hous.data.model.request.TempManagerRequest
-import com.hous.data.model.response.RulesTableResponse
 import com.hous.data.source.remote.RemoteRulesTodayDataSource
 import com.hous.domain.model.RuleInfo
 import com.hous.domain.model.TempManagerInfo
@@ -37,7 +34,6 @@ class RulesTodayRepositoryImpl @Inject constructor(
 
     override suspend fun getMyTodoInfoList(roomId: String): List<RuleInfo>? {
         return remoteRulesTodayDataSource.getMyToDoInfoList(roomId)
-
     }
 
     override suspend fun putMyToDoCheckLust(

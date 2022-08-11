@@ -29,8 +29,8 @@ class NewRulesViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
     val buttonState: StateFlow<Boolean> = uiState.map {
         it.ruleName.isNotEmpty() &&
-                it.categoryName.isNotEmpty() &&
-                (uiState.value.checkBoxState == State.SELECT || isDayCheck())
+            it.categoryName.isNotEmpty() &&
+            (uiState.value.checkBoxState == State.SELECT || isDayCheck())
     }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(3000L), false)
 

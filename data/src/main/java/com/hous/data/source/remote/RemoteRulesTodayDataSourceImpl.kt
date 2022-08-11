@@ -24,7 +24,8 @@ class RemoteRulesTodayDataSourceImpl @Inject constructor(
             { response ->
                 return RulesTodayInfo(
                     response.data?.homeRuleCategories!!.map { it.toCategoryInfo() },
-                    response.data.todayTodoRules.map { it.toRuleInfo() })
+                    response.data.todayTodoRules.map { it.toRuleInfo() }
+                )
             },
             {
                 Timber.e(it.message)
@@ -51,7 +52,6 @@ class RemoteRulesTodayDataSourceImpl @Inject constructor(
             }
         )
 
-
     override suspend fun putTempManagerInfoList(
         roomId: String,
         ruleId: String,
@@ -65,9 +65,9 @@ class RemoteRulesTodayDataSourceImpl @Inject constructor(
             )
         }.fold(
             {}, {
-                Timber.e(it.message)
-                null
-            }
+            Timber.e(it.message)
+            null
+        }
         )
     }
 

@@ -114,7 +114,6 @@ class RulesViewModel @Inject constructor(
                 _tmpManagerList.value = it.homies
                 _tmpTodayToDoPosition.value = position
             }
-
         }
     }
 
@@ -124,7 +123,6 @@ class RulesViewModel @Inject constructor(
                 _todayTodoList.value = it.todayTodoRules
             }
         }
-
 
     /** get
      * My -To - DO 서버통신*/
@@ -204,5 +202,4 @@ class RulesViewModel @Inject constructor(
         tmpCategoryOfRuleList[position].isChecked = true
         _categoryOfRuleList.value = tmpCategoryOfRuleList.toList()
     }
-
 }
