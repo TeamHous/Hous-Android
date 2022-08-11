@@ -7,13 +7,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -71,24 +71,4 @@ object NetworkModule {
                 )
             )
             .build()
-
-    @Provides
-    @Singleton
-    fun provideHomeService(retrofit: Retrofit): com.hous.data.api.HomeApi =
-        retrofit.create(com.hous.data.api.HomeApi::class.java)
-
-    @Provides
-    @Singleton
-    fun provideRulesService(retrofit: Retrofit): com.hous.data.api.RulesApi =
-        retrofit.create(com.hous.data.api.RulesApi::class.java)
-
-    @Provides
-    @Singleton
-    fun provideProfileService(retrofit: Retrofit): com.hous.data.api.ProfileApi =
-        retrofit.create(com.hous.data.api.ProfileApi::class.java)
-
-    @Provides
-    @Singleton
-    fun provideNewRulesApi(retrofit: Retrofit): com.hous.data.api.NewRulesApi =
-        retrofit.create(com.hous.data.api.NewRulesApi::class.java)
 }
