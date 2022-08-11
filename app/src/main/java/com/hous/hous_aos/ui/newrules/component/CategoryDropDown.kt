@@ -16,12 +16,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import com.hous.domain.model.CategoryInfo
 import com.hous.hous_aos.R
-import com.hous.domain.model.Category
 
 @Composable
 fun CategoryDropDownMenu(
-    ruleCategoryList: List<Category>,
+    ruleCategoryList: List<CategoryInfo>,
     setCategory: (String, String) -> Unit
 ) {
     var isExpanded by remember { mutableStateOf(false) }
@@ -40,14 +40,14 @@ fun CategoryDropDownMenu(
         expanded = isExpanded,
         onDismissRequest = { isExpanded = false }
     ) {
-        ruleCategoryList.forEach { category ->
+        ruleCategoryList.forEach { categoryInfo ->
             DropdownMenuItem(
                 onClick = {
-                    setCategory(category.id, category.categoryName)
+                    setCategory(categoryInfo.id, categoryInfo.categoryName)
                     isExpanded = false
                 }
             ) {
-                Text(category.categoryName)
+                Text(categoryInfo.categoryName)
             }
         }
     }

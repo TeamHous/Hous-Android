@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.hous.domain.model.DayData
-import com.hous.domain.model.Homie
+import com.hous.domain.model.DayDataInfo
+import com.hous.domain.model.HomieInfo
 import com.hous.domain.model.Manager
 import com.hous.domain.model.State
 
@@ -18,12 +18,12 @@ fun ManagerItem(
     manager: Manager,
     currentIndex: Int,
     checkBoxState: State,
-    homies: List<Homie>,
+    homies: List<HomieInfo>,
     homieState: HashMap<String, Boolean>,
     setCheckBoxState: (String, State) -> Unit,
     deleteManager: (Int) -> Unit,
-    choiceManager: (Int, Homie) -> Unit,
-    selectDay: (Int, DayData) -> Unit
+    choiceManager: (Int, HomieInfo) -> Unit,
+    selectDay: (Int, DayDataInfo) -> Unit
 ) {
     Column {
         Row(verticalAlignment = Alignment.CenterVertically) {

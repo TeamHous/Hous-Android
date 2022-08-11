@@ -16,13 +16,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.hous.domain.model.Homie
+import com.hous.domain.model.HomieInfo
 import com.hous.hous_aos.R
 import com.hous.hous_aos.ui.newrules.isAddDay
 
 @Composable
 fun NewRulesAddMangerButton(
-    homies: List<Homie>,
+    homies: List<HomieInfo>,
     homieState: HashMap<String, Boolean>,
     isShowAddButton: () -> Boolean,
     addManager: () -> Unit

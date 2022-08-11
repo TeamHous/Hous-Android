@@ -18,14 +18,14 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.hous.domain.model.CategoryInfo
 import com.hous.hous_aos.R
-import com.hous.domain.model.Category
 
 @Composable
 fun CategoryItem(
     radius: Dp,
     categoryName: String,
-    ruleCategoryList: List<Category>,
+    ruleCategoryList: List<CategoryInfo>,
     setCategory: (String, String) -> Unit
 ) {
     Box(

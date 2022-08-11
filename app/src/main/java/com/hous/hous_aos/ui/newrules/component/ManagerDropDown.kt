@@ -29,18 +29,18 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
-import com.hous.hous_aos.R
-import com.hous.domain.model.Homie
+import com.hous.domain.model.HomieInfo
 import com.hous.domain.model.State
+import com.hous.hous_aos.R
 import com.hous.hous_aos.ui.newrules.isAddDay
 
 @Composable
 fun ManagerDropDownMenu(
     managerIndex: Int,
-    homies: List<Homie>,
+    homies: List<HomieInfo>,
     homieState: HashMap<String, Boolean>,
     checkBoxState: State,
-    choiceManager: (Int, Homie) -> Unit
+    choiceManager: (Int, HomieInfo) -> Unit
 ) {
     if (checkBoxState != State.SELECT && isAddDay(homies, homieState)) {
         var isExpanded by remember { mutableStateOf(false) }
@@ -61,15 +61,15 @@ fun ManagerDropDownMenu(
             expanded = isExpanded,
             onDismissRequest = { isExpanded = false }
         ) {
-            homies.forEach { homie ->
-                if (homieState[homie.userName]!!) {
+            homies.forEach { homieInfo ->
+                if (homieState[homieInfo.userName]!!) {
                     DropdownMenuItem(
                         onClick = {
-                            choiceManager(managerIndex, homie)
+                            choiceManager(managerIndex, homieInfo)
                             isExpanded = false
                         }
                     ) {
-                        val color = when (homie.typeColor) {
+                        val color = when (homieInfo.typeColor) {
                             "RED" -> colorResource(id = R.color.hous_red)
                             "BLUE" -> colorResource(id = R.color.hous_blue)
                             "YELLOW" -> colorResource(id = R.color.hous_yellow)
@@ -89,7 +89,7 @@ fun ManagerDropDownMenu(
                             )
                             Spacer(modifier = Modifier.size(6.dp))
                             Text(
-                                text = homie.userName,
+                                text = homieInfo.userName,
                                 fontFamily = FontFamily(
                                     Font(
                                         resId = R.font.spoqa_han_sans_neo_medium,
