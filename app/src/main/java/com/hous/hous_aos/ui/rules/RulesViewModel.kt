@@ -10,6 +10,7 @@ import com.hous.domain.model.HomieInfo
 import com.hous.domain.model.RuleInfo
 import com.hous.domain.model.TempManagerInfo
 import com.hous.domain.model.rules.RulesTodayInfo
+import com.hous.hous_aos.util.safeLet
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -63,16 +64,20 @@ class RulesViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val rulesTodayInfo: RulesTodayInfo? = rulesTodayRepository.getTodayTodayInfoList("")
-            rulesTodayInfo?.let {
-                Timber.d("RulesViewModel init")
-                _todayTodoList.value = it.todayTodoRules
-                _categoryOfRuleList.value = it.homeRuleCategories.plus(
-                    CategoryInfo(
-                        id = "62d6b94e0e9be86f165d48db",
-                        categoryName = "없음",
-                        categoryIcon = "CLEAN"
+            if (rulesTodayInfo != null) {
+                rulesTodayInfo.let { rulesTodayInfo ->
+                    Timber.d("RulesViewModel init")
+                    _todayTodoList.value = rulesTodayInfo.todayTodoRules
+                    _categoryOfRuleList.value = rulesTodayInfo.homeRuleCategories.plus(
+                        CategoryInfo(
+                            id = "62d6b94e0e9be86f165d48db",
+                            categoryName = "없음",
+                            categoryIcon = "CLEAN"
+                        )
                     )
-                )
+                }
+            } else {
+                Timber.e("rulesTodayInfo: $rulesTodayInfo")
             }
         }
     }
@@ -82,17 +87,29 @@ class RulesViewModel @Inject constructor(
      * 임시 담당자 save버튼 누르면 서버로 보내기
      * */
     fun putToTmpManagerList() {
-        val clickedTmpManagerList: MutableList<String> = mutableListOf()
-        _tmpManagerList.value?.forEach {
-            if (it.isChecked) clickedTmpManagerList.add(it.id!!)
-        }
+        val clickedTmpManagerList: MutableList<String> =
+            mutableListOf<String>().also { clickedTmpManagerList ->
+                _tmpManagerList.value?.forEach { homieInfo ->
+                    homieInfo.id?.let { id ->
+                        if (homieInfo.isChecked) clickedTmpManagerList.add(id)
+                    } ?: Timber.e("homieInfo.id: ${homieInfo.id}")
+                }
+                Timber.d("clickedTmpManagerList -  $clickedTmpManagerList")
+            }
 
         viewModelScope.launch {
-            rulesTodayRepository.putTempManagerInfoList(
-                "",
-                _todayTodoList.value!![tmpTodayToDoPosition.value!!].id,
-                clickedTmpManagerList
-            )?.let { fetchToTodayToDoList() }
+            safeLet(
+                todayTodoList.value,
+                tmpTodayToDoPosition.value
+            ) { todayTodoList: List<RuleInfo>, position: Int ->
+                rulesTodayRepository.putTempManagerInfoList(
+                    "",
+                    todayTodoList[position].id,
+                    clickedTmpManagerList
+                )
+                fetchToTodayToDoList()
+            }
+                ?: Timber.e("Put 실패 - todayTodoList: ${todayTodoList.value}, tmpTodayToDoPosition: ${tmpTodayToDoPosition.value}}")
         }
     }
 
@@ -100,8 +117,10 @@ class RulesViewModel @Inject constructor(
      * 임시 담당자 checked 바꾸기
      * */
     fun setSelectedTmpManager(position: Int) {
-        requireNotNull(_tmpManagerList.value)[position].isChecked =
-            !requireNotNull(_tmpManagerList.value)[position].isChecked
+        _tmpManagerList.value?.let { tmpManagerList ->
+            val checkState = !(tmpManagerList[position].isChecked)
+            tmpManagerList[position].isChecked = checkState
+        }
     }
 
     /** get
@@ -110,27 +129,27 @@ class RulesViewModel @Inject constructor(
         viewModelScope.launch {
             val tempManagerInfo: TempManagerInfo? =
                 rulesTodayRepository.getTempManagerInfoList("", _todayTodoList.value!![position].id)
-            tempManagerInfo?.let {
-                _tmpManagerList.value = it.homies
+            tempManagerInfo?.let { tempManagerInfo ->
+                _tmpManagerList.value = tempManagerInfo.homies
                 _tmpTodayToDoPosition.value = position
-            }
+            } ?: Timber.e("서버통신 실패")
         }
     }
 
     fun fetchToTodayToDoList() =
         viewModelScope.launch {
-            rulesTodayRepository.getTodayTodayInfoList("")?.let {
-                _todayTodoList.value = it.todayTodoRules
-            }
+            rulesTodayRepository.getTodayTodayInfoList("")?.let { rulesTodayInfo ->
+                _todayTodoList.value = rulesTodayInfo.todayTodoRules
+            } ?: Timber.e("서버통신 실패")
         }
 
     /** get
      * My -To - DO 서버통신*/
     fun fetchToMyTodayToDoList() {
         viewModelScope.launch {
-            rulesTodayRepository.getMyTodoInfoList("")?.let {
-                _myTodoList.value = it
-            }
+            rulesTodayRepository.getMyTodoInfoList("")?.let { ruleInfoList ->
+                _myTodoList.value = ruleInfoList
+            } ?: Timber.e("서버통신 실패")
         }
     }
 
@@ -138,17 +157,18 @@ class RulesViewModel @Inject constructor(
      * 나의 to-do check한 거 보내기
      * */
     fun setMyToDoCheckBoxSelected(position: Int) {
-        val isSelected = myTodoList.value!![position].isChecked
-        myTodoList.value!![position].isChecked = !isSelected
-        val checked = myTodoList.value!![position].isChecked
-        val id = myTodoList.value!![position].id
-        viewModelScope.launch {
-            rulesTodayRepository.putMyToDoCheckLust(
-                "",
-                id,
-                checked
-            )
-        }
+        myTodoList.value?.let { myTodoList ->
+            val checkState = !(myTodoList[position].isChecked)
+            myTodoList[position].isChecked = checkState
+            val id = myTodoList[position].id
+            viewModelScope.launch {
+                rulesTodayRepository.putMyToDoCheckLust(
+                    "",
+                    id,
+                    checkState
+                )
+            }
+        } ?: Timber.e("myTodoList: ${myTodoList.value}")
     }
 
     /**
