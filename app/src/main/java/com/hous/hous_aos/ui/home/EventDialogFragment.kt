@@ -30,7 +30,7 @@ class EventDialogFragment : DialogFragment() {
         _binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_event_dialog, container, false)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = this@EventDialogFragment
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
