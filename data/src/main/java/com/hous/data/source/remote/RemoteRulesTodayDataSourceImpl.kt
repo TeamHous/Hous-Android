@@ -23,8 +23,12 @@ class RemoteRulesTodayDataSourceImpl @Inject constructor(
         }.fold(
             { response ->
                 return RulesTodayInfo(
-                    response.data?.homeRuleCategories!!.map { it.toCategoryInfo() },
-                    response.data.todayTodoRules.map { it.toRuleInfo() }
+                    response.data?.homeRuleCategories!!.map { categoryData ->
+                        categoryData.toCategoryInfo()
+                    },
+                    response.data.todayTodoRules.map { ruleData ->
+                        ruleData.toRuleInfo()
+                    }
                 )
             },
             {
@@ -43,7 +47,9 @@ class RemoteRulesTodayDataSourceImpl @Inject constructor(
             { response ->
                 return TempManagerInfo(
                     response.data!!.id,
-                    response.data.homies.map { it.toHomieInfo() }
+                    response.data.homies.map { homieData ->
+                        homieData.toHomieInfo()
+                    }
                 )
             },
             {
@@ -74,7 +80,9 @@ class RemoteRulesTodayDataSourceImpl @Inject constructor(
     override suspend fun getMyToDoInfoList(roomId: String): List<RuleInfo>? {
         return runCatching { rulesApi.getMyTodoInfoList(ROOM_ID) }.fold(
             { response ->
-                response.data?.map { it.toRuleInfo() }
+                response.data?.map { ruleData ->
+                    ruleData.toRuleInfo()
+                }
             },
             {
                 Timber.e(it.message)
@@ -100,8 +108,12 @@ class RemoteRulesTodayDataSourceImpl @Inject constructor(
         runCatching { rulesApi.getRuleTableInfoList(ROOM_ID, categoryId) }.fold(
             { response ->
                 return RulesTableInfo(
-                    response.data?.keyRules!!.map { it.toRuleInfo() },
-                    response.data.rules.map { it.toRuleInfo() }
+                    response.data?.keyRules!!.map { ruleData ->
+                        ruleData.toRuleInfo()
+                    },
+                    response.data.rules.map { ruleData ->
+                        ruleData.toRuleInfo()
+                    }
                 )
             },
             {

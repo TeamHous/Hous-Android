@@ -10,7 +10,7 @@ data class Manager(
         DayDataInfo("화", State.UNSELECT),
         DayDataInfo("수", State.UNSELECT),
         DayDataInfo("목", State.UNSELECT),
-        DayDataInfo("금ø", State.UNSELECT),
+        DayDataInfo("금", State.UNSELECT),
         DayDataInfo("토", State.UNSELECT),
         DayDataInfo("일", State.UNSELECT)
     )
