@@ -19,7 +19,7 @@
 
         <variable
             name="data"
-            type="com.hous.data.entity.Rule" />
+            type="com.hous.domain.model.RuleInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

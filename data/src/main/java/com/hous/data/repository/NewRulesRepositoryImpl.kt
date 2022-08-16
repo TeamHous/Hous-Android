@@ -4,7 +4,7 @@ import android.util.Log
 import com.hous.data.model.request.Member
 import com.hous.data.model.request.NewRulesRequest
 import com.hous.data.source.remote.RemoteNewRulesDataSource
-import com.hous.domain.model.DayData
+import com.hous.domain.model.DayDataInfo
 import com.hous.domain.model.Manager
 import com.hous.domain.model.NewRuleInfo
 import com.hous.domain.model.State
@@ -43,12 +43,12 @@ class NewRulesRepositoryImpl @Inject constructor(
         runCatching {
             val response = remoteNewRulesDataSource.getNewRuleList(roomId)
             NewRuleInfo(
-                response.data!!.ruleCategories.map { it.toCategory() },
-                response.data.homies.map { it.toHomie() }
+                response.data!!.ruleCategories.map { it.toCategoryInfo() },
+                response.data.homies.map { it.toHomieInfo() }
             )
         }
 
-    private fun dayToInt(dayDataList: List<DayData>): List<Int> {
+    private fun dayToInt(dayDataList: List<DayDataInfo>): List<Int> {
         val tempList = mutableListOf<Int>()
         for (index in 0 until 7) {
             if (dayDataList[index].dayState == State.SELECT) tempList.add(index)

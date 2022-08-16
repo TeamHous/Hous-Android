@@ -17,15 +17,15 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
-import com.hous.domain.model.DayData
+import com.hous.domain.model.DayDataInfo
 import com.hous.domain.model.State
 import com.hous.hous_aos.R
 
 @Composable
 fun NewRulesDay(
-    dayData: DayData,
+    dayData: DayDataInfo,
     currentIndex: Int,
-    selectDay: (Int, DayData) -> Unit
+    selectDay: (Int, DayDataInfo) -> Unit
 ) {
     val color = when (dayData.dayState) {
         State.UNSELECT -> colorResource(id = R.color.white)

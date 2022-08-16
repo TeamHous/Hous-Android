@@ -1,5 +1,11 @@
 package com.hous.data.api
 
+import com.hous.data.entity.Rule
+import com.hous.data.model.WrapperClass
+import com.hous.data.model.request.MyToDoCheckRequest
+import com.hous.data.model.request.TempManagerRequest
+import com.hous.data.model.response.RulesTodayInfoListResponse
+import com.hous.data.model.response.TempManagerResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PUT
@@ -9,32 +15,32 @@ interface RulesApi {
     @GET("room/{roomId}/rules")
     suspend fun getTodayTodayInfoList(
         @Path("roomId") roomId: String
-    ): com.hous.data.model.WrapperClass<com.hous.data.model.response.RulesTodayInfoListResponse>
+    ): WrapperClass<RulesTodayInfoListResponse>
 
     @GET("/room/{roomId}/rule/{ruleId}/today")
     suspend fun getTempManagerInfoList(
         @Path("roomId") roomId: String,
         @Path("ruleId") ruleId: String
-    ): com.hous.data.model.WrapperClass<com.hous.data.model.response.TempManagerResponse>
+    ): WrapperClass<TempManagerResponse>
 
     @PUT("/room/{roomId}/rule/{ruleId}/today")
     suspend fun putTempManagerInfoList(
         @Path("roomId") roomId: String,
         @Path("ruleId") ruleId: String,
-        @Body tmpRuleMembers: com.hous.data.model.response.TempManagerRequest
-    ): com.hous.data.model.WrapperClass<Any>
+        @Body tmpRuleMembers: TempManagerRequest
+    ): Any?
 
     @GET("/room/{roomId}/rules/me")
     suspend fun getMyTodoInfoList(
         @Path("roomId") roomId: String
-    ): com.hous.data.model.WrapperClass<List<com.hous.data.entity.Rule>>
+    ): WrapperClass<List<Rule>>
 
     @PUT("room/{roomId}/rule/{ruleId}/check")
     suspend fun putMyToDoCheckList(
         @Path("roomId") roomId: String,
         @Path("ruleId") ruleId: String,
-        @Body isCheck: com.hous.data.model.request.MyToDoCheckRequest
-    ): com.hous.data.model.WrapperClass<com.hous.data.model.request.MyToDoCheckRequest>
+        @Body isCheck: MyToDoCheckRequest
+    ): WrapperClass<MyToDoCheckRequest>
 
     @GET("/room/{roomId}/category/{categoryId}/rule")
     suspend fun getRuleTableInfoList(

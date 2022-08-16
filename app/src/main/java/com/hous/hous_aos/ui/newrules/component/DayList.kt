@@ -5,14 +5,14 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import com.hous.domain.model.DayData
+import com.hous.domain.model.DayDataInfo
 import com.hous.domain.model.Manager
 
 @Composable
 fun NewRulesDayList(
     manager: Manager,
     currentIndex: Int,
-    selectDay: (Int, DayData) -> Unit
+    selectDay: (Int, DayDataInfo) -> Unit
 ) {
     LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
         itemsIndexed(manager.dayDataList) { _, value ->

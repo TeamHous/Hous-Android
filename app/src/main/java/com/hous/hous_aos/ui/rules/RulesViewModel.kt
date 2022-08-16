@@ -1,18 +1,20 @@
 package com.hous.hous_aos.ui.rules
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hous.data.entity.Category
-import com.hous.data.entity.Homie
-import com.hous.data.entity.Rule
-import com.hous.data.model.response.TempManagerRequest
 import com.hous.data.repository.RulesTodayRepository
+import com.hous.domain.model.CategoryInfo
+import com.hous.domain.model.HomieInfo
+import com.hous.domain.model.RuleInfo
+import com.hous.domain.model.TempManagerInfo
+import com.hous.domain.model.rules.RulesTodayInfo
+import com.hous.hous_aos.util.safeLet
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
 @HiltViewModel
 class RulesViewModel @Inject constructor(
@@ -25,26 +27,26 @@ class RulesViewModel @Inject constructor(
     val isSelectedCategorySmile: LiveData<Boolean> get() = _isSelectedCategorySmile
 
     private var _categoryOfRuleList =
-        MutableLiveData<List<Category>>()
+        MutableLiveData<List<CategoryInfo>>()
     val categoryOfRuleList get() = _categoryOfRuleList
 
     private var _todayTodoList =
-        MutableLiveData<List<Rule>>()
+        MutableLiveData<List<RuleInfo>>()
     val todayTodoList get() = _todayTodoList
 
     private var _myTodoList =
-        MutableLiveData<List<Rule>>()
+        MutableLiveData<List<RuleInfo>>()
     val myTodoList get() = _myTodoList
 
     private var _keyRulesTableList =
-        MutableLiveData<List<Rule>>()
+        MutableLiveData<List<RuleInfo>>()
     val keyRulesTableList get() = _keyRulesTableList
 
     private var _generalRulesTableList =
-        MutableLiveData<List<Rule>>()
+        MutableLiveData<List<RuleInfo>>()
     val generalRulesTableList get() = _generalRulesTableList
 
-    private var _tmpManagerList = MutableLiveData<List<Homie>>()
+    private var _tmpManagerList = MutableLiveData<List<HomieInfo>>()
     val tmpManagerList get() = _tmpManagerList
 
     private var _tmpTodayToDoPosition = MutableLiveData<Int>(0)
@@ -61,25 +63,22 @@ class RulesViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            rulesTodayRepository.getTodayTodayInfoList("")
-                .onSuccess {
-                    _todayTodoList.value = it.data!!.todayTodoRules
-                    _categoryOfRuleList.value = it.data!!.homeRuleCategories
-                    _categoryOfRuleList.value = (_categoryOfRuleList.value!!).plus(
-                        Category(
+            val rulesTodayInfo: RulesTodayInfo? = rulesTodayRepository.getTodayTodayInfoList("")
+            if (rulesTodayInfo != null) {
+                rulesTodayInfo.let { rulesTodayInfo ->
+                    Timber.d("RulesViewModel init")
+                    _todayTodoList.value = rulesTodayInfo.todayTodoRules
+                    _categoryOfRuleList.value = rulesTodayInfo.homeRuleCategories.plus(
+                        CategoryInfo(
                             id = "62d6b94e0e9be86f165d48db",
                             categoryName = "없음",
                             categoryIcon = "CLEAN"
                         )
                     )
-                    Log.d(
-                        TAG,
-                        "통신 시작 -- ${_todayTodoList?.value}"
-                    )
                 }
-                .onFailure {
-                    Log.d(TAG, "RulesViewModel - init - getRulesTodayList fail : ${it.message}")
-                }
+            } else {
+                Timber.e("rulesTodayInfo: $rulesTodayInfo")
+            }
         }
     }
 
@@ -88,28 +87,29 @@ class RulesViewModel @Inject constructor(
      * 임시 담당자 save버튼 누르면 서버로 보내기
      * */
     fun putToTmpManagerList() {
-        val clickedTmpManagerList: MutableList<String> = mutableListOf()
-        _tmpManagerList.value?.forEach {
-            if (it.isChecked) clickedTmpManagerList.add(it.id!!)
-        }
-        val tmp = TempManagerRequest(clickedTmpManagerList)
-        Log.d(
-            TAG,
-            "Put -- tmp.tmpRuleMembers: ${tmp.tmpRuleMembers} tmp.size : ${tmp.tmpRuleMembers.size}"
-        )
+        val clickedTmpManagerList: MutableList<String> =
+            mutableListOf<String>().also { clickedTmpManagerList ->
+                _tmpManagerList.value?.forEach { homieInfo ->
+                    homieInfo.id?.let { id ->
+                        if (homieInfo.isChecked) clickedTmpManagerList.add(id)
+                    } ?: Timber.e("homieInfo.id: ${homieInfo.id}")
+                }
+                Timber.d("clickedTmpManagerList -  $clickedTmpManagerList")
+            }
+
         viewModelScope.launch {
-            rulesTodayRepository.putTempManagerInfoList(
-                "",
-                _todayTodoList.value!![tmpTodayToDoPosition.value!!].id,
-                tmp
-            )
-                .onSuccess {
-                    fetchToTodayToDoList()
-                }
-                .onFailure {
-                    Log.d(TAG, " result fail : $tmp")
-                    Log.d(TAG, " result fail : ${it.message}")
-                }
+            safeLet(
+                todayTodoList.value,
+                tmpTodayToDoPosition.value
+            ) { todayTodoList: List<RuleInfo>, position: Int ->
+                rulesTodayRepository.putTempManagerInfoList(
+                    "",
+                    todayTodoList[position].id,
+                    clickedTmpManagerList
+                )
+                fetchToTodayToDoList()
+            }
+                ?: Timber.e("Put 실패 - todayTodoList: ${todayTodoList.value}, tmpTodayToDoPosition: ${tmpTodayToDoPosition.value}}")
         }
     }
 
@@ -117,61 +117,39 @@ class RulesViewModel @Inject constructor(
      * 임시 담당자 checked 바꾸기
      * */
     fun setSelectedTmpManager(position: Int) {
-        requireNotNull(_tmpManagerList.value)[position].isChecked =
-            !requireNotNull(_tmpManagerList.value)[position].isChecked
+        _tmpManagerList.value?.let { tmpManagerList ->
+            val checkState = !(tmpManagerList[position].isChecked)
+            tmpManagerList[position].isChecked = checkState
+        }
     }
 
     /** get
      * 임시 담당자 다이얼로그 조회 */
     fun fetchToTmpManagerList(position: Int) {
-        Log.d(
-            TAG,
-            "RulesViewModel - fetchToTmpManagerList() _todayTodoList.value!![position].id: ${_todayTodoList.value!![position].id}"
-        )
         viewModelScope.launch {
-            rulesTodayRepository.getTempManagerInfoList("", _todayTodoList.value!![position].id)
-                .onSuccess {
-                    _tmpManagerList.value = it.data!!.homies
-                    _tmpTodayToDoPosition.postValue(position)
-                }
-                .onFailure {
-                    Log.d(TAG, "RulesViewModel - fetchToTmpManagerList() - ${it.message}")
-                }
+            val tempManagerInfo: TempManagerInfo? =
+                rulesTodayRepository.getTempManagerInfoList("", _todayTodoList.value!![position].id)
+            tempManagerInfo?.let { tempManagerInfo ->
+                _tmpManagerList.value = tempManagerInfo.homies
+                _tmpTodayToDoPosition.value = position
+            } ?: Timber.e("서버통신 실패")
         }
     }
 
-    fun fetchToTodayToDoList() {
+    fun fetchToTodayToDoList() =
         viewModelScope.launch {
-            rulesTodayRepository.getTodayTodayInfoList("")
-                .onSuccess {
-                    _todayTodoList.value = it.data!!.todayTodoRules
-//                    Log.d(
-//                        TAG,
-//                        "다시서버통신 -- Size: ${_todayTodoList?.value!![0].todayMembersWithTypeColor.size}"
-//                    )
-                }
-                .onFailure {
-                    Log.d(
-                        TAG,
-                        "RulesViewModel - init - getRulesTodayList fail : ${it.message}"
-                    )
-                }
+            rulesTodayRepository.getTodayTodayInfoList("")?.let { rulesTodayInfo ->
+                _todayTodoList.value = rulesTodayInfo.todayTodoRules
+            } ?: Timber.e("서버통신 실패")
         }
-    }
 
     /** get
      * My -To - DO 서버통신*/
     fun fetchToMyTodayToDoList() {
         viewModelScope.launch {
-            rulesTodayRepository.getMyTodoInfoList("")
-                .onSuccess {
-                    _myTodoList.value = it.data!!
-                    Log.d(TAG, "RulesViewModel - fetchToMyTodayToDoList() called")
-                    Log.d("MYTODO", "Success ")
-                }
-                .onFailure {
-                    Log.d(TAG, "fail : ${it.message}")
-                }
+            rulesTodayRepository.getMyTodoInfoList("")?.let { ruleInfoList ->
+                _myTodoList.value = ruleInfoList
+            } ?: Timber.e("서버통신 실패")
         }
     }
 
@@ -179,26 +157,18 @@ class RulesViewModel @Inject constructor(
      * 나의 to-do check한 거 보내기
      * */
     fun setMyToDoCheckBoxSelected(position: Int) {
-        val isSelected = myTodoList.value!![position].isChecked
-        myTodoList.value!![position].isChecked = !isSelected
-        val checked = myTodoList.value!![position].isChecked
-        val id = myTodoList.value!![position].id
-        viewModelScope.launch {
-            rulesTodayRepository.putMyToDoCheckLust(
-                "",
-                id,
-                com.hous.data.model.request.MyToDoCheckRequest(checked)
-            )
-                .onSuccess {
-                    Log.d(TAG, "Success - id: $id, checked: $checked ")
-                }
-                .onFailure {
-                    Log.d(
-                        TAG,
-                        "fail - $id, checked: $checked -  :${it.message}"
-                    )
-                }
-        }
+        myTodoList.value?.let { myTodoList ->
+            val checkState = !(myTodoList[position].isChecked)
+            myTodoList[position].isChecked = checkState
+            val id = myTodoList[position].id
+            viewModelScope.launch {
+                rulesTodayRepository.putMyToDoCheckLust(
+                    "",
+                    id,
+                    checkState
+                )
+            }
+        } ?: Timber.e("myTodoList: ${myTodoList.value}")
     }
 
     /**
@@ -208,33 +178,17 @@ class RulesViewModel @Inject constructor(
         val categoryId = categoryOfRuleList.value!![position].id
         _categoryName.value = categoryOfRuleList.value!![position].categoryName
         _categoryId.value = categoryOfRuleList.value!![position].id
-        Log.d("RulesViewModel", "categoryId: $categoryId")
         viewModelScope.launch {
-            rulesTodayRepository.getRuleTableInfoList("", categoryId)
-                .onSuccess {
-                    Log.d("RulesViewModel", "Success - RulesTableList() ${it.message}")
-                    val data = it.data
-                    Log.d("RulesViewModel", "Success- data: $data")
-                    val tmpGeneralRulesTableList = data!!.rules
-                    val tmpKeyRulesTableList = data.keyRules
-                    val totalRulesDataSize =
-                        tmpGeneralRulesTableList.size + tmpKeyRulesTableList.size
+            rulesTodayRepository.getRuleTableInfoList("", categoryId)?.let {
+                val tmpGeneralRulesTableList = it.rules
+                val tmpKeyRulesTableList = it.keyRules
+                val totalRulesDataSize =
+                    tmpGeneralRulesTableList.size + tmpKeyRulesTableList.size
 
-                    _ruleTableSize.value = totalRulesDataSize
-                    _generalRulesTableList.value = tmpGeneralRulesTableList
-                    _keyRulesTableList.value = tmpKeyRulesTableList
-                    Log.d(
-                        "RulesViewModel",
-                        "Success -keyRulesTableList: ${generalRulesTableList.value}"
-                    )
-                    Log.d(
-                        "RulesViewModel",
-                        "Success -tmpGeneralRulesTableList: ${keyRulesTableList.value}"
-                    )
-                }
-                .onFailure {
-                    Log.d("RulesViewModel", "Fail - RulesTableList() ${it.message}")
-                }
+                _ruleTableSize.value = totalRulesDataSize
+                _generalRulesTableList.value = tmpGeneralRulesTableList
+                _keyRulesTableList.value = tmpKeyRulesTableList
+            }
         }
     }
 
@@ -267,9 +221,5 @@ class RulesViewModel @Inject constructor(
         }
         tmpCategoryOfRuleList[position].isChecked = true
         _categoryOfRuleList.value = tmpCategoryOfRuleList.toList()
-    }
-
-    companion object {
-        private const val TAG = "RulesViewModel"
     }
 }

@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.hous.domain.model.Homie
+import com.hous.domain.model.HomieInfo
 import com.hous.hous_aos.R
 import com.hous.hous_aos.ui.newrules.component.CategoryItem
 import com.hous.hous_aos.ui.newrules.component.ManagerItem
@@ -143,7 +143,7 @@ fun NewRulesScreen(
                 Spacer(modifier = Modifier.size(12.dp))
             }
 
-            itemsIndexed(uiState.ManagerList) { index, value ->
+            itemsIndexed(uiState.managerList) { index, value ->
                 ManagerItem(
                     manager = value,
                     currentIndex = index,
@@ -177,7 +177,7 @@ fun NewRulesScreen(
 }
 
 fun isAddDay(
-    homies: List<Homie>,
+    homies: List<HomieInfo>,
     homieState: HashMap<String, Boolean>
 ): Boolean {
     var temp = false

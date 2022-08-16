@@ -1,6 +1,6 @@
 package com.hous.domain.model
 
-data class Homie(
+data class HomieInfo(
     val id: String? = null,
     val userName: String = "",
     val typeName: String = "",

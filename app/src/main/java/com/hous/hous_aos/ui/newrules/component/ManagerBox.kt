@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.hous.domain.model.Homie
+import com.hous.domain.model.HomieInfo
 import com.hous.domain.model.Manager
 import com.hous.domain.model.State
 import com.hous.hous_aos.R
@@ -30,10 +30,10 @@ fun ManagerBox(
     radius: Dp,
     managerIndex: Int,
     manager: Manager,
-    homies: List<Homie>,
+    homies: List<HomieInfo>,
     homieState: HashMap<String, Boolean>,
     checkBoxState: State,
-    choiceManager: (Int, Homie) -> Unit
+    choiceManager: (Int, HomieInfo) -> Unit
 ) {
     Box(
         modifier = Modifier

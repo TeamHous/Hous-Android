@@ -1,6 +1,6 @@
 package com.hous.domain.model
 
-data class Category(
+data class CategoryInfo(
     val id: String = "",
     val categoryName: String = "",
     val categoryIcon: String = "",

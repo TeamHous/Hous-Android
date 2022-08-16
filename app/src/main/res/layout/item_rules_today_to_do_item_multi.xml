@@ -23,7 +23,7 @@
 
         <variable
             name="data"
-            type="com.hous.data.entity.Rule" />
+            type="com.hous.domain.model.RuleInfo" />
 
         <variable
             name="count"

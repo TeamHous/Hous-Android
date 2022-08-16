@@ -1,17 +1,17 @@
 package com.hous.hous_aos.ui.rules.rules_table
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.data.entity.Rule
+import com.hous.domain.model.RuleInfo
 import com.hous.hous_aos.databinding.ItemRulesTableGeneralBinding
 import com.hous.hous_aos.ui.rules.IconColor
+import timber.log.Timber
 
 class GeneralRulesAdapter :
-    ListAdapter<Rule, GeneralRulesAdapter.GeneralRulesViewHolder>(generalRulesDiffUtil) {
+    ListAdapter<RuleInfo, GeneralRulesAdapter.GeneralRulesViewHolder>(generalRulesDiffUtil) {
 
     private val iconColorHashMap: HashMap<String, IconColor> = hashMapOf(
         "RED" to IconColor.RED,
@@ -30,8 +30,8 @@ class GeneralRulesAdapter :
 
     override fun onBindViewHolder(holder: GeneralRulesViewHolder, position: Int) {
         val currentItem = currentList[position]
-        Log.d("크기", "$currentList")
-        Log.d("크기", "${currentList.size}")
+        Timber.d("크기", "$currentList")
+        Timber.d("크기", "${currentList.size}")
         holder.onBind(currentItem)
     }
 
@@ -40,11 +40,10 @@ class GeneralRulesAdapter :
         private val iconColorHashMap: HashMap<String, IconColor>
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Rule) {
+        fun onBind(data: RuleInfo) {
             binding.data = data
             val memberCnt = if (data.membersCnt >= 4) 3 else data.membersCnt
-            Log.d(
-                "GeneralAdapter",
+            Timber.d(
                 "memberCnt:$memberCnt , data.iconList.size 값 : ${data.typeColors.size} ,data.iconList: ${data.typeColors} 이 들어왔습니다."
             )
             when (memberCnt) {
@@ -73,17 +72,17 @@ class GeneralRulesAdapter :
     }
 
     companion object {
-        private val generalRulesDiffUtil = object : DiffUtil.ItemCallback<Rule>() {
+        private val generalRulesDiffUtil = object : DiffUtil.ItemCallback<RuleInfo>() {
             override fun areItemsTheSame(
-                oldItem: Rule,
-                newItem: Rule
+                oldItem: RuleInfo,
+                newItem: RuleInfo
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: Rule,
-                newItem: Rule
+                oldItem: RuleInfo,
+                newItem: RuleInfo
             ): Boolean {
                 return oldItem == newItem
             }

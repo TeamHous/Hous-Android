@@ -1,23 +1,23 @@
-package com.hous.hous_aos.ui.rules.adapter
+package com.hous.hous_aos.ui.rules.today_to_do
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.data.entity.Rule
+import com.hous.domain.model.HomieInfo
+import com.hous.domain.model.RuleInfo
 import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemMultiBinding
 import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemNoneBinding
 import com.hous.hous_aos.databinding.ItemRulesTodayToDoItemOneBinding
 import com.hous.hous_aos.ui.rules.IconColor
-import com.hous.hous_aos.ui.rules.today_to_do.ItemToDoViewType
+import timber.log.Timber
 
 class TodayTodoAdapter(
     private val onClickIcon: () -> Unit,
     private val fetchToTmpManagerList: (Int) -> Unit
 ) :
-    ListAdapter<Rule, RecyclerView.ViewHolder>(
+    ListAdapter<RuleInfo, RecyclerView.ViewHolder>(
         TodayTodoDiffUtilCallback
     ) {
 
@@ -81,8 +81,8 @@ class TodayTodoAdapter(
         private val onClickIcon: () -> Unit,
         private val binding: ItemRulesTodayToDoItemNoneBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: com.hous.data.entity.Rule) {
-            Log.d(TAG, "NONE : ,  data: $data")
+        fun onBind(data: RuleInfo) {
+            Timber.d("NONE : ,  data: $data")
             binding.data = data
             binding.ivManagerEmpty.setOnClickListener {
                 fetchToTmpManagerList(absoluteAdapterPosition)
@@ -96,8 +96,8 @@ class TodayTodoAdapter(
         private val onClickIcon: () -> Unit,
         private val binding: ItemRulesTodayToDoItemOneBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: com.hous.data.entity.Rule) {
-            Log.d(TAG, "One : ,  data: $data")
+        fun onBind(data: RuleInfo) {
+            Timber.d("One : ,  data: $data")
             binding.data = data
             binding.tvManager.text =
                 changeListToString(requireNotNull(data.todayMembersWithTypeColor))
@@ -109,7 +109,7 @@ class TodayTodoAdapter(
             }
         }
 
-        private fun changeListToString(managerDataList: List<com.hous.data.entity.Homie>): String {
+        private fun changeListToString(managerDataList: List<HomieInfo>): String {
             val textList = managerDataList.map { it.userName }
             return textList[0]
         }
@@ -132,8 +132,8 @@ class TodayTodoAdapter(
         private val onClickIcon: () -> Unit,
         private val binding: ItemRulesTodayToDoItemMultiBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: com.hous.data.entity.Rule) {
-            Log.d(TAG, "MULTI : ,  data: $data")
+        fun onBind(data: RuleInfo) {
+            Timber.d("MULTI : ,  data: $data")
             binding.data = data
             binding.tvManager.text =
                 changeListToString(requireNotNull(data.todayMembersWithTypeColor))
@@ -167,7 +167,7 @@ class TodayTodoAdapter(
             }
         }
 
-        private fun changeListToString(managerDataList: List<com.hous.data.entity.Homie>): String {
+        private fun changeListToString(managerDataList: List<HomieInfo>): String {
             val textList = managerDataList.map { it.userName }
             val sizeOfTextList = textList.size
             return if (sizeOfTextList in 2..3) {
@@ -202,24 +202,23 @@ class TodayTodoAdapter(
 
     companion object {
         private val TodayTodoDiffUtilCallback =
-            object : DiffUtil.ItemCallback<Rule>() {
+            object : DiffUtil.ItemCallback<RuleInfo>() {
                 override fun areItemsTheSame(
-                    oldItem: Rule,
-                    newItem: Rule
+                    oldItem: RuleInfo,
+                    newItem: RuleInfo
 
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: Rule,
-                    newItem: Rule
+                    oldItem: RuleInfo,
+                    newItem: RuleInfo
                 ): Boolean {
                     return oldItem == newItem
                 }
             }
-        const val TAG = "로그"
-        private const val MANAGER_NUMBER_ZERO = 0
+
         private const val MANAGER_NUMBER_ONE = 1
         private const val MANAGER_NUMBER_TWO = 2
         private const val BLUE = "BLUE"

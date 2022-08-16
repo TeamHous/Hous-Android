@@ -62,6 +62,7 @@ dependencies {
     ThirdPartyDependencies.run {
         implementation(interceptor)
         implementation(gson)
+        implementation(timber)
         implementation(retrofit2)
         implementation(retrofit2Converter)
     }

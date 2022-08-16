@@ -6,7 +6,7 @@ import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.hous.data.entity.Category
+import com.hous.domain.model.CategoryInfo
 import com.hous.hous_aos.R
 import com.hous.hous_aos.databinding.ItemRulesRuleBinding
 
@@ -16,7 +16,7 @@ class HomeRulesCategoryAdapter(
     private val onPlusClick: () -> Unit,
     private val onChangeIsSelected: (Int) -> Unit
 ) :
-    ListAdapter<Category, RecyclerView.ViewHolder>(
+    ListAdapter<CategoryInfo, RecyclerView.ViewHolder>(
         CategoryOfRuleDiffUtilCallback
     ) {
     private val iconTypeHashMap: HashMap<String, CategoryIconType> = hashMapOf(
@@ -79,7 +79,7 @@ class HomeRulesCategoryAdapter(
         private val binding: ItemRulesRuleBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind(data: com.hous.data.entity.Category) {
+        fun onBind(data: CategoryInfo) {
             binding.data = data
             binding.iconType = iconTypeHashMap[data.categoryIcon]
             /** 앱잼 내에서는 비활성화*/
@@ -100,7 +100,7 @@ class HomeRulesCategoryAdapter(
         private val binding: ItemRulesRuleBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind(data: com.hous.data.entity.Category) {
+        fun onBind(data: CategoryInfo) {
             binding.data = data
             binding.iconType = CategoryIconType.NONE
             /** 앱잼 내에서는 비활성화*/
@@ -112,17 +112,17 @@ class HomeRulesCategoryAdapter(
 
     companion object {
         private val CategoryOfRuleDiffUtilCallback =
-            object : DiffUtil.ItemCallback<com.hous.data.entity.Category>() {
+            object : DiffUtil.ItemCallback<CategoryInfo>() {
                 override fun areItemsTheSame(
-                    oldItem: com.hous.data.entity.Category,
-                    newItem: com.hous.data.entity.Category
+                    oldItem: CategoryInfo,
+                    newItem: CategoryInfo
                 ): Boolean {
                     return oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: com.hous.data.entity.Category,
-                    newItem: com.hous.data.entity.Category
+                    oldItem: CategoryInfo,
+                    newItem: CategoryInfo
                 ): Boolean {
                     return oldItem == newItem
                 }

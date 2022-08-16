@@ -1,32 +1,30 @@
-package com.hous.data.source.remote
+package com.hous.data.repository
 
-import com.hous.data.model.request.MyToDoCheckRequest
-import com.hous.data.model.request.TempManagerRequest
 import com.hous.domain.model.RuleInfo
 import com.hous.domain.model.TempManagerInfo
 import com.hous.domain.model.rules.RulesTableInfo
 import com.hous.domain.model.rules.RulesTodayInfo
 
-interface RemoteRulesTodayDataSource {
+interface RulesTodayRepository {
     suspend fun getTodayTodayInfoList(roomId: String): RulesTodayInfo?
 
     suspend fun getTempManagerInfoList(
         roomId: String,
-        ruleId: String
+        rulesId: String
     ): TempManagerInfo?
 
     suspend fun putTempManagerInfoList(
         roomId: String,
         ruleId: String,
-        tmpRuleMembers: TempManagerRequest
+        tmpRuleMembers: List<String>
     ): Any?
 
-    suspend fun getMyToDoInfoList(roomId: String): List<RuleInfo>?
+    suspend fun getMyTodoInfoList(roomId: String): List<RuleInfo>?
 
     suspend fun putMyToDoCheckLust(
         roomId: String,
         ruleId: String,
-        isCheck: MyToDoCheckRequest
+        isCheck: Boolean
     )
 
     suspend fun getRuleTableInfoList(

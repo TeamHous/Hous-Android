@@ -25,7 +25,7 @@ class TempManagerDialogFragment : DialogFragment() {
         _binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_temp_manager, container, false)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = requireActivity()
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
