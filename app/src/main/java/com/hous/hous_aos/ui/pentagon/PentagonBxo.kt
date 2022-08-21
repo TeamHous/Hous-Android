@@ -1,5 +1,8 @@
 package com.hous.hous_aos.ui.pentagon
 
+import android.graphics.Color
+import android.graphics.Paint
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,6 +21,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.center
+import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringArrayResource
@@ -25,6 +30,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,7 +41,7 @@ import kotlin.math.sin
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewPentagon() {
+fun PreviewPentagon1() {
     Box(
         modifier = Modifier.wrapContentHeight()
     ) {
@@ -90,6 +96,30 @@ fun PentagonBox(
 }
 
 @Composable
+private fun PentagonTextWithCanvas() {
+    val textList = stringArrayResource(id = R.array.pentagon_text)
+    val currentAngle = -0.5 * Math.PI
+    val angle = 2.0 * Math.PI / 5.0f
+    val radiusList = listOf(320.0f, 350.0f, 350.0f, 350.0f, 350.0f)
+    Canvas(modifier = Modifier.fillMaxSize()) {
+        repeat(5) { index ->
+            drawContext.canvas.nativeCanvas.apply {
+                drawText(
+                    textList[index],
+                    size.center.x + (radiusList[index] * cos(currentAngle + angle * index)).toFloat(),
+                    size.center.y + (radiusList[index] * sin(currentAngle + angle * index)).toFloat(),
+                    Paint().apply {
+                        this.color = Color.BLACK
+                        this.textSize = 18.dp.toPx()
+                        this.textAlign = Paint.Align.CENTER
+                    }
+                )
+            }
+        }
+    }
+}
+
+@Composable
 private fun PentagonText() {
     val textList = stringArrayResource(id = R.array.pentagon_text)
 
@@ -118,14 +148,15 @@ private fun PentagonText() {
                                 (center.y + (radiusPxList[i] * sin(currentAngle + angle * i)).toFloat() - 20).toDp()
                             ),
                         fontStyle = FontStyle(R.style.Description),
-                        color = colorResource(id = R.color.g_5)
+                        color = colorResource(id = R.color.g_5),
+                        textAlign = TextAlign.Center
                     )
                 }
             }
             Spacer(
                 modifier = Modifier
                     .offset((center.x).dp, (center.y + 400.0f.dp.toPx()).dp)
-                    .size(16.dp),
+                    .size(16.dp)
             )
         }
     }
